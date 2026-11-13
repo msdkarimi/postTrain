@@ -1,0 +1,611 @@
+Multiple-choice knowledge questions and everyday advice: for a choice question the reasoning comes first and the letter last, wrong options are ruled out with a reason, and follow-ups build on the same topic.
+
+### mt/q001 | skills=mcq_science
+@user
+Which gas do plants absorb from the air for photosynthesis?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Hydrogen
+@assistant
+Photosynthesis combines carbon dioxide and water, using light energy, to make sugar. Oxygen is what the plant releases, so A is the product, not the input. Nitrogen makes up most of the air, but plants take the nitrogen they need from the soil through their roots. Hydrogen gas is not taken from the air at all.
+
+Answer: C
+@check has=Answer: C
+@user
+Next one. Where in the plant cell does photosynthesis happen?
+A. Mitochondria
+B. Chloroplasts
+C. Nucleus
+D. Ribosomes
+@assistant
+Photosynthesis needs chlorophyll, the green pigment that captures light, and chlorophyll is found in the chloroplasts. Mitochondria release energy from sugar, which is the reverse process. The nucleus stores the genetic material, and ribosomes build proteins.
+
+Answer: B
+@check has=Answer: B
+@user
+Why are A and B easy to mix up?
+@assistant
+Because both are the cell's energy organelles, and they do opposite jobs.
+
+- Chloroplasts store energy: they use light to build sugar from carbon dioxide and water, and release oxygen.
+- Mitochondria release energy: they break sugar down with oxygen, and give off carbon dioxide and water.
+
+A way to remember it: chloroplasts contain chlorophyll, and both words start with "chlor", from the Greek for green. Plant cells have both organelles. Animal cells have only mitochondria.
+@check has=opposite
+
+### mt/q002 | skills=mcq_math
+@user
+What is the slope of the line through the points (2, 3) and (6, 11)?
+A. 1/2
+B. 2
+C. 4
+D. 8
+@assistant
+Slope is the change in y divided by the change in x.
+
+Step 1: Change in y: 11 - 3 = 8.
+Step 2: Change in x: 6 - 2 = 4.
+Step 3: 8 / 4 = 2.
+
+Option D is only the change in y, option C is only the change in x, and option A is the ratio upside down.
+
+Answer: B
+@check has=Answer: B
+@user
+What is the equation of that line?
+A. y = 2x - 1
+B. y = 2x + 1
+C. y = 2x + 3
+D. y = x + 1
+@assistant
+The slope is 2, so the line has the form y = 2x + c. That rules out D.
+
+Step 1: Put in the point (2, 3): 3 = 2 x 2 + c, so c = -1.
+Step 2: Check with the other point (6, 11): 2 x 6 - 1 = 11. Correct.
+
+Answer: A
+@check has=Answer: A
+@user
+Where does it cross the x-axis?
+@assistant
+On the x-axis y is 0.
+
+Step 1: Set 0 = 2x - 1.
+Step 2: 2x = 1, so x = 1/2.
+
+The line crosses the x-axis at (1/2, 0).
+@check has=1/2
+
+### mt/q003 | skills=mcq_history
+@user
+The printing press with movable type was introduced to Europe by Johannes Gutenberg in which century?
+A. 13th
+B. 15th
+C. 17th
+D. 19th
+@assistant
+Gutenberg developed his press in Mainz around 1440, and his famous Bible was printed in the 1450s. Years in the 1400s belong to the 15th century. The 13th century is too early, and the 17th and 19th are far too late: by then printed books had been common for generations.
+
+Answer: B
+@check has=Answer: B
+@user
+Which was the most direct effect of the press?
+A. Books became cheaper and more widely available
+B. Paper was invented
+C. Latin stopped being used at once
+D. Universities were founded for the first time
+@assistant
+The press made it possible to produce many identical copies quickly, which cut the cost of books and spread them widely. That is option A.
+
+The others do not fit. Paper was invented in China many centuries earlier and was already in use in Europe. Latin remained the language of scholarship for a long time after printing began. Universities such as Bologna and Paris were founded in the Middle Ages, well before the press.
+
+Answer: A
+@check has=Answer: A
+@user
+I get confused by the century thing. Why is 1440 the 15th century?
+@assistant
+Because the count starts at the first century, which covers the years 1 to 100. There was no "zeroth" century.
+
+- Years 1 to 100: 1st century
+- Years 101 to 200: 2nd century
+- Years 1401 to 1500: 15th century
+
+A shortcut: take the first two digits of the year and add one. For 1440 that is 14 + 1 = 15. The only exception is a year ending in 00, such as 1500, which is the last year of the century before.
+@check has=add one
+
+### mt/q004 | skills=mcq_physics
+@user
+A ball is thrown straight up. Ignoring air resistance, what is its acceleration at the very top of its flight?
+A. Zero
+B. 9.8 m/s² upward
+C. 9.8 m/s² downward
+D. It depends on the mass
+@assistant
+Gravity pulls the ball downward with the same strength during the whole flight, so the acceleration is 9.8 m/s² downward on the way up, at the top, and on the way down.
+
+Option A is the common trap. At the top the velocity is zero for an instant, but the acceleration is not. If it were zero as well, the ball would stay hanging in the air. Option D is wrong because, without air resistance, all masses fall with the same acceleration.
+
+Answer: C
+@check has=Answer: C
+@user
+If it's thrown up at 19.6 m/s, how long until it reaches the top?
+A. 1 s
+B. 2 s
+C. 4 s
+D. 9.8 s
+@assistant
+At the top the velocity is zero, and the ball loses 9.8 m/s of speed every second.
+
+Step 1: Time = initial speed / acceleration = 19.6 / 9.8 = 2 s.
+
+Option C, 4 s, is the time for the full flight up and back down.
+
+Answer: B
+@check has=Answer: B
+@user
+How high does it go?
+@assistant
+Step 1: During the climb the speed falls evenly from 19.6 m/s to 0, so the average speed is 19.6 / 2 = 9.8 m/s.
+Step 2: Height = average speed x time = 9.8 x 2 = 19.6 m.
+
+Check with the formula h = v² / (2g): 19.6² / (2 x 9.8) = 384.16 / 19.6 = 19.6 m.
+
+The ball rises 19.6 metres.
+@check has=19.6 m
+
+### mt/q005 | skills=mcq_economics
+@user
+If the price of a good rises and nothing else changes, the quantity demanded usually:
+A. Rises
+B. Falls
+C. Stays the same
+D. Doubles
+@assistant
+This is the law of demand. When a good costs more, some buyers buy less of it or switch to alternatives, so the quantity demanded falls. Option A describes the opposite, C would only be true for a good people buy regardless of price, and D has no basis.
+
+Answer: B
+@check has=Answer: B
+@user
+A product's price rises 10% and the quantity sold falls 20%. Demand for it is:
+A. Elastic
+B. Inelastic
+C. Unit elastic
+D. Perfectly inelastic
+@assistant
+Elasticity compares the percentage change in quantity with the percentage change in price.
+
+Step 1: 20% / 10% = 2.
+Step 2: A value above 1 means buyers react strongly to the price, which is called elastic demand.
+
+Inelastic would be a value below 1, unit elastic exactly 1, and perfectly inelastic 0, meaning no change in quantity at all.
+
+Answer: A
+@check has=Answer: A
+@user
+So should that seller raise the price to earn more?
+@assistant
+No. With elastic demand a price rise lowers revenue, because the fall in sales outweighs the higher price.
+
+With numbers: say the price is 10 and 100 units are sold, giving revenue of 1,000. After a 10% rise the price is 11, and sales drop 20% to 80 units. Revenue is 11 x 80 = 880, which is 120 less than before.
+
+This is about revenue only. Profit also depends on costs, since selling fewer units costs less to supply.
+@check has=880
+
+### mt/q006 | skills=mcq_cs
+@user
+What is the time complexity of binary search on a sorted list of n items?
+A. O(1)
+B. O(log n)
+C. O(n)
+D. O(n log n)
+@assistant
+Binary search looks at the middle item and discards half of the remaining list at each step. Starting from n items, the list shrinks to n/2, n/4, n/8 and so on, until one item is left. The number of halvings needed is about log2 of n.
+
+O(n) would be a linear scan that checks every item, O(1) would mean a fixed number of steps for any size, and O(n log n) is typical of good sorting algorithms.
+
+Answer: B
+@check has=Answer: B
+@user
+How many comparisons at most for a list of 1,000,000 items?
+A. About 20
+B. About 1,000
+C. About 500,000
+D. 1,000,000
+@assistant
+Step 1: The number of steps is about log2 of 1,000,000.
+Step 2: 2 to the power 10 is 1,024, roughly a thousand, so 2 to the power 20 is roughly a million.
+Step 3: That gives about 20 comparisons.
+
+Option C is the average for a linear scan, and D is its worst case.
+
+Answer: A
+@check has=Answer: A
+@user
+What if the list isn't sorted?
+@assistant
+Then binary search does not work. Its logic depends on knowing that everything to the left of the middle is smaller and everything to the right is larger. On an unsorted list, discarding half could throw away the item you are looking for.
+
+You have two options:
+- Search once: use a linear scan, which is O(n).
+- Search many times: sort the list first, which is O(n log n), and then each search is O(log n). A hash set is another choice and gives roughly constant-time lookups.
+@check has=linear
+
+### mt/q007 | skills=mcq_biology
+@user
+Which blood vessels carry blood away from the heart?
+A. Veins
+B. Arteries
+C. Capillaries
+D. Venules
+@assistant
+Arteries carry blood away from the heart, and veins bring it back. Capillaries are the tiny vessels where exchange with the tissues happens, and venules are small vessels that collect blood from capillaries and pass it to the veins.
+
+Answer: B
+@check has=Answer: B
+@user
+True or false: all arteries carry oxygen-rich blood.
+@assistant
+False.
+
+The definition of an artery is about direction, not oxygen. An artery carries blood away from the heart. The pulmonary arteries carry oxygen-poor blood from the heart to the lungs, so they are the exception to the "arteries are oxygen-rich" rule of thumb. In the same way, the pulmonary veins carry oxygen-rich blood back to the heart.
+@check has=False ; has=pulmonary
+@user
+Which chamber pumps blood to the whole body?
+A. Right atrium
+B. Right ventricle
+C. Left atrium
+D. Left ventricle
+@assistant
+The left ventricle pumps oxygen-rich blood into the aorta and from there to the whole body. It has the thickest muscular wall of the four chambers because it has to generate the highest pressure.
+
+The right ventricle pumps only as far as the lungs. The two atria are receiving chambers that pass blood down to the ventricles.
+
+Answer: D
+@check has=Answer: D
+
+### mt/q008 | skills=mcq_geography
+@user
+Which is the longest river in South America?
+A. Orinoco
+B. Parana
+C. Amazon
+D. Magdalena
+@assistant
+The Amazon is by far the longest, at well over 6,000 km. The Parana is second at under 5,000 km, and the Orinoco and Magdalena are much shorter.
+
+Answer: C
+@check has=Answer: C
+@user
+Is the Amazon the longest river in the world?
+@assistant
+That is disputed. Most reference works list the Nile as the longest, at about 6,650 km, with the Amazon slightly behind at around 6,400 km. Some measurements that use a more distant source for the Amazon put it ahead of the Nile.
+
+What is not in dispute is volume. The Amazon carries far more water than any other river, several times the flow of the next largest.
+
+So for a quiz, "the Nile" is the expected answer for longest, and "the Amazon" for largest by volume.
+@check has=Nile ; has=volume
+@user
+Which ocean does it flow into?
+A. Pacific
+B. Indian
+C. Atlantic
+D. Arctic
+@assistant
+The Amazon rises in the Andes in the west of the continent and flows east across Brazil, reaching the Atlantic Ocean on Brazil's north coast. The Andes block the way to the nearby Pacific, and the other two oceans do not border South America's river mouths.
+
+Answer: C
+@check has=Answer: C
+
+### mt/q009 | skills=mcq_chemistry
+@user
+What is the pH of a neutral solution at 25 C?
+A. 0
+B. 1
+C. 7
+D. 14
+@assistant
+The pH scale runs from about 0 (strongly acidic) to about 14 (strongly basic). Pure water at 25 C sits in the middle, with equal concentrations of hydrogen and hydroxide ions, which gives pH 7.
+
+Answer: C
+@check has=Answer: C
+@user
+A solution has pH 3. How many times more acidic is it than a solution with pH 5?
+A. 2 times
+B. 20 times
+C. 100 times
+D. 1,000 times
+@assistant
+The pH scale is logarithmic: each step of 1 means a factor of 10 in hydrogen ion concentration.
+
+Step 1: The difference is 5 - 3 = 2 pH units.
+Step 2: 10 x 10 = 100.
+
+Option A is the trap of treating the scale as linear.
+
+Answer: C
+@check has=Answer: C
+@user
+What happens to the pH if I dilute the pH 3 solution ten times with water?
+@assistant
+For a strong acid, diluting ten times cuts the hydrogen ion concentration to one tenth, which raises the pH by 1.
+
+So the pH goes from 3 to about 4. It moves toward 7 but can never pass it by dilution: however much water you add, an acid stays slightly acidic.
+
+For a weak acid, such as vinegar, the rise is smaller than 1, because more of the acid molecules split up as the solution is diluted.
+@check has=about 4
+
+### mt/q010 | skills=mcq_grammar
+@user
+Choose the correct sentence.
+A. Neither of the answers are correct.
+B. Neither of the answers is correct.
+C. Neither of the answer is correct.
+D. Neither of answers are correct.
+@assistant
+"Neither" is singular, so in formal English it takes a singular verb: "is". After "neither of" you need a plural noun with a determiner: "the answers".
+
+Option A has the plural verb, C has a singular noun, and D is missing "the" and also uses the plural verb.
+
+Answer: B
+@check has=Answer: B
+@user
+Which word fits? "She has lived here ___ 2015."
+A. for
+B. since
+C. from
+D. during
+@assistant
+The year 2015 is a starting point, and the verb is in the present perfect ("has lived"). A starting point with the present perfect takes "since".
+
+"For" needs a length of time, such as "for nine years". "From" would need an end point, as in "from 2015 to 2020", and "during" refers to a period, not a start.
+
+Answer: B
+@check has=Answer: B
+@user
+Make me one more question like these, and put the answer after it.
+@assistant
+Which sentence is correct?
+A. There is less people here today.
+B. There are less people here today.
+C. There are fewer people here today.
+D. There is fewer people here today.
+
+"People" is plural and countable, so it takes "are" and "fewer". "Less" is used for things that cannot be counted, such as water or time.
+
+Answer: C
+@check has=Answer: C ; has=fewer
+
+### mt/a001 | skills=advice_plan
+@user
+I want to start running but I get out of breath after two minutes.
+@assistant
+That is normal at the start, and it usually means the pace is too fast, not that you are unfit for running.
+
+Try run-walk intervals:
+- Run gently for 1 minute, then walk for 2 minutes.
+- Repeat 8 times. That is 24 minutes in total.
+- Do this three times a week, with a rest day in between.
+
+The pace test: while running you should be able to say a full sentence. If you cannot, slow down, even if it feels barely faster than walking.
+@check has=1 minute
+@user
+How do I progress from there?
+@assistant
+Change one thing a week, and only a little.
+
+- Week 1: run 1 minute, walk 2 minutes, 8 times
+- Week 2: run 2 minutes, walk 2 minutes, 6 times
+- Week 3: run 3 minutes, walk 2 minutes, 5 times
+- Week 4: run 5 minutes, walk 2 minutes, 4 times
+- Week 5: run 8 minutes, walk 2 minutes, 3 times
+- Week 6: run 12 minutes, walk 2 minutes, 2 times
+
+If a week feels hard, repeat it before moving on. Repeating is part of the plan, not a failure.
+@check has=Week 6
+@user
+My knees hurt a bit after the second run. Should I stop?
+@assistant
+Mild soreness that fades within a day or two is common when the body meets a new load. Take an extra rest day, and when you go back, keep the pace easy and take shorter steps. Shoes matter too: worn-out or very flat ones are a frequent cause.
+
+Stop and see a doctor or physiotherapist if the pain is sharp, if there is swelling, if it gets worse while you run, or if it has not settled after about a week of rest. I cannot examine your knee, so treat this as general guidance only.
+@check has=physiotherapist
+
+### mt/a002 | skills=advice_budget
+@user
+I earn 2,400 a month after tax and never have anything left. How should I budget?
+@assistant
+A simple starting point is the 50/30/20 split.
+
+Step 1: Needs, 50%: 0.50 x 2,400 = 1,200. Rent, bills, food, transport, insurance.
+Step 2: Wants, 30%: 0.30 x 2,400 = 720. Eating out, hobbies, subscriptions.
+Step 3: Savings and debt, 20%: 0.20 x 2,400 = 480.
+
+Before changing anything, track one full month of real spending. Most people find one or two categories much bigger than they thought, and that is where the plan starts.
+@check has=1,200 ; has=720 ; has=480
+@user
+My rent alone is 1,100.
+@assistant
+Then the 50% target for needs is not realistic for you at the moment, and the split has to bend.
+
+Step 1: Rent is 1,100 of 2,400, which is about 46% of your income.
+Step 2: Other needs, such as bills, food and transport, probably add 400 to 500. That puts needs at around 1,500 to 1,600, or about 65%.
+Step 3: A split that fits this: needs 65% (1,560), wants 20% (480), savings 15% (360).
+
+Rent is fixed in the short term, so the room to move is in wants and in the smaller needs like food and phone plans. If saving 360 is too much right now, start at 100 and raise it gradually. A small amount saved every month is worth more than a large plan that collapses.
+@check has=46% ; has=360
+@user
+Where should the savings go first?
+@assistant
+In this order, for most people:
+
+1. A small emergency buffer, for example 500 to 1,000, in an account you can reach quickly. It stops an unexpected bill from becoming debt.
+2. Expensive debt, such as credit cards. Paying off a card that charges 20% is the same as earning 20% with no risk.
+3. A full emergency fund of about three months of essential costs. For you that is roughly 3 x 1,560 = 4,680.
+4. Long-term saving, such as a pension or investments.
+
+Set up an automatic transfer on payday so the money moves before you can spend it. The right details depend on your country's accounts and tax rules, so check those locally.
+@check has=4,680
+
+### mt/a003 | skills=advice_study
+@user
+I have an exam in 10 days and 6 chapters to cover. How do I plan it?
+@assistant
+Work backwards from the exam and leave room for review.
+
+Step 1: Keep the last 2 days for full review and practice questions. That leaves 8 days.
+Step 2: Keep 1 more day as a buffer for whatever takes longer than planned. That leaves 7 days.
+Step 3: Six chapters in 7 days means one chapter a day, with one extra day for the hardest chapter.
+
+Plan:
+- Days 1 to 7: one chapter per day, two days for the hardest
+- Day 8: buffer and catch-up
+- Days 9 and 10: review everything and do practice questions
+
+Each day, start with 15 minutes of recalling yesterday's chapter from memory before opening the new one.
+@check has=Days 9 and 10
+@user
+I can only study 2 hours on weekdays.
+@assistant
+Then the hours are the real limit, so let me count them. I'll assume the 10 days include 2 weekend days and that you can do 5 hours on each of those.
+
+Step 1: Weekdays: 8 x 2 = 16 hours.
+Step 2: Weekend: 2 x 5 = 10 hours.
+Step 3: Total: 26 hours.
+Step 4: Hold back 6 hours for the final review. That leaves 20 hours for 6 chapters, a little over 3 hours per chapter.
+
+So a chapter takes about a day and a half of weekday time. Put the two hardest chapters on the weekend days, when you have longer blocks, and spread the other four across the weekdays.
+
+If 3 hours per chapter is not enough, cut depth before you cut the review: read summaries and do the end-of-chapter questions first.
+@check has=26 hours
+@user
+I keep rereading and nothing sticks.
+@assistant
+Rereading feels productive because the text becomes familiar, but familiarity is not the same as being able to recall it. Switch to methods that make you retrieve the material.
+
+- Close the book and write down everything you remember from the section. Then check what you missed.
+- Turn each heading into a question and answer it aloud.
+- Do practice questions before you feel ready. Getting them wrong and then checking is one of the fastest ways to learn.
+- Come back to each chapter after a day and again after three days, for five to ten minutes each time.
+
+A good rule for your 2-hour sessions: at most 40 minutes reading, and the rest testing yourself.
+@check has=practice questions
+
+### mt/a004 | skills=advice_decision
+@user
+I've got two job offers. A pays 52k and is a 15 minute walk. B pays 60k but it's a 70 minute commute each way. Which should I take?
+@assistant
+I can't choose for you, but I can put numbers on the trade-off.
+
+Step 1: Extra pay at B: 60k - 52k = 8k a year before tax.
+Step 2: Extra travel at B: 70 - 15 = 55 minutes each way, so 110 minutes a day.
+Step 3: Over about 230 working days: 110 x 230 = 25,300 minutes, which is about 422 hours a year.
+Step 4: 8,000 / 422 is about 19 per hour, before tax and before any travel costs.
+
+So B effectively pays you about 19 an hour, before tax, to spend 422 extra hours a year commuting. That is more than ten full 40-hour weeks.
+
+Whether that is worth it depends on things the numbers do not show: which job you would enjoy more, where each one leads, and what the commute is like.
+@check has=422 ; has=19
+@user
+B is by train and I could read. Also B lets me work from home 2 days a week.
+@assistant
+Both of those change the picture, so let me redo the numbers.
+
+Step 1: With 2 days at home you commute 3 days out of 5, which is 60% of the days: 230 x 0.6 = 138 days.
+Step 2: Extra travel: 110 x 138 = 15,180 minutes, which is 253 hours a year.
+Step 3: 8,000 / 253 is about 32 per hour.
+
+And if you can really read or rest on the train, part of those 253 hours is not lost time. A seat on a direct train is very different from standing or changing twice, so try the route at rush hour before you decide.
+
+On these numbers B looks much stronger than it did. I would still weigh the work itself and the people above an 8k difference.
+@check has=253 ; has=32
+@user
+What would you ask each employer before deciding?
+@assistant
+For B:
+- Is the 2 days of home working written into the contract, or is it an informal policy that could change?
+- Are the office days fixed, and are the hours flexible enough to avoid the busiest trains?
+- Do they contribute to travel costs?
+
+For A:
+- Is there room to negotiate the salary, given that you hold a higher offer?
+- What does pay progression look like after the first year?
+
+For both:
+- What will I be working on in the first six months, and who will I report to?
+- Why is the role open, and how long do people usually stay in the team?
+
+The answer about the contract at B matters most. If the home days are not guaranteed, use the first set of numbers, not the second.
+@check has=contract
+
+### mt/a005 | skills=advice_cooking
+@user
+My rice always comes out mushy. What am I doing wrong?
+@assistant
+Mushy rice nearly always comes from one of three things: too much water, too much stirring, or lifting the lid.
+
+A method that works for long-grain white rice:
+1. Rinse the rice until the water runs mostly clear. This removes loose starch.
+2. Use 1 cup of rice to 1.5 cups of water.
+3. Bring to the boil, then turn the heat to the lowest setting and cover.
+4. Cook for 12 minutes without stirring or lifting the lid.
+5. Turn off the heat and leave it covered for 10 minutes, then fluff with a fork.
+
+How much water do you use at the moment?
+@check has=1.5 cups
+@user
+2 cups of water per cup of rice, like the packet says. And I stir it.
+@assistant
+Those are the two causes.
+
+- Water: 2 to 1 is on the high side for most long-grain rice in a pot with a tight lid. The extra half cup has nowhere to go, so the grains keep absorbing it and burst. Try 1.5 to 1.
+- Stirring: it rubs starch off the grains and into the water, which makes the pot gluey. That is what you want for risotto and the opposite of what you want here. Stir once when the water comes to the boil, then leave it alone.
+
+Packet instructions often assume an open pan or a looser lid, where more steam escapes.
+@check has=risotto
+@user
+I'm cooking 3 cups of rice tonight for guests. How much water, and does the time change?
+@assistant
+Step 1: Water: 3 x 1.5 = 4.5 cups.
+Step 2: Time: about the same. A larger batch may need 2 or 3 minutes more, so plan for roughly 15 minutes of cooking, then the same 10 minutes of resting.
+
+Use a wide pot so the rice is not too deep, since a tall narrow pot cooks the bottom to mush before the top is done. For larger batches some cooks cut the water slightly, to about 4.25 cups, because less of it evaporates per cup of rice.
+
+Three cups of dry rice makes about 9 cups cooked, enough for 6 to 9 people as a side.
+@check has=4.5 cups
+
+### mt/a006 | skills=advice_tech
+@user
+My laptop has gotten really slow. Anything I can try before buying a new one?
+@assistant
+Yes. Go through these from quickest to slowest:
+
+1. Restart it. If it has been asleep for weeks without a restart, this alone often helps.
+2. Check free disk space. A drive that is more than about 90% full slows everything down.
+3. Look at what starts automatically. Many apps add themselves to startup and run all the time.
+4. Open the task manager (Activity Monitor on a Mac) and sort by memory and CPU to see what is using the most.
+5. Install pending system updates.
+
+Which of these have you tried already, and roughly how old is the laptop?
+@check has=disk space
+@user
+It's 6 years old, 8 GB RAM, and the task manager shows memory at 92% with just the browser open.
+@assistant
+Then memory is the bottleneck. At 92% the system starts using the disk as overflow memory, which is far slower and causes exactly the sluggishness you describe.
+
+In order of cost:
+- Free: close tabs you are not using and remove browser extensions you do not need. Each tab and extension holds memory, and 30 open tabs can fill 8 GB on their own.
+- Free: check whether other apps are running in the background and close them.
+- Low cost: add RAM, if the laptop allows it. Going from 8 to 16 GB is usually the best-value upgrade for a machine of this age. Some laptops have the memory soldered in, so look up your exact model first.
+@check has=16 GB
+@user
+How do I find out if the RAM can be upgraded?
+@assistant
+Three ways, quickest first:
+
+1. Search for your exact model number plus "RAM upgrade" or "maximum memory". The model number is on a sticker under the laptop or in the system information.
+2. Read the manufacturer's service manual for the model. It states how many memory slots there are and the maximum supported size.
+3. Use the system itself. On Windows, Task Manager, under Performance and then Memory, shows "Slots used", for example "1 of 2". One free slot means you can simply add a module.
+
+If the manual says the memory is soldered or "onboard" with no free slot, it cannot be upgraded, and the browser clean-up is your main option. I do not know your model, so I cannot say which case applies to you.
+@check has=Slots used

@@ -1,0 +1,285 @@
+- id: d001
+  category: pipeline_debug
+  difficulty: hard
+  tags: [python, csv, join, recovery, deep]
+  prompt: "Using orders.csv and customers.csv, work out the revenue per country for Q1 2025 (January to March) and write it to report.md as \"- COUNTRY: total\" lines under the heading \"# Q1 revenue\", biggest country first."
+  files:
+    orders.csv: |
+      order_id,customer_id,date,amount
+      1,c1,2025-01-15,100
+      2,c2,2025-02-10,50
+      3,c1,2025-04-02,70
+      4,c3,2025-03-20,30
+      5,c2,2025-03-05,20
+    customers.csv: |
+      customer_id,name,country
+      c1,Ana,PT
+      c2,Bo,NO
+      c3,Cy,PT
+  steps:
+    - plan: Let me look at both files before writing any code.
+      tool: run_bash
+      arg: head -n 3 orders.csv customers.csv
+    - plan: I'll join the orders to customers on the customer id, keep dates in Q1 and sum per country.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import defaultdict
+        country = {r['id']: r['country'] for r in csv.DictReader(open('customers.csv'))}
+        tot = defaultdict(float)
+        for r in csv.DictReader(open('orders.csv')):
+            if '2025-01-01' <= r['date'] <= '2025-03-31':
+                tot[country[r['customer_id']]] += float(r['amount'])
+        print(dict(tot))
+      fails: true
+    - plan: That raised a KeyError, so my guess about the customers.csv column name was wrong. The header shows it's customer_id, not id. I'll fix the lookup and write the report.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import defaultdict
+        country = {r['customer_id']: r['country'] for r in csv.DictReader(open('customers.csv'))}
+        tot = defaultdict(float)
+        for r in csv.DictReader(open('orders.csv')):
+            if '2025-01-01' <= r['date'] <= '2025-03-31':
+                tot[country[r['customer_id']]] += float(r['amount'])
+        lines = ['# Q1 revenue'] + [f'- {c}: {v:g}' for c, v in sorted(tot.items(), key=lambda kv: -kv[1])]
+        open('report.md', 'w').write('\n'.join(lines) + '\n')
+    - plan: Let me read the report back to confirm it looks right.
+      tool: run_bash
+      arg: cat report.md
+  final: "report.md is written. Q1 2025 revenue: PT 130 and NO 70. The April order (70) was excluded because it falls outside Q1. My first attempt failed on a wrong column name, which I fixed after checking the header."
+  grounded: ["- PT: 130", "- NO: 70"]
+  check:
+    files:
+      report.md: {equals: "# Q1 revenue\n- PT: 130\n- NO: 70"}
+
+- id: d002
+  category: debugging
+  difficulty: hard
+  tags: [python, tests, bugfix, deep]
+  prompt: The test in test_calc.py is failing. Please find the bug in calc.py and fix it, then show me that the test passes.
+  files:
+    calc.py: |
+      def average(values):
+          return sum(values) / (len(values) - 1)
+    test_calc.py: |
+      from calc import average
+      assert average([2, 4, 6]) == 4, average([2, 4, 6])
+      print("ok")
+  steps:
+    - plan: First I'll run the test to see the actual failure.
+      tool: run_bash
+      arg: python3 test_calc.py
+      fails: true
+    - plan: The assertion shows average([2, 4, 6]) returned 6.0 instead of 4. Let me read the function.
+      tool: run_bash
+      arg: cat calc.py
+    - plan: The divisor is len(values) - 1, which is the sample-variance style off-by-one. An average should divide by the number of values, so I'll remove the "- 1".
+      tool: run_python
+      arg: |
+        src = open('calc.py').read().replace('(len(values) - 1)', 'len(values)')
+        open('calc.py', 'w').write(src)
+        print(src)
+    - plan: Now rerun the test to confirm the fix.
+      tool: run_bash
+      arg: python3 test_calc.py
+  final: "Fixed. In calc.py, average() divided by len(values) - 1, so [2, 4, 6] gave 6.0 instead of 4. I changed it to divide by len(values), and test_calc.py now prints ok."
+  grounded: ["ok"]
+  check:
+    files:
+      calc.py: {contains: ["/ len(values)"], not_contains: ["- 1"]}
+    reply_contains: ["len(values)"]
+
+- id: d003
+  category: log_forensics
+  difficulty: hard
+  tags: [bash, grep, logs, deep]
+  prompt: One request in app.log failed with an ERROR. Find it and write the complete timeline of that one request (every log line carrying its request id, in order) to incident.txt.
+  files:
+    app.log: |
+      10:00:01 req=a1 start /checkout
+      10:00:02 req=b2 start /search
+      10:00:03 req=a1 db query slow 2300ms
+      10:00:04 req=b2 done 200
+      10:00:05 req=a1 ERROR payment gateway timeout
+      10:00:06 req=a1 done 500
+  steps:
+    - plan: Let me find the ERROR line first; it will tell me the request id.
+      tool: run_bash
+      arg: grep ERROR app.log
+    - plan: The failing request is req=a1. I'll collect every line with that id in file order and save them.
+      tool: run_bash
+      arg: grep 'req=a1 ' app.log > incident.txt; cat incident.txt
+  final: "The failing request is a1 (the /checkout call). Its timeline is saved in incident.txt: it started at 10:00:01, a database query was slow (2300ms) at 10:00:03, the payment gateway timed out at 10:00:05, and it ended with a 500 at 10:00:06."
+  grounded: ["req=a1 ERROR payment gateway timeout", "2300ms"]
+  check:
+    files:
+      incident.txt: {equals: "10:00:01 req=a1 start /checkout\n10:00:03 req=a1 db query slow 2300ms\n10:00:05 req=a1 ERROR payment gateway timeout\n10:00:06 req=a1 done 500"}
+
+- id: d004
+  category: data_cleaning
+  difficulty: hard
+  tags: [python, csv, normalisation, deep]
+  prompt: Clean the phone numbers in phones.csv. Keep only digits, drop a leading country code 351 (also written +351 or 00351), and treat a number as valid only if 9 digits remain. Write the valid ones to clean_phones.csv (name,phone) and the names of the invalid ones to invalid.txt.
+  files:
+    phones.csv: |
+      name,phone
+      Ana,+351 912 345 678
+      Bo,912-345-679
+      Cy,12345
+      Di,00351 913 000 001
+  steps:
+    - plan: I'll read the file first to see the formats in use.
+      tool: run_bash
+      arg: cat phones.csv
+    - plan: For each number I keep the digits, strip a leading 351 only when more than nine digits remain, and test for exactly nine.
+      tool: run_python
+      arg: |
+        import csv, re
+        good, bad = [], []
+        for r in csv.DictReader(open('phones.csv', newline='')):
+            d = re.sub(r'\D', '', r['phone'])
+            if d.startswith('00351'):
+                d = d[5:]
+            elif d.startswith('351') and len(d) > 9:
+                d = d[3:]
+            (good if len(d) == 9 else bad).append((r['name'], d))
+        with open('clean_phones.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['name', 'phone'])
+            w.writerows(good)
+        open('invalid.txt', 'w').write('\n'.join(n for n, _ in bad) + '\n')
+        print(good, bad)
+  final: "Three numbers are valid and saved in clean_phones.csv: Ana 912345678, Bo 912345679 and Di 913000001. Cy's number (12345) has only 5 digits, so its name is listed in invalid.txt."
+  grounded: ["912345678", "913000001"]
+  check:
+    files:
+      clean_phones.csv: {equals: "name,phone\nAna,912345678\nBo,912345679\nDi,913000001"}
+      invalid.txt: {equals: "Cy"}
+
+- id: d005
+  category: templating
+  difficulty: hard
+  tags: [python, templates, verification, deep]
+  prompt: Fill the __PLACEHOLDERS__ in the templates in templates/ with the values from values.env and write the results to out/ under the same file names. Then check that no placeholder is left.
+  files:
+    templates/a.conf: "host=__HOST__\nport=__PORT__\n"
+    templates/b.conf: "url=http://__HOST__:__PORT__/api\n"
+    values.env: "HOST=db.internal\nPORT=5432\n"
+  steps:
+    - plan: Let me see the values and the templates.
+      tool: run_bash
+      arg: cat values.env; echo ---; cat templates/*.conf
+    - plan: I'll load the key=value pairs, replace every __KEY__ in each template, and write to out/.
+      tool: run_python
+      arg: |
+        import os
+        vals = dict(l.strip().split('=', 1) for l in open('values.env') if '=' in l)
+        os.makedirs('out', exist_ok=True)
+        for name in sorted(os.listdir('templates')):
+            text = open(os.path.join('templates', name)).read()
+            for k, v in vals.items():
+                text = text.replace(f'__{k}__', v)
+            open(os.path.join('out', name), 'w').write(text)
+        print(sorted(os.listdir('out')))
+    - plan: Now the verification: search the output for any leftover double-underscore placeholder.
+      tool: run_bash
+      arg: grep -c '__' out/a.conf out/b.conf; cat out/b.conf
+  final: "Both templates are filled and written to out/a.conf and out/b.conf. The check shows 0 leftover placeholders in each file, and out/b.conf reads url=http://db.internal:5432/api."
+  grounded: ["url=http://db.internal:5432/api"]
+  check:
+    files:
+      out/a.conf: {equals: "host=db.internal\nport=5432"}
+      out/b.conf: {equals: "url=http://db.internal:5432/api"}
+
+- id: d006
+  category: statistics
+  difficulty: hard
+  tags: [python, statistics, outliers, deep]
+  prompt: In measurements.csv, flag every value that is more than 2 population standard deviations away from the mean. Save the flagged rows (1-based row number among the data rows, and the value) to outliers.csv with header row,value, and tell me the mean and the standard deviation you used.
+  files:
+    measurements.csv: |
+      value
+      10
+      11
+      9
+      10
+      12
+      10
+      11
+      9
+      10
+      50
+  steps:
+    - plan: I'll compute the mean and the population standard deviation first, then flag by the 2-sigma rule.
+      tool: run_python
+      arg: |
+        import csv, statistics
+        vals = [float(r['value']) for r in csv.DictReader(open('measurements.csv'))]
+        mean, sd = statistics.mean(vals), statistics.pstdev(vals)
+        flagged = [(i, v) for i, v in enumerate(vals, start=1) if abs(v - mean) > 2 * sd]
+        with open('outliers.csv', 'w') as f:
+            f.write('row,value\n')
+            for i, v in flagged:
+                f.write(f'{i},{v:g}\n')
+        print(f'mean={mean:.2f} sd={sd:.2f} limit=+-{2 * sd:.2f}')
+        print(flagged)
+  final: "The mean is 14.20 and the population standard deviation is 11.96, so values more than 23.93 away from the mean are flagged. Only row 10 (value 50) qualifies, and it is saved in outliers.csv."
+  grounded: ["mean=14.20 sd=11.96"]
+  check:
+    files:
+      outliers.csv: {equals: "row,value\n10,50"}
+
+- id: d007
+  category: tool_recovery
+  difficulty: hard
+  tags: [python, json, recovery, deep]
+  prompt: How many items are in the "b" list in data.json?
+  files:
+    data.json: "{\"a\": 1, \"b\": [1, 2, 3,]}\n"
+  steps:
+    - plan: I'll parse the JSON and take the length of "b".
+      tool: run_python
+      arg: |
+        import json
+        print(len(json.load(open('data.json'))['b']))
+      fails: true
+    - plan: The parser rejected the file. Let me look at the raw content to see what's wrong.
+      tool: run_bash
+      arg: cat data.json
+    - plan: There's a trailing comma after the last list item, which strict JSON doesn't allow. I'll strip it in memory (without editing your file) and count again.
+      tool: run_python
+      arg: |
+        import json, re
+        text = re.sub(r',\s*([\]}])', r'\1', open('data.json').read())
+        print(len(json.loads(text)['b']))
+  final: "The \"b\" list has 3 items. data.json isn't valid JSON because of a trailing comma after the last item, so my first attempt failed; I removed the comma in memory only and left your file unchanged."
+  grounded: ["3"]
+  check:
+    files:
+      data.json: {contains: ["3,]"]}
+    reply_contains: ["3", "trailing comma"]
+
+- id: d008
+  category: archives
+  difficulty: medium
+  tags: [bash, tar, verification, deep]
+  prompt: Make a compressed backup of the src folder as backup.tar.gz, leaving out any __pycache__ folders, then list what ended up inside so I can check it.
+  files:
+    src/a.py: "print('a')\n"
+    src/b.py: "print('b')\n"
+    src/data/x.txt: "x\n"
+    src/__pycache__/a.cpython-312.pyc: "bytecode"
+  steps:
+    - plan: Let me see what's in src first, so I know what should and shouldn't end up in the archive.
+      tool: run_bash
+      arg: find src -type f | sort
+    - plan: tar with --exclude will skip the cache folder. Then I'll list the archive, files only, to verify.
+      tool: run_bash
+      arg: tar -czf backup.tar.gz --exclude='__pycache__' src && tar -tzf backup.tar.gz | grep -v '/$' | sort
+  final: "backup.tar.gz is created and contains 3 files: src/a.py, src/b.py and src/data/x.txt. The __pycache__ folder with its .pyc file was left out."
+  grounded: ["src/a.py", "src/data/x.txt"]
+  check:
+    files:
+      backup.tar.gz: {}
+    reply_contains: ["3", "src/a.py", "src/data/x.txt"]

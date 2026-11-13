@@ -1,0 +1,125 @@
+471 ||| Total amount for the Central region in 2024-10, please - use the rows of sales.csv whose date starts with 2024-10.
+472 ||| From orders.csv, add up the amount for West region rows dated in 2025-11 (date starts with 2025-11). What's the total?
+473 ||| how much did the South region total in 2024-12? use orders.csv, rows where date starts with 2024-12
+474 ||| What does the West region add up to in 2024-03? Count the rows of orders.csv whose date begins with 2024-03. Thanks!
+475 ||| I need the South region's total amount for 2025-02 - orders.csv, rows with a date starting 2025-02. Thank you!
+476 ||| Who earns the most? Show the 5 highest salary values in people.csv with the people they belong to. Short answer.
+477 ||| Hello, list the top 3 salaries in team_roster.csv together with who earns them.
+478 ||| Please rank the top 5 people by score in staff.csv, highest to lowest, with their scores, and double-check the ranking.
+479 ||| Find the 5 biggest salaries in employees.csv and the people behind them, in descending order. Please double-check it.
+480 ||| Top 5 earners in people.csv - names with salary, highest to lowest, please.
+481 ||| Hey, find all the email addresses in notes.txt, make them lowercase, remove duplicates, sort them alphabetically and save them one per line in emails.txt. How many unique addresses are there?
+482 ||| I need the unique email addresses from notes.txt (lowercase, sorted, one per line) in emails.txt, plus the count. Tell me when you're finished.
+483 ||| Extract every email address in notes.txt to unique_emails.txt - lowercase, no duplicates, alphabetical order - and tell me how many you found.
+484 ||| For my weekly report: put the unique email addresses from notes.txt into contacts.txt (lowercase, sorted, one per line) and tell me how many there are.
+485 ||| Pull out the email addresses from notes.txt, lowercase them, dedupe, sort alphabetically and write one per line to unique_emails.txt. Then tell me the number of unique addresses. Short reply.
+486 ||| How many lines mention budget (any capitalisation) across the .txt files in docs/? Only .txt files count. Thank you!
+487 ||| Across docs/*.txt, in how many lines does refund show up, in any capitalisation? Thank you!
+488 ||| Count lines that contain the word contract (case-insensitive) in the .txt files under docs/, leaving out any other file types. Thanks!
+489 ||| Rushing: number of lines containing refund (ignore case) in the .txt files in docs/, nothing but .txt. Thanks!
+490 ||| Hi! In docs/, look only at the .txt files and count the lines with the word budget, regardless of case. Please double-check the result.
+491 ||| Small task: take inbox.json and write mail_report.json with two fields: 'unread' (number of unread messages) and 'urgent_senders' (sorted unique sender addresses of messages with urgent in the subject, any capitalisation, read or unread).
+492 ||| In a rush: triage mailbox.json and save triage.json as {"unread": <count of unread messages>, "asap_senders": <sorted unique senders of messages with 'asap' in the subject, case-insensitive>}
+493 ||| Please triage messages.json - write triage.json as a JSON object {"unread": <count of unread messages>, "asap_senders": <sorted unique senders of messages with 'asap' in the subject, case-insensitive>}. Tell me when done.
+494 ||| Hey, go through messages.json and create triage.json with 'unread' (how many messages are unread) and 'asap_senders' (sorted unique sender addresses whose subject contains asap, any capitalisation, whether read or unread).
+495 ||| hello, triage inbox.json for me and save inbox_summary.json as {"unread": <count of unread messages>, "critical_senders": <sorted unique senders of messages with 'critical' in the subject, case-insensitive>}. Please check your work.
+496 ||| Hello, convert config.ini to settings.json grouped by section, keeping every value as a string. Thank you!
+497 ||| hello - can you turn config.ini into settings.json? One JSON object per section, values stay strings. Thanks!
+498 ||| Hi! I need config.ini as JSON in config.json: sections as objects, every value still a string. Thanks!
+499 ||| Small task: config.ini -> settings.json. One object per section with its keys, and all values kept as strings.
+500 ||| For my weekly report: convert config.ini into settings.json, grouped by section, with all values as strings. Tell me when it's done.
+501 ||| Please arrange a 60-minute meeting called Planning session on 2026-11-20 with Kofi Haddad, Felix Kim and Theo Rossi. Take the earliest slot between 09:00 and 17:00 when all three are free (see calendar.json), get their email addresses from contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Please double-check the result.
+502 ||| Set up Planning session, 45 minutes, on 2026-04-11 with Noah Ferrari, Kenji Garcia and Theo Schmidt: earliest slot between 09:00 and 17:00 that is free for everyone (calendar.json), emails from contacts.csv, and the invite in out/invite.txt as exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Tell me when it's done.
+503 ||| In a rush - Design review, 60 minutes, on 2026-07-21 with Priya Fischer and Oscar Weber. Use calendar.json to find the earliest slot between 09:00 and 17:00 when both are free, look up their emails in contacts.csv and write out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Short reply.
+504 ||| Quick one: plan a 30-minute Planning session on 2026-07-03 with Alice Ivanov, Sofia Dubois and Hana Schmidt. Find the earliest slot between 09:00 and 17:00 when they're all free (calendar.json), look up their emails in contacts.csv, and save the invite as out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'.
+505 ||| Hi! I want a 45-minute Design review on 2026-06-08 with Dmitri Santos, Amira Fischer and Sofia Larsen. Check calendar.json for the earliest slot between 09:00 and 17:00 when they're all free, get their emails from contacts.csv and write out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'.
+506 ||| For my weekly report: from users.json keep only the active users aged 30 or older, and write out.json as a JSON list of objects with keys user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name. Thanks in advance.
+507 ||| I need selected_users.json from users.json: only active users with age >= 25, as a list sorted by full_name, each item holding user_id, full_name and email.
+508 ||| Need a hand: filter users.json to active users aged 25 or older and write selected_users.json as a JSON list of objects with user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name. Thanks in advance.
+509 ||| In a rush: out.json should contain only the active users from users.json who are 35 or older, as a JSON list of objects with user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name.
+510 ||| Could you filter users.json down to active users with age >= 25 and save out.json - a list sorted by full_name where each item has user_id, full_name and email?
+511 ||| Small task: merge the two JSON lists people_a.json and people_b.json into merged.json - one record per id, the newest 'updated' wins (on a tie people_b), sorted by id. Thank you!
+512 ||| Please merge people_a.json and people_b.json into merged.json. Records are matched by id; if an id appears in both, keep the one with the later 'updated' date (tie: prefer people_b). Sort by id.
+513 ||| Hey, combine people_a.json and people_b.json (both JSON lists) into merged.json with one record per id. The newest 'updated' wins, people_b on ties, sorted by id.
+514 ||| hey, can you merge people_a.json and people_b.json into merged.json? Records keyed by id; for ids in both files keep the later 'updated' date, preferring people_b on a tie. Sorted by id please.
+515 ||| For my weekly report: people_a.json and people_b.json are JSON lists - combine them in merged.json, one record per id, newest 'updated' wins (tie: people_b), sorted by id. Let me know when it's done.
+516 ||| Hello. Please write report.md from portfolio.json. First line '# Status Report', then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, highest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Include only projects whose status is 'active'. Thank you!
+517 ||| Hi! Build report.md from projects.json. Layout: '# Project Report' on the first line, then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, lowest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Only include projects whose status is 'active'.
+518 ||| For my weekly report, read portfolio.json and produce report.md in exactly this layout: a title line '# Project Report', a table with the header '| Project | Status | Budget |' and separator '|---|---|---|', one row per project sorted by budget (lowest first), the budget written with thousands separators, and a last line 'Total budget: N' (also with thousands separators). Only projects whose status is 'done' should be included.
+519 ||| hello, initiatives.json needs turning into report.md in exactly this layout: a title line '# Project Report', a table with the header '| Project | Status | Budget |' and separator '|---|---|---|', one row per project sorted by budget (lowest first), the budget written with thousands separators, and a last line 'Total budget: N' (also with thousands separators). Include only projects whose status is 'active'. Tell me when it's done.
+520 ||| Could you write report.md from portfolio.json? '# Portfolio Summary' on the first line, then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, highest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Include only projects whose status is 'paused'. Thanks!
+521 ||| Hi! Which file in logs/ is the biggest? I need its name and exact size in bytes - and please double-check.
+522 ||| In a rush: what's the largest file in logs/, and how many bytes is it?
+523 ||| Which log under logs/ takes up the most space? Name and exact byte size please. Thanks!
+524 ||| Small task: tell me the name and size in bytes of the biggest file in logs/. Let me know when you have it.
+525 ||| For my weekly report: look in logs/ and tell me which file is biggest and its size in bytes.
+526 ||| Hey, which 5 requests in access.log were slowest (path and latency in ms, descending)? Also the mean latency over the whole log, rounded to one decimal. Short reply.
+527 ||| Need a hand: in access.log, give me the 4 slowest requests (path and latency, slowest first) and the average latency of all requests to 1 decimal. Thanks in advance.
+528 ||| From access.log I want the 5 slowest requests, path and latency, slowest first, and the average latency across all requests (1 decimal).
+529 ||| Hello, access.log: top 5 slowest requests by latency in ms (with path, descending) and the mean latency of the entire log, 1 decimal.
+530 ||| In a rush - the 5 slowest requests in access.log (path, latency in ms, slowest first) plus the overall mean latency rounded to one decimal. Tell me when it's done.
+531 ||| Error stats for app.log, please: how many ERROR lines, and the first and last ERROR timestamps.
+532 ||| How many ERROR-level entries does app.log have, and when was the earliest and the latest? Please double-check.
+533 ||| Rushing - app.log: number of ERROR lines plus the timestamps of the first and last one, thanks!
+534 ||| In a hurry: count ERROR entries in app.log, and give me the first and the last ERROR timestamp. Thanks!
+535 ||| Quick one: app.log - how many ERROR entries, when was the first, when was the last? Please verify.
+536 ||| Quick one: create toc.md as a table of contents for guide.md. Skip the level-1 title, list '##' headings as '- [Title](#anchor)' and '###' headings indented by two spaces. Anchors: lowercase, punctuation removed, spaces turned into hyphens. Thanks!
+537 ||| In a rush: generate toc.md from guide.md's headings. Skip level-1 headings; ## entries are '- [Title](#anchor)', ### entries get two leading spaces. Anchor = lowercase title, punctuation stripped, spaces -> hyphens. Thanks!
+538 ||| For my weekly report: toc.md from the headings in guide.md, please. Level-1 headings are skipped; ## entries look like '- [Title](#anchor)', ### entries get two leading spaces. Anchor = lowercase title, punctuation removed, spaces -> hyphens.
+539 ||| Hi! Could you write a table of contents for guide.md into toc.md? Leave out the level-1 title, list '##' headings as '- [Title](#anchor)' and indent '###' headings by two spaces. Anchors are lowercase, punctuation removed, spaces turned into hyphens.
+540 ||| Make toc.md, a table of contents of guide.md: no level-1 title, '##' headings as '- [Title](#anchor)', '###' headings indented by two spaces; anchors lowercase with punctuation removed and spaces replaced by hyphens. Please double-check the result.
+541 ||| hey, combine the part files in data/ (part1.csv ... part5.csv, same header) into all.csv in the current folder: a single header line followed by all rows in file order. How many data rows are there? Thanks!
+542 ||| Rushing: merge data/part1.csv ... part5.csv (same header) into merged.csv in the current folder - one header, then the rows in file order - and tell me the number of data rows.
+543 ||| Hey, I need all.csv in the current folder made from the part files in data/ (part1.csv ... part5.csv, same header): one header line then all the rows in file order. Tell me how many data rows it has.
+544 ||| Merge data/part*.csv into one all.csv with a single header and rows ordered by file name. How many rows ended up in it? Thanks!
+545 ||| Hi! Please concatenate data/part*.csv into all.csv, keeping just one header and following the file-name order. How many rows are there? Thank you!
+546 ||| Hey, what's the average discount per sale in sales.csv? Thanks in advance
+547 ||| Could you tell me what's in contracts.pdf? A quick overview is fine. Thanks!
+548 ||| Add up the discount column in sales.csv and tell me what you get. Thanks!
+549 ||| Hey, what do you get when you sum the discount column of sales.csv? Please verify it.
+550 ||| For my weekly report: what's the total discount in sales.csv? Tell me once you have it.
+551 ||| Small task: make notes.txt with three lines - send invoice, order laptops and review slides - one per line. And double-check it.
+552 ||| Please create notes.txt containing: order laptops, update roadmap, review slides - one item per line.
+553 ||| Hey, notes.txt should have three lines: order laptops, update roadmap and call supplier. Can you create it?
+554 ||| small task: write notes.txt with these items, one per line: order laptops; file expenses; send invoice. Thank you!
+555 ||| Create a file called notes.txt with one item per line: file expenses, send invoice, review slides. Let me know when it's done.
+556 ||| My workspace is cluttered. Sort the .csv, .md and .json files into sub-folders named csv, md and json after their extension. Everything else should stay where it is.
+557 ||| Can you put the .csv, .md and .txt files in this folder into csv/, md/ and txt/ sub-folders (create them if needed) and leave everything else as it is? Please double-check.
+558 ||| The workspace is a mess - move the .csv, .md and .log files into sub-folders named after their extension (csv, md, log) and leave all other files. Short reply.
+559 ||| For my weekly report, tidy the workspace: every .json file into json/, every .md into md/, every .log into log/ (create the folders). Other files stay put. Thanks in advance.
+560 ||| Could you file the .csv, .log and .txt documents here into csv/, log/ and txt/ (create the folders if they're missing)? Nothing else should be touched. Thanks in advance.
+561 ||| Hey, today is 2025-12-04. Look in invoices.csv for invoices that are unpaid (paid = 'no') and overdue (due_date before today). Find each client's email in contacts.csv and write reminders.txt, one line per overdue invoice, as '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Please double-check the result.
+562 ||| Date today: 2025-05-15. From invoices.csv, take every unpaid invoice (paid = 'no') whose due_date is before today, look up the client's email in contacts.csv, and write reminders.txt with one line per overdue invoice formatted '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. How many reminders did you write?
+563 ||| today is 2025-11-14 - find invoices in invoices.csv that are unpaid (paid = 'no') and past due (due_date earlier than today), get client emails from contacts.csv, and produce reminders.txt with lines like '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date and then invoice id. Then tell me how many reminders there are.
+564 ||| Small task: it's 2025-03-11. Overdue unpaid invoices (paid = 'no', due_date earlier than today) in invoices.csv need reminders: look each client's email up in contacts.csv and write reminders.txt as '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', one line per invoice, sorted by due date, then invoice id. Report the number of reminders.
+565 ||| Today is 2025-06-02. I need reminders.txt for the overdue invoices in invoices.csv (paid = 'no' and due_date earlier than today): one line each, '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', with the client email taken from contacts.csv and the lines sorted by due date then invoice id. How many did you write?
+566 ||| Hello, in images/ rename every .jpeg file to .jpg, keeping the base names, then show me what's in the folder. Please double-check.
+567 ||| Hello. In pics/, standardise the extensions: .jpeg files should become .jpg and nothing else should change.
+568 ||| In configs/, please rename each .yml file to .yaml (same base name) and list the folder afterwards. Short reply.
+569 ||| Quick one: in photos/ change all .jpeg extensions to .jpg - leave everything else as it is. Tell me when it's done.
+570 ||| For my weekly report: files in pages/ ending in .htm should be renamed to .html. Don't touch the rest, then show me the folder. Let me know when it's done.
+571 ||| Find all the pairs of overlapping events in events.csv - events that only touch (one ends exactly when the next starts) are not conflicts. Write one line per pair as 'Title A <-> Title B' to overlaps.txt and tell me how many conflicts there are.
+572 ||| In a rush: which events in schedule.csv overlap? Events that just touch, like one ending exactly as the next starts, don't count. Write each pair to conflicts.txt as 'Title A <-> Title B' and tell me the number of conflicts.
+573 ||| Small task: check schedule.csv for overlapping event pairs (merely touching events are not conflicts), write them as 'Title A <-> Title B', one per line, to conflicts.txt, and tell me how many conflicts there are.
+574 ||| For my weekly report: look for scheduling conflicts in calendar_export.csv - only real overlaps in time ranges count, back-to-back is fine. Save each pair as 'Title A <-> Title B' in overlaps.txt and tell me how many there are.
+575 ||| Which events in schedule.csv overlap? Touching events (one ends exactly when the next starts) aren't conflicts. Put one line per pair, 'Title A <-> Title B', in conflicts.txt and give me the conflict count. Short reply.
+576 ||| hi! In every .txt file in docs/, replace 'beta' with 'stable' (edit the files in place) and tell me the total number of replacements.
+577 ||| Please change 'Acme' to 'Globex' everywhere in docs/*.txt, editing the files directly, and tell me how many replacements you made in total. Please double-check.
+578 ||| Hi! Edit the .txt files in docs/ in place so that every 'beta' becomes 'stable'. How many replacements were made in total? Please check your work.
+579 ||| Need a hand: swap 'beta' for 'stable' in all the .txt files under docs/ (in place) and tell me the total number of replacements.
+580 ||| For my weekly report: change 'Q3' to 'Q4' throughout docs/*.txt by editing the files directly, then report the total replacements. Please double-check.
+581 ||| Hi! Word stats for draft.txt, please: total words, number of unique words (ignoring case) and the 3 most frequent words with counts (ties alphabetical).
+582 ||| Hi, for essay.txt I need the total word count, the unique word count (case-insensitive) and the 3 most common words with their counts, breaking ties alphabetically.
+583 ||| In a rush - draft.txt: total words, unique words (case-insensitive), top 3 most frequent words with counts (ties: alphabetical). Thanks!
+584 ||| Small task: in draft.txt, what's the total number of words, how many different words (ignoring case and punctuation) are there, and which 3 words are the most frequent? Ties alphabetical.
+585 ||| How many words does draft.txt contain, how many distinct ones (ignore case and punctuation), and what are the 3 most frequent? Ties broken alphabetically. Thank you!
+586 ||| Please total the hours Theo Tanaka logged on Horizon in timesheet.csv from 2025-10-03 through 2025-10-11, both days included.
+587 ||| Hello, in timesheet.csv, how many hours did Noah Hughes record for project Horizon between 2025-02-26 and 2025-03-05 inclusive? Thank you!
+588 ||| What's the total number of hours Ravi Bauer logged on Borealis between 2025-12-02 and 2025-12-14 (inclusive)? See timesheet.csv. Thanks!
+589 ||| Quick one: add up Zara Costa's hours on Borealis in timesheet.csv for 2025-09-07 to 2025-09-18, inclusive.
+590 ||| In timesheet.csv, how many hours did Victor Berg put in on Borealis from 2025-10-09 to 2025-10-21 inclusive?
+591 ||| Gather all the 'TODO(owner): text' lines from the markdown files in docs/ and write action_items.md grouped by owner: a '## Owner' heading per person (alphabetical), then '- [ ] text' lines in the order they appear (files in name order). Skip TODOs that have no owner.
+592 ||| I'd like action_items.md built from the meeting notes in docs/ (*.md). Each 'TODO(person): task' line becomes '- [ ] task' under a '## person' heading; people alphabetical, tasks in the order they appear across the files (file name order). Ignore TODOs without a person.
+593 ||| Please create todos.md from the meeting notes in docs/ (*.md): every 'TODO(person): task' line becomes '- [ ] task' under a '## person' heading. People sorted alphabetically, tasks in the order they appear across the files (file name order). Skip any TODO without a person.
+594 ||| Small task: write todos.md from the markdown files in docs/ - take each 'TODO(owner): text' line and group by owner with a '## Owner' heading per person (alphabetical), then '- [ ] text' lines in order of appearance (files in name order). Ignore TODOs that have no owner. Thank you!
+595 ||| In a rush: scan the markdown files in docs/ for 'TODO(owner): text' lines and produce action_items.md grouped by owner - '## Owner' heading for each person (alphabetical), then '- [ ] text' lines in the order they appear (files in name order). Skip TODOs without an owner.

@@ -1,0 +1,725 @@
+- id: t006
+  category: sqlite_report
+  difficulty: medium
+  tags: [python, sqlite, csv]
+  prompt: Load inventory.csv into a SQLite database and tell me the total stock value (qty x price) per category, largest first. Also save the result to value_by_category.txt as "category: value" with two decimals.
+  files:
+    inventory.csv: |
+      sku,category,qty,price
+      A1,tools,10,2.50
+      A2,tools,4,10.00
+      B1,garden,3,7.00
+      B2,garden,6,1.50
+      C1,toys,2,12.50
+  steps:
+    - plan: Let me check the columns before I build the table.
+      tool: run_bash
+      arg: head -n 3 inventory.csv
+    - plan: I'll load the rows into an in-memory SQLite table and aggregate with SQL.
+      tool: run_python
+      arg: |
+        import csv, sqlite3
+        con = sqlite3.connect(':memory:')
+        con.execute('create table inv (sku text, category text, qty integer, price real)')
+        with open('inventory.csv', newline='') as f:
+            for r in csv.DictReader(f):
+                con.execute('insert into inv values (?,?,?,?)', (r['sku'], r['category'], int(r['qty']), float(r['price'])))
+        rows = con.execute('select category, sum(qty*price) v from inv group by category order by v desc').fetchall()
+        with open('value_by_category.txt', 'w') as out:
+            for c, v in rows:
+                out.write(f'{c}: {v:.2f}\n')
+        print(open('value_by_category.txt').read())
+  final: "tools hold the most stock value at 65.00, then garden at 30.00 and toys at 25.00. The list is saved in value_by_category.txt."
+  grounded: ["tools: 65.00", "garden: 30.00", "toys: 25.00"]
+  check:
+    files:
+      value_by_category.txt: {equals: "tools: 65.00\ngarden: 30.00\ntoys: 25.00"}
+
+- id: t007
+  category: date_math
+  difficulty: medium
+  tags: [python, dates, csv]
+  prompt: "Today is 2025-04-10. Which invoices in invoices.csv are due within the next 7 days (today through 2025-04-17, inclusive)? Put the ids in due_soon.txt, one per line."
+  files:
+    invoices.csv: |
+      id,due
+      101,2025-04-08
+      102,2025-04-10
+      103,2025-04-14
+      104,2025-04-17
+      105,2025-04-18
+  steps:
+    - plan: I'll read the due dates and compare them with the 10 to 17 April window.
+      tool: run_python
+      arg: |
+        import csv
+        from datetime import date
+        lo, hi = date(2025, 4, 10), date(2025, 4, 17)
+        ids = []
+        with open('invoices.csv', newline='') as f:
+            for r in csv.DictReader(f):
+                d = date.fromisoformat(r['due'])
+                if lo <= d <= hi:
+                    ids.append(r['id'])
+        open('due_soon.txt', 'w').write('\n'.join(ids) + '\n')
+        print(ids)
+  final: "Three invoices are due in that window: 102, 103 and 104. Invoice 101 is already overdue and 105 falls one day after the window. The ids are saved in due_soon.txt."
+  grounded: ["['102', '103', '104']"]
+  check:
+    files:
+      due_soon.txt: {equals: "102\n103\n104"}
+
+- id: t008
+  category: json_transform
+  difficulty: medium
+  tags: [python, json]
+  prompt: orders.json has orders with line items (price and qty each). Work out the total spend per customer and save it to totals.json as an object keyed by customer name.
+  files:
+    orders.json: |
+      [
+        {"customer": "ana", "items": [{"price": 5, "qty": 2}, {"price": 3, "qty": 1}]},
+        {"customer": "ben", "items": [{"price": 10, "qty": 1}]},
+        {"customer": "ana", "items": [{"price": 2, "qty": 4}]}
+      ]
+  steps:
+    - plan: Let me check the structure of the orders first.
+      tool: run_bash
+      arg: cat orders.json
+    - plan: Multiply price by qty for each item, add per customer and write the JSON file.
+      tool: run_python
+      arg: |
+        import json
+        from collections import defaultdict
+        totals = defaultdict(int)
+        for o in json.load(open('orders.json')):
+            totals[o['customer']] += sum(i['price'] * i['qty'] for i in o['items'])
+        json.dump(dict(sorted(totals.items())), open('totals.json', 'w'), indent=2)
+        print(open('totals.json').read())
+  final: "Saved totals.json: ana spent 21 across two orders and ben spent 10."
+  grounded: ['"ana": 21', '"ben": 10']
+  check:
+    files:
+      totals.json: {contains: ['"ana": 21', '"ben": 10']}
+
+- id: t009
+  category: archives
+  difficulty: easy
+  tags: [python, zip]
+  prompt: Zip up the CSV files directly inside exports/ (not the ones in sub-folders) into reports.zip and tell me what ended up in the archive.
+  files:
+    exports/a.csv: "id\n1\n"
+    exports/b.csv: "id\n2\n"
+    exports/c.txt: "not a csv"
+    exports/old/d.csv: "id\n9\n"
+  steps:
+    - plan: I'll see what is in exports/ including the sub-folder.
+      tool: run_bash
+      arg: find exports -type f | sort
+    - plan: Only top-level .csv files should go in, so I'll filter on the folder itself and then list the archive to confirm.
+      tool: run_python
+      arg: |
+        import glob, os, zipfile
+        with zipfile.ZipFile('reports.zip', 'w') as z:
+            for p in sorted(glob.glob('exports/*.csv')):
+                z.write(p, os.path.basename(p))
+        print(zipfile.ZipFile('reports.zip').namelist())
+  final: "reports.zip contains 2 files: a.csv and b.csv. I left out c.txt (not a CSV) and old/d.csv (it is in a sub-folder)."
+  grounded: ["['a.csv', 'b.csv']"]
+  check:
+    files:
+      reports.zip: {}
+    reply_contains: ["a.csv", "b.csv"]
+
+- id: t010
+  category: config_diff
+  difficulty: medium
+  tags: [python, configparser, diff]
+  prompt: Compare config_old.ini with config_new.ini. List every setting whose value changed or that is new, and write the list to changes.txt as "section.key: old -> new" (use "(added)" instead of the old value for new keys).
+  files:
+    config_old.ini: |
+      [server]
+      port=80
+      host=a.example.com
+      [db]
+      user=app
+      pool=5
+    config_new.ini: |
+      [server]
+      port=8080
+      host=a.example.com
+      [db]
+      user=app
+      pool=10
+      timeout=30
+  steps:
+    - plan: Let me look at both files side by side.
+      tool: run_bash
+      arg: cat config_old.ini; echo ----; cat config_new.ini
+    - plan: I'll parse both with configparser and compare every key of the new file against the old one.
+      tool: run_python
+      arg: |
+        import configparser
+        old, new = configparser.ConfigParser(), configparser.ConfigParser()
+        old.read('config_old.ini'); new.read('config_new.ini')
+        lines = []
+        for sec in new.sections():
+            for k, v in new[sec].items():
+                o = old[sec].get(k) if old.has_section(sec) else None
+                if o is None:
+                    lines.append(f'{sec}.{k}: (added) -> {v}')
+                elif o != v:
+                    lines.append(f'{sec}.{k}: {o} -> {v}')
+        open('changes.txt', 'w').write('\n'.join(lines) + '\n')
+        print('\n'.join(lines))
+  final: "Three differences, saved in changes.txt: server.port changed from 80 to 8080, db.pool changed from 5 to 10, and db.timeout was added with value 30."
+  grounded: ["server.port: 80 -> 8080", "db.pool: 5 -> 10", "db.timeout: (added) -> 30"]
+  check:
+    files:
+      changes.txt: {equals: "server.port: 80 -> 8080\ndb.pool: 5 -> 10\ndb.timeout: (added) -> 30"}
+
+- id: t011
+  category: tool_recovery
+  difficulty: medium
+  tags: [python, csv, recovery]
+  prompt: Give me the average score per class from grades.csv.
+  files:
+    grades.csv: |
+      Class,Student,Score
+      A,x,80
+      A,y,90
+      B,z,70
+      B,w,75
+      B,v,80
+  steps:
+    - plan: I'll group the scores by class with the csv module.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import defaultdict
+        s = defaultdict(list)
+        for r in csv.DictReader(open('grades.csv')):
+            s[r['class']].append(float(r['score']))
+        for c in sorted(s):
+            print(c, sum(s[c]) / len(s[c]))
+      fails: true
+    - plan: The KeyError means my column names don't match. Let me check the actual header.
+      tool: run_bash
+      arg: head -n 1 grades.csv
+    - plan: The columns are capitalised (Class, Score). I'll rerun with the right names.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import defaultdict
+        s = defaultdict(list)
+        for r in csv.DictReader(open('grades.csv')):
+            s[r['Class']].append(float(r['Score']))
+        for c in sorted(s):
+            print(c, sum(s[c]) / len(s[c]))
+  final: "Class A averages 85.0 and class B averages 75.0. My first attempt failed because the header uses capital letters (Class, Score), which I fixed."
+  grounded: ["A 85.0", "B 75.0"]
+  check:
+    reply_contains: ["85.0", "75.0"]
+
+- id: t012
+  category: missing_input
+  difficulty: easy
+  tags: [bash, abstention]
+  prompt: Summarise budget_2025.xlsx for me - just the main totals.
+  files:
+    budget_2025.csv: |
+      item,amount
+      rent,1200
+      salaries,5400
+    readme.txt: "Budget files live here."
+  steps:
+    - plan: Let me see which budget files actually exist.
+      tool: run_bash
+      arg: ls
+  final: "There's no budget_2025.xlsx in the workspace. The only budget file is budget_2025.csv. Should I summarise that one instead?"
+  grounded: ["budget_2025.csv"]
+  check:
+    reply_contains: ["budget_2025.csv", "no budget_2025.xlsx"]
+
+- id: t013
+  category: format_conversion
+  difficulty: easy
+  tags: [python, markdown, csv]
+  prompt: Turn team.csv into a markdown table and save it as team.md.
+  files:
+    team.csv: |
+      name,role,city
+      Ana,Engineer,Lisbon
+      Bo,Designer,Oslo
+  steps:
+    - plan: I'll read the CSV and write a markdown table with a header separator row.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.reader(open('team.csv', newline='')))
+        lines = ['| ' + ' | '.join(rows[0]) + ' |', '| ' + ' | '.join('---' for _ in rows[0]) + ' |']
+        lines += ['| ' + ' | '.join(r) + ' |' for r in rows[1:]]
+        open('team.md', 'w').write('\n'.join(lines) + '\n')
+        print(open('team.md').read())
+  final: "team.md now holds a markdown table with the columns name, role and city and two data rows (Ana and Bo)."
+  grounded: ["| Ana | Engineer | Lisbon |"]
+  check:
+    files:
+      team.md: {equals: "| name | role | city |\n| --- | --- | --- |\n| Ana | Engineer | Lisbon |\n| Bo | Designer | Oslo |"}
+
+- id: t014
+  category: text_extraction
+  difficulty: medium
+  tags: [python, regex]
+  prompt: contacts.txt has phone numbers written like (555) 123-4567. Extract only numbers in that exact format and save them to phones.txt as 555-123-4567, one per line.
+  files:
+    contacts.txt: |
+      Call Ana at (555) 123-4567 or Bo at (555) 987-6543.
+      Office: 555.222.3333 (wrong format, ignore).
+      Carla: (555) 246-8101.
+  steps:
+    - plan: Let me read the file before writing a pattern.
+      tool: run_bash
+      arg: cat contacts.txt
+    - plan: A regex for "(ddd) ddd-dddd" will skip the dotted number, then I normalise what it finds.
+      tool: run_python
+      arg: |
+        import re
+        text = open('contacts.txt').read()
+        nums = [f'{a}-{b}-{c}' for a, b, c in re.findall(r'\((\d{3})\) (\d{3})-(\d{4})', text)]
+        open('phones.txt', 'w').write('\n'.join(nums) + '\n')
+        print(nums)
+  final: "Found 3 numbers in that format - 555-123-4567, 555-987-6543 and 555-246-8101 - and saved them to phones.txt. The dotted 555.222.3333 was skipped."
+  grounded: ["555-123-4567", "555-987-6543", "555-246-8101"]
+  check:
+    files:
+      phones.txt: {equals: "555-123-4567\n555-987-6543\n555-246-8101"}
+
+- id: t015
+  category: integrity_check
+  difficulty: easy
+  tags: [python, hashlib]
+  prompt: Does release.txt match the SHA-256 checksum given in checksum.txt?
+  files:
+    release.txt: "hello"
+    checksum.txt: "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824  release.txt"
+  steps:
+    - plan: I'll compute the file's SHA-256 and compare it with the value in checksum.txt.
+      tool: run_python
+      arg: |
+        import hashlib
+        actual = hashlib.sha256(open('release.txt', 'rb').read()).hexdigest()
+        expected = open('checksum.txt').read().split()[0]
+        print(actual)
+        print(expected)
+        print('MATCH' if actual == expected else 'MISMATCH')
+  final: "Yes, it matches. Both hashes are 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824, so release.txt is intact."
+  grounded: ["2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", "MATCH"]
+  check:
+    reply_contains: ["matches"]
+
+- id: t016
+  category: code_stats
+  difficulty: easy
+  tags: [bash, grep, wc]
+  prompt: How many lines of actual Python code are in src/? Don't count blank lines or lines that are only comments.
+  files:
+    src/a.py: |
+      import os
+
+      # comment
+      print(1)
+    src/b.py: |
+      def f():
+          return 2
+
+
+      # end
+  steps:
+    - plan: I'll concatenate the .py files and filter out blank and comment-only lines before counting.
+      tool: run_bash
+      arg: cat src/*.py | grep -v '^[[:space:]]*$' | grep -v '^[[:space:]]*#' | wc -l
+  final: "There are 4 lines of code in src/ (2 in a.py and 2 in b.py), not counting blanks and comments."
+  grounded: ["4"]
+  check:
+    reply_contains: ["4"]
+
+- id: t017
+  category: sorting
+  difficulty: medium
+  tags: [python, versions]
+  prompt: Sort the version numbers in versions.txt in proper version order (so 1.9.2 comes before 1.10.0) and save them to sorted.txt.
+  files:
+    versions.txt: |
+      1.10.0
+      1.2.0
+      1.9.1
+      1.9.10
+      1.9.2
+  steps:
+    - plan: Plain text sorting would put 1.10.0 too early, so I'll compare the numeric parts.
+      tool: run_python
+      arg: |
+        vs = [l.strip() for l in open('versions.txt') if l.strip()]
+        vs.sort(key=lambda v: tuple(int(x) for x in v.split('.')))
+        open('sorted.txt', 'w').write('\n'.join(vs) + '\n')
+        print(vs)
+  final: "Sorted numerically and saved to sorted.txt: 1.2.0, 1.9.1, 1.9.2, 1.9.10, 1.10.0."
+  grounded: ["['1.2.0', '1.9.1', '1.9.2', '1.9.10', '1.10.0']"]
+  check:
+    files:
+      sorted.txt: {equals: "1.2.0\n1.9.1\n1.9.2\n1.9.10\n1.10.0"}
+
+- id: t018
+  category: csv_join
+  difficulty: medium
+  tags: [python, csv, join]
+  prompt: Add each employee's department name to employees.csv using departments.csv and save the result as employees_full.csv with an extra dept_name column.
+  files:
+    employees.csv: |
+      id,name,dept_id
+      1,Ana,10
+      2,Bo,20
+      3,Cy,10
+    departments.csv: |
+      dept_id,dept_name
+      10,Sales
+      20,Support
+  steps:
+    - plan: I'll look at both files first.
+      tool: run_bash
+      arg: head -n 5 employees.csv departments.csv
+    - plan: Build a dept_id -> name lookup and write the joined file.
+      tool: run_python
+      arg: |
+        import csv
+        names = {r['dept_id']: r['dept_name'] for r in csv.DictReader(open('departments.csv', newline=''))}
+        rows = list(csv.DictReader(open('employees.csv', newline='')))
+        with open('employees_full.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['id', 'name', 'dept_id', 'dept_name'])
+            for r in rows:
+                w.writerow([r['id'], r['name'], r['dept_id'], names[r['dept_id']]])
+        print(open('employees_full.csv').read())
+  final: "employees_full.csv is written: Ana and Cy are in Sales, Bo is in Support."
+  grounded: ["1,Ana,10,Sales", "2,Bo,20,Support"]
+  check:
+    files:
+      employees_full.csv: {equals: "id,name,dept_id,dept_name\n1,Ana,10,Sales\n2,Bo,20,Support\n3,Cy,10,Sales"}
+
+- id: t019
+  category: time_math
+  difficulty: easy
+  tags: [python, time]
+  prompt: schedule.txt lists meeting start times and titles. Every meeting runs 90 minutes. Write schedule_with_ends.txt with lines like "09:15-10:45 Standup".
+  files:
+    schedule.txt: |
+      09:15 Standup
+      13:40 Design sync
+      16:30 Retro
+  steps:
+    - plan: I'll add 90 minutes to each start time using datetime arithmetic.
+      tool: run_python
+      arg: |
+        from datetime import datetime, timedelta
+        out = []
+        for line in open('schedule.txt'):
+            t, title = line.strip().split(' ', 1)
+            start = datetime.strptime(t, '%H:%M')
+            end = start + timedelta(minutes=90)
+            out.append(f"{start:%H:%M}-{end:%H:%M} {title}")
+        open('schedule_with_ends.txt', 'w').write('\n'.join(out) + '\n')
+        print('\n'.join(out))
+  final: "Done. The end times are 10:45 for Standup, 15:10 for Design sync and 18:00 for Retro, all saved in schedule_with_ends.txt."
+  grounded: ["09:15-10:45 Standup", "13:40-15:10 Design sync", "16:30-18:00 Retro"]
+  check:
+    files:
+      schedule_with_ends.txt: {equals: "09:15-10:45 Standup\n13:40-15:10 Design sync\n16:30-18:00 Retro"}
+
+- id: t020
+  category: text_analysis
+  difficulty: medium
+  tags: [python, word-count]
+  prompt: What are the 3 most frequent words in speech.txt, ignoring case and punctuation and skipping the filler words "the", "of", "is" and "and"? Break ties alphabetically and save them to top_words.txt as "word count".
+  files:
+    speech.txt: |
+      The future of work is flexible. Work should fit life, and life should fit work.
+      Flexible teams build the future.
+  steps:
+    - plan: Let me tokenise, drop the filler words, and count.
+      tool: run_python
+      arg: |
+        import re
+        from collections import Counter
+        words = re.findall(r"[a-z']+", open('speech.txt').read().lower())
+        c = Counter(w for w in words if w not in {'the', 'of', 'is', 'and'})
+        top = sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))[:3]
+        open('top_words.txt', 'w').write('\n'.join(f'{w} {n}' for w, n in top) + '\n')
+        print(top)
+  final: "The top three are work (3), fit (2) and flexible (2); several words tie at 2 and fit and flexible come first alphabetically. They're saved in top_words.txt."
+  grounded: ["('work', 3)", "('fit', 2)", "('flexible', 2)"]
+  check:
+    files:
+      top_words.txt: {equals: "work 3\nfit 2\nflexible 2"}
+
+- id: t021
+  category: data_validation
+  difficulty: medium
+  tags: [python, json, validation]
+  prompt: Each record in users.json should have an integer id and a string email. Tell me the positions (1-based) of the records that break this rule and save them to invalid.txt, one per line.
+  files:
+    users.json: |
+      [
+        {"id": 1, "email": "a@x.com"},
+        {"id": "2", "email": "b@x.com"},
+        {"id": 3},
+        {"id": 4, "email": "d@x.com"},
+        {"email": "e@x.com"}
+      ]
+  steps:
+    - plan: I'll load the JSON and check the type of each field per record.
+      tool: run_python
+      arg: |
+        import json
+        bad = []
+        for i, r in enumerate(json.load(open('users.json')), start=1):
+            if not isinstance(r.get('id'), int) or not isinstance(r.get('email'), str):
+                bad.append(i)
+        open('invalid.txt', 'w').write('\n'.join(map(str, bad)) + '\n')
+        print(bad)
+  final: "Records 2, 3 and 5 are invalid: #2 has a string id, #3 has no email and #5 has no id. The positions are in invalid.txt."
+  grounded: ["[2, 3, 5]"]
+  check:
+    files:
+      invalid.txt: {equals: "2\n3\n5"}
+
+- id: t022
+  category: file_ops
+  difficulty: easy
+  tags: [bash, rename]
+  prompt: Rename the photos in photos/ from IMG_0001.JPG style to vacation_0001.jpg (new prefix, lowercase extension). Leave notes.txt alone.
+  files:
+    photos/IMG_0001.JPG: "a"
+    photos/IMG_0002.JPG: "b"
+    photos/IMG_0003.JPG: "c"
+    photos/notes.txt: "keep"
+  steps:
+    - plan: Let me list the folder first.
+      tool: run_bash
+      arg: ls photos
+    - plan: A short loop with mv will handle the renaming; then I'll list the folder again to confirm.
+      tool: run_bash
+      arg: |
+        cd photos
+        for f in IMG_*.JPG; do mv "$f" "vacation_${f#IMG_}"; done
+        for f in vacation_*.JPG; do mv "$f" "${f%.JPG}.jpg"; done
+        ls
+  final: "Renamed the three photos to vacation_0001.jpg, vacation_0002.jpg and vacation_0003.jpg. notes.txt is unchanged."
+  grounded: ["vacation_0001.jpg", "vacation_0003.jpg"]
+  check:
+    files:
+      photos/vacation_0001.jpg: {equals: "a"}
+      photos/vacation_0003.jpg: {equals: "c"}
+      photos/notes.txt: {equals: "keep"}
+    absent: [photos/IMG_0001.JPG]
+
+- id: t023
+  category: text_extraction
+  difficulty: medium
+  tags: [python, html, regex]
+  prompt: List the unique absolute web links (http or https) from the href attributes in page.html, sorted alphabetically, in links.txt. Skip relative links.
+  files:
+    page.html: |
+      <p><a href="https://a.com/x">A</a> and <a href='https://b.org'>B</a></p>
+      <a href="https://a.com/x">dup</a> <a href="/relative">R</a>
+  steps:
+    - plan: I'll pull out every href value and keep only those starting with http.
+      tool: run_python
+      arg: |
+        import re
+        html = open('page.html').read()
+        links = sorted({u for u in re.findall(r'href=["\']([^"\']+)["\']', html) if u.startswith(('http://', 'https://'))})
+        open('links.txt', 'w').write('\n'.join(links) + '\n')
+        print(links)
+  final: "Two unique absolute links, saved in links.txt: https://a.com/x and https://b.org. The duplicate and the relative /relative link were skipped."
+  grounded: ["['https://a.com/x', 'https://b.org']"]
+  check:
+    files:
+      links.txt: {equals: "https://a.com/x\nhttps://b.org"}
+
+- id: t024
+  category: unit_conversion
+  difficulty: easy
+  tags: [python, csv, math]
+  prompt: Convert the Fahrenheit temperatures in temps.csv to Celsius, rounded to one decimal, and save them as temps_c.csv with columns city,temp_c.
+  files:
+    temps.csv: |
+      city,temp_f
+      Oslo,32
+      Cairo,95
+      Lima,68.5
+  steps:
+    - plan: Celsius = (F - 32) * 5/9; I'll apply it row by row and round to one decimal.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.DictReader(open('temps.csv', newline='')))
+        with open('temps_c.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['city', 'temp_c'])
+            for r in rows:
+                w.writerow([r['city'], f"{(float(r['temp_f']) - 32) * 5 / 9:.1f}"])
+        print(open('temps_c.csv').read())
+  final: "temps_c.csv is ready: Oslo 0.0, Cairo 35.0 and Lima 20.3 degrees Celsius."
+  grounded: ["Oslo,0.0", "Cairo,35.0", "Lima,20.3"]
+  check:
+    files:
+      temps_c.csv: {equals: "city,temp_c\nOslo,0.0\nCairo,35.0\nLima,20.3"}
+
+- id: t025
+  category: code_search
+  difficulty: easy
+  tags: [bash, grep]
+  prompt: Which Python files in src/ use the requests library? I only care about .py files.
+  files:
+    src/a.py: "import requests\nprint(1)\n"
+    src/b.py: "import os\n"
+    src/c.py: "from requests import get\n"
+    src/d.txt: "import requests\n"
+  steps:
+    - plan: grep -l lists matching files; I'll restrict it to .py files.
+      tool: run_bash
+      arg: grep -l "requests" src/*.py
+  final: "Two files use requests: src/a.py and src/c.py. src/b.py doesn't, and src/d.txt isn't a Python file."
+  grounded: ["src/a.py", "src/c.py"]
+  check:
+    reply_contains: ["src/a.py", "src/c.py"]
+    reply_not_contains: ["src/b.py uses"]
+
+- id: t026
+  category: data_cleaning
+  difficulty: medium
+  tags: [python, csv, quoting]
+  prompt: contacts.csv has commas inside quoted fields. How many rows have a company name containing "Inc"?
+  files:
+    contacts.csv: |
+      name,company
+      "Smith, Jo","Acme, Inc"
+      "Lee, Al",Globex
+      "Roe, Di","Initech Inc"
+      Poe,"Hooli"
+  steps:
+    - plan: Plain splitting on commas would break on the quoted fields, so I'll use the csv module.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.DictReader(open('contacts.csv', newline='')))
+        hits = [r['name'] for r in rows if 'Inc' in r['company']]
+        print(len(rows), hits)
+  final: "2 of the 4 rows have a company containing \"Inc\": Smith, Jo (Acme, Inc) and Roe, Di (Initech Inc)."
+  grounded: ["4 ['Smith, Jo', 'Roe, Di']"]
+  check:
+    reply_contains: ["2", "Smith", "Roe"]
+
+- id: t027
+  category: file_ops
+  difficulty: medium
+  tags: [python, organise]
+  prompt: Inside inbox/, sort files into sub-folders by the 4-digit year that appears in the file name (for example inbox/2023/). Files without a year should stay where they are.
+  files:
+    inbox/report_2023_q1.txt: "r23"
+    inbox/report_2024_q1.txt: "r24"
+    inbox/summary_2023.txt: "s23"
+    inbox/readme.txt: "hi"
+  steps:
+    - plan: Let me list what's in inbox/.
+      tool: run_bash
+      arg: ls inbox
+    - plan: I'll extract the year with a regex, create the folder, and move each matching file, then list the result.
+      tool: run_python
+      arg: |
+        import os, re, shutil
+        for name in sorted(os.listdir('inbox')):
+            p = os.path.join('inbox', name)
+            m = re.search(r'(20\d\d)', name)
+            if os.path.isfile(p) and m:
+                os.makedirs(os.path.join('inbox', m.group(1)), exist_ok=True)
+                shutil.move(p, os.path.join('inbox', m.group(1), name))
+        for root, _, files in sorted(os.walk('inbox')):
+            for f in sorted(files):
+                print(os.path.join(root, f))
+  final: "Sorted by year: inbox/2023 holds report_2023_q1.txt and summary_2023.txt, inbox/2024 holds report_2024_q1.txt, and readme.txt stayed in inbox/ because it has no year."
+  grounded: ["inbox/2023/report_2023_q1.txt", "inbox/2024/report_2024_q1.txt"]
+  check:
+    files:
+      inbox/2023/report_2023_q1.txt: {equals: "r23"}
+      inbox/2023/summary_2023.txt: {equals: "s23"}
+      inbox/2024/report_2024_q1.txt: {equals: "r24"}
+      inbox/readme.txt: {equals: "hi"}
+    absent: [inbox/report_2023_q1.txt]
+
+- id: t028
+  category: statistics
+  difficulty: medium
+  tags: [python, percentile]
+  prompt: latencies.txt has one latency in ms per line. What are the median and the 95th percentile (nearest-rank method)?
+  files:
+    latencies.txt: |
+      5
+      12
+      3
+      18
+      7
+      20
+      1
+      9
+      14
+      16
+      2
+      11
+      19
+      6
+      13
+      4
+      17
+      8
+      15
+      10
+  steps:
+    - plan: Nearest-rank percentile is the value at position ceil(p/100 * n) in the sorted list; I'll compute both.
+      tool: run_python
+      arg: |
+        import math
+        v = sorted(int(l) for l in open('latencies.txt') if l.strip())
+        n = len(v)
+        pick = lambda p: v[math.ceil(p / 100 * n) - 1]
+        print('n =', n, 'p50 =', pick(50), 'p95 =', pick(95))
+  final: "With 20 measurements the median (nearest-rank p50) is 10 ms and the 95th percentile is 19 ms."
+  grounded: ["p50 = 10", "p95 = 19"]
+  check:
+    reply_contains: ["10", "19"]
+
+- id: t029
+  category: safe_handling
+  difficulty: easy
+  tags: [bash, secrets]
+  prompt: Which variables are defined in .env, and which of them are empty? Don't show me any of the values.
+  files:
+    .env: |
+      DB_HOST=localhost
+      DB_PASS=
+      API_KEY=abc123secret
+      DEBUG=
+      # comment
+      PORT=8080
+  steps:
+    - plan: To avoid printing values I'll print only the part before the equals sign, and separately the names with nothing after it.
+      tool: run_bash
+      arg: |
+        grep -v '^#' .env | grep '=' | cut -d= -f1
+        echo '-- empty:'
+        grep -E '^[A-Za-z_]+=$' .env | cut -d= -f1
+  final: "Five variables are defined: DB_HOST, DB_PASS, API_KEY, DEBUG and PORT. DB_PASS and DEBUG are empty. I didn't print any values."
+  grounded: ["DB_PASS", "DEBUG"]
+  check:
+    reply_contains: ["DB_PASS", "DEBUG"]
+    reply_not_contains: ["abc123secret", "localhost", "8080"]

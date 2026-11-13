@@ -1,0 +1,266 @@
+### if/1034
+<<Why I Walk at Lunch>>
+Hi [Name], I wanted to tell you about something that has changed my afternoons. Since I started a twenty minute walk at lunch my mood has been noticeably better, and it only takes a few minutes to get going.
+
+The reason is simple. Exercise releases endorphins and reduces stress hormones so problems feel smaller and focus returns. It also helps me sleep, which makes the next morning easier.
+
+If you would like to try it, I am heading out at [time] tomorrow and would be glad to have company.
+
+### if/2066
+"Imagine your town gets three coloured bins: one for paper, one for plastic and one for food scraps. Every week a truck collects them and takes them to a special place where paper is turned into new paper and food scraps become soil for plants. When you sort your rubbish into the right bin you help the earth by making less trash, and the town even saves money."
+### if/4222
+{"title": "The machine that made books easy", "content": "Long ago, every book was copied by hand, which took months, so only rich people owned them. Then a man named Johannes Gutenberg built a printing press with small metal letters that could be moved around and used again. Suddenly one book could be made many times in a few days, books became cheaper, and many more people learned to read."}
+### if/716
+Meet the BrewMaster pour-over set. It includes a ceramic dripper and a glass server plus a pack of one hundred filters. Rinse the filter and add your grounds then pour hot water in slow circles and enjoy a clean cup in under four minutes. The set is dishwasher safe and fits any kitchen counter.
+
+### if/4838
+First I want to let you know that our product launch has been moved back by two weeks. The *main reason* is that testing found a few issues with the checkout flow, and fixing them properly will take time. The *new date* is the 24th, and I will send a short status update every Friday. Please tell your teams so nobody plans around the old date.
+### if/2894
+Honestly I think the best reviews are the small daily ones.
+Sofia: How do you comment on a colleague's code without sounding harsh?
+Ravi: I start with something that works well, and then ask a question instead of giving an order.
+Sofia: Like "what do you think about extracting this function?"
+Ravi: Exactly. It also helps to point to a pattern in the codebase so the suggestion feels shared, not personal.
+Sofia: And if I disagree strongly?
+Ravi: Offer a call and explain your reasoning. Tone is hard to read in text.
+### if/337
+Honestly, delays are never the news we want to share. Our product launch is moving back by two weeks so we can finish testing and polish the first experience. The extra time will make the release smoother for everyone. In this post we explain what changed, what happens next and how you can still get early access.
+### if/2241
+"Subject: How rain gets back to the sky
+
+Hi Noor, I learned something nice about the water cycle today. First, the sun warms rivers and seas and the water becomes vapour, which is *evaporation*. Then the vapour cools high up and forms clouds, called *condensation*. Finally the water falls as rain or snow and flows back to the sea, which closes the *whole cycle*. Hope that helps with your homework! Best, Ali"
+### if/4112
+Mia: Look, the caterpillar has stopped moving.
+Leo: Is it dead?
+Mia: No, my book says it is forming a chrysalis.
+Leo: What happens inside?
+Mia: Its body breaks down and rebuilds into a butterfly in about two weeks.
+Leo: That sounds like magic.
+Mia: It is called metamorphosis. We just have to wait.
+
+Let me know if you have any questions.
+### if/3381
+{"title": "MorningSpark Planner", "content": "A simple notebook for building a morning routine. Each page has room for a glass of water, a short stretch, a breakfast choice and three priorities for the day. Pocket-sized, undated and printed on recycled paper, it helps you start every day with a clear head."}
+### if/2154
+Today your passwords are like keys to your house. Never tell them to anyone except [a parent]. Make each one long, like a funny sentence, and use a different one for every game or app. If someone asks for your password online, tell [a trusted adult] straight away.
+### if/1210
+Coffee checklist: fresh beans, clean equipment, the right water temperature and a timer. Check each item before you brew.
+
+P.S. Enjoy it while it is hot.
+### if/3470
+SECTION 1
+Q: Are electric cars cheaper to run? A: Usually yes, because *electricity costs less than fuel* per kilometre and there are fewer parts to service.
+
+SECTION 2
+Q: What are the downsides? A: The *purchase price is often higher*, charging on long trips needs planning, and *battery replacement* can be expensive outside the warranty. Let me know if you have any questions.
+### if/1713
+Hi Karen,
+Quick update about my flat. The heater stopped working on Monday and the apartment is now very cold in the evenings. I have already contacted the landlord by phone.
+
+I *reported the fault in writing* yesterday and asked for a repair date. So far there is no answer and I will follow up tomorrow morning.
+
+Because of this I may work from home with a heater borrowed from a neighbour but I will be *available online* during normal hours.
+
+Thank you for your understanding.
+
+### if/5855
+Hi Tom, I am sorry but my train was delayed by forty minutes and I missed our meeting at ten. I should have messaged you earlier. Could we reschedule for later today or tomorrow morning? I will send you my notes in the meantime so you are not blocked.
+
+Let me know if you have any questions.
+### if/4697
+Libraries today are daily community hubs: they lend books and digital media, offer free internet and quiet study space, run workshops and help people find reliable information, all on a modest budget.
+### if/4150
+Lisbon in three days is the easiest big-city escape in Europe. You can ride a yellow tram through Alfama in the morning, taste a warm pastel de nata by lunchtime and watch the sun set over the Tagus. Book your flight today and you will be eating grilled sardines by the river this weekend.
+### if/5416
+being kind in code review is not about softening the truth, it is about making the truth easy to hear. start with what works, ask questions instead of giving orders, and explain why a change helps. when people feel respected, they accept feedback faster, learn more and write better code next time, which is what every team really wants.
+### if/1146
+<<Two Ways to See the Water Cycle>>
+One perspective is the physical view: the water cycle is a closed loop where the sun drives evaporation, vapour cools into clouds and precipitation returns water to land and sea.
+
+A second perspective is the human view: the cycle is also a supply system that fills reservoirs, feeds farms and decides whether a town has enough drinking water in summer.
+
+The physical view stresses the steady process and the conservation of water, while the human view stresses timing and place, because rain in the wrong month or location can mean flood or drought.
+
+Seen together, the two perspectives show that the cycle is both natural law and daily concern, and good planning needs both.
+
+### if/4737
+"Key ideas on renting versus buying:
+- Buying usually pays off only if you stay for several years.
+- Compare total monthly costs, including insurance, maintenance and taxes.
+- Renting offers flexibility and keeps your savings available.
+- A deposit should not drain your emergency fund.
+- House prices can fall as well as rise.
+- Neither choice is always cheaper, so run the numbers for your own city."
+### if/577
+{"title": "Planning a surprise birthday party", "content": "Pick a date and a secret co-conspirator, keep the guest list small, send invitations with a clear instruction to stay quiet, arrange a believable reason to get the guest of honour to the venue at the right time, and plan the cake and music in advance. Have a backup plan in case someone lets the secret slip."}
+### if/1701
+SECTION 1
+Anna: What is the goal of this presentation?
+Ben: Help the executives decide on funding.
+SECTION 2
+Anna: Then lead with the answer and keep slides few.
+Ben: Right so three key numbers only.
+SECTION 3
+Anna: Prepare a short backup section for questions.
+Ben: Yes with details they can ask about.
+SECTION 4
+Anna: Rehearse the timing twice.
+Ben: Agreed and ten minutes maximum.
+
+### if/3027
+Exercise improves mood in several linked ways. It triggers the release of endorphins and other brain chemicals that create a feeling of wellbeing. It lowers stress hormones and improves sleep quality. It also gives a sense of achievement. Even short regular walks can make a noticeable difference to daily energy and outlook.
+
+### if/793
+Subject: Giving kind code reviews
+
+Hi team, I wanted to share a few habits for reviewing code kindly. Start with what works well, ask questions instead of giving orders, and explain the reason behind every suggestion. Keep comments about the code and never about the person. These small changes make reviews faster and friendlier.
+
+That is all for now.
+### if/5900
+Subject: Lisbon plan
+
+Hi Elena,
+
+I have drafted the plan for our three days in Lisbon. On the first day we can wander through *Alfama and the castle*, on the second we visit *Belem for the tower and the famous pastries*, and on the third we leave time for a relaxed day trip to Sintra or the beach. Let me know which parts you want to change.
+
+Best wishes
+Jo
+### if/3282
+First perspective: the buyer. The buyer sees a *broken promise*, because the package was paid for and did not arrive, and expects a fast refund or replacement with clear tracking.
+
+Second perspective: the seller. The seller sees a *shared problem*, since the carrier may have lost the parcel, and needs time to open an investigation before paying twice.
+
+The two views can meet in the middle with an *agreed deadline*: the seller investigates for a fixed number of days and then refunds if the package is not found.
+### if/238
+"SUBJECT: UPDATE ON TEAM COMMUNICATION
+HI ALL, I WANT TO PROPOSE THREE SIMPLE RULES FOR OUR REMOTE WORK: WRITE UPDATES IN THE TEAM CHANNEL, STATE DEADLINES CLEARLY AND ASK FOR CONFIRMATION WHEN A TASK MATTERS.
+
+IF YOU AGREE I WILL ADD THEM TO OUR TEAM PAGE THIS WEEK.
+
+THANKS!"
+
+### if/4729
+a clear bug report names the problem in a short title, lists the exact steps to reproduce it, says what you expected and what happened instead, and includes details like the version, system and error messages. one bug per report and a screenshot or log make it far easier and faster to fix.
+### if/442
+Friends and colleagues, thank you for staying with me this morning. I want to tell you about my journey here, because it did not go as planned.
+
+At seven thirty I stood on the platform with a coffee and my notes, confident that I would arrive early. Then the announcement came: the train was delayed. Ten minutes became twenty and twenty became forty. I watched the clock and felt my meeting slipping away.
+
+At first I was angry. Then I began to think about what a delay teaches. It reminds us that we cannot control everything, but we can control how we respond. I sent a message to the organiser, shared my slides by email and joined the discussion from my phone on the platform.
+
+By the time the train finally arrived the main points had been covered and my team had made a decision without me. That could have felt like failure, but it felt like trust. They had the information they needed because I had prepared in advance.
+
+So here is my lesson. Plan a buffer, communicate early and never assume that a missed train means a missed opportunity. Thank you.
+### if/1422
+Checklist for how the internet routes data:
+- Your device splits a message into small packets
+- Each packet gets a destination address
+- Routers read the address and pick the next hop
+- Packets may take different paths
+- The destination reassembles them in order
+
+That is all for now.
+### if/1832
+SECTION 1
+CYCLING IS THE CHEAPEST, FASTEST WAY TO MOVE THROUGH A CITY.
+SECTION 2
+YOU SKIP TRAFFIC, STAY FIT AND ARRIVE SMILING. GET ON A BIKE TODAY.
+### if/4847
+Today I will explain how a grown-up prepares a big talk. Imagine you want to show your class a drawing. First, decide the one thing you want everyone to remember. Next, make a few big pictures instead of lots of tiny words. Then practise saying it out loud at home, like a game, so you feel calm on the day. When the moment comes, take a deep breath and share your idea slowly.
+### if/5169
+SECTION 1
+Check the invitation: who invited you, when it is and what it is about.
+
+SECTION 2
+Decide that you cannot attend and reply as soon as possible.
+
+SECTION 3
+Write a short polite message: thank them, decline and offer an alternative.
+
+SECTION 4
+Send it and note the date in your calendar.
+
+Is there anything else I can help with?
+### if/4012
+<<Interview Prep Message>>
+
+Hi [Name], I have my interview at [company] on [date] and I wanted to share my plan in case it helps you too. I will research the team, review the job description, practise answers to common questions out loud, and prepare three questions of my own. Wish me luck!
+### if/147
+"Coffee checklist: 1) Fresh beans from [roaster]. 2) Clean grinder and [brewing method]. 3) Water at [temperature]. 4) A timer for three minutes."
+### if/509
+SECTION 1
+- Vaccines show the immune system a harmless piece of a germ
+- The body makes antibodies in response
+
+SECTION 2
+- Memory cells stay behind for years
+- If the real germ appears, the response is faster
+### if/3685
+1. A fast processor that handles compiling and many tools at once
+2. At least sixteen gigabytes of memory
+3. A fast solid state drive for large projects
+4. A comfortable keyboard and a sharp screen
+5. Good battery life and a reliable operating system
+### if/1014
+subject: how the internet finds you
+
+hi sam,
+1. your device splits a message into small packets
+2. each packet carries the address of its destination
+3. routers pass the packets along from hop to hop
+4. the destination puts the packets back in order
+cheers, kim
+### if/3315
+Friends, a flat map of a round planet must lie about something. Here is how:
+- Mercator keeps angles right but makes Greenland look as big as Africa
+- Equal-area maps keep sizes true but stretch shapes
+- No flat map keeps distance, direction and area all correct at once
+
+P.S. Next time you see a map, check what it chose to hide.
+### if/3588
+Honestly, learning a language in six months is realistic if you plan well. Study a little every day, learn the most common thousand words first, speak from week one and review your mistakes regularly. Use short lessons, listen to podcasts for your level and find a partner to practise with.
+
+That is all for now.
+### if/5953
+the netsafe home kit includes a modern router with automatic updates, a printed setup guide and a card for your wifi password. it walks you through changing the default password, turning on encryption and creating a separate network for guests, so your family stays safe online.
+### if/1780
+Noisy dog checklist: talk to your neighbour kindly, keep a short log of the noise and agree on a balance between their needs and yours. If that fails, check the budget for a mediator or a letter from the housing office.
+### if/4321
+Main points: set clear working hours, write updates, hold short check-ins and ask for feedback.
+
+Thanks for reading.
+### if/4671
+<<Better Remote Teamwork>>
+
+Keep a daily check-in short and predictable, write decisions down so nobody has to guess, and be honest about workload and deadlines. Use video for complex topics and text for updates, and add small social moments so people stay connected.
+### if/377
+{"title": "Kind code reviews", "content": "Start with what works, ask questions instead of giving orders, explain why a change helps, keep comments about the code and not the person, and agree on style rules in advance so reviews stay about substance."}
+### if/4725
+Good morning everyone. Let me clear up a common mix-up:
+- Weather is what the atmosphere does today in one place
+- Climate is the average of that weather over thirty years or more
+- One cold winter does not disprove a warming climate
+
+P.S. Check the forecast for tomorrow and the climate data for the decade.
+### if/4414
+"Training plan for a first 10k:
+1. Start with run and walk intervals, such as two minutes running and one minute walking.
+2. Train three times a week and rest on the other days.
+3. Increase the total time by about ten percent each week.
+4. Buy shoes that fit well and replace them regularly.
+5. Practise your pace on one longer run before race day."
+
+### if/4510
+mia: shall we plant tomatoes on the balcony?
+leo: yes but they need sun and big pots.
+mia: i can buy soil on saturday.
+leo: i will water them every morning.
+mia: perfect, we will have salad by summer.
+### if/2538
+<<Notes on the Butterfly Life Cycle>>
+
+Hi Priya, here is a short summary. A butterfly goes through *four stages*: egg, caterpillar, chrysalis and adult. The caterpillar eats constantly, and inside the chrysalis its body is *completely rebuilt*. Let me know if you want to show this to the class.
+
+P.S. I have photos of a caterpillar if you need them.
+### if/2778
+A common mistake with food waste is buying too much because of a bargain and then forgetting what is in the fridge. The signal is old leftovers at the back of the shelf. The simple fix: plan meals, check what you have before shopping, store food in clear containers and eat the oldest items first.

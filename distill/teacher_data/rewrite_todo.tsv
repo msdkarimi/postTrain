@@ -1,0 +1,595 @@
+agent/api_agenda_summary/10522	Hi! Show me Theo Silva and Kofi Yilmaz's meetings on 2025-04-14, in time order
+agent/api_agenda_summary/10158	Quick one: Give me a quick agenda for 2026-04-23 covering Ingrid Larsen and Maya Novak. Let me know once it's done
+agent/api_agenda_summary/10019	What's on the calendar on 2026-06-18 for Leo Hughes, Ingrid Fischer and Marco Rossi? Thanks in advance
+agent/api_agenda_summary/10183	Hello. Give me a quick agenda for 2026-10-22 covering Hana Rossi and Hana Ferrari.
+agent/api_agenda_summary/10352	Give me a quick agenda for 2026-11-22 covering Ines Popov and Theo Kowalski. Let me know once it's done.
+agent/api_agenda_summary/10394	Give me a quick agenda for 2026-07-08 covering Leo Yilmaz and Elena Okafor. Thanks!
+agent/api_agenda_summary/10188	hi! Give me a quick agenda for 2025-10-17 covering Noah Santos, Sofia Costa and Pavel Larsen.
+agent/api_agenda_summary/10376	What's on the calendar on 2025-07-17 for Chloe Nguyen, Elena Rossi and Ines Bauer?
+agent/api_agenda_summary/10618	Hey, Show me Kenji Popov, Pavel Schmidt and Zara Bauer's meetings on 2026-03-08, in time order.
+agent/api_agenda_summary/10405	Show me Aisha Weber, Oscar Silva and Chloe Ferrari's meetings on 2026-06-30, in time order.
+agent/api_agenda_summary/10462	What's on the calendar on 2025-04-03 for Oscar Berg, Hugo Dubois and Amira Berg?
+agent/api_agenda_summary/10337	Show me Aisha Rossi, Alice Nguyen and Bianca Patel's meetings on 2026-05-20, in time order. Keep your reply short.
+agent/api_agenda_summary/10263	What's on the calendar on 2026-05-07 for Ethan Lindgren and Ingrid Patel?
+agent/api_agenda_summary/10534	need a hand here. Give me a quick agenda for 2025-05-13 covering Aisha Patel, Hugo Kowalski and Nora Hughes. Thanks in advance.
+agent/api_agenda_summary/10678	Give me a quick agenda for 2026-10-31 covering Noah Tanaka and Ingrid Lindgren. Thanks in advance.
+agent/api_agenda_summary/10468	Could you help me with something? What's on the calendar on 2026-06-19 for Sara Lindgren and Hugo Okafor? Keep your reply short.
+agent/api_agenda_summary/10169	Working on my weekly report. Give me a quick agenda for 2026-05-09 covering Jonas Haddad, Oscar Silva and Ines Larsen
+agent/api_agenda_summary/10015	Show me Kenji Popov, Hana Popov and Hana Kowalski's meetings on 2026-03-09, in time order. Please double-check the result.
+agent/api_agenda_summary/10556	Hey, Give me a quick agenda for 2026-01-13 covering Chloe Garcia and Irene Costa.
+agent/api_ambiguous_contact/10183	Hello. Draft a short email to Victor saying the slide deck is ready for review. Let me know once it's done.
+agent/api_ambiguous_contact/10638	Hi! Draft a short email to Alice saying the report is ready for review.
+agent/api_ambiguous_contact/10480	Need a hand here. Draft a short email to Chloe saying the slide deck is ready for review. Thanks!
+agent/api_ambiguous_contact/10427	Could you help me with something? Draft a short email to Victor saying the budget draft is ready for review. Let me know once it's done.
+agent/api_ambiguous_contact/10412	Hi! Draft a short email to Amira saying the report is ready for review.
+agent/api_ambiguous_contact/10021	Hey, Draft a short email to Aisha saying the slide deck is ready for review. Let me know once it's done.
+agent/api_ambiguous_contact/10404	Draft a short email to Amira saying the proposal is ready for review. Thank you!
+agent/api_ambiguous_contact/10513	Quick one: Draft a short email to Sara saying the proposal is ready for review. Thanks!
+agent/api_ambiguous_contact/10337	Need a hand here. Draft a short email to Priya saying the slide deck is ready for review. Thanks in advance.
+agent/api_ambiguous_contact/10498	Draft a short email to Nora saying the proposal is ready for review. Thank you!
+agent/api_ambiguous_contact/10263	Quick one: Draft a short email to Nora saying the proposal is ready for review. Please double-check the result.
+agent/api_ambiguous_contact/10450	Small task: Draft a short email to Yara saying the slide deck is ready for review.
+agent/api_ambiguous_contact/10745	draft a short email to Victor saying the slide deck is ready for review. Thank you!
+agent/api_ambiguous_contact/10298	quick one: Draft a short email to Ravi saying the budget draft is ready for review.
+agent/api_ambiguous_contact/10478	Small task: Draft a short email to Diego saying the slide deck is ready for review.
+agent/api_ambiguous_contact/10075	Hey, Draft a short email to Priya saying the proposal is ready for review.
+agent/api_ambiguous_contact/10401	Draft a short email to Alice saying the report is ready for review. Let me know once it's done
+agent/api_ambiguous_contact/10384	Hey, Draft a short email to Chloe saying the report is ready for review. Thank you!
+agent/api_ambiguous_contact/10007	Draft a short email to Noah saying the slide deck is ready for review. Keep your reply short.
+agent/api_calculator_basic/10140	Small task: If 2,500 EUR grows by 6% per year, what is it worth after 3 years? Thank you!
+agent/api_calculator_basic/10253	could you help me with something? I'm buying 28 items at 33.2 EUR each, with 19% VAT on top. What is the total? Let me know once it's done.
+agent/api_calculator_basic/10461	Quick one: If 9,500 EUR grows by 3% per year, what is it worth after 2 years? Thank you!
+agent/api_calculator_basic/10427	Working on my weekly report. We spent 987.2 EUR together. How much does each of the 5 of us pay if we split it evenly? Let me know once it's done.
+agent/api_calculator_basic/10423	Hi! What is 12.5% of 1,980? Thanks in advance.
+agent/api_calculator_basic/10448	Working on my weekly report. We spent 483.0 EUR together. How much does each of the 7 of us pay if we split it evenly? Thanks!
+agent/api_calculator_basic/10009	Hello. We spent 885.2 EUR together. How much does each of the 4 of us pay if we split it evenly?
+agent/api_calculator_basic/10069	Hey, If 14,500 EUR grows by 5% per year, what is it worth after 6 years? Please double-check the result.
+agent/api_calculator_basic/10394	I'm buying 25 items at 12.4 EUR each, with 21% VAT on top. What is the total? Please double-check the result.
+agent/api_calculator_basic/10123	We spent 702.2 EUR together. How much does each of the 8 of us pay if we split it evenly?
+agent/api_calculator_basic/10256	I'm in a rush, so please be efficient. If 15,000 EUR grows by 5% per year, what is it worth after 2 years?
+agent/api_calculator_basic/10056	Need a hand here. What is 12.5% of 1,600? Thanks!
+agent/api_calculator_basic/10263	Hello. We spent 426.5 EUR together. How much does each of the 9 of us pay if we split it evenly? Keep your reply short.
+agent/api_calculator_basic/10321	Quick one: I'm buying 33 items at 19.99 EUR each, with 21% VAT on top. What is the total? Thank you!
+agent/api_calculator_basic/10286	Could you help me with something? Convert 5 miles to kilometres (1 mile = 1.609344 km).
+agent/api_calculator_basic/10062	If 19,500 EUR grows by 3% per year, what is it worth after 4 years?
+agent/api_calculator_basic/10233	Quick one: If 9,000 EUR grows by 4% per year, what is it worth after 2 years?
+agent/api_calculator_basic/10497	Need a hand here. We spent 930.5 EUR together. How much does each of the 5 of us pay if we split it evenly? Please double-check the result.
+agent/api_calculator_basic/10281	hey, We spent 861.0 EUR together. How much does each of the 6 of us pay if we split it evenly? Please double-check the result.
+agent/api_calculator_chain/10113	I'm in a rush, so please be efficient. Using finance/q3.txt, what is the profit margin as a percentage and the revenue per employee? Thank you!
+agent/api_calculator_chain/10312	From finance/q1.txt: give me the profit margin (%) and revenue per head.
+agent/api_calculator_chain/10205	Small task: From finance/q3.txt: give me the profit margin (%) and revenue per head. Please double-check the result.
+agent/api_calculator_chain/10292	Could you help me with something? Using finance/q2.txt, what is the profit margin as a percentage and the revenue per employee? Thanks!
+agent/api_calculator_chain/10585	I'm in a rush, so please be efficient. From finance/q3.txt: give me the profit margin (%) and revenue per head.
+agent/api_calculator_chain/10498	From finance/q1.txt: give me the profit margin (%) and revenue per head.
+agent/api_calculator_chain/10191	quick one: Using finance/q2.txt, what is the profit margin as a percentage and the revenue per employee?
+agent/api_calculator_chain/10433	Working on my weekly report. From finance/q2.txt: give me the profit margin (%) and revenue per head. Thank you!
+agent/api_calculator_chain/10435	Small task: Using finance/q1.txt, what is the profit margin as a percentage and the revenue per employee? Thanks in advance.
+agent/api_calculator_chain/10302	From finance/q1.txt: give me the profit margin (%) and revenue per head. Thanks in advance
+agent/api_calculator_chain/10492	From finance/q4.txt: give me the profit margin (%) and revenue per head. Thanks!
+agent/api_calculator_chain/10382	Small task: From finance/q2.txt: give me the profit margin (%) and revenue per head.
+agent/api_calculator_chain/10581	Hey, From finance/q3.txt: give me the profit margin (%) and revenue per head. Thank you!
+agent/api_calculator_chain/10067	Working on my weekly report. From finance/q2.txt: give me the profit margin (%) and revenue per head. Please double-check the result.
+agent/api_calculator_chain/10238	Hello. From finance/q2.txt: give me the profit margin (%) and revenue per head.
+agent/api_calculator_chain/10068	Hey, From finance/q1.txt: give me the profit margin (%) and revenue per head. Thanks in advance.
+agent/api_calculator_chain/10253	Need a hand here. Using finance/q3.txt, what is the profit margin as a percentage and the revenue per employee?
+agent/api_calculator_chain/10407	Hello. Using finance/q4.txt, what is the profit margin as a percentage and the revenue per employee? Thanks in advance.
+agent/api_calculator_chain/10406	From finance/q4.txt: give me the profit margin (%) and revenue per head.
+agent/api_cancel_event/10324	Hi! This is Marco Moreau. Please delete 'Planning session' from the calendar on 2025-02-03. Thanks in advance.
+agent/api_cancel_event/10435	I'm Mei Larsen. Cancel 'Planning session' on 2026-11-20 and draft a short email to the other attendees (Kofi Ivanov) letting them know. Don't send it
+agent/api_cancel_event/10135	Working on my weekly report. This is Chloe Fischer. Please delete 'Customer workshop' from the calendar on 2026-11-28. Thanks!
+agent/api_cancel_event/10128	Hello. I'm Kofi Fischer. Cancel my 'Strategy meeting' meeting on 2025-12-02.
+agent/api_cancel_event/10471	Hello. This is Amira Popov. Please delete 'Budget review' from the calendar on 2026-08-13. Let me know once it's done.
+agent/api_cancel_event/10566	Hi! I'm Arjun Dubois. Cancel my 'Weekly sync' meeting on 2026-09-03. Thank you!
+agent/api_cancel_event/10367	This is Yara Kim: please cancel my 'Vendor demo' meeting on 2025-05-26 and prepare (but don't send) a note to Ethan Rossi and Priya Okafor about the cancellation.
+agent/api_cancel_event/10335	small task: I'm Alice Haddad. Cancel my 'Planning session' meeting on 2025-06-25. Keep your reply short
+agent/api_cancel_event/10000	Hello. This is Yara Andersson. Please delete 'Budget review' from the calendar on 2025-04-12. Keep your reply short.
+agent/api_cancel_event/10563	Need a hand here. I'm Sofia Larsen. Cancel my 'Retro' meeting on 2025-07-09. Keep your reply short.
+agent/api_cancel_event/10253	This is Aisha Costa. Please delete 'Strategy meeting' from the calendar on 2025-03-22. Thank you!
+agent/api_cancel_event/10565	Hi! I'm Arjun Tanaka. Cancel my 'Project kickoff' meeting on 2026-06-22. Thank you!
+agent/api_cancel_event/10661	Hi! I'm Pavel Lindgren. Cancel my 'Retro' meeting on 2026-11-09. Thanks in advance.
+agent/api_cancel_event/10350	Need a hand here. This is Liam Garcia. Please delete 'Strategy meeting' from the calendar on 2025-02-24. Keep your reply short.
+agent/api_cancel_event/10114	Hi! I'm Liam Kowalski. Cancel 'Roadmap discussion' on 2026-01-03 and draft a short email to the other attendees (Hugo Weber and Priya Tanaka) letting them know. Don't send it. Keep your reply short.
+agent/api_cancel_event/10351	Hi! I'm Elena Novak. Cancel my 'Budget review' meeting on 2026-03-20. Thank you!
+agent/api_cancel_event/10437	Need a hand here. I'm Liam Hughes. Cancel my 'Roadmap discussion' meeting on 2026-02-02. Keep your reply short.
+agent/api_cancel_event/10656	working on my weekly report. I'm Liam Tanaka. Cancel 'Weekly sync' on 2025-03-22 and draft a short email to the other attendees (Nora Haddad) letting them know. Don't send it. Please double-check the result.
+agent/api_cancel_event/10502	I'm in a rush, so please be efficient. I'm Lena Patel. Cancel my 'Strategy meeting' meeting on 2025-12-14. Thank you!
+agent/api_confirm_destructive/10205	Could you help me with something? Free up some space by removing the junk in the workspace.
+agent/api_confirm_destructive/10540	hey, Clean up the workspace: get rid of everything that's temporary or outdated.
+agent/api_confirm_destructive/10424	Free up some space by removing the junk in the workspace. Thanks!
+agent/api_confirm_destructive/10778	Hi! Tidy up my files - delete whatever is old or temporary. Thank you!
+agent/api_confirm_destructive/10049	I'm in a rush, so please be efficient. Free up some space by removing the junk in the workspace. Please double-check the result.
+agent/api_confirm_destructive/10459	Quick one: Tidy up my files - delete whatever is old or temporary. Let me know once it's done.
+agent/api_confirm_destructive/10648	I'm in a rush, so please be efficient. Tidy up my files - delete whatever is old or temporary. Thanks in advance.
+agent/api_confirm_destructive/10280	hello. Tidy up my files - delete whatever is old or temporary.
+agent/api_confirm_destructive/10608	Small task: Free up some space by removing the junk in the workspace. Thank you!
+agent/api_confirm_destructive/10271	Small task: Tidy up my files - delete whatever is old or temporary. Thanks!
+agent/api_confirm_destructive/10488	Tidy up my files - delete whatever is old or temporary
+agent/api_confirm_destructive/10112	could you help me with something? Clean up the workspace: get rid of everything that's temporary or outdated. Please double-check the result.
+agent/api_confirm_destructive/10771	Small task: Clean up the workspace: get rid of everything that's temporary or outdated. Thanks in advance.
+agent/api_confirm_destructive/10473	I'm in a rush, so please be efficient. Free up some space by removing the junk in the workspace. Keep your reply short.
+agent/api_confirm_destructive/10713	Could you help me with something? Free up some space by removing the junk in the workspace. Thanks!
+agent/api_confirm_destructive/10101	I'm in a rush, so please be efficient. Free up some space by removing the junk in the workspace. Thank you!
+agent/api_confirm_destructive/10487	Hi! Tidy up my files - delete whatever is old or temporary.
+agent/api_confirm_destructive/10474	Quick one: Tidy up my files - delete whatever is old or temporary.
+agent/api_confirm_destructive/10528	Hi! Clean up the workspace: get rid of everything that's temporary or outdated. Let me know once it's done.
+agent/api_conflict_check/10270	Could you help me with something? Is 10:15 on 2026-11-18 free for Victor Haddad, Mei Weber and Pavel Tanaka? If everyone is free, book 'Design review' for 45 minutes; if not, tell me who is busy and when we could meet instead. Let me know once it's done.
+agent/api_conflict_check/10654	Quick one: Is 10:00 on 2026-04-17 free for Aisha Fischer and Ines Tanaka? If everyone is free, book 'Retro' for 60 minutes; if not, tell me who is busy and when we could meet instead.
+agent/api_conflict_check/10594	Need a hand here. Is 12:30 on 2025-02-07 free for Ingrid Lindgren and Tomas Patel? If everyone is free, book 'Budget review' for 60 minutes; if not, tell me who is busy and when we could meet instead. Please double-check the result.
+agent/api_conflict_check/10221	quick one: Check whether Ingrid Okafor, Tomas Novak and Elena Berg are all available at 12:45 on 2025-07-16 for 45 minutes. If yes, create 'Roadmap discussion'. If not, say who has a conflict and propose the earliest alternative.
+agent/api_conflict_check/10459	Is 15:00 on 2025-07-06 free for Alice Lindgren and Yara Berg? If everyone is free, book 'Strategy meeting' for 60 minutes; if not, tell me who is busy and when we could meet instead.
+agent/api_conflict_check/10290	Check whether Amira Berg, Irene Ivanov and Marco Hughes are all available at 15:45 on 2025-05-28 for 30 minutes. If yes, create 'Retro'. If not, say who has a conflict and propose the earliest alternative.
+agent/api_conflict_check/10738	Hi! Is 14:15 on 2025-11-18 free for Mei Weber, Amira Kim and Sofia Tanaka? If everyone is free, book 'Retro' for 45 minutes; if not, tell me who is busy and when we could meet instead. Keep your reply short.
+agent/api_conflict_check/10229	Quick one: Is 11:45 on 2026-05-02 free for Theo Weber, Felix Rahman and Kofi Kowalski? If everyone is free, book 'Design review' for 45 minutes; if not, tell me who is busy and when we could meet instead. Please double-check the result.
+agent/api_conflict_check/10117	Quick one: Is 13:30 on 2025-01-04 free for Nora Yilmaz, Zara Silva and Amira Dubois? If everyone is free, book 'Roadmap discussion' for 45 minutes; if not, tell me who is busy and when we could meet instead.
+agent/api_conflict_check/10344	Quick one: Is 10:30 on 2025-09-08 free for Yara Ferrari and Hana Kim? If everyone is free, book 'Onboarding session' for 30 minutes; if not, tell me who is busy and when we could meet instead. Thank you!
+agent/api_conflict_check/10382	Need a hand here. Check whether Amira Schmidt and Ingrid Patel are all available at 11:15 on 2026-10-24 for 30 minutes. If yes, create 'Quarterly check-in'. If not, say who has a conflict and propose the earliest alternative. Please double-check the result.
+agent/api_conflict_check/10602	Small task: Is 15:00 on 2026-01-25 free for Arjun Kowalski, Zara Hughes and Victor Lindgren? If everyone is free, book 'Roadmap discussion' for 60 minutes; if not, tell me who is busy and when we could meet instead. Let me know once it's done.
+agent/api_conflict_check/10001	I'm in a rush, so please be efficient. Is 13:15 on 2026-08-06 free for Marco Popov and Elena Larsen? If everyone is free, book 'Project kickoff' for 60 minutes; if not, tell me who is busy and when we could meet instead. Please double-check the result.
+agent/api_conflict_check/10352	Could you help me with something? Is 12:30 on 2025-06-10 free for Tomas Novak and Victor Haddad? If everyone is free, book 'Design review' for 45 minutes; if not, tell me who is busy and when we could meet instead.
+agent/api_conflict_check/10162	Small task: Is 15:30 on 2026-03-30 free for Nadia Yilmaz and Arjun Okafor? If everyone is free, book 'Weekly sync' for 60 minutes; if not, tell me who is busy and when we could meet instead. Please double-check the result.
+agent/api_conflict_check/10175	Small task: Is 14:15 on 2025-09-11 free for Ravi Schmidt and Kenji Santos? If everyone is free, book 'Customer workshop' for 30 minutes; if not, tell me who is busy and when we could meet instead. Let me know once it's done.
+agent/api_conflict_check/10425	Need a hand here. Check whether Maya Kim and Sara Lindgren are all available at 12:15 on 2026-01-30 for 60 minutes. If yes, create 'Weekly sync'. If not, say who has a conflict and propose the earliest alternative. Thanks in advance.
+agent/api_conflict_check/10553	Could you help me with something? Check whether Victor Rossi and Noah Nguyen are all available at 12:45 on 2026-08-29 for 45 minutes. If yes, create 'Quarterly check-in'. If not, say who has a conflict and propose the earliest alternative. Please double-check the result.
+agent/api_conflict_check/10355	working on my weekly report. Check whether Elena Fischer and Ethan Andersson are all available at 14:30 on 2026-07-10 for 60 minutes. If yes, create 'Quarterly check-in'. If not, say who has a conflict and propose the earliest alternative.
+agent/api_draft_or_send/10263	Hi! Please email Jonas Moreau (subject: 'Cobalt numbers') to say they need to send the Cobalt numbers by 2026-10-09 at 11:00. Send it right away. Thank you!
+agent/api_draft_or_send/10116	Working on my weekly report. Please email Victor Costa and Diego Mendez (subject: 'Horizon update') to say the Horizon workshop starts at 11:30 on 2025-03-07. Send it right away. Thank you!
+agent/api_draft_or_send/10264	quick one: Please email Liam Moreau (subject: 'Horizon update') to say the Horizon review has been moved to 2026-12-25 at 15:00, but only save it as a draft. Thank you!
+agent/api_draft_or_send/10841	Need a hand here. Write an email to Nadia Silva with the subject 'Apollo numbers' letting them know they need to send the Apollo numbers by 2025-10-29 at 10:30. Don't send it, I want to review it first. Please double-check the result.
+agent/api_draft_or_send/10815	Quick one: Write an email to Aisha Fischer with the subject 'Apollo numbers' letting them know they need to send the Apollo numbers by 2026-01-04 at 12:30. Don't send it, I want to review it first. Keep your reply short.
+agent/api_draft_or_send/10650	Write an email to Theo Silva with the subject 'Cobalt update' letting them know the Cobalt workshop starts at 12:30 on 2025-05-10. Don't send it, I want to review it first. Thanks!
+agent/api_draft_or_send/10661	I'm in a rush, so please be efficient. Please email Felix Novak and Diego Okafor (subject: 'Borealis update') to say the Borealis workshop starts at 14:00 on 2025-09-06, but only save it as a draft. Let me know once it's done.
+agent/api_draft_or_send/10305	I'm in a rush, so please be efficient. Write an email to Arjun Ferrari and Elena Santos with the subject 'Horizon update' letting them know the Horizon review has been moved to 2026-10-12 at 11:30. Don't send it, I want to review it first. Thank you!
+agent/api_draft_or_send/10302	Please email Sara Costa (subject: 'Cobalt update') to say the Cobalt workshop starts at 12:00 on 2026-03-06, but only save it as a draft. Thanks in advance.
+agent/api_draft_or_send/10628	Write an email to Dmitri Tanaka with the subject 'Granite update' letting them know the Granite workshop starts at 09:30 on 2025-03-31 and send it.
+agent/api_draft_or_send/10066	Hey, Please email Oscar Mendez and Sara Rahman (subject: 'Borealis update') to say the Borealis review has been moved to 2025-09-26 at 11:00, but only save it as a draft. Keep your reply short.
+agent/api_draft_or_send/10623	Could you help me with something? Write an email to Pavel Santos with the subject 'Borealis numbers' letting them know they need to send the Borealis numbers by 2025-11-13 at 13:00. Don't send it, I want to review it first. Keep your reply short.
+agent/api_draft_or_send/10215	Please email Liam Garcia (subject: 'Apollo update') to say the Apollo review has been moved to 2026-08-23 at 12:45. Send it right away. Thanks in advance.
+agent/api_draft_or_send/10506	Working on my weekly report. Write an email to Maya Costa with the subject 'Falcon update' letting them know the Falcon workshop starts at 12:15 on 2025-03-20. Don't send it, I want to review it first.
+agent/api_draft_or_send/10081	Need a hand here. Please email Hana Bauer (subject: 'Everest update') to say the Everest workshop starts at 13:45 on 2025-08-01, but only save it as a draft. Thanks!
+agent/api_draft_or_send/10666	Write an email to Liam Nguyen and Zara Weber with the subject 'Falcon update' letting them know the Falcon review has been moved to 2025-04-28 at 12:30. Don't send it, I want to review it first
+agent/api_draft_or_send/10718	Please email Tomas Larsen (subject: 'Apollo update') to say the Apollo review has been moved to 2026-09-22 at 16:30. Send it right away. Thanks!
+agent/api_draft_or_send/10626	Quick one: Write an email to Elena Berg with the subject 'Falcon numbers' letting them know they need to send the Falcon numbers by 2025-05-31 at 12:45. Don't send it, I want to review it first.
+agent/api_draft_or_send/10636	Please email Sofia Okafor (subject: 'Borealis update') to say the Borealis workshop starts at 10:00 on 2026-11-18. Send it right away.
+agent/api_file_not_found_recover/10383	Hi! Open reports/q2_summary.md and tell me the revenue figure. Thanks!
+agent/api_file_not_found_recover/10138	Open reports/q3-summary.txt and tell me the revenue figure. Thanks!
+agent/api_file_not_found_recover/10558	how much revenue did we report in reports/q3_summary.md?
+agent/api_file_not_found_recover/10260	Open reports/q4-summary.txt and tell me the revenue figure.
+agent/api_file_not_found_recover/10202	What was the revenue in reports/q3_summary.md? Please double-check the result
+agent/api_file_not_found_recover/10713	How much revenue did we report in reports/q3-summary.txt? Keep your reply short.
+agent/api_file_not_found_recover/10428	What was the revenue in reports/q2-summary.txt?
+agent/api_file_not_found_recover/10204	open reports/q1_summary.md and tell me the revenue figure. Let me know once it's done.
+agent/api_file_not_found_recover/10419	Need a hand here. Open reports/q1_summary.md and tell me the revenue figure. Please double-check the result.
+agent/api_file_not_found_recover/10504	Hi! What was the revenue in reports/q2_summary.md?
+agent/api_file_not_found_recover/10608	How much revenue did we report in reports/q4-summary.txt?
+agent/api_file_not_found_recover/10737	I'm in a rush, so please be efficient. How much revenue did we report in reports/q1-summary.txt?
+agent/api_file_not_found_recover/10736	Hi! Open reports/q2_summary.md and tell me the revenue figure. Keep your reply short
+agent/api_file_not_found_recover/10485	Hey, Open reports/q1_summary.md and tell me the revenue figure.
+agent/api_file_not_found_recover/10363	Quick one: Open reports/q4_summary.md and tell me the revenue figure. Thank you!
+agent/api_file_not_found_recover/10248	Hey, How much revenue did we report in reports/q2-summary.txt?
+agent/api_file_not_found_recover/10687	Open reports/q1_summary.md and tell me the revenue figure. Let me know once it's done.
+agent/api_file_not_found_recover/10464	Small task: Open reports/q3_summary.md and tell me the revenue figure.
+agent/api_file_not_found_recover/10466	I'm in a rush, so please be efficient. How much revenue did we report in reports/q1-summary.txt? Thanks!
+agent/api_find_and_schedule/10252	Small task: Can you set up 'Customer workshop' (60 min) on 2025-03-06 with Ines Okafor, Diego Silva and Tomas Ferrari? Pick the earliest common free time within working hours. Please double-check the result.
+agent/api_find_and_schedule/10779	Small task: Schedule 'Planning session' on 2025-06-05 for 60 minutes with Chloe Moreau and Ines Santos, at the earliest time everyone is free. Thanks!
+agent/api_find_and_schedule/10235	Quick one: Please book a 30-minute meeting called 'Project kickoff' with Ines Nguyen and Omar Nguyen on 2026-09-05. Use the first slot when all of them are available. Thanks in advance.
+agent/api_find_and_schedule/10399	Please book a 30-minute meeting called 'Onboarding session' with Pavel Popov, Liam Ivanov, Ingrid Patel and Aisha Larsen on 2025-02-20. Use the first slot when all of them are available. Let me know once it's done
+agent/api_find_and_schedule/10938	I'm in a rush, so please be efficient. I need 60 minutes on 2026-05-16 for Hugo Dubois, Irene Bauer, Ravi Rossi and Kenji Rossi. Find the earliest time they're all free and create the event 'Vendor demo'.
+agent/api_find_and_schedule/10081	Schedule 'Retro' on 2026-01-15 for 60 minutes with Ravi Kowalski, Lena Costa, Alice Hughes and Aisha Yilmaz, at the earliest time everyone is free. Keep your reply short
+agent/api_find_and_schedule/10816	Can you set up 'Quarterly check-in' (60 min) on 2025-01-07 with Ingrid Novak, Sara Schmidt and Mei Moreau? Pick the earliest common free time within working hours.
+agent/api_find_and_schedule/10764	I'm in a rush, so please be efficient. Schedule 'Design review' on 2025-08-22 for 60 minutes with Ethan Haddad, Zara Andersson and Maya Haddad, at the earliest time everyone is free. Thank you!
+agent/api_find_and_schedule/10606	Can you set up 'Roadmap discussion' (60 min) on 2026-02-01 with Tomas Weber, Leo Bauer, Dmitri Berg and Theo Patel? Pick the earliest common free time within working hours. Thanks in advance.
+agent/api_find_and_schedule/10757	I need 45 minutes on 2026-11-15 for Arjun Hughes, Arjun Schmidt and Zara Fischer. Find the earliest time they're all free and create the event 'Onboarding session'. Let me know once it's done.
+agent/api_find_and_schedule/10017	Hello. I need 60 minutes on 2025-03-22 for Ingrid Andersson and Dmitri Dubois. Find the earliest time they're all free and create the event 'Strategy meeting'
+agent/api_find_and_schedule/10180	Hey, Can you set up 'Roadmap discussion' (45 min) on 2025-07-20 with Ines Rossi, Nadia Larsen, Zara Tanaka and Theo Ferrari? Pick the earliest common free time within working hours.
+agent/api_find_and_schedule/10249	Hi! I need 30 minutes on 2025-10-05 for Ines Ivanov, Theo Costa and Ravi Kim. Find the earliest time they're all free and create the event 'Retro'.
+agent/api_find_and_schedule/10642	Quick one: I need 45 minutes on 2025-11-09 for Sara Weber, Arjun Rossi, Sara Moreau and Leo Popov. Find the earliest time they're all free and create the event 'Planning session'.
+agent/api_find_and_schedule/10018	Could you help me with something? Can you set up 'Quarterly check-in' (45 min) on 2026-07-24 with Mei Fischer, Marco Popov, Elena Moreau and Hugo Ferrari? Pick the earliest common free time within working hours. Thanks!
+agent/api_find_and_schedule/10175	Can you set up 'Roadmap discussion' (60 min) on 2026-05-09 with Mei Larsen, Liam Popov, Priya Berg and Arjun Popov? Pick the earliest common free time within working hours. Thank you!
+agent/api_find_and_schedule/10206	Hi! Please book a 30-minute meeting called 'Vendor demo' with Felix Costa, Victor Rahman, Mei Popov and Ingrid Santos on 2026-04-27. Use the first slot when all of them are available.
+agent/api_find_and_schedule/10439	Hey, Schedule 'Planning session' on 2025-07-20 for 60 minutes with Kofi Ferrari and Aisha Santos, at the earliest time everyone is free.
+agent/api_find_and_schedule/10211	Hello. Please book a 60-minute meeting called 'Strategy meeting' with Felix Novak and Maya Weber on 2025-10-26. Use the first slot when all of them are available.
+agent/api_followup_adjust/10133	Need a hand here. Book 'Planning session' on 2025-04-05 for 30 minutes with Victor Garcia, Liam Rahman and Hana Kowalski at the earliest time they're all free. Thank you!
+agent/api_followup_adjust/10474	Hi! Book 'Vendor demo' on 2025-07-10 for 30 minutes with Elena Moreau, Hana Berg and Mei Popov at the earliest time they're all free. Thanks in advance.
+agent/api_followup_adjust/10577	Hello. Book 'Strategy meeting' on 2026-04-27 for 60 minutes with Sara Ferrari, Mei Berg and Sofia Novak at the earliest time they're all free. Let me know once it's done.
+agent/api_followup_adjust/10177	Book 'Vendor demo' on 2026-08-26 for 30 minutes with Bianca Kowalski and Sara Hughes at the earliest time they're all free.
+agent/api_followup_adjust/10115	Book 'Planning session' on 2025-09-09 for 30 minutes with Tomas Ivanov, Hugo Larsen and Alice Okafor at the earliest time they're all free. Keep your reply short.
+agent/api_followup_adjust/10002	Book 'Budget review' on 2026-07-04 for 45 minutes with Lena Popov, Irene Berg and Arjun Okafor at the earliest time they're all free
+agent/api_followup_adjust/10747	Small task: Book 'Roadmap discussion' on 2026-08-14 for 30 minutes with Nadia Bauer, Elena Andersson and Hugo Weber at the earliest time they're all free. Let me know once it's done
+agent/api_followup_adjust/10341	Book 'Budget review' on 2026-09-23 for 60 minutes with Ethan Costa and Yara Andersson at the earliest time they're all free. Thanks!
+agent/api_followup_adjust/10038	small task: Book 'Planning session' on 2025-11-24 for 45 minutes with Chloe Santos and Jonas Tanaka at the earliest time they're all free. Please double-check the result.
+agent/api_followup_adjust/10642	Book 'Roadmap discussion' on 2025-11-08 for 45 minutes with Irene Fischer and Bianca Hughes at the earliest time they're all free.
+agent/api_inbox_digest/10409	Hello. Summarise my unread emails.
+agent/api_inbox_digest/10570	working on my weekly report. What's new in my inbox? Only the unread ones, please.
+agent/api_inbox_digest/10533	Quick one: Give me a digest of the emails I haven't read yet. Please double-check the result.
+agent/api_inbox_digest/10221	what's new in my inbox? Only the unread ones, please.
+agent/api_inbox_digest/10523	Hi! What's new in my inbox? Only the unread ones, please.
+agent/api_inbox_digest/10116	Hi! Give me a digest of the emails I haven't read yet.
+agent/api_inbox_digest/10621	Hey, Summarise my unread emails.
+agent/api_inbox_digest/10715	Could you help me with something? What's new in my inbox? Only the unread ones, please. Thanks!
+agent/api_inbox_digest/10659	What's new in my inbox? Only the unread ones, please. Thanks!
+agent/api_inbox_digest/10369	What's new in my inbox? Only the unread ones, please. Keep your reply short.
+agent/api_meeting_prep/10163	Set up 'Weekly sync' (30 min) on 2025-11-12 with Marco Larsen and Kenji Mendez: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Weekly sync' due on 2025-11-12.
+agent/api_meeting_prep/10625	Set up 'Quarterly check-in' (30 min) on 2025-08-12 with Hugo Kowalski, Ines Patel and Oscar Costa: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Quarterly check-in' due on 2025-08-12. Thank you!
+agent/api_meeting_prep/10461	Hello. Set up 'Onboarding session' (60 min) on 2026-12-14 with Ravi Berg, Aisha Kim and Yara Ferrari: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Onboarding session' due on 2026-12-14. Please double-check the result
+agent/api_meeting_prep/10593	Hello. Set up 'Project kickoff' (45 min) on 2026-07-25 with Ingrid Garcia, Theo Weber and Kenji Dubois: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Project kickoff' due on 2026-07-25. Keep your reply short.
+agent/api_meeting_prep/10138	Hi! Set up 'Project kickoff' (30 min) on 2026-09-10 with Sofia Yilmaz and Dmitri Moreau: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Project kickoff' due on 2026-09-10. Thanks!
+agent/api_meeting_prep/10626	Working on my weekly report. Set up 'Strategy meeting' (30 min) on 2026-09-24 with Bianca Bauer, Nadia Silva and Irene Dubois: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Strategy meeting' due on 2026-09-24. Thank you!
+agent/api_meeting_prep/10393	Set up 'Weekly sync' (60 min) on 2025-03-25 with Irene Novak, Ines Ivanov and Ines Costa: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Weekly sync' due on 2025-03-25. Let me know once it's done
+agent/api_meeting_prep/10414	Hey, Set up 'Design review' (60 min) on 2025-05-03 with Chloe Haddad and Hugo Schmidt: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Design review' due on 2025-05-03. Let me know once it's done.
+agent/api_meeting_prep/10230	Need a hand here. Set up 'Retro' (45 min) on 2026-09-23 with Ravi Bauer and Liam Silva: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Retro' due on 2026-09-23.
+agent/api_meeting_prep/10110	I'm in a rush, so please be efficient. Set up 'Roadmap discussion' (60 min) on 2026-07-27 with Elena Kowalski, Mei Ferrari and Mei Fischer: book the earliest slot when they are all free, write an invitation email draft to them (don't send it), and add a task for me called 'Prepare agenda for Roadmap discussion' due on 2026-07-27.
+agent/api_no_tool_needed/10388	Hey, What is the capital of Japan? Thanks in advance.
+agent/api_no_tool_needed/10615	Could you help me with something? What is 11 times 6?
+agent/api_no_tool_needed/10927	Small task: Which HTTP status code means 'Not Found'? Thanks!
+agent/api_no_tool_needed/10548	Working on my weekly report. What is the capital of Switzerland? Thanks!
+agent/api_no_tool_needed/10690	Quick mental math: 15 + 31? Thanks in advance.
+agent/api_no_tool_needed/10836	Hello. What is the chemical symbol for iron? Please double-check the result.
+agent/api_no_tool_needed/10045	What does CSV stand for? Thanks!
+agent/api_no_tool_needed/10840	which month comes after March? Keep your reply short.
+agent/api_no_tool_needed/10773	could you help me with something? What is the chemical symbol for sodium?
+agent/api_no_tool_needed/10243	Could you help me with something? What does CSV stand for?
+agent/api_reply_confirm_meeting/10572	I'm Oscar Bauer. Reply to Alice Nguyen's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send. Thanks in advance.
+agent/api_reply_confirm_meeting/10519	hi! This is Sofia Moreau. Diego Okafor emailed me asking for a quick sync. Draft a reply confirming the earliest time that works for both of us within what they proposed. Please double-check the result.
+agent/api_reply_confirm_meeting/10144	Need a hand here. I'm Theo Santos. Reply to Aisha Kowalski's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send. Thank you!
+agent/api_reply_confirm_meeting/10419	Small task: I'm Alice Costa. Reply to Nadia Haddad's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send. Thank you!
+agent/api_reply_confirm_meeting/10726	This is Lena Nguyen. Liam Nguyen emailed me asking for a quick sync. Draft a reply confirming the earliest time that works for both of us within what they proposed. Thank you!
+agent/api_reply_confirm_meeting/10140	Need a hand here. This is Bianca Rahman. Liam Silva emailed me asking for a quick sync. Draft a reply confirming the earliest time that works for both of us within what they proposed. Thank you!
+agent/api_reply_confirm_meeting/10427	Quick one: I'm Maya Mendez. Reply to Alice Rahman's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send.
+agent/api_reply_confirm_meeting/10147	I'm Ethan Kim. Reply to Ethan Ferrari's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send. Thanks in advance.
+agent/api_reply_confirm_meeting/10412	I'm Priya Ivanov. Reply to Alice Fischer's email about the sync: pick the earliest 30-minute slot on the day they proposed, after the time they suggested, when we are both free. Save it as a draft, don't send. Keep your reply short.
+agent/api_reply_confirm_meeting/10450	Working on my weekly report. This is Nora Berg. Leo Rossi emailed me asking for a quick sync. Draft a reply confirming the earliest time that works for both of us within what they proposed. Let me know once it's done.
+agent/api_reschedule/10161	I'm Arjun Patel. Move 'Project kickoff' on 2025-06-11 to 13:00.
+agent/api_reschedule/10673	Need a hand here. I'm Marco Andersson. Move 'Quarterly check-in' on 2026-07-28 to 13:00. Let me know once it's done
+agent/api_reschedule/10646	Hey, This is Hugo Kim: please shift my 'Budget review' meeting on 2025-07-15 so it starts at 10:00.
+agent/api_reschedule/10677	Hi! I'm Yara Popov. Find the earliest time on 2026-03-11 that works for everyone in 'Planning session' and move the meeting there.
+agent/api_reschedule/10254	Could you help me with something? This is Hugo Santos: please shift my 'Roadmap discussion' meeting on 2026-08-23 so it starts at 12:30. Thanks!
+agent/api_reschedule/10044	Hi! I'm Dmitri Nguyen. Reschedule 'Budget review' on 2026-07-13 to the earliest time when all attendees (Aisha Garcia and Dmitri Larsen and I) are free.
+agent/api_reschedule/10018	I'm in a rush, so please be efficient. I'm Amira Popov. Reschedule 'Retro' on 2026-11-14 to the earliest time when all attendees (Dmitri Silva and I) are free. Thanks in advance.
+agent/api_reschedule/10364	Need a hand here. I'm Felix Novak. Move 'Onboarding session' on 2025-12-26 to 14:30. Please double-check the result.
+agent/api_reschedule/10123	I'm Ethan Weber. Reschedule 'Strategy meeting' on 2026-01-05 to the earliest time when all attendees (Nora Moreau and Jonas Santos and I) are free. Let me know once it's done.
+agent/api_reschedule/10603	Hey, I'm Aisha Silva. Move 'Strategy meeting' on 2026-09-22 to 12:15. Please double-check the result.
+agent/api_search_and_answer/10712	I need the Apollo budget submission deadline and its owner. Keep your reply short.
+agent/api_search_and_answer/10473	Small task: What's the submission deadline for the Delta budget? Who is responsible?
+agent/api_search_and_answer/10337	I need the Horizon budget submission deadline and its owner. Let me know once it's done.
+agent/api_search_and_answer/10212	need a hand here. What's the submission deadline for the Apollo budget? Who is responsible? Please double-check the result.
+agent/api_search_and_answer/10149	I need the Apollo budget submission deadline and its owner. Thanks!
+agent/api_search_and_answer/10736	I need the Borealis budget submission deadline and its owner.
+agent/api_search_and_answer/10445	Small task: I need the Apollo budget submission deadline and its owner
+agent/api_search_and_answer/10375	Working on my weekly report. What's the submission deadline for the Delta budget? Who is responsible? Thank you!
+agent/api_search_and_answer/10277	Hey, When is the budget submission deadline for Granite, and who owns it? Let me know once it's done.
+agent/api_search_and_answer/10444	hi! What's the submission deadline for the Delta budget? Who is responsible? Thanks!
+agent/api_table_aggregate/10569	Hi! How many sales were made in the South region according to the sales spreadsheet?
+agent/api_table_aggregate/10009	Could you help me with something? What is the average amount per product in data/sales_2025.csv?
+agent/api_table_aggregate/10038	I'm in a rush, so please be efficient. What is the average amount per product in the sales spreadsheet?
+agent/api_table_aggregate/10326	Hey, What was the largest single sale in the West region in the sales spreadsheet? Thanks in advance.
+agent/api_table_aggregate/10026	Hey, How many sales were made in the East region according to data/sales_2025.csv? Let me know once it's done.
+agent/api_table_aggregate/10164	need a hand here. How many sales were made in the South region according to data/sales_2025.csv? Thanks!
+agent/api_table_aggregate/10255	Could you help me with something? What is the total amount for the West region in data/sales_2024.csv? Thank you!
+agent/api_table_aggregate/10370	What is the average amount per product in the sales spreadsheet?
+agent/api_table_aggregate/10036	Hello. How many sales were made in the West region according to the sales spreadsheet?
+agent/api_table_aggregate/10563	Hi! What is the average amount per product in the sales spreadsheet? Please double-check the result.
+agent/api_task_capture/10275	Quick one: Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date.
+agent/api_task_capture/10011	Hello. Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date. Thanks in advance.
+agent/api_task_capture/10183	Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date
+agent/api_task_capture/10623	Hey, Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date
+agent/api_task_capture/10298	I'm in a rush, so please be efficient. Turn the action items in notes/standup.md into tasks: one task per '- ACTION' line, with its owner and due date. Thanks!
+agent/api_task_capture/10437	I'm in a rush, so please be efficient. Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date. Please double-check the result.
+agent/api_task_capture/10037	Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date. Let me know once it's done.
+agent/api_task_capture/10677	Hi! Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date.
+agent/api_task_capture/10614	Quick one: Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date.
+agent/api_task_capture/10757	Hi! Read notes/standup.md and add every action item (the lines starting with '- ACTION') to my task list with the owner and due date
+agent/api_task_review/10209	Hello. Mark 'Update the onboarding checklist' and 'Renew the software licences' as done, then tell me which tasks are still open. Keep your reply short.
+agent/api_task_review/10293	Quick one: I finished 'Book the conference room' and 'Schedule the customer call'. Please close them and list what's left on my to-do list.
+agent/api_task_review/10225	could you help me with something? I finished 'Renew the software licences' and 'Confirm the budget numbers'. Please close them and list what's left on my to-do list.
+agent/api_task_review/10408	Mark 'Review the vendor contract' and 'Update the onboarding checklist' as done, then tell me which tasks are still open.
+agent/api_task_review/10250	Working on my weekly report. I finished 'Draft the release notes' and 'Fix the broken export link'. Please close them and list what's left on my to-do list. Thanks in advance.
+agent/api_task_review/10077	mark 'Book the conference room' and 'Schedule the customer call' as done, then tell me which tasks are still open. Thanks!
+agent/api_task_review/10091	I finished 'Draft the release notes' and 'Schedule the customer call' and 'Fix the broken export link'. Please close them and list what's left on my to-do list. Thank you!
+agent/api_task_review/10101	Quick one: I finished 'Confirm the budget numbers' and 'Review the vendor contract' and 'Draft the release notes'. Please close them and list what's left on my to-do list.
+agent/api_task_review/10442	I finished 'Schedule the customer call' and 'Review the vendor contract'. Please close them and list what's left on my to-do list. Thanks in advance.
+agent/api_task_review/10515	Hey, Mark 'Send the revised quote' as done, then tell me which tasks are still open. Thanks!
+agent/api_today_agenda/10443	Quick one: This is Victor Mendez. Show me today's schedule. Please double-check the result.
+agent/api_today_agenda/10012	hey, This is Ravi Kowalski. Show me today's schedule. Thank you!
+agent/api_today_agenda/10370	Hello. I'm Aisha Costa. What do I have on my calendar today? Thank you!
+agent/api_today_agenda/10315	Small task: This is Tomas Kowalski. Show me today's schedule.
+agent/api_today_agenda/10055	Hello. This is Zara Mendez. Show me today's schedule. Keep your reply short.
+agent/api_today_agenda/10499	Small task: This is Arjun Andersson. Show me today's schedule. Thank you!
+agent/api_today_agenda/10373	Hi! This is Nadia Larsen. Show me today's schedule. Thanks!
+agent/api_today_agenda/10175	could you help me with something? This is Kofi Larsen. Show me today's schedule
+agent/api_today_agenda/10145	quick one: I'm Diego Berg. What do I have on my calendar today? Thank you!
+agent/api_today_agenda/10124	Could you help me with something? I'm Ethan Novak. What do I have on my calendar today? Let me know once it's done.
+agent/api_unsupported_request/10564	Hi! Please book me a flight to Lyon.
+agent/api_unsupported_request/10426	Working on my weekly report. Please order lunch for the team from a restaurant. Thanks!
+agent/api_unsupported_request/10341	Quick one: Please book a taxi to the airport for tomorrow morning. Keep your reply short
+agent/api_unsupported_request/10226	Need a hand here. Please buy 50 shares of the company's stock.
+agent/api_unsupported_request/10649	Please transfer 500 EUR to the supplier's bank account. Thank you!
+agent/api_unsupported_request/10327	please order lunch for the team from a restaurant.
+agent/api_unsupported_request/10731	Small task: Please book me a flight to Lisbon. Thanks!
+agent/api_unsupported_request/10325	Hello. Please book a taxi to the airport for tomorrow morning. Thanks in advance
+agent/api_unsupported_request/10323	Small task: Please order lunch for the team from a restaurant.
+agent/api_unsupported_request/10354	Please print the budget report on the office printer. Thank you!
+agent/api_weekly_digest/10680	Hey, Build weekly_digest.md for 2025-02-12: a title '# Digest for 2025-02-12', then for each of Liam Andersson, Mei Kim and Ravi Fischer (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md.
+agent/api_weekly_digest/10386	build weekly_digest.md for 2025-08-13: a title '# Digest for 2025-08-13', then for each of Irene Kowalski and Nadia Novak (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Thanks in advance.
+agent/api_weekly_digest/10160	Small task: Build weekly_digest.md for 2025-09-22: a title '# Digest for 2025-09-22', then for each of Ines Moreau and Mei Nguyen (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Thanks in advance.
+agent/api_weekly_digest/10663	Small task: Build weekly_digest.md for 2025-05-26: a title '# Digest for 2025-05-26', then for each of Lena Mendez and Sofia Novak (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md.
+agent/api_weekly_digest/10201	Quick one: Build digest.md for 2025-11-18: a title '# Digest for 2025-11-18', then for each of Mei Patel and Sofia Larsen (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md
+agent/api_weekly_digest/10099	Small task: Build digest.md for 2026-07-09: a title '# Digest for 2026-07-09', then for each of Bianca Moreau, Diego Hughes and Felix Andersson (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Thanks in advance
+agent/api_weekly_digest/10612	Working on my weekly report. Build weekly_digest.md for 2026-09-11: a title '# Digest for 2026-09-11', then for each of Ingrid Weber and Omar Larsen (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Thanks!
+agent/api_weekly_digest/10298	Working on my weekly report. Build digest.md for 2026-05-16: a title '# Digest for 2026-05-16', then for each of Hugo Weber, Jonas Tanaka and Pavel Kim (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md.
+agent/api_weekly_digest/10597	Need a hand here. Build weekly_digest.md for 2025-08-24: a title '# Digest for 2025-08-24', then for each of Bianca Schmidt and Diego Popov (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Thank you!
+agent/api_weekly_digest/10126	Working on my weekly report. Build weekly_digest.md for 2025-10-25: a title '# Digest for 2025-10-25', then for each of Chloe Hughes and Kofi Silva (alphabetical) a '## <name>' heading followed by one line per event '- <start> <title>' in time order (or '- no events'), and a last line 'Open projects: N' counting the '(open)' entries in projects.md. Keep your reply short.
+agent/api_write_summary/10360	Read the status files for Borealis, Everest and Granite (status/<name in lowercase>.md) and write reports/summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10141	Read the status files for Apollo, Falcon and Horizon (status/<name in lowercase>.md) and write status_summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'. Thanks!
+agent/api_write_summary/10377	Small task: Read the status files for Delta, Falcon and Horizon (status/<name in lowercase>.md) and write reports/summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10052	Read the status files for Apollo and Everest (status/<name in lowercase>.md) and write reports/summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10008	Read the status files for Falcon and Granite (status/<name in lowercase>.md) and write summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10183	Hi! Read the status files for Borealis and Granite (status/<name in lowercase>.md) and write status_summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10456	read the status files for Borealis and Delta (status/<name in lowercase>.md) and write summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10628	Hey, Read the status files for Borealis and Cobalt (status/<name in lowercase>.md) and write reports/summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'. Let me know once it's done.
+agent/api_write_summary/10543	Hello. Read the status files for Apollo and Cobalt (status/<name in lowercase>.md) and write summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/api_write_summary/10282	Read the status files for Everest and Granite (status/<name in lowercase>.md) and write reports/summary.md with one line per project in alphabetical order, formatted as '- <Project>: <status>, <percent>% of budget used'.
+agent/bash_file_counts/10008	Count the files by extension across all sub-folders and report each as 'ext: count'. Thanks in advance.
+agent/bash_file_counts/10007	Could you help me with something? How many files of each extension are there in this folder tree (recursively)? List them as 'ext: count'. Please double-check the result.
+agent/bash_file_counts/10156	Working on my weekly report. Count the files by extension across all sub-folders and report each as 'ext: count'. Thank you!
+agent/bash_file_counts/10312	I'm in a rush, so please be efficient. Give me a per-extension file count for everything under the current folder.
+agent/bash_file_counts/10321	I'm in a rush, so please be efficient. Give me a per-extension file count for everything under the current folder.
+agent/bash_file_counts/10126	Quick one: How many files of each extension are there in this folder tree (recursively)? List them as 'ext: count'. Let me know once it's done.
+agent/bash_file_counts/10335	Hello. Count the files by extension across all sub-folders and report each as 'ext: count'.
+agent/bash_file_counts/10218	Could you help me with something? Count the files by extension across all sub-folders and report each as 'ext: count'.
+agent/bash_file_counts/10231	Count the files by extension across all sub-folders and report each as 'ext: count'. Thanks!
+agent/bash_file_counts/10388	Hey, Give me a per-extension file count for everything under the current folder.
+agent/common_free_slot/10267	Hello. Using calendar.json, find the earliest 45-minute slot on 2026-06-03 between 09:00 and 17:00 when Zara, Sofia, Liam and Ingrid are all free. Write just the start time (HH:MM) to slot.txt. Let me know once it's done.
+agent/common_free_slot/10213	I'm in a rush, so please be efficient. Using calendar.json, find the earliest 30-minute slot on 2025-06-26 between 09:00 and 17:00 when Hana and Zara are all free. Write just the start time (HH:MM) to meeting_time.txt. Please double-check the result.
+agent/common_free_slot/10022	Hello. When can Noah, Chloe and Amira meet for 60 minutes on 2026-10-09? Use calendar.json and pick the earliest common free slot within working hours (09:00-17:00). Write just the start time (HH:MM) to meeting_time.txt. Thanks!
+agent/common_free_slot/10509	Small task: Using calendar.json, find the earliest 30-minute slot on 2026-08-19 between 09:00 and 17:00 when Kenji, Dmitri and Oscar are all free. Reply with the start and end time.
+agent/common_free_slot/10611	I'm in a rush, so please be efficient. When can Zara, Diego, Ravi and Dmitri meet for 60 minutes on 2026-12-14? Use calendar.json and pick the earliest common free slot within working hours (09:00-17:00). Reply with the start and end time.
+agent/common_free_slot/10279	I'm in a rush, so please be efficient. Using calendar.json, find the earliest 45-minute slot on 2026-08-21 between 09:00 and 17:00 when Ravi, Yara, Mei and Ines are all free. Write just the start time (HH:MM) to slot.txt. Let me know once it's done
+agent/common_free_slot/10474	I'm in a rush, so please be efficient. Using calendar.json, find the earliest 60-minute slot on 2025-01-30 between 09:00 and 17:00 when Diego, Aisha, Ethan and Dmitri are all free. Reply with the start and end time. Thank you!
+agent/common_free_slot/10257	I'm in a rush, so please be efficient. When can Ingrid, Elena, Bianca and Mei meet for 45 minutes on 2025-05-14? Use calendar.json and pick the earliest common free slot within working hours (09:00-17:00). Reply with the start and end time.
+agent/common_free_slot/10186	Quick one: When can Noah, Dmitri, Liam and Nora meet for 45 minutes on 2025-12-17? Use calendar.json and pick the earliest common free slot within working hours (09:00-17:00). Reply with the start and end time. Please double-check the result.
+agent/common_free_slot/10254	When can Omar, Priya and Dmitri meet for 45 minutes on 2025-10-23? Use calendar.json and pick the earliest common free slot within working hours (09:00-17:00). Reply with the start and end time. Let me know once it's done.
+agent/config_update/10086	Hey, Edit config.json in place: remove server.debug, set logging.level to "debug" and add features.beta_search = true. Keep everything else unchanged.
+agent/config_update/10239	Need a hand here. Edit config.json in place: add features.new_checkout = true, set logging.level to "debug" and bump the patch number of version by one. Keep everything else unchanged.
+agent/config_update/10254	Need a hand here. Edit config.json in place: remove server.debug, set logging.level to "error" and add features.new_checkout = true. Keep everything else unchanged. Thanks!
+agent/config_update/10410	Hi! Edit config.json in place: remove server.debug, set server.port to 8080 and add features.beta_search = true. Keep everything else unchanged. Thank you!
+agent/config_update/10236	I'm in a rush, so please be efficient. Edit config.json in place: remove server.debug, add features.new_checkout = true and set server.port to 4000. Keep everything else unchanged. Keep your reply short.
+agent/config_update/10361	Need a hand here. Edit config.json in place: set logging.level to "debug", set server.port to 9000 and remove server.debug. Keep everything else unchanged.
+agent/config_update/10415	Hello. Edit config.json in place: bump the patch number of version by one, set logging.level to "debug" and add features.audit_trail = true. Keep everything else unchanged. Thanks in advance.
+agent/config_update/10009	hey, Edit config.json in place: set logging.level to "debug", add features.new_checkout = true and bump the patch number of version by one. Keep everything else unchanged.
+agent/config_update/10430	Working on my weekly report. Edit config.json in place: set logging.level to "debug", remove server.debug and bump the patch number of version by one. Keep everything else unchanged
+agent/config_update/10337	Hey, Edit config.json in place: bump the patch number of version by one, remove server.debug and set logging.level to "debug". Keep everything else unchanged. Let me know once it's done.
+agent/csv_clean_dedupe/10351	Hey, Please deduplicate contacts_raw.csv by email (case-insensitively, keep the first row), trim all fields, and save to clean.csv. Thank you!
+agent/csv_clean_dedupe/10293	please deduplicate leads.csv by email (case-insensitively, keep the first row), trim all fields, and save to clean.csv. Please double-check the result.
+agent/csv_clean_dedupe/10161	Hi! Please deduplicate customers_export.csv by email (case-insensitively, keep the first row), trim all fields, and save to contacts_clean.csv. Keep your reply short.
+agent/csv_clean_dedupe/10097	Working on my weekly report. leads.csv is messy. Strip spaces, lowercase emails, remove repeated emails (first occurrence wins), and write the cleaned file to contacts_clean.csv. Thank you!
+agent/csv_clean_dedupe/10487	Quick one: customers_export.csv is messy. Strip spaces, lowercase emails, remove repeated emails (first occurrence wins), and write the cleaned file to contacts_clean.csv. Please double-check the result.
+agent/csv_clean_dedupe/10071	Could you help me with something? Please deduplicate contacts_raw.csv by email (case-insensitively, keep the first row), trim all fields, and save to clean.csv. Keep your reply short.
+agent/csv_clean_dedupe/10296	Hey, Please deduplicate contacts_raw.csv by email (case-insensitively, keep the first row), trim all fields, and save to contacts_clean.csv. Thanks!
+agent/csv_clean_dedupe/10527	Hey, Clean leads.csv: trim whitespace in every field, lowercase the email addresses, drop duplicate emails (keep the first one) and save the result to contacts_clean.csv with the same header. Thanks in advance.
+agent/csv_clean_dedupe/10102	Hello. Clean leads.csv: trim whitespace in every field, lowercase the email addresses, drop duplicate emails (keep the first one) and save the result to clean.csv with the same header. Thank you!
+agent/csv_clean_dedupe/10147	Need a hand here. customers_export.csv is messy. Strip spaces, lowercase emails, remove repeated emails (first occurrence wins), and write the cleaned file to contacts_clean.csv. Thank you!
+agent/csv_count_by_month/10160	Hey, I need monthly event counts from log_events.csv. Save them to monthly_counts.json as a JSON object with YYYY-MM keys, and mention which month had the most events. Keep your reply short.
+agent/csv_count_by_month/10079	Hi! I need monthly event counts from events.csv. Save them to monthly_counts.json as a JSON object with YYYY-MM keys, and mention which month had the most events. Let me know once it's done
+agent/csv_count_by_month/10275	Count how many rows in activity.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to monthly_counts.json. Also tell me the busiest month. Thank you!
+agent/csv_count_by_month/10166	I'm in a rush, so please be efficient. Count how many rows in activity.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to counts.json. Also tell me the busiest month.
+agent/csv_count_by_month/10142	Hello. Count how many rows in events.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to monthly_counts.json. Also tell me the busiest month.
+agent/csv_count_by_month/10191	Count how many rows in log_events.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to monthly_counts.json. Also tell me the busiest month
+agent/csv_count_by_month/10012	Need a hand here. Count how many rows in activity.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to monthly_counts.json. Also tell me the busiest month
+agent/csv_count_by_month/10169	Small task: Count how many rows in log_events.csv fall in each month (use the created_at column) and write a JSON object like {"YYYY-MM": count} to monthly_counts.json. Also tell me the busiest month. Keep your reply short.
+agent/csv_count_by_month/10044	Small task: I need monthly event counts from events.csv. Save them to counts.json as a JSON object with YYYY-MM keys, and mention which month had the most events.
+agent/csv_count_by_month/10346	I need monthly event counts from events.csv. Save them to monthly_counts.json as a JSON object with YYYY-MM keys, and mention which month had the most events. Thank you!
+agent/csv_filter_export/10303	Filter sales_log.csv: region must be South and amount above 200. Write the matching rows to big_orders.csv, same columns, and tell me the count. Please double-check the result.
+agent/csv_filter_export/10417	Working on my weekly report. From sales_log.csv, keep only the South rows whose amount is greater than 300 and save them (with the same header) to big_orders.csv. How many rows did you keep? Thanks in advance.
+agent/csv_filter_export/10001	Hey, From sales_log.csv, keep only the West rows whose amount is greater than 750 and save them (with the same header) to filtered.csv. How many rows did you keep? Thanks in advance
+agent/csv_filter_export/10242	Hey, Filter orders.csv: region must be East and amount above 500. Write the matching rows to filtered.csv, same columns, and tell me the count. Thanks in advance.
+agent/csv_filter_export/10118	Hey, Filter sales_log.csv: region must be West and amount above 300. Write the matching rows to big_orders.csv, same columns, and tell me the count. Please double-check the result.
+agent/csv_filter_export/10377	I'm in a rush, so please be efficient. From sales_log.csv, keep only the North rows whose amount is greater than 750 and save them (with the same header) to filtered.csv. How many rows did you keep? Thanks!
+agent/csv_filter_export/10138	Could you help me with something? Filter sales_log.csv: region must be South and amount above 300. Write the matching rows to big_orders.csv, same columns, and tell me the count. Thanks!
+agent/csv_filter_export/10089	Working on my weekly report. From sales_log.csv, keep only the East rows whose amount is greater than 200 and save them (with the same header) to filtered.csv. How many rows did you keep? Thanks!
+agent/csv_filter_export/10312	Need a hand here. Filter sales_log.csv: region must be Central and amount above 300. Write the matching rows to big_orders.csv, same columns, and tell me the count
+agent/csv_filter_export/10350	Hello. From orders.csv, keep only the East rows whose amount is greater than 300 and save them (with the same header) to big_orders.csv. How many rows did you keep? Thanks!
+agent/csv_filtered_sum/10685	Could you help me with something? What was the total revenue for the South region in January 2025? The data is in transactions.csv. Save just the number (two decimals) to result.txt. Thank you!
+agent/csv_filtered_sum/10601	working on my weekly report. How much did the West region bring in during January 2024? Numbers are in revenue_log.csv. Thanks in advance.
+agent/csv_filtered_sum/10260	I'm in a rush, so please be efficient. How much did the South region bring in during July 2023? Numbers are in sales.csv. Keep your reply short.
+agent/csv_filtered_sum/10248	From transactions.csv, give me the sum of the revenue column for region West during February 2023.
+agent/csv_filtered_sum/10293	Working on my weekly report. From sales_export.csv, give me the sum of the total column for region North during November 2024. Keep your reply short.
+agent/csv_filtered_sum/10359	Please add up all East sales for January 2025 from orders_2024.csv. Thanks in advance.
+agent/csv_filtered_sum/10576	small task: Please add up all North sales for December 2024 from sales.csv. Please double-check the result.
+agent/csv_filtered_sum/10194	Hey, From transactions.csv, give me the sum of the amount column for region West during January 2023. Save just the number (two decimals) to result.txt.
+agent/csv_filtered_sum/10564	Small task: How much did the South region bring in during July 2024? Numbers are in sales.csv. Let me know once it's done.
+agent/csv_filtered_sum/10357	Working on my weekly report. From orders_2024.csv, give me the sum of the total column for region South during October 2025.
+agent/csv_group_followup/10272	Hello. Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first. Thanks in advance.
+agent/csv_group_followup/10313	Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first. Thanks in advance.
+agent/csv_group_followup/10180	Working on my weekly report. Total the amount per category in costs.csv and save it to summary.csv as category,total (2 decimals), largest first.
+agent/csv_group_followup/10629	Hey, Total the amount per category in costs.csv and save it to summary.csv as category,total (2 decimals), largest first.
+agent/csv_group_followup/10303	Quick one: Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first.
+agent/csv_group_followup/10150	Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first. Thanks!
+agent/csv_group_followup/10583	Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first. Thanks!
+agent/csv_group_followup/10138	Need a hand here. Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first.
+agent/csv_group_followup/10260	Hi! Total the amount per category in spend.csv and save it to summary.csv as category,total (2 decimals), largest first. Keep your reply short.
+agent/csv_group_followup/10351	Small task: Total the amount per category in costs.csv and save it to summary.csv as category,total (2 decimals), largest first. Please double-check the result.
+agent/csv_group_totals/10457	Summarise ledger.csv: one row per category with the summed amount, largest first, saved as out/summary.csv with header category,total. Thanks in advance.
+agent/csv_group_totals/10059	Group expenses.csv by category and write the total amount per category to totals_by_category.csv, highest total first. Use the columns category and total.
+agent/csv_group_totals/10428	Need a hand here. I need amount totals per category from billing_2024.csv. Write them to summary.csv (columns: category,total), sorted from biggest to smallest. Please double-check the result.
+agent/csv_group_totals/10132	hello. I need amount totals per category from invoices.csv. Write them to summary.csv (columns: category,total), sorted from biggest to smallest. Please double-check the result.
+agent/csv_group_totals/10453	Need a hand here. Summarise billing_2024.csv: one row per dept with the summed total, largest first, saved as totals_by_category.csv with header dept,total. Keep your reply short.
+agent/csv_group_totals/10468	Hello. Summarise ledger.csv: one row per category with the summed amount, largest first, saved as totals_by_category.csv with header category,total.
+agent/csv_group_totals/10021	Hello. I need amount totals per category from expenses.csv. Write them to totals_by_category.csv (columns: category,total), sorted from biggest to smallest.
+agent/csv_group_totals/10114	Summarise ledger.csv: one row per category with the summed amount, largest first, saved as summary.csv with header category,total.
+agent/csv_group_totals/10530	I'm in a rush, so please be efficient. I need amount totals per category from billing_2024.csv. Write them to summary.csv (columns: category,total), sorted from biggest to smallest. Thanks!
+agent/csv_group_totals/10378	Need a hand here. Group expenses.csv by category and write the total amount per category to out/summary.csv, highest total first. Use the columns category and total. Please double-check the result.
+agent/csv_join_city_totals/10255	I want revenue per city. Match each order in orders.csv to its customer in customers.csv (skip orders whose customer is unknown), add up the amounts per city and store them in revenue_by_city.csv (header city,total; biggest total first). Which city leads?
+agent/csv_join_city_totals/10412	Small task: Using orders.csv and customers.csv, work out the total order amount per city. Ignore orders from customers that aren't in customers.csv. Write revenue_by_city.csv (columns city,total, biggest first) and tell me which city is on top.
+agent/csv_join_city_totals/10309	Using orders.csv and customers.csv, work out the total order amount per city. Ignore orders from customers that aren't in customers.csv. Write revenue_by_city.csv (columns city,total, biggest first) and tell me which city is on top.
+agent/csv_join_city_totals/10295	Using orders.csv and customers.csv, work out the total order amount per city. Ignore orders from customers that aren't in customers.csv. Write city_totals.csv (columns city,total, biggest first) and tell me which city is on top. Thanks in advance.
+agent/csv_join_city_totals/10230	Hello. I want revenue per city. Match each order in orders.csv to its customer in customers.csv (skip orders whose customer is unknown), add up the amounts per city and store them in city_totals.csv (header city,total; biggest total first). Which city leads? Keep your reply short
+agent/csv_join_city_totals/10491	Working on my weekly report. Please build revenue_by_city.csv from orders.csv and customers.csv: total order value for every city (columns city,total, sorted high to low). Orders from customers missing in customers.csv should be ignored. Then name the top city.
+agent/csv_join_city_totals/10398	Hello. Join orders.csv with customers.csv on customer_id and sum the amounts by city. Skip orders with unknown customers. Save to revenue_by_city.csv as city,total sorted descending, then tell me the best city.
+agent/csv_join_city_totals/10050	Join orders.csv with customers.csv on customer_id and sum the amounts by city. Skip orders with unknown customers. Save to city_totals.csv as city,total sorted descending, then tell me the best city.
+agent/csv_join_city_totals/10077	Working on my weekly report. Using orders.csv and customers.csv, work out the total order amount per city. Ignore orders from customers that aren't in customers.csv. Write city_totals.csv (columns city,total, biggest first) and tell me which city is on top. Keep your reply short.
+agent/csv_join_city_totals/10410	Could you help me with something? I want revenue per city. Match each order in orders.csv to its customer in customers.csv (skip orders whose customer is unknown), add up the amounts per city and store them in revenue_by_city.csv (header city,total; biggest total first). Which city leads? Thanks in advance.
+agent/csv_overdue_days/10006	Need a hand here. Today is 2025-03-19. In tasks.csv, find the tasks whose due_date is before today and write overdue.csv with columns task,days_overdue (days between the due date and today), most overdue first, ties by task name. Which task is the most overdue? Let me know once it's done.
+agent/csv_overdue_days/10149	Need a hand here. Today is 2025-10-24. In todo.csv, find the tasks whose due_date is before today and write late_tasks.csv with columns task,days_overdue (days between the due date and today), most overdue first, ties by task name. Which task is the most overdue? Thank you!
+agent/csv_overdue_days/10494	Working on my weekly report. Today is 2025-11-10. In tasks.csv, find the tasks whose due_date is before today and write late_tasks.csv with columns task,days_overdue (days between the due date and today), most overdue first, ties by task name. Which task is the most overdue?
+agent/csv_overdue_days/10181	Quick one: Assuming today is 2025-02-20, list the overdue tasks from tasks.csv in late_tasks.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one. Keep your reply short.
+agent/csv_overdue_days/10062	Small task: Assuming today is 2025-05-24, list the overdue tasks from tasks.csv in late_tasks.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one.
+agent/csv_overdue_days/10111	Hi! Assuming today is 2025-10-09, list the overdue tasks from todo.csv in overdue.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one.
+agent/csv_overdue_days/10448	Assuming today is 2025-03-15, list the overdue tasks from todo.csv in overdue.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one. Let me know once it's done.
+agent/csv_overdue_days/10093	Could you help me with something? Assuming today is 2025-04-22, list the overdue tasks from todo.csv in overdue.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one. Let me know once it's done.
+agent/csv_overdue_days/10510	Assuming today is 2025-06-28, list the overdue tasks from todo.csv in late_tasks.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one. Thanks!
+agent/csv_overdue_days/10423	Working on my weekly report. Assuming today is 2025-03-18, list the overdue tasks from tasks.csv in late_tasks.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue one.
+agent/csv_percent_of_total/10395	I'm in a rush, so please be efficient. From spend.csv, work out each category's share of the total amount as a percentage with 2 decimals. Write shares.csv (columns category,percent), largest share first, and tell me the biggest category.
+agent/csv_percent_of_total/10192	What percentage of the overall spend does each category in budget_lines.csv represent? Save it to shares.csv as category,percent (2 decimals, descending) and name the top one. Keep your reply short.
+agent/csv_percent_of_total/10456	Small task: What percentage of the overall spend does each category in spend.csv represent? Save it to percent_of_total.csv as category,percent (2 decimals, descending) and name the top one. Let me know once it's done.
+agent/csv_percent_of_total/10001	quick one: From spend.csv, work out each category's share of the total amount as a percentage with 2 decimals. Write percent_of_total.csv (columns category,percent), largest share first, and tell me the biggest category. Thanks in advance.
+agent/csv_percent_of_total/10015	What percentage of the overall spend does each category in expenses.csv represent? Save it to percent_of_total.csv as category,percent (2 decimals, descending) and name the top one. Thank you!
+agent/csv_percent_of_total/10291	Small task: What percentage of the overall spend does each category in spend.csv represent? Save it to shares.csv as category,percent (2 decimals, descending) and name the top one.
+agent/csv_percent_of_total/10265	Hello. What percentage of the overall spend does each category in spend.csv represent? Save it to shares.csv as category,percent (2 decimals, descending) and name the top one.
+agent/csv_percent_of_total/10405	Hey, What percentage of the overall spend does each category in spend.csv represent? Save it to shares.csv as category,percent (2 decimals, descending) and name the top one.
+agent/csv_percent_of_total/10315	Need a hand here. What percentage of the overall spend does each category in expenses.csv represent? Save it to percent_of_total.csv as category,percent (2 decimals, descending) and name the top one. Thanks!
+agent/csv_percent_of_total/10431	What percentage of the overall spend does each category in expenses.csv represent? Save it to percent_of_total.csv as category,percent (2 decimals, descending) and name the top one. Thank you!
+agent/csv_pivot_month_category/10468	Hi! Pivot activity_log.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts.
+agent/csv_pivot_month_category/10052	Need a hand here. Build a month-by-category table from activity_log.csv: write pivot.csv with header 'month,<categories alphabetically>' and one row per month (YYYY-MM, ascending) holding the number of events (0 if none). Please double-check the result.
+agent/csv_pivot_month_category/10242	hello. Pivot events.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts. Keep your reply short.
+agent/csv_pivot_month_category/10153	Build a month-by-category table from events.csv: write pivot.csv with header 'month,<categories alphabetically>' and one row per month (YYYY-MM, ascending) holding the number of events (0 if none).
+agent/csv_pivot_month_category/10125	Hi! Pivot events.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts. Thanks!
+agent/csv_pivot_month_category/10391	Pivot events.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts.
+agent/csv_pivot_month_category/10133	Build a month-by-category table from events.csv: write pivot.csv with header 'month,<categories alphabetically>' and one row per month (YYYY-MM, ascending) holding the number of events (0 if none). Thank you!
+agent/csv_pivot_month_category/10420	Need a hand here. Pivot events.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts.
+agent/csv_pivot_month_category/10410	Need a hand here. Pivot events.csv into pivot.csv: rows are months (YYYY-MM), columns are the categories in alphabetical order, cells are event counts. Thanks in advance.
+agent/csv_pivot_month_category/10337	Build a month-by-category table from events.csv: write pivot.csv with header 'month,<categories alphabetically>' and one row per month (YYYY-MM, ascending) holding the number of events (0 if none). Thanks!
+agent/csv_stats/10136	Hello. What are the average, median, min and max latency_ms in sensor_data.csv? Skip missing values and round to two decimals.
+agent/csv_stats/10341	Could you help me with something? What are the average, median, min and max reading in measurements.csv? Skip missing values and round to two decimals.
+agent/csv_stats/10272	Compute the mean, median, minimum and maximum of the weight_kg column in measurements.csv, rounded to 2 decimals. Some cells are blank or N/A - ignore those. Thanks in advance.
+agent/csv_stats/10297	Hello. What are the average, median, min and max weight_kg in measurements.csv? Skip missing values and round to two decimals.
+agent/csv_stats/10143	Give me summary stats (mean, median, min, max) for weight_kg from measurements.csv. Ignore empty or N/A entries. Let me know once it's done.
+agent/csv_stats/10129	need a hand here. What are the average, median, min and max temperature in sensor_data.csv? Skip missing values and round to two decimals
+agent/csv_stats/10280	Hey, Compute the mean, median, minimum and maximum of the reading column in sensor_data.csv, rounded to 2 decimals. Some cells are blank or N/A - ignore those. Thank you!
+agent/csv_stats/10033	Hello. What are the average, median, min and max temperature in sensor_data.csv? Skip missing values and round to two decimals. Please double-check the result.
+agent/csv_stats/10300	Need a hand here. Give me summary stats (mean, median, min, max) for temperature from measurements.csv. Ignore empty or N/A entries. Keep your reply short.
+agent/csv_stats/10131	I'm in a rush, so please be efficient. Give me summary stats (mean, median, min, max) for reading from readings.csv. Ignore empty or N/A entries. Keep your reply short.
+agent/csv_sum_followup/10343	Quick one: What is the total amount for the Central region in 2024-10 (rows of sales.csv whose date starts with 2024-10)?
+agent/csv_sum_followup/10415	What is the total amount for the West region in 2025-11 (rows of orders.csv whose date starts with 2025-11)?
+agent/csv_sum_followup/10379	What is the total amount for the South region in 2024-12 (rows of orders.csv whose date starts with 2024-12)?
+agent/csv_sum_followup/10566	What is the total amount for the West region in 2024-03 (rows of orders.csv whose date starts with 2024-03)? Thanks!
+agent/csv_sum_followup/10746	Need a hand here. What is the total amount for the South region in 2025-02 (rows of orders.csv whose date starts with 2025-02)? Thank you!
+agent/csv_top_n/10054	From people.csv, show me the 5 highest salary values and who they belong to. Keep your reply short.
+agent/csv_top_n/10429	Hello. From team_roster.csv, show me the 3 highest salary values and who they belong to.
+agent/csv_top_n/10036	Could you help me with something? Who are the top 5 people by score in staff.csv? List them from highest to lowest with their score. Please double-check the result.
+agent/csv_top_n/10288	Hello. Find the 5 people with the biggest salary in employees.csv, in descending order. Please double-check the result.
+agent/csv_top_n/10300	Need a hand here. Who are the top 5 people by salary in people.csv? List them from highest to lowest with their salary.
+agent/extract_emails/10197	Hey, Pull every email address out of notes.txt, lowercase them, remove duplicates, sort alphabetically and save one per line to emails.txt. Tell me how many unique addresses there are.
+agent/extract_emails/10027	Need a hand here. List the unique email addresses mentioned in notes.txt (lowercase, sorted, one per line) in emails.txt and tell me the count. Let me know once it's done.
+agent/extract_emails/10264	Need a hand here. Extract all email addresses from notes.txt into unique_emails.txt: lowercase, deduplicated, alphabetical. How many are there?
+agent/extract_emails/10015	Working on my weekly report. List the unique email addresses mentioned in notes.txt (lowercase, sorted, one per line) in contacts.txt and tell me the count.
+agent/extract_emails/10565	Need a hand here. Pull every email address out of notes.txt, lowercase them, remove duplicates, sort alphabetically and save one per line to unique_emails.txt. Tell me how many unique addresses there are. Keep your reply short.
+agent/grep_keyword_count/10091	Need a hand here. Count the lines containing the word budget, ignoring case, in all .txt files under docs/. Don't count other file types. Thank you!
+agent/grep_keyword_count/10157	Hey, Across docs/*.txt, how many lines contain 'refund' in any capitalisation? Thank you!
+agent/grep_keyword_count/10255	Count the lines containing the word contract, ignoring case, in all .txt files under docs/. Don't count other file types. Thanks!
+agent/grep_keyword_count/10368	I'm in a rush, so please be efficient. Count the lines containing the word refund, ignoring case, in all .txt files under docs/. Don't count other file types. Thanks!
+agent/grep_keyword_count/10076	Hi! Count the lines containing the word budget, ignoring case, in all .txt files under docs/. Don't count other file types. Please double-check the result.
+agent/inbox_triage/10321	Small task: Look at inbox.json and write mail_report.json with two fields: 'unread' (how many messages are unread) and 'urgent_senders' (sorted list of unique sender addresses whose subject contains 'urgent' in any capitalisation, read or unread).
+agent/inbox_triage/10463	I'm in a rush, so please be efficient. Triage mailbox.json for me. Save triage.json as a JSON object {"unread": <count of unread messages>, "asap_senders": <sorted unique senders of messages with 'asap' in the subject, case-insensitive>}
+agent/inbox_triage/10183	Triage messages.json for me. Save triage.json as a JSON object {"unread": <count of unread messages>, "asap_senders": <sorted unique senders of messages with 'asap' in the subject, case-insensitive>}. Let me know once it's done.
+agent/inbox_triage/10403	Hey, Look at messages.json and write triage.json with two fields: 'unread' (how many messages are unread) and 'asap_senders' (sorted list of unique sender addresses whose subject contains 'asap' in any capitalisation, read or unread).
+agent/inbox_triage/10181	hello. Triage inbox.json for me. Save inbox_summary.json as a JSON object {"unread": <count of unread messages>, "critical_senders": <sorted unique senders of messages with 'critical' in the subject, case-insensitive>}. Please double-check the result.
+agent/ini_to_json/10066	Hello. Turn config.ini into JSON (settings.json), grouped by section; all values should stay strings. Thank you!
+agent/ini_to_json/10130	hello. Turn config.ini into JSON (settings.json), grouped by section; all values should stay strings. Thanks!
+agent/ini_to_json/10148	Hi! Turn config.ini into JSON (config.json), grouped by section; all values should stay strings. Thanks!
+agent/ini_to_json/10212	Small task: Convert config.ini to settings.json: one object per section with its keys, keeping every value as a string.
+agent/ini_to_json/10165	Working on my weekly report. Turn config.ini into JSON (settings.json), grouped by section; all values should stay strings. Let me know once it's done.
+agent/invite_draft/10391	Small task: Set up a 60-minute meeting called 'Planning session' with Kofi Haddad, Felix Kim and Theo Rossi on 2026-11-20. Find the earliest slot between 09:00 and 17:00 when they are all free (calendar.json), look up their email addresses in contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Please double-check the result.
+agent/invite_draft/10007	Hey, Set up a 45-minute meeting called 'Planning session' with Noah Ferrari, Kenji Garcia and Theo Schmidt on 2026-04-11. Find the earliest slot between 09:00 and 17:00 when they are all free (calendar.json), look up their email addresses in contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Let me know once it's done.
+agent/invite_draft/10609	I'm in a rush, so please be efficient. Set up a 60-minute meeting called 'Design review' with Priya Fischer and Oscar Weber on 2026-07-21. Find the earliest slot between 09:00 and 17:00 when they are all free (calendar.json), look up their email addresses in contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'. Keep your reply short.
+agent/invite_draft/10241	Quick one: Set up a 30-minute meeting called 'Planning session' with Alice Ivanov, Sofia Dubois and Hana Schmidt on 2026-07-03. Find the earliest slot between 09:00 and 17:00 when they are all free (calendar.json), look up their email addresses in contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'.
+agent/invite_draft/10019	Hi! Set up a 45-minute meeting called 'Design review' with Dmitri Santos, Amira Fischer and Sofia Larsen on 2026-06-08. Find the earliest slot between 09:00 and 17:00 when they are all free (calendar.json), look up their email addresses in contacts.csv, and write the invite to out/invite.txt in exactly three lines: 'To: <emails separated by comma and space, in the order I listed the people>', 'Subject: <the meeting name>', 'When: YYYY-MM-DD HH:MM'.
+agent/json_filter_transform/10009	Working on my weekly report. From users.json keep only active users aged 30 or older. Write out.json as a JSON list of objects with keys user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name. Thanks in advance.
+agent/json_filter_transform/10152	could you help me with something? Filter users.json to active users with age >= 25 and save selected_users.json: a list sorted by full_name where each item has user_id, full_name and email.
+agent/json_filter_transform/10119	need a hand here. From users.json keep only active users aged 25 or older. Write selected_users.json as a JSON list of objects with keys user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name. Thanks in advance.
+agent/json_filter_transform/10314	I'm in a rush, so please be efficient. From users.json keep only active users aged 35 or older. Write out.json as a JSON list of objects with keys user_id (the id), full_name (first and last name joined by a space) and email, sorted by full_name.
+agent/json_filter_transform/10280	Could you help me with something? Filter users.json to active users with age >= 25 and save out.json: a list sorted by full_name where each item has user_id, full_name and email.
+agent/json_merge_dedupe/10009	Small task: Combine the two JSON lists people_a.json and people_b.json into merged.json: one record per id, newest 'updated' wins (tie: people_b), sorted by id. Thank you!
+agent/json_merge_dedupe/10431	Merge people_a.json and people_b.json into merged.json. Records are keyed by id; when an id is in both files keep the one with the later 'updated' date (on a tie prefer people_b). Sort by id.
+agent/json_merge_dedupe/10433	Hey, Combine the two JSON lists people_a.json and people_b.json into merged.json: one record per id, newest 'updated' wins (tie: people_b), sorted by id.
+agent/json_merge_dedupe/10157	hey, Merge people_a.json and people_b.json into merged.json. Records are keyed by id; when an id is in both files keep the one with the later 'updated' date (on a tie prefer people_b). Sort by id.
+agent/json_merge_dedupe/10149	Working on my weekly report. Combine the two JSON lists people_a.json and people_b.json into merged.json: one record per id, newest 'updated' wins (tie: people_b), sorted by id. Let me know once it's done.
+agent/json_to_markdown/10117	Hello. Turn portfolio.json into report.md. Layout: '# Status Report' on the first line, then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, highest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Include only projects whose status is 'active'. Thank you!
+agent/json_to_markdown/10102	Hi! Turn projects.json into report.md. Layout: '# Project Report' on the first line, then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, lowest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Include only projects whose status is 'active'.
+agent/json_to_markdown/10152	Working on my weekly report. Read portfolio.json and write report.md in exactly this layout: a title line '# Project Report', a table with the header '| Project | Status | Budget |' and separator '|---|---|---|', one row per project sorted by budget (lowest first), with the budget written with thousands separators, and a last line 'Total budget: N' (also with thousands separators). Include only projects whose status is 'done'.
+agent/json_to_markdown/10028	hello. Read initiatives.json and write report.md in exactly this layout: a title line '# Project Report', a table with the header '| Project | Status | Budget |' and separator '|---|---|---|', one row per project sorted by budget (lowest first), with the budget written with thousands separators, and a last line 'Total budget: N' (also with thousands separators). Include only projects whose status is 'active'. Let me know once it's done.
+agent/json_to_markdown/10452	Could you help me with something? Turn portfolio.json into report.md. Layout: '# Portfolio Summary' on the first line, then a markdown table (header '| Project | Status | Budget |', separator '|---|---|---|') with projects ordered by budget, highest first; budgets get thousands separators. End with 'Total budget: N' using thousands separators. Include only projects whose status is 'paused'. Thanks!
+agent/largest_file/10290	Hi! Which log under logs/ takes the most space? Give me its name and exact size in bytes. Please double-check the result.
+agent/largest_file/10325	I'm in a rush, so please be efficient. Find the biggest file in the logs/ folder and tell me its name and size in bytes.
+agent/largest_file/10069	which log under logs/ takes the most space? Give me its name and exact size in bytes. Thanks!
+agent/largest_file/10336	Small task: Find the biggest file in the logs/ folder and tell me its name and size in bytes. Let me know once it's done.
+agent/largest_file/10049	Working on my weekly report. Look through logs/ and report the biggest file together with its size in bytes. Let me know once it's done
+agent/log_slowest_requests/10395	Hey, Find the 5 slowest requests in access.log (path and latency in ms, descending) and the mean latency across the whole log, rounded to one decimal. Keep your reply short.
+agent/log_slowest_requests/10248	Need a hand here. In access.log, which 4 requests were slowest? Give the path and latency for each, slowest first, plus the average latency over all requests (1 decimal). Thanks in advance.
+agent/log_slowest_requests/10243	In access.log, which 5 requests were slowest? Give the path and latency for each, slowest first, plus the average latency over all requests (1 decimal).
+agent/log_slowest_requests/10335	Hello. Find the 5 slowest requests in access.log (path and latency in ms, descending) and the mean latency across the whole log, rounded to one decimal.
+agent/log_slowest_requests/10392	I'm in a rush, so please be efficient. Find the 5 slowest requests in access.log (path and latency in ms, descending) and the mean latency across the whole log, rounded to one decimal. Let me know once it's done.
+agent/log_summary/10127	I need error stats from app.log: the count of ERROR lines and the first and last ERROR timestamps.
+agent/log_summary/10355	Tell me the number of ERROR-level entries in app.log, plus the time of the earliest and the latest one. Please double-check the result.
+agent/log_summary/10217	I'm in a rush, so please be efficient. How many ERROR lines are in app.log, and what are the timestamps of the first and last one? Thanks!
+agent/log_summary/10366	I'm in a rush, so please be efficient. Count the ERROR entries in app.log and give me the first and last ERROR timestamps. Thanks!
+agent/log_summary/10078	Quick one: Count the ERROR entries in app.log and give me the first and last ERROR timestamps. Please double-check the result.
+agent/markdown_toc/10120	Quick one: Generate a table of contents for guide.md and save it to toc.md: skip the level-1 title, list '##' headings as '- [Title](#anchor)' and '###' headings indented by two spaces. Anchors are lowercase, with punctuation removed and spaces turned into hyphens. Thanks!
+agent/markdown_toc/10367	I'm in a rush, so please be efficient. Create toc.md from the headings in guide.md. Level-1 headings are skipped; ## entries are '- [Title](#anchor)', ### entries get two leading spaces. Anchor = lowercase title, punctuation stripped, spaces -> hyphens. Thanks!
+agent/markdown_toc/10071	Working on my weekly report. Create toc.md from the headings in guide.md. Level-1 headings are skipped; ## entries are '- [Title](#anchor)', ### entries get two leading spaces. Anchor = lowercase title, punctuation stripped, spaces -> hyphens.
+agent/markdown_toc/10360	Hi! Generate a table of contents for guide.md and save it to toc.md: skip the level-1 title, list '##' headings as '- [Title](#anchor)' and '###' headings indented by two spaces. Anchors are lowercase, with punctuation removed and spaces turned into hyphens.
+agent/markdown_toc/10002	Generate a table of contents for guide.md and save it to toc.md: skip the level-1 title, list '##' headings as '- [Title](#anchor)' and '###' headings indented by two spaces. Anchors are lowercase, with punctuation removed and spaces turned into hyphens. Please double-check the result.
+agent/merge_csv_parts/10186	hey, Merge the part files in data/ (part1.csv ... part5.csv, same header) into all.csv in the current folder: one header line, then all rows in file order. Tell me how many data rows there are. Thanks!
+agent/merge_csv_parts/10413	I'm in a rush, so please be efficient. Merge the part files in data/ (part1.csv ... part5.csv, same header) into merged.csv in the current folder: one header line, then all rows in file order. Tell me how many data rows there are.
+agent/merge_csv_parts/10207	Hey, Merge the part files in data/ (part1.csv ... part5.csv, same header) into all.csv in the current folder: one header line, then all rows in file order. Tell me how many data rows there are.
+agent/merge_csv_parts/10359	Combine data/part*.csv into a single all.csv with just one header and the rows in order of the file names. How many rows did you end up with? Thanks!
+agent/merge_csv_parts/10014	Hi! Combine data/part*.csv into a single all.csv with just one header and the rows in order of the file names. How many rows did you end up with? Thank you!
+agent/missing_information/10560	Hey, Give me the average discount per sale from sales.csv. Thanks in advance
+agent/missing_information/10755	Could you help me with something? What's in contracts.pdf? Give me a quick overview. Thanks!
+agent/missing_information/10182	Please sum the discount column of sales.csv and tell me the result. Thanks!
+agent/missing_information/10104	Hey, Please sum the discount column of sales.csv and tell me the result. Please double-check the result.
+agent/missing_information/10222	Working on my weekly report. What is the total discount in sales.csv? Let me know once it's done.
+agent/notes_edit_followup/10373	Small task: Create notes.txt with three lines: 'send invoice', 'order laptops' and 'review slides' (one per line). Please double-check the result
+agent/notes_edit_followup/10003	Write a file notes.txt that contains these items, one per line: order laptops; update roadmap; review slides.
+agent/notes_edit_followup/10203	Hey, Create notes.txt with three lines: 'order laptops', 'update roadmap' and 'call supplier' (one per line).
+agent/notes_edit_followup/10357	small task: Write a file notes.txt that contains these items, one per line: order laptops; file expenses; send invoice. Thank you!
+agent/notes_edit_followup/10253	Write a file notes.txt that contains these items, one per line: file expenses; send invoice; review slides. Let me know once it's done.
+agent/organize_by_ext/10198	The workspace is cluttered. Group the .csv, .md and .json files into sub-folders named after their extension (csv, md, json); everything else stays put.
+agent/organize_by_ext/10163	Can you file the .csv, .md and .txt documents in this folder into csv/, md/ and txt/ respectively? Create the folders if needed and leave the rest alone. Please double-check the result.
+agent/organize_by_ext/10307	The workspace is cluttered. Group the .csv, .md and .log files into sub-folders named after their extension (csv, md, log); everything else stays put. Keep your reply short.
+agent/organize_by_ext/10094	Working on my weekly report. Tidy up the workspace: move every .json file into a folder called json/, every .md into md/ and every .log into log/ (create the folders). Leave all other files where they are. Thanks in advance.
+agent/organize_by_ext/10563	Could you help me with something? Can you file the .csv, .log and .txt documents in this folder into csv/, log/ and txt/ respectively? Create the folders if needed and leave the rest alone. Thanks in advance
+agent/overdue_reminders/10580	Hey, Today is 2025-12-04. In invoices.csv, find every invoice that is unpaid (paid = 'no') and past its due date (due_date earlier than today). Look up each client's email in contacts.csv and write reminders.txt with one line per overdue invoice in the form '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Please double-check the result.
+agent/overdue_reminders/10618	Today is 2025-05-15. In invoices.csv, find every invoice that is unpaid (paid = 'no') and past its due date (due_date earlier than today). Look up each client's email in contacts.csv and write reminders.txt with one line per overdue invoice in the form '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Keep your reply short
+agent/overdue_reminders/10274	today is 2025-11-14. In invoices.csv, find every invoice that is unpaid (paid = 'no') and past its due date (due_date earlier than today). Look up each client's email in contacts.csv and write reminders.txt with one line per overdue invoice in the form '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Thanks in advance.
+agent/overdue_reminders/10731	Small task: Today is 2025-03-11. In invoices.csv, find every invoice that is unpaid (paid = 'no') and past its due date (due_date earlier than today). Look up each client's email in contacts.csv and write reminders.txt with one line per overdue invoice in the form '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Let me know once it's done.
+agent/overdue_reminders/10634	Today is 2025-06-02. In invoices.csv, find every invoice that is unpaid (paid = 'no') and past its due date (due_date earlier than today). Look up each client's email in contacts.csv and write reminders.txt with one line per overdue invoice in the form '<email> | <invoice_id> | <amount with 2 decimals> | due <due_date>', sorted by due date then invoice id. Tell me how many reminders you wrote. Thanks!
+agent/rename_extension/10301	Hello. In images/, switch the extension of each .jpeg file to .jpg, keeping the base names, and list the folder afterwards. Please double-check the result.
+agent/rename_extension/10020	Hello. Please standardise the extensions in pics/: all .jpeg files should become .jpg. Nothing else should change.
+agent/rename_extension/10317	Hello. In configs/, switch the extension of each .yml file to .yaml, keeping the base names, and list the folder afterwards. Keep your reply short.
+agent/rename_extension/10002	Quick one: Please standardise the extensions in photos/: all .jpeg files should become .jpg. Nothing else should change. Let me know once it's done.
+agent/rename_extension/10176	Working on my weekly report. The pages/ folder has files ending in .htm; change those to .html. Leave the other files alone, then show me the folder. Let me know once it's done.
+agent/schedule_conflicts/10310	Find all pairs of overlapping events in events.csv (events that merely touch, like one ending exactly when the next starts, are not conflicts). Write one line per pair as 'Title A <-> Title B' to overlaps.txt and tell me how many conflicts there are.
+agent/schedule_conflicts/10489	I'm in a rush, so please be efficient. Find all pairs of overlapping events in schedule.csv (events that merely touch, like one ending exactly when the next starts, are not conflicts). Write one line per pair as 'Title A <-> Title B' to conflicts.txt and tell me how many conflicts there are.
+agent/schedule_conflicts/10200	Small task: Find all pairs of overlapping events in schedule.csv (events that merely touch, like one ending exactly when the next starts, are not conflicts). Write one line per pair as 'Title A <-> Title B' to conflicts.txt and tell me how many conflicts there are.
+agent/schedule_conflicts/10266	Working on my weekly report. Check calendar_export.csv for scheduling conflicts. A conflict means the time ranges really overlap (back-to-back is fine). Save each pair as 'Title A <-> Title B' in overlaps.txt and report the count
+agent/schedule_conflicts/10201	Find all pairs of overlapping events in schedule.csv (events that merely touch, like one ending exactly when the next starts, are not conflicts). Write one line per pair as 'Title A <-> Title B' to conflicts.txt and tell me how many conflicts there are. Keep your reply short.
+agent/text_replace_files/10168	hi! Replace every occurrence of 'beta' with 'stable' in all the .txt files in docs/ (edit them in place) and tell me how many replacements you made in total.
+agent/text_replace_files/10346	In docs/*.txt, change 'Acme' to 'Globex' everywhere. Update the files directly and report the total number of replacements. Please double-check the result.
+agent/text_replace_files/10358	Hi! Replace every occurrence of 'beta' with 'stable' in all the .txt files in docs/ (edit them in place) and tell me how many replacements you made in total. Please double-check the result.
+agent/text_replace_files/10436	Need a hand here. Replace every occurrence of 'beta' with 'stable' in all the .txt files in docs/ (edit them in place) and tell me how many replacements you made in total.
+agent/text_replace_files/10044	Working on my weekly report. In docs/*.txt, change 'Q3' to 'Q4' everywhere. Update the files directly and report the total number of replacements. Please double-check the result.
+agent/text_word_stats/10241	Hi! Give me word statistics for draft.txt: total words, unique words (case-insensitive) and the top 3 most frequent words with their counts (ties: alphabetical).
+agent/text_word_stats/10002	Hi! Give me word statistics for essay.txt: total words, unique words (case-insensitive) and the top 3 most frequent words with their counts (ties: alphabetical).
+agent/text_word_stats/10026	I'm in a rush, so please be efficient. Give me word statistics for draft.txt: total words, unique words (case-insensitive) and the top 3 most frequent words with their counts (ties: alphabetical). Thanks!
+agent/text_word_stats/10375	Small task: For draft.txt: how many words are there in total, how many different words (ignore case and punctuation), and which 3 words appear most often? Break ties alphabetically.
+agent/text_word_stats/10075	For draft.txt: how many words are there in total, how many different words (ignore case and punctuation), and which 3 words appear most often? Break ties alphabetically. Thank you!
+agent/timesheet_hours/10313	Could you help me with something? From timesheet.csv, total the hours for Theo Tanaka on Horizon from 2025-10-03 through 2025-10-11 inclusive.
+agent/timesheet_hours/10097	Hello. How many hours did Noah Hughes log on project Horizon between 2025-02-26 and 2025-03-05 (both days included)? The data is in timesheet.csv. Thank you!
+agent/timesheet_hours/10236	Need a hand here. How many hours did Ravi Bauer log on project Borealis between 2025-12-02 and 2025-12-14 (both days included)? The data is in timesheet.csv. Thanks!
+agent/timesheet_hours/10016	Quick one: From timesheet.csv, total the hours for Zara Costa on Borealis from 2025-09-07 through 2025-09-18 inclusive.
+agent/timesheet_hours/10296	Could you help me with something? From timesheet.csv, total the hours for Victor Berg on Borealis from 2025-10-09 through 2025-10-21 inclusive
+agent/todo_extract/10425	Collect every line of the form 'TODO(owner): text' from the markdown files in docs/ and write action_items.md grouped by owner: a '## Owner' heading per person (alphabetical), then '- [ ] text' lines in the order they appear (files in name order). Ignore TODOs without an owner.
+agent/todo_extract/10157	Build an action-item list in action_items.md from the meeting notes in docs/ (*.md). Every 'TODO(person): task' line becomes '- [ ] task' under a '## person' heading; people sorted alphabetically, tasks in the order they appear across the files (file name order). Skip TODOs that have no person.
+agent/todo_extract/10423	Need a hand here. Build an action-item list in todos.md from the meeting notes in docs/ (*.md). Every 'TODO(person): task' line becomes '- [ ] task' under a '## person' heading; people sorted alphabetically, tasks in the order they appear across the files (file name order). Skip TODOs that have no person.
+agent/todo_extract/10019	Small task: Collect every line of the form 'TODO(owner): text' from the markdown files in docs/ and write todos.md grouped by owner: a '## Owner' heading per person (alphabetical), then '- [ ] text' lines in the order they appear (files in name order). Ignore TODOs without an owner. Thank you!
+agent/todo_extract/10255	I'm in a rush, so please be efficient. Collect every line of the form 'TODO(owner): text' from the markdown files in docs/ and write action_items.md grouped by owner: a '## Owner' heading per person (alphabetical), then '- [ ] text' lines in the order they appear (files in name order). Ignore TODOs without an owner. Thanks!

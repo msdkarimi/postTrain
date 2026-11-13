@@ -1,0 +1,526 @@
+- id: t030
+  category: log_analysis
+  difficulty: medium
+  tags: [python, logs, time-window]
+  prompt: In access.log, how many requests happened from 10:00 up to (but not including) 10:30, and how many of those returned a 5xx status?
+  files:
+    access.log: |
+      [09:58:01] GET /a 200
+      [10:05:11] GET /b 200
+      [10:12:40] POST /c 500
+      [10:29:59] GET /a 200
+      [10:30:00] GET /d 404
+      [10:45:10] GET /a 200
+  steps:
+    - plan: Let me check the line format first.
+      tool: run_bash
+      arg: head -n 3 access.log
+    - plan: I'll parse the time and status from each line and filter on the window.
+      tool: run_python
+      arg: |
+        import re
+        total = errors = 0
+        for line in open('access.log'):
+            m = re.match(r'\[(\d\d):(\d\d):(\d\d)\] \S+ \S+ (\d{3})', line)
+            if not m:
+                continue
+            secs = int(m[1]) * 3600 + int(m[2]) * 60 + int(m[3])
+            if 10 * 3600 <= secs < 10 * 3600 + 1800:
+                total += 1
+                errors += m[4].startswith('5')
+        print('requests:', total, '5xx:', errors)
+  final: "3 requests fall in the 10:00-10:30 window, and 1 of them (the POST /c at 10:12:40) returned a 5xx status."
+  grounded: ["requests: 3 5xx: 1"]
+  check:
+    reply_contains: ["3", "1"]
+
+- id: t031
+  category: json_transform
+  difficulty: medium
+  tags: [python, json, flatten]
+  prompt: Flatten the nested settings.json into dotted keys (like app.name) and save it as flat.json.
+  files:
+    settings.json: |
+      {"app": {"name": "shop", "debug": false}, "db": {"host": "h1", "port": 5432}}
+  steps:
+    - plan: I'll walk the nested dictionaries recursively and join the key path with dots.
+      tool: run_python
+      arg: |
+        import json
+        def flat(d, prefix=''):
+            out = {}
+            for k, v in d.items():
+                key = f'{prefix}{k}'
+                if isinstance(v, dict):
+                    out.update(flat(v, key + '.'))
+                else:
+                    out[key] = v
+            return out
+        res = flat(json.load(open('settings.json')))
+        json.dump(res, open('flat.json', 'w'), indent=2)
+        print(open('flat.json').read())
+  final: "flat.json now has four keys: app.name, app.debug, db.host and db.port, with the original values kept."
+  grounded: ['"app.name": "shop"', '"db.port": 5432']
+  check:
+    files:
+      flat.json: {contains: ['"app.name": "shop"', '"app.debug": false', '"db.host": "h1"', '"db.port": 5432']}
+
+- id: t032
+  category: file_ops
+  difficulty: medium
+  tags: [python, hashlib, duplicates]
+  prompt: Are there any duplicate files (identical content, regardless of name) in photos/? Tell me which ones belong together.
+  files:
+    photos/a.jpg: "same"
+    photos/b.jpg: "diff"
+    photos/c.jpg: "same"
+    photos/d.jpg: "other"
+    photos/e.jpg: "diff"
+  steps:
+    - plan: I'll hash every file and group the names that share a hash.
+      tool: run_python
+      arg: |
+        import hashlib, os
+        from collections import defaultdict
+        groups = defaultdict(list)
+        for name in sorted(os.listdir('photos')):
+            h = hashlib.md5(open(os.path.join('photos', name), 'rb').read()).hexdigest()
+            groups[h].append(name)
+        for names in groups.values():
+            if len(names) > 1:
+                print(names)
+  final: "Yes, two groups of duplicates: a.jpg and c.jpg are identical, and b.jpg and e.jpg are identical. d.jpg is unique."
+  grounded: ["['a.jpg', 'c.jpg']", "['b.jpg', 'e.jpg']"]
+  check:
+    reply_contains: ["a.jpg", "c.jpg", "b.jpg", "e.jpg"]
+
+- id: t033
+  category: text_analysis
+  difficulty: medium
+  tags: [python, anagrams]
+  prompt: Group the anagrams in words.txt. Write anagrams.txt with one line per group of two or more words (words sorted alphabetically inside the line, lines sorted alphabetically).
+  files:
+    words.txt: |
+      listen
+      silent
+      enlist
+      google
+      gogole
+      cat
+      act
+      tac
+      dog
+  steps:
+    - plan: Words are anagrams when their sorted letters match, so I'll group by that key.
+      tool: run_python
+      arg: |
+        from collections import defaultdict
+        g = defaultdict(list)
+        for w in (l.strip() for l in open('words.txt') if l.strip()):
+            g[''.join(sorted(w))].append(w)
+        lines = sorted(' '.join(sorted(ws)) for ws in g.values() if len(ws) > 1)
+        open('anagrams.txt', 'w').write('\n'.join(lines) + '\n')
+        print('\n'.join(lines))
+  final: "Three anagram groups are saved in anagrams.txt: act cat tac, enlist listen silent, and gogole google. dog has no anagram partner."
+  grounded: ["act cat tac", "enlist listen silent", "gogole google"]
+  check:
+    files:
+      anagrams.txt: {equals: "act cat tac\nenlist listen silent\ngogole google"}
+
+- id: t034
+  category: date_math
+  difficulty: medium
+  tags: [python, dates, holidays]
+  prompt: How many working days (Monday to Friday) are there from 2025-03-03 to 2025-03-21 inclusive, not counting the dates listed in holidays.txt?
+  files:
+    holidays.txt: |
+      2025-03-10
+  steps:
+    - plan: I'll read the holidays, then count weekdays in the range that aren't holidays.
+      tool: run_python
+      arg: |
+        from datetime import date, timedelta
+        hol = {l.strip() for l in open('holidays.txt') if l.strip()}
+        d, end, n = date(2025, 3, 3), date(2025, 3, 21), 0
+        while d <= end:
+            if d.weekday() < 5 and d.isoformat() not in hol:
+                n += 1
+            d += timedelta(days=1)
+        print(n)
+  final: "There are 14 working days in that range: 15 weekdays minus the holiday on 2025-03-10."
+  grounded: ["14"]
+  check:
+    reply_contains: ["14"]
+
+- id: t035
+  category: text_wrangling
+  difficulty: easy
+  tags: [bash, sed, regex]
+  prompt: names.txt has names as "Lastname, Firstname". Convert each line to "Firstname Lastname" and save the result to names_fixed.txt.
+  files:
+    names.txt: |
+      Ruiz, Ana
+      Okoye, Dara
+      Li, Chen
+  steps:
+    - plan: A sed substitution with two capture groups will swap the parts.
+      tool: run_bash
+      arg: sed -E 's/^([^,]+), (.+)$/\2 \1/' names.txt > names_fixed.txt && cat names_fixed.txt
+  final: "names_fixed.txt now contains Ana Ruiz, Dara Okoye and Chen Li."
+  grounded: ["Ana Ruiz", "Dara Okoye", "Chen Li"]
+  check:
+    files:
+      names_fixed.txt: {equals: "Ana Ruiz\nDara Okoye\nChen Li"}
+
+- id: t036
+  category: csv_math
+  difficulty: medium
+  tags: [python, csv, totals]
+  prompt: Add a "line_total" column (qty x price, two decimals) to order_lines.csv and save it as order_lines_total.csv. What's the grand total of the order?
+  files:
+    order_lines.csv: |
+      item,qty,price
+      pen,10,1.20
+      book,2,7.50
+      bag,1,24.99
+  steps:
+    - plan: Compute qty times price for each row, write the new file and keep a running total.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.DictReader(open('order_lines.csv', newline='')))
+        grand = 0.0
+        with open('order_lines_total.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['item', 'qty', 'price', 'line_total'])
+            for r in rows:
+                t = int(r['qty']) * float(r['price'])
+                grand += t
+                w.writerow([r['item'], r['qty'], r['price'], f'{t:.2f}'])
+        print(open('order_lines_total.csv').read())
+        print('grand total:', f'{grand:.2f}')
+  final: "The grand total is 51.99 (pen 12.00 + book 15.00 + bag 24.99). The new file is order_lines_total.csv."
+  grounded: ["grand total: 51.99"]
+  check:
+    files:
+      order_lines_total.csv: {equals: "item,qty,price,line_total\npen,10,1.20,12.00\nbook,2,7.50,15.00\nbag,1,24.99,24.99"}
+
+- id: t037
+  category: scripting
+  difficulty: medium
+  tags: [bash, script, backup]
+  prompt: Write a small bash script backup.sh that copies every .conf file from etc/ into a new folder backup/, then run it and show me what's in backup/.
+  files:
+    etc/a.conf: "A=1"
+    etc/b.conf: "B=2"
+    etc/c.txt: "not a conf"
+  steps:
+    - plan: I'll write the script with a heredoc so the file contents are exact, make it executable and run it.
+      tool: run_bash
+      arg: |
+        cat > backup.sh <<'SCRIPT'
+        #!/bin/bash
+        mkdir -p backup
+        cp etc/*.conf backup/
+        SCRIPT
+        chmod +x backup.sh
+        ./backup.sh
+        ls backup
+  final: "backup.sh is written and executed. backup/ now contains a.conf and b.conf; c.txt was not copied because it isn't a .conf file."
+  grounded: ["a.conf", "b.conf"]
+  check:
+    files:
+      backup.sh: {contains: ["cp etc/*.conf backup/"]}
+      backup/a.conf: {equals: "A=1"}
+      backup/b.conf: {equals: "B=2"}
+    absent: [backup/c.txt]
+
+- id: t038
+  category: text_analysis
+  difficulty: easy
+  tags: [bash, awk]
+  prompt: What's the longest line in README.md and how many characters long is it?
+  files:
+    README.md: |
+      # Title
+      Short line.
+      This is a considerably longer line of text.
+      Mid line here.
+  steps:
+    - plan: awk can track the longest line and its length in one pass.
+      tool: run_bash
+      arg: awk '{ if (length($0) > max) { max = length($0); line = $0 } } END { print max ": " line }' README.md
+  final: "The longest line is \"This is a considerably longer line of text.\" at 43 characters."
+  grounded: ["43: This is a considerably longer line of text."]
+  check:
+    reply_contains: ["43", "considerably longer"]
+
+- id: t039
+  category: config_edit
+  difficulty: easy
+  tags: [python, properties]
+  prompt: In app.properties set max.connections to 50 and make sure cache.ttl=300 is present (add it if it isn't). Leave everything else alone.
+  files:
+    app.properties: |
+      app.name=shop
+      max.connections=10
+      log.level=info
+  steps:
+    - plan: Let me read the current file first.
+      tool: run_bash
+      arg: cat app.properties
+    - plan: I'll rewrite the matching line and append cache.ttl only if it's missing.
+      tool: run_python
+      arg: |
+        lines = open('app.properties').read().splitlines()
+        out, has_ttl = [], False
+        for l in lines:
+            if l.startswith('max.connections='):
+                l = 'max.connections=50'
+            if l.startswith('cache.ttl='):
+                has_ttl = True
+            out.append(l)
+        if not has_ttl:
+            out.append('cache.ttl=300')
+        open('app.properties', 'w').write('\n'.join(out) + '\n')
+        print(open('app.properties').read())
+  final: "Updated app.properties: max.connections is now 50 (it was 10) and cache.ttl=300 was added at the end. app.name and log.level are unchanged."
+  grounded: ["max.connections=50", "cache.ttl=300"]
+  check:
+    files:
+      app.properties: {equals: "app.name=shop\nmax.connections=50\nlog.level=info\ncache.ttl=300"}
+
+- id: t040
+  category: csv_filter
+  difficulty: easy
+  tags: [bash, grep, dates]
+  prompt: Pull the March 2025 rows out of visits.csv into march.csv (keep the header) and tell me how many visits that is.
+  files:
+    visits.csv: |
+      date,page
+      2025-02-28,/a
+      2025-03-01,/b
+      2025-03-15,/a
+      2025-03-31,/c
+      2025-04-01,/b
+  steps:
+    - plan: Dates are ISO formatted, so a prefix match on 2025-03 is enough; I'll keep the header line too.
+      tool: run_bash
+      arg: (head -n 1 visits.csv; grep '^2025-03' visits.csv) > march.csv && cat march.csv
+  final: "march.csv has the header plus 3 March visits (2025-03-01, 2025-03-15 and 2025-03-31)."
+  grounded: ["2025-03-31,/c"]
+  check:
+    files:
+      march.csv: {equals: "date,page\n2025-03-01,/b\n2025-03-15,/a\n2025-03-31,/c"}
+
+- id: t041
+  category: csv_group
+  difficulty: easy
+  tags: [python, csv, aggregation]
+  prompt: Which product sold the most units overall in sales_q1.csv?
+  files:
+    sales_q1.csv: |
+      product,units
+      widget,5
+      gadget,3
+      widget,4
+      doohickey,8
+      gadget,2
+  steps:
+    - plan: Products appear several times, so I'll sum the units per product before comparing.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import Counter
+        c = Counter()
+        for r in csv.DictReader(open('sales_q1.csv')):
+            c[r['product']] += int(r['units'])
+        print(c.most_common())
+  final: "widget sold the most with 9 units in total, ahead of doohickey (8) and gadget (5)."
+  grounded: ["('widget', 9)"]
+  check:
+    reply_contains: ["widget", "9"]
+
+- id: t042
+  category: data_validation
+  difficulty: medium
+  tags: [python, csv, missing-values]
+  prompt: Which columns in survey.csv have empty cells, and how many each?
+  files:
+    survey.csv: |
+      id,age,city
+      1,30,Oslo
+      2,,Rome
+      3,25,
+      4,,Paris
+  steps:
+    - plan: I'll count blank values per column with the csv module.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.DictReader(open('survey.csv', newline='')))
+        for col in rows[0]:
+            print(col, sum(1 for r in rows if not r[col].strip()))
+  final: "age has 2 empty cells and city has 1. The id column is complete."
+  grounded: ["age 2", "city 1", "id 0"]
+  check:
+    reply_contains: ["age", "2", "city", "1"]
+
+- id: t043
+  category: log_analysis
+  difficulty: easy
+  tags: [bash, awk, counting]
+  prompt: Count how many lines of each level (INFO, WARN, ERROR) there are in app.log.
+  files:
+    app.log: |
+      2025-01-01 10:00:00 INFO service started
+      2025-01-01 10:00:05 INFO listening on 8080
+      2025-01-01 10:01:10 WARN slow response
+      2025-01-01 10:02:30 ERROR db timeout
+      2025-01-01 10:03:00 INFO request ok
+      2025-01-01 10:04:45 ERROR db timeout
+  steps:
+    - plan: The level is the third field, so I can count it with awk.
+      tool: run_bash
+      arg: awk '{print $3}' app.log | sort | uniq -c | sort -rn
+  final: "app.log has 3 INFO lines, 2 ERROR lines and 1 WARN line."
+  grounded: ["3 INFO", "2 ERROR", "1 WARN"]
+  check:
+    reply_contains: ["3 INFO", "2 ERROR", "1 WARN"]
+
+- id: t044
+  category: file_parsing
+  difficulty: easy
+  tags: [bash, grep, ics]
+  prompt: How many events are in calendar.ics and what are their titles?
+  files:
+    calendar.ics: |
+      BEGIN:VCALENDAR
+      BEGIN:VEVENT
+      SUMMARY:Team standup
+      DTSTART:20250310T090000
+      END:VEVENT
+      BEGIN:VEVENT
+      SUMMARY:Dentist
+      DTSTART:20250311T143000
+      END:VEVENT
+      BEGIN:VEVENT
+      SUMMARY:Board review
+      DTSTART:20250312T100000
+      END:VEVENT
+      END:VCALENDAR
+  steps:
+    - plan: Each event starts with BEGIN:VEVENT, and titles are on SUMMARY lines.
+      tool: run_bash
+      arg: grep -c 'BEGIN:VEVENT' calendar.ics; grep '^SUMMARY:' calendar.ics | cut -d: -f2-
+  final: "There are 3 events: Team standup, Dentist and Board review."
+  grounded: ["Team standup", "Dentist", "Board review"]
+  check:
+    reply_contains: ["3", "Team standup", "Dentist", "Board review"]
+
+- id: t045
+  category: json_transform
+  difficulty: medium
+  tags: [python, json, pricing]
+  prompt: Raise every price in catalog.json by 10 percent, rounded to two decimals, and write the result back to the same file.
+  files:
+    catalog.json: |
+      [{"sku": "A", "price": 10.0}, {"sku": "B", "price": 24.5}, {"sku": "C", "price": 3.99}]
+  steps:
+    - plan: Load the list, multiply each price by 1.1, round, and save it in place.
+      tool: run_python
+      arg: |
+        import json
+        items = json.load(open('catalog.json'))
+        for i in items:
+            i['price'] = round(i['price'] * 1.1, 2)
+        json.dump(items, open('catalog.json', 'w'), indent=2)
+        print([(i['sku'], i['price']) for i in items])
+  final: "catalog.json is updated: A is now 11.0, B is 26.95 and C is 4.39."
+  grounded: ["('A', 11.0)", "('B', 26.95)", "('C', 4.39)"]
+  check:
+    files:
+      catalog.json: {contains: ['"price": 11.0', '"price": 26.95', '"price": 4.39']}
+
+- id: t046
+  category: file_ops
+  difficulty: easy
+  tags: [python, extensions]
+  prompt: List the distinct file extensions used in this folder tree (lowercase, sorted, no dots). Files without an extension don't count.
+  files:
+    a.TXT: "1"
+    b.txt: "2"
+    c.Py: "3"
+    d.md: "4"
+    sub/e.PY: "5"
+    Makefile: "6"
+  steps:
+    - plan: I'll walk the tree and collect lowercase extensions of files that have one.
+      tool: run_python
+      arg: |
+        import os
+        exts = set()
+        for root, _, files in os.walk('.'):
+            for f in files:
+                if '.' in f:
+                    exts.add(f.rsplit('.', 1)[1].lower())
+        print(sorted(exts))
+  final: "Three extensions are in use: md, py and txt. Makefile has no extension, so it isn't counted."
+  grounded: ["['md', 'py', 'txt']"]
+  check:
+    reply_contains: ["md", "py", "txt"]
+
+- id: t047
+  category: json_lines
+  difficulty: medium
+  tags: [python, jsonl, counting]
+  prompt: events.jsonl has one JSON object per line. Count the events per "type" and save them to counts.txt as "type count", most frequent first.
+  files:
+    events.jsonl: |
+      {"type": "click", "user": 1}
+      {"type": "view", "user": 2}
+      {"type": "click", "user": 3}
+      {"type": "buy", "user": 1}
+      {"type": "click", "user": 2}
+      {"type": "view", "user": 1}
+  steps:
+    - plan: Each line is its own JSON document, so I'll parse them one by one and count the types.
+      tool: run_python
+      arg: |
+        import json
+        from collections import Counter
+        c = Counter(json.loads(l)['type'] for l in open('events.jsonl') if l.strip())
+        rows = sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))
+        open('counts.txt', 'w').write('\n'.join(f'{t} {n}' for t, n in rows) + '\n')
+        print(rows)
+  final: "click is the most frequent with 3 events, then view with 2 and buy with 1. The counts are saved in counts.txt."
+  grounded: ["[('click', 3), ('view', 2), ('buy', 1)]"]
+  check:
+    files:
+      counts.txt: {equals: "click 3\nview 2\nbuy 1"}
+
+- id: t048
+  category: templating
+  difficulty: easy
+  tags: [python, template]
+  prompt: Fill in the placeholders in letter.tpl with the values from data.json and save the finished text as letter.txt.
+  files:
+    letter.tpl: |
+      Dear {name},
+      Your order {order_id} ships on {date}.
+    data.json: |
+      {"name": "Ana", "order_id": "A-17", "date": "2025-05-02"}
+  steps:
+    - plan: I'll load the JSON and let str.format fill in the template.
+      tool: run_python
+      arg: |
+        import json
+        data = json.load(open('data.json'))
+        text = open('letter.tpl').read().format(**data)
+        open('letter.txt', 'w').write(text)
+        print(text)
+  final: "letter.txt is ready: it greets Ana and says order A-17 ships on 2025-05-02."
+  grounded: ["Your order A-17 ships on 2025-05-02."]
+  check:
+    files:
+      letter.txt: {equals: "Dear Ana,\nYour order A-17 ships on 2025-05-02."}

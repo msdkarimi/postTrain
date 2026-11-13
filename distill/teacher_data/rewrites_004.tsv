@@ -1,0 +1,140 @@
+331 ||| Report how many files there are for each extension across every sub-folder, one per line as 'ext: count'. Thanks in advance.
+332 ||| Recursively, how many files of each extension does this folder tree contain? Give them as 'ext: count' and double-check your counts.
+333 ||| For my weekly report: tally the files by extension in all sub-folders, formatted 'ext: count'. Thank you!
+334 ||| In a rush - how many files of each extension are under the current folder?
+335 ||| Break down everything under the current directory by file extension, with counts. I'm in a hurry.
+336 ||| Walk this folder tree and tell me, in the form 'ext: count', how many files each extension has. Let me know when you're done.
+337 ||| Please count files by extension, including sub-folders, and report each as 'ext: count'.
+338 ||| Could you tally up the files in all the sub-folders by extension? 'ext: count' per line is fine.
+339 ||| per-extension file count across all sub-folders, formatted as 'ext: count', thanks!
+340 ||| Hey, what's the file count per extension for everything below the current folder?
+341 ||| Check calendar.json for the earliest 45-minute slot on 2026-06-03 between 09:00 and 17:00 when Zara, Sofia, Liam and Ingrid are all free, and write only the start time (HH:MM) into slot.txt. Tell me when it's done.
+342 ||| In a rush: use calendar.json to find the earliest 30 minutes on 2025-06-26, 09:00-17:00, where Hana and Zara are both free. Put just the start time (HH:MM) in meeting_time.txt and double-check it.
+343 ||| Can Noah, Chloe and Amira get together for 60 minutes on 2026-10-09? Look in calendar.json, take the earliest slot they all have free during 09:00-17:00, and save only the start time (HH:MM) to meeting_time.txt. Thanks!
+344 ||| From calendar.json, what's the earliest 30-minute slot on 2026-08-19 (between 09:00 and 17:00) when Kenji, Dmitri and Oscar are all free? Tell me the start and end time.
+345 ||| Rushing: when could Zara, Diego, Ravi and Dmitri meet for 60 minutes on 2026-12-14? Use calendar.json, earliest common free slot between 09:00 and 17:00, and reply with start and end time.
+346 ||| Look at calendar.json and find the earliest 45-minute window on 2026-08-21, 09:00 to 17:00, when Ravi, Yara, Mei and Ines are free together. Write only the start time (HH:MM) to slot.txt and tell me when you've finished.
+347 ||| I'm in a hurry. Which is the earliest 60-minute slot on 2025-01-30 within 09:00-17:00 when Diego, Aisha, Ethan and Dmitri are all free, per calendar.json? Give me start and end. Thank you!
+348 ||| Quickly: Ingrid, Elena, Bianca and Mei need 45 minutes together on 2025-05-14. Using calendar.json, find the earliest common free slot in working hours (09:00-17:00) and tell me when it starts and ends.
+349 ||| Please use calendar.json to work out when Noah, Dmitri, Liam and Nora can meet for 45 minutes on 2025-12-17 - the earliest common free slot within 09:00-17:00. Reply with start and end, and double-check.
+350 ||| calendar.json: earliest slot on 2025-10-23 where Omar, Priya and Dmitri can all meet for 45 minutes (working hours 09:00-17:00). Start and end time please. Let me know when done.
+351 ||| Please update config.json in place: delete server.debug, make logging.level "debug", and add features.beta_search = true. Everything else must stay exactly as it is.
+352 ||| In config.json (edit in place) I need features.new_checkout = true added, logging.level set to "debug", and version's patch number bumped by one. Don't touch anything else.
+353 ||| Edit config.json directly: drop server.debug, set logging.level to "error", add features.new_checkout = true. Leave the rest alone. Thanks!
+354 ||| Hi! In config.json, in place, please remove server.debug, change server.port to 8080 and add features.beta_search = true, keeping all other settings unchanged. Thank you!
+355 ||| Rushing - modify config.json in place: server.debug out, features.new_checkout = true in, server.port 4000. Nothing else changes. Short reply.
+356 ||| I need three edits to config.json, made in place: logging.level -> "debug", server.port -> 9000, and delete server.debug. Keep everything else the same.
+357 ||| Hello, can you make these changes to config.json in place: increase the patch number in version by one, set logging.level to "debug", and add features.audit_trail = true? Everything else should stay unchanged. Thanks in advance.
+358 ||| hey, in config.json (in place): logging.level = "debug", add features.new_checkout = true, and bump version's patch number by 1. leave everything else as is
+359 ||| For my weekly report: edit config.json in place - set logging.level to "debug", remove server.debug and bump the patch number of version by one - and keep everything else unchanged.
+360 ||| Hey, update config.json in place: version patch +1, remove server.debug, logging.level to "debug". Nothing else should change. Let me know when it's done.
+361 ||| Hey, please clean contacts_raw.csv into clean.csv: deduplicate by email (ignore case, keep the first row) and trim every field. Thank you!
+362 ||| Dedupe leads.csv on the email column, case-insensitively and keeping the first occurrence, trim all fields, and write clean.csv. Please double-check it.
+363 ||| Can you take customers_export.csv, remove duplicate emails (case-insensitive, first row wins), trim all the fields, and save it as contacts_clean.csv? Short reply please.
+364 ||| For my weekly report: leads.csv is a mess. Trim the spaces, lowercase the emails, keep only the first row for each repeated email and save the result as contacts_clean.csv. Thank you!
+365 ||| customers_export.csv needs cleaning - strip whitespace, lowercase emails, drop repeats (first occurrence stays), output to contacts_clean.csv. Please verify afterwards.
+366 ||| Could you deduplicate contacts_raw.csv by email, ignoring case and keeping the first row, trim all fields, and save as clean.csv? Short reply is fine.
+367 ||| Hey, remove duplicate emails from contacts_raw.csv (case-insensitive, keep first), trim all fields, and save the result to contacts_clean.csv. Thanks!
+368 ||| Hey, tidy up leads.csv for me: trim whitespace in all fields, lowercase the emails, remove later duplicate emails keeping the first, and write contacts_clean.csv with the same header. Thanks in advance.
+369 ||| Please clean leads.csv - trim every field, lowercase the email addresses, drop duplicate emails (first one stays) - and save to clean.csv, same header as the original. Thank you!
+370 ||| I need customers_export.csv cleaned: whitespace stripped, emails lowercased, repeated emails removed (first occurrence wins). Write it to contacts_clean.csv. Thank you!
+371 ||| Hey, count events per month in log_events.csv, store them in monthly_counts.json as an object keyed by YYYY-MM, and tell me which month had the most. Short reply.
+372 ||| Hi! Could you give me monthly event counts from events.csv in monthly_counts.json (JSON object, YYYY-MM keys) and say which month was busiest? Let me know when it's done.
+373 ||| Using the created_at column of activity.csv, count rows per month and write {"YYYY-MM": count} to monthly_counts.json. Which month was the busiest? Thank you!
+374 ||| In a rush: how many rows of activity.csv fall into each month (look at created_at)? Write them as {"YYYY-MM": count} to counts.json, and name the busiest month.
+375 ||| Hello! For events.csv, group rows by month using created_at and save a JSON object like {"YYYY-MM": count} to monthly_counts.json, then tell me the busiest month.
+376 ||| Count the rows per month in log_events.csv (created_at column), write the counts to monthly_counts.json as {"YYYY-MM": count}, and tell me the busiest month
+377 ||| I need a per-month row count for activity.csv based on created_at. Save it as {"YYYY-MM": count} in monthly_counts.json and tell me which month is busiest.
+378 ||| Small task: tally rows per month from log_events.csv using created_at; output {"YYYY-MM": count} to monthly_counts.json; name the busiest month. Short reply please.
+379 ||| events.csv - monthly event counts into counts.json as a JSON object with YYYY-MM keys, and which month had the most events?
+380 ||| Please produce monthly_counts.json (YYYY-MM keys, JSON object) from events.csv with the number of events per month, and say which month had the most events. Thank you!
+381 ||| In sales_log.csv, find the rows where region is South and amount is above 200. Save them to big_orders.csv with the same columns and tell me how many there are. Please double-check.
+382 ||| For my weekly report: take sales_log.csv, keep the South rows with amount greater than 300, and save them with the same header to big_orders.csv. How many rows is that? Thanks in advance.
+383 ||| Hey, from sales_log.csv please keep only rows for the West region where amount is over 750, save them (same header) to filtered.csv and tell me how many you kept. Thanks in advance
+384 ||| Hey! orders.csv: I want the East rows with amount above 500 in filtered.csv, same columns. How many are there?
+385 ||| Filter sales_log.csv to region West with amount above 300, write the result to big_orders.csv with the same columns, and tell me the row count. Please verify your result.
+386 ||| Rushing: from sales_log.csv keep only the North rows with amount greater than 750, save them to filtered.csv (same header) and say how many rows you kept. Thanks!
+387 ||| Could you pull the South rows with amount above 300 out of sales_log.csv into big_orders.csv (same columns) and tell me the count? Thanks!
+388 ||| For the weekly report: keep the East rows of sales_log.csv whose amount is greater than 200, write them to filtered.csv with the same header, and tell me how many rows you kept. Thanks!
+389 ||| sales_log.csv -> big_orders.csv: only region Central, amount above 300, same columns. Then tell me how many rows.
+390 ||| Hello, from orders.csv I need the East rows with amount over 300 saved to big_orders.csv (same header). How many rows did you keep? Thanks!
+391 ||| What was South region's total revenue in January 2025? It's in transactions.csv. Please save only the number, with two decimals, in result.txt. Thank you!
+392 ||| For my weekly report: how much revenue did the West region bring in during January 2024, based on revenue_log.csv? Thanks in advance.
+393 ||| In a rush - total for the South region in July 2023 from sales.csv? Short reply please.
+394 ||| Add up the revenue column for the West region in February 2023 using transactions.csv.
+395 ||| For the weekly report, sum the total column for the North region in November 2024 from sales_export.csv. Short reply please.
+396 ||| orders_2024.csv: what's the total of East sales for January 2025? Thanks in advance.
+397 ||| Sum up the North sales for December 2024 in sales.csv, and double-check the sum please.
+398 ||| Please sum the amount column for region West in January 2023 from transactions.csv and write just the number (two decimals) into result.txt.
+399 ||| How much revenue did the South region generate in July 2024 (sales.csv)? Let me know once you have it.
+400 ||| For the weekly report: add up the total column of orders_2024.csv for South in October 2025.
+401 ||| Hello, please total up amount per category from spend.csv and write summary.csv as category,total with 2 decimals, biggest first. Thanks in advance.
+402 ||| Sum the amount column grouped by category in spend.csv. Output summary.csv: category,total (2 decimals), largest total first. Thanks in advance.
+403 ||| For my weekly report: I need category totals from costs.csv in summary.csv (category,total, 2 decimals), ordered largest first.
+404 ||| Hey, can you aggregate costs.csv by category - total amount, 2 decimals - and save as summary.csv with columns category,total, largest at the top?
+405 ||| Quick one: summary.csv from spend.csv, one row per category, total amount to 2 decimals, largest first (category,total).
+406 ||| Please create summary.csv from spend.csv with each category's total amount (category,total; 2 decimals; largest first). Thanks!
+407 ||| spend.csv -> summary.csv: sum amount per category, header category,total, round to 2 decimals, sort descending by total. thanks!
+408 ||| I'd like the amount per category in spend.csv summed and saved to summary.csv (category,total), 2 decimals, biggest first.
+409 ||| Hi! Make summary.csv listing the total amount for each category in spend.csv: category,total, two decimals, largest first. Short reply.
+410 ||| Total costs.csv's amount column per category into summary.csv (category,total, 2 decimals, largest first) and double-check it.
+411 ||| ledger.csv: give me one row per category with the summed amount, largest first, in out/summary.csv with the header category,total. Thanks in advance.
+412 ||| Group the rows of expenses.csv by category and write each category's total amount into totals_by_category.csv, highest first, with columns category and total.
+413 ||| I need amount totals by category from billing_2024.csv in summary.csv (category,total), sorted biggest to smallest. Please double-check it.
+414 ||| hello, sum up amount per category in invoices.csv and write summary.csv (category,total), biggest first. check it please
+415 ||| Summarise billing_2024.csv by dept: one row per dept with the summed total, largest first, into totals_by_category.csv with header dept,total. Short reply.
+416 ||| Hello! Please total ledger.csv's amounts per category (largest first) and save as totals_by_category.csv, header category,total.
+417 ||| Hello, expenses.csv: totals of amount per category, written to totals_by_category.csv (category,total), biggest to smallest.
+418 ||| Make summary.csv out of ledger.csv - one row per category with the summed amount, descending, header category,total.
+419 ||| Rushing: category totals of amount from billing_2024.csv into summary.csv (category,total), largest to smallest. Thanks!
+420 ||| Please group expenses.csv by category and write the summed amount per category to out/summary.csv (columns category and total), highest total first, then double-check it.
+421 ||| Which city brings in the most revenue? Match each order in orders.csv to its customer in customers.csv (ignore orders from unknown customers), sum amounts per city and save revenue_by_city.csv (city,total, biggest first). Tell me the leading city.
+422 ||| Small task: compute total order amount per city from orders.csv and customers.csv, ignoring orders whose customer isn't in customers.csv. Save revenue_by_city.csv (city,total; biggest first) and tell me the top city.
+423 ||| Can you work out how much each city spent in total, using orders.csv and customers.csv? Orders from customers who aren't listed in customers.csv don't count. Write revenue_by_city.csv with columns city,total, biggest first, and say which city is on top.
+424 ||| Using orders.csv and customers.csv, sum the order amounts per city (skip unknown customers), write city_totals.csv with city,total biggest first, and tell me the top city. Thanks in advance.
+425 ||| Hello. Revenue by city, please: link orders.csv to customers.csv by customer, skip unknown customers, sum per city and save city_totals.csv (city,total; largest first). Which city is first? Short reply.
+426 ||| For the weekly report: create revenue_by_city.csv from orders.csv and customers.csv with total order value per city (city,total, high to low). Skip orders whose customers aren't in customers.csv. And name the top city.
+427 ||| Hello! Join orders.csv to customers.csv via customer_id, total the amounts per city (unknown customers skipped), save as revenue_by_city.csv (city,total, descending) and tell me the best city.
+428 ||| Merge orders.csv and customers.csv on customer_id, sum amounts by city, skip orders with unknown customers, and save city_totals.csv as city,total in descending order. Then name the best city.
+429 ||| Weekly report: totals per city from orders.csv + customers.csv, ignoring customers that aren't in customers.csv. city_totals.csv (city,total) biggest first, and tell me the top city. Short reply.
+430 ||| Could you help me figure out revenue per city? orders.csv has the orders and customers.csv has the customers (skip orders from unknown customers). Save revenue_by_city.csv (city,total, biggest first) and tell me the leader. Thanks in advance.
+431 ||| Today is 2025-03-19. Which tasks in tasks.csv are overdue (due_date before today)? Write overdue.csv with task,days_overdue, most overdue first and ties by task name, and tell me the most overdue task. Let me know when done.
+432 ||| Taking today as 2025-10-24, find the tasks in todo.csv whose due_date has passed and write late_tasks.csv (task,days_overdue; most overdue first; ties by task name). Name the most overdue task. Thank you!
+433 ||| For the weekly report - today is 2025-11-10. List from tasks.csv the tasks past their due_date in late_tasks.csv with columns task,days_overdue, most overdue first, ties by task name, and tell me which is most overdue.
+434 ||| Quick one: given that today is 2025-02-20, write late_tasks.csv with the overdue tasks from tasks.csv (task,days_overdue; largest first; alphabetical ties) and name the most overdue. Short reply.
+435 ||| Small task: today = 2025-05-24. Put the overdue tasks from tasks.csv into late_tasks.csv as task,days_overdue (biggest first, ties alphabetical) and tell me the most overdue one.
+436 ||| Hi! Today is 2025-10-09. Which tasks in todo.csv are overdue? Save them to overdue.csv (task,days_overdue; biggest first; ties alphabetical) and name the most overdue.
+437 ||| Suppose today is 2025-03-15: write overdue.csv with the overdue tasks from todo.csv (task,days_overdue, biggest first, ties alphabetical) and tell me which one is the most overdue. Let me know when it's done.
+438 ||| Please treat 2025-04-22 as today. Find overdue tasks in todo.csv, save them as overdue.csv (columns task,days_overdue; largest first; ties alphabetical), and name the most overdue one. Thanks in advance.
+439 ||| With today being 2025-06-28, list todo.csv's overdue tasks in late_tasks.csv (task,days_overdue; largest first; alphabetical on ties) and tell me which is the most overdue. Thanks!
+440 ||| Weekly report prep. Today is 2025-03-18, so find overdue tasks in tasks.csv and list them in late_tasks.csv (task,days_overdue; biggest first; ties alphabetical). Which is most overdue?
+441 ||| In a rush - from spend.csv give me each category's percentage of the total amount (2 decimals) in shares.csv (category,percent), largest share first, and tell me the biggest category.
+442 ||| What share of total spend does each category in budget_lines.csv account for? Save shares.csv (category,percent; 2 decimals; descending) and name the top category. Short reply.
+443 ||| Small task: calculate the percentage of overall spend per category in spend.csv, save percent_of_total.csv as category,percent (2 decimals, descending), and tell me the top category. Let me know when it's done.
+444 ||| quick one: percent of total amount per category from spend.csv into percent_of_total.csv (category,percent), 2 decimals, largest first - and which category is biggest? Thanks in advance.
+445 ||| expenses.csv - give me each category's percentage of total spend, saved as percent_of_total.csv (category,percent, 2 decimals, descending), and tell me the top one. Thank you!
+446 ||| Small task: work out each category's percentage of the total spend in spend.csv and write shares.csv (category,percent; 2 decimals; descending). Which category is top?
+447 ||| Hello! I'd like shares.csv: the percentage of total spend for each category in spend.csv, 2 decimals, descending, columns category,percent. Name the top category too.
+448 ||| Hey, how is spend.csv's total split across categories in percent? Save as shares.csv (category,percent, 2 decimals, descending) and name the biggest one.
+449 ||| Need percentages of overall spend per category from expenses.csv, saved as percent_of_total.csv (category,percent; 2 decimals; descending), plus the name of the top category. Thanks!
+450 ||| Could you calculate the percentage of overall spend represented by each category in expenses.csv, save it to percent_of_total.csv (category,percent, descending, 2 decimals) and name the top category? Thank you!
+451 ||| Hi! Turn activity_log.csv into a pivot (pivot.csv): one row per month (YYYY-MM), one column per category in alphabetical order, event counts in the cells.
+452 ||| Please make a month-by-category table from activity_log.csv, saved as pivot.csv: header 'month,<categories alphabetically>', one row per month (YYYY-MM, ascending), with event counts (0 where there are none). And double-check it.
+453 ||| hello - pivot events.csv into pivot.csv. Rows = months (YYYY-MM), columns = categories in alphabetical order, cells = number of events. Short reply.
+454 ||| From events.csv, build pivot.csv, a month-by-category table: header 'month,<categories alphabetically>', and a row for each month (YYYY-MM, ascending) with the event count (0 if none).
+455 ||| Hi! Could you pivot events.csv so that months (YYYY-MM) are rows and categories (alphabetical) are columns, with event counts in the cells? Save it as pivot.csv. Thanks!
+456 ||| events.csv to pivot.csv: month (YYYY-MM) down the side, categories in alphabetical order across, event counts inside.
+457 ||| I want a month-by-category table of events from events.csv written to pivot.csv: header 'month,<categories alphabetically>', one row per month (YYYY-MM, ascending), 0 for months without events. Thank you!
+458 ||| Need a hand: pivot events.csv into pivot.csv - YYYY-MM months as rows, categories (alphabetical) as columns, counts of events in the cells.
+459 ||| Please reshape events.csv into pivot.csv with months (YYYY-MM) as rows and alphabetically ordered categories as columns; each cell is an event count. Thanks in advance.
+460 ||| Create pivot.csv from events.csv: 'month,<categories alphabetically>' as the header, then one row per month (YYYY-MM, ascending) showing how many events there were (0 if none). Thanks!
+461 ||| Hello, for latency_ms in sensor_data.csv, what are the mean, median, min and max? Ignore missing values and round to two decimals.
+462 ||| What are the average, median, minimum and maximum of reading in measurements.csv? Skip missing values, round to 2 decimals.
+463 ||| Some cells in measurements.csv are blank or N/A. Ignoring those, compute mean, median, min and max of weight_kg, rounded to 2 decimals. Thanks in advance.
+464 ||| Hello, can you give me avg, median, min, max for the weight_kg column of measurements.csv? Leave out missing values, two decimals.
+465 ||| Summary stats (mean, median, min, max) for weight_kg in measurements.csv, please - ignore empty/N/A cells. Tell me when it's done.
+466 ||| need the average, median, min and max of temperature in sensor_data.csv (skip missing values, 2 decimals)
+467 ||| Hey, from the reading column in sensor_data.csv I need mean, median, min and max, rounded to two decimals. Blank and N/A cells should be ignored. Thank you!
+468 ||| Hello. Average, median, min, max of temperature in sensor_data.csv, ignoring missing data, rounded to 2 decimals. Please double check the numbers.
+469 ||| Need a hand: give me mean, median, min and max of temperature from measurements.csv, ignoring empty or N/A entries. Short reply.
+470 ||| In a rush - summary stats (mean, median, min, max) for reading in readings.csv, skipping empty or N/A entries. Short reply.

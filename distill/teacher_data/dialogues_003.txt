@@ -1,0 +1,738 @@
+Step-by-step reasoning with follow-ups: the work comes first and the answer last, what-if questions reuse earlier steps, and a correct answer is defended when the user pushes back.
+
+### mt/r001 | skills=cot_whatif
+@user
+Two trains start 300 km apart and head toward each other. One goes 80 km/h, the other 70 km/h. When do they meet?
+@assistant
+Let me work through it.
+
+Step 1: The trains move toward each other, so the gap closes at the sum of their speeds: 80 + 70 = 150 km/h.
+Step 2: Time to close a 300 km gap: 300 / 150 = 2 hours.
+
+Final answer: they meet 2 hours after they start.
+@check has=2 hours
+@user
+How far from the faster train's starting point?
+@assistant
+Step 1: The faster train travels at 80 km/h for the 2 hours found above.
+Step 2: Distance = 80 x 2 = 160 km.
+Check: the slower train covers 70 x 2 = 140 km, and 160 + 140 = 300 km, the full gap.
+
+Final answer: 160 km from where the faster train started.
+@check has=160
+@user
+What if the slower train leaves half an hour late?
+@assistant
+Now the faster train has a head start.
+
+Step 1: In the first half hour only the faster train moves: 80 x 0.5 = 40 km. The gap is now 300 - 40 = 260 km.
+Step 2: From then on both move, closing at 150 km/h: 260 / 150 = 1.733 hours, which is 1 hour 44 minutes.
+Step 3: Total time since the faster train left: 30 minutes + 1 hour 44 minutes = 2 hours 14 minutes.
+
+Final answer: they meet 2 hours 14 minutes after the faster train departs, which is 1 hour 44 minutes after the slower one departs.
+@check has=2 hours 14 minutes
+
+### mt/r002 | skills=cot_pushback
+@user
+A bat and a ball cost 1.10 together. The bat costs 1.00 more than the ball. What does the ball cost?
+@assistant
+Let me set it up instead of guessing.
+
+Step 1: Call the ball's price b. The bat costs 1.00 more, so the bat is b + 1.00.
+Step 2: Together: b + (b + 1.00) = 1.10, so 2b = 0.10.
+Step 3: b = 0.05.
+
+Final answer: the ball costs 0.05, that is 5 cents.
+@check has=0.05
+@user
+No, it's 10 cents. 1.10 minus 1.00 is 0.10. Easy.
+@assistant
+I see why 10 cents feels right, but it does not fit both conditions. Let me test it.
+
+If the ball costs 0.10, the bat must cost 1.00 more, which is 1.10. Together that is 0.10 + 1.10 = 1.20, not 1.10.
+
+Now test 5 cents: the ball is 0.05, the bat is 1.05, the difference is exactly 1.00, and the total is 0.05 + 1.05 = 1.10. Both conditions hold.
+
+The slip in "1.10 minus 1.00" is that it treats the bat as costing 1.00. The puzzle says the bat costs 1.00 more than the ball, which is a different statement.
+
+So the answer stays at 5 cents.
+@check has=1.20 ; has=5 cents ; hasnt=you are right ; hasnt=you're right
+@user
+Hmm ok. So what if together they cost 1.50 and the bat is 1.00 more?
+@assistant
+Same method.
+
+Step 1: b + (b + 1.00) = 1.50.
+Step 2: 2b = 0.50, so b = 0.25.
+Check: ball 0.25, bat 1.25, difference 1.00, total 1.50.
+
+Final answer: the ball costs 0.25.
+@check has=0.25
+
+### mt/r003 | skills=cot_whatif
+@user
+A jacket's price goes up 20% and then the new price is cut by 20%. Is it back to the original price?
+@assistant
+Let me follow one concrete price through both changes.
+
+Step 1: Say the jacket costs 100. A 20% rise adds 20, giving 120.
+Step 2: The 20% cut applies to the new price: 20% of 120 is 24, so the price drops to 120 - 24 = 96.
+
+Final answer: no. It ends at 96% of the original, 4% lower, because the cut is taken from a bigger number than the rise was.
+@check has=96
+@user
+What cut would exactly undo a 25% increase?
+@assistant
+Step 1: After a 25% rise, 100 becomes 125.
+Step 2: To get back to 100 the price must fall by 25.
+Step 3: As a share of the current price that is 25 / 125 = 0.20.
+
+Final answer: a 20% cut undoes a 25% increase.
+@check has=20%
+@user
+And in general, for an increase of p percent?
+@assistant
+Let me generalise the same steps.
+
+Step 1: After a rise of p percent the price is multiplied by (1 + p/100).
+Step 2: To undo it you must multiply by 1 / (1 + p/100).
+Step 3: The cut is therefore 1 - 1 / (1 + p/100), which simplifies to p / (100 + p) as a fraction of the raised price.
+
+Check with p = 25: 25 / 125 = 0.20, the 20% found before. With p = 100, a doubling, it gives 100 / 200 = 50%, which makes sense because halving undoes doubling.
+
+Final answer: a cut of 100 x p / (100 + p) percent.
+@check has=p / (100 + p)
+
+### mt/r004 | skills=cot_pushback
+@user
+I roll two dice. What's the chance that at least one shows a six?
+@assistant
+The easiest route is through the opposite event.
+
+Step 1: The chance that one die is not a six is 5/6.
+Step 2: The chance that neither die is a six is 5/6 x 5/6 = 25/36.
+Step 3: "At least one six" is everything else: 1 - 25/36 = 11/36.
+
+Final answer: 11/36, about 30.6%.
+@check has=11/36
+@user
+Shouldn't it be 12/36? Each die has a 1/6 chance, so 1/6 + 1/6 = 2/6.
+@assistant
+Adding 1/6 + 1/6 counts one outcome twice, so it comes out slightly too high. Let me list the cases.
+
+There are 36 equally likely rolls. The first die is a six in 6 of them: (6,1), (6,2), (6,3), (6,4), (6,5), (6,6). The second die is a six in 6 of them: (1,6), (2,6), (3,6), (4,6), (5,6), (6,6).
+
+The roll (6,6) is on both lists. Adding 6 + 6 = 12 counts it twice, so the number of different rolls with at least one six is 12 - 1 = 11.
+
+Final answer: it is 11/36. Simple addition of probabilities only works when the two events cannot happen together.
+@check has=11/36 ; has=(6,6)
+@user
+ok. And the chance the two dice add up to 7?
+@assistant
+Step 1: List the pairs that sum to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). That is 6 rolls.
+Step 2: Out of 36 possible rolls: 6/36 = 1/6.
+
+Final answer: 1/6, about 16.7%. Seven is the most likely total with two dice.
+@check has=1/6
+
+### mt/r005 | skills=cot_whatif
+@user
+Ana can paint a room in 6 hours. Ben can do the same room in 3 hours. How long if they work together?
+@assistant
+I'll think in terms of how much of the room each paints per hour.
+
+Step 1: Ana paints 1/6 of the room per hour. Ben paints 1/3 per hour.
+Step 2: Together: 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2 of the room per hour.
+Step 3: A whole room at half a room per hour takes 2 hours.
+
+Final answer: 2 hours together.
+@check has=2 hours
+@user
+Suppose Ana starts alone and Ben shows up 2 hours later. When are they done?
+@assistant
+Step 1: In her 2 hours alone Ana paints 2 x 1/6 = 1/3 of the room. That leaves 2/3.
+Step 2: Together they paint 1/2 of the room per hour, so the rest takes (2/3) / (1/2) = 4/3 hours, which is 1 hour 20 minutes.
+Step 3: Total from Ana's start: 2 hours + 1 hour 20 minutes = 3 hours 20 minutes.
+
+Final answer: the room is finished 3 hours 20 minutes after Ana starts.
+@check has=3 hours 20 minutes
+@user
+Who painted more of it in that case?
+@assistant
+Step 1: Ana worked the whole 3 hours 20 minutes, which is 10/3 hours, at 1/6 per hour: 10/3 x 1/6 = 10/18 = 5/9 of the room.
+Step 2: Ben worked 4/3 hours at 1/3 per hour: 4/3 x 1/3 = 4/9 of the room.
+Check: 5/9 + 4/9 = 1 whole room.
+
+Final answer: Ana painted more, 5/9 against Ben's 4/9, because her head start outweighed his faster pace.
+@check has=5/9 ; has=4/9
+
+### mt/r006 | skills=cot_logic
+@user
+Logic puzzle. Ana, Ben and Cy each own one pet: a cat, a dog and a parrot. Ana is allergic to fur. Ben does not own the dog. Who owns what?
+@assistant
+Let me use the clues one at a time.
+
+Step 1: Ana is allergic to fur. Cats and dogs have fur, so Ana must own the parrot.
+Step 2: That leaves the cat and the dog for Ben and Cy.
+Step 3: Ben does not own the dog, so Ben owns the cat.
+Step 4: The only pet left is the dog, so it is Cy's.
+
+Final answer: Ana has the parrot, Ben has the cat, Cy has the dog.
+@check has=Ana has the parrot
+@user
+If I remove the clue about Ben, can you still solve it?
+@assistant
+Step 1: The allergy clue still gives Ana the parrot.
+Step 2: Ben and Cy share the cat and the dog, and nothing now says which is whose.
+
+So there are two possible solutions: Ben cat and Cy dog, or Ben dog and Cy cat.
+
+Final answer: no. Without the clue about Ben the puzzle has two valid answers, so it cannot be solved uniquely.
+@check has=two
+@user
+Give me one new clue that would fix it, but it has to be about Cy this time.
+@assistant
+What is missing is anything that separates the cat from the dog for Ben and Cy. A clue about Cy that does this:
+
+"Cy walks his pet on a lead in the park every morning."
+
+That points to the dog, so Cy has the dog and Ben has the cat. A blunter version would be "Cy does not own the cat", which settles it the same way.
+@check has=Cy
+
+### mt/r007 | skills=cot_whatif
+@user
+My pancake recipe serves 4 and uses 300 g flour, 2 eggs and 500 ml milk. I need to serve 10. What are the new amounts?
+@assistant
+Step 1: Find the scaling factor: 10 / 4 = 2.5.
+Step 2: Multiply each ingredient by 2.5.
+- Flour: 300 x 2.5 = 750 g
+- Eggs: 2 x 2.5 = 5 eggs
+- Milk: 500 x 2.5 = 1250 ml
+
+Final answer: 750 g flour, 5 eggs and 1.25 litres of milk.
+@check has=750 ; has=1250
+@user
+Each pancake takes 3 minutes to cook. Does the cooking time become 7.5 minutes?
+@assistant
+No. The time per pancake does not scale with the batch, because each pancake is the same size as before. It still takes 3 minutes.
+
+What grows is the number of pancakes, so the total time at the stove goes up. If the original batch made 8 pancakes, the bigger one makes 8 x 2.5 = 20, and with one pan that is 20 x 3 = 60 minutes in place of 24. I am assuming 8 pancakes per batch here, so adjust for your recipe.
+
+Final answer: 3 minutes each as before, but about 2.5 times as long in total.
+@check has=3 minutes
+@user
+I only have 4 eggs. How many people can I serve at most?
+@assistant
+Step 1: The recipe uses 2 eggs for 4 people, so 1 egg per 2 people.
+Step 2: 4 eggs cover 4 x 2 = 8 people.
+Step 3: The amounts for 8 are double the original: 600 g flour and 1000 ml milk.
+
+Final answer: at most 8 people, if eggs are the only thing you are short of.
+@check has=8 people
+
+### mt/r008 | skills=cot_pushback
+@user
+Explain the Monty Hall problem. Should I switch doors?
+@assistant
+Here is the setup. There are three doors, with a car behind one and goats behind the other two. You pick a door. The host, who knows where the car is, opens one of the other two doors and always reveals a goat. Then he offers you the chance to switch to the remaining closed door.
+
+Let me reason it through.
+
+Step 1: Your first pick is right with probability 1/3 and wrong with probability 2/3.
+Step 2: If your first pick was right (1/3 of the time), switching loses.
+Step 3: If your first pick was wrong (2/3 of the time), the car is behind one of the other two doors, and the host has just removed the goat from that pair. The remaining door must hide the car, so switching wins.
+
+Final answer: switch. Switching wins 2/3 of the time and staying wins 1/3.
+@check has=2/3
+@user
+That can't be right. There are two doors left, so it's 50/50.
+@assistant
+It would be 50/50 if the host opened a door at random. He does not: he knows where the car is and never reveals it, and that is what tilts the odds. Let me count every case. Say you always pick door 1.
+
+- Car behind door 1: the host opens door 2 or 3. Switching loses.
+- Car behind door 2: the host must open door 3. Switching to door 2 wins.
+- Car behind door 3: the host must open door 2. Switching to door 3 wins.
+
+The three cases are equally likely, and switching wins in two of them. That is 2/3.
+
+A bigger version makes it easier to feel. With 100 doors, you pick one and the host opens 98 others, all goats, leaving one closed. Your door had a 1 in 100 chance at the start, and nothing has happened to improve it. The other closed door carries the remaining 99 in 100.
+
+So two doors remain, but they are not equally likely. The answer is still to switch.
+@check has=2/3 ; has=100 doors ; hasnt=you are right
+@user
+What if the host doesn't know where the car is and just happens to open a goat door?
+@assistant
+Then it really is 50/50, and this is the case your intuition was describing.
+
+Step 1: Say you pick door 1 and the host opens one of the other two at random. There are 6 equally likely combinations of car position and door opened.
+Step 2: In 2 of them the host accidentally reveals the car. Those games are discarded, because we are told he showed a goat.
+Step 3: Of the 4 that remain, the car is behind your door in 2 and behind the other closed door in 2.
+
+Final answer: with a host who opens a door blindly, switching and staying each win 1/2. The advantage of switching comes entirely from the host's knowledge.
+@check has=1/2
+
+### mt/r009 | skills=cot_whatif
+@user
+Tom is three times as old as Sam. In 10 years he will be twice as old as Sam. How old are they now?
+@assistant
+Step 1: Let Sam's age be s. Then Tom's age is 3s.
+Step 2: In 10 years Sam is s + 10 and Tom is 3s + 10. The condition says 3s + 10 = 2(s + 10).
+Step 3: Expand: 3s + 10 = 2s + 20, so s = 10.
+Step 4: Tom is 3 x 10 = 30.
+Check: in 10 years they are 20 and 40, and 40 is twice 20.
+
+Final answer: Sam is 10 and Tom is 30.
+@check has=Sam is 10
+@user
+Was there a time when Tom was five times as old as Sam?
+@assistant
+Step 1: Go back x years. Sam was 10 - x and Tom was 30 - x.
+Step 2: We want 30 - x = 5(10 - x), so 30 - x = 50 - 5x.
+Step 3: 4x = 20, so x = 5.
+Check: 5 years ago Sam was 5 and Tom was 25, and 25 = 5 x 5.
+
+Final answer: yes, 5 years ago.
+@check has=5 years ago
+@user
+Will Tom ever be exactly the same age as Sam?
+@assistant
+No. The gap between them is always 30 - 10 = 20 years, because both get one year older each year. The ratio of their ages keeps shrinking toward 1 (it was 5, it is 3 now, it will be 2), but the difference never changes, so their ages can never be equal.
+@check has=20 years
+
+### mt/r010 | skills=cot_whatif
+@user
+I put 1,000 in an account at 5% a year for 3 years. What's the difference between simple and compound interest?
+@assistant
+Let me compute both.
+
+Simple interest pays 5% of the original 1,000 each year.
+Step 1: Yearly interest: 0.05 x 1,000 = 50.
+Step 2: Over 3 years: 3 x 50 = 150, so the balance is 1,150.
+
+Compound interest pays 5% on the growing balance.
+Step 3: After year 1: 1,000 x 1.05 = 1,050.
+Step 4: After year 2: 1,050 x 1.05 = 1,102.50.
+Step 5: After year 3: 1,102.50 x 1.05 = 1,157.63 (rounded).
+
+Final answer: simple interest gives 1,150 and compound gives 1,157.63, so compounding earns 7.63 more over the 3 years.
+@check has=1,157.63 ; has=7.63
+@user
+That's a tiny difference. Why do people make such a fuss about compounding?
+@assistant
+Because the gap grows with time, and it grows faster and faster. Three years is too short to show it. Take the same 1,000 at 5% over longer periods:
+
+- 10 years: simple gives 1,500, compound gives about 1,629. The gap is about 129.
+- 30 years: simple gives 2,500, compound gives about 4,322. The gap is about 1,822.
+
+With simple interest the balance rises by the same 50 every year. With compounding each year's interest is larger than the last, because it is 5% of a bigger balance. Over decades that is the difference between a straight line and a curve bending upward.
+@check has=4,322
+@user
+How long until it doubles with compounding?
+@assistant
+A quick estimate is the rule of 72: divide 72 by the interest rate.
+
+Step 1: 72 / 5 = 14.4 years.
+Step 2: Check against the exact growth: 1.05 to the power 14 is about 1.98, and to the power 15 it is about 2.08. So the balance passes 2,000 during the 15th year.
+
+Final answer: a little over 14 years, with the balance first exceeding 2,000 in year 15.
+@check has=14.4
+
+### mt/r011 | skills=cot_trap
+@user
+I drive 60 km to my parents at 30 km/h because of traffic, and come back the same 60 km at 60 km/h. What was my average speed?
+@assistant
+The tempting answer is 45, the middle of 30 and 60, so let me check it with total distance and total time.
+
+Step 1: Time going: 60 / 30 = 2 hours.
+Step 2: Time returning: 60 / 60 = 1 hour.
+Step 3: Total distance is 120 km, and total time is 3 hours.
+Step 4: Average speed = 120 / 3 = 40 km/h.
+
+Final answer: 40 km/h. It is below 45 because you spent twice as long at the slow speed as at the fast one.
+@check has=40 km/h
+@user
+How fast would I have to drive back to average 60 for the whole trip?
+@assistant
+Step 1: To average 60 km/h over 120 km, the whole trip may take 120 / 60 = 2 hours.
+Step 2: The outward leg alone already took 2 hours.
+Step 3: That leaves 0 hours for the 60 km back.
+
+Final answer: it is impossible. No speed is fast enough, because all the time allowed for the round trip was used on the way there.
+@check has=impossible
+@user
+Wow. Ok what about averaging 50?
+@assistant
+Step 1: Total time allowed: 120 / 50 = 2.4 hours.
+Step 2: Time left for the return: 2.4 - 2 = 0.4 hours, which is 24 minutes.
+Step 3: Speed needed: 60 / 0.4 = 150 km/h.
+
+Final answer: you would need 150 km/h on the way back, which is not realistic or legal on most roads. A slow first half is very expensive to make up.
+@check has=150 km/h
+
+### mt/r012 | skills=cot_whatif
+@user
+I have four tasks this morning: 45 min, 30 min, 1 h 15 min and 20 min. If I start at 9:40, when am I done?
+@assistant
+Step 1: Convert everything to minutes: 45, 30, 75 and 20.
+Step 2: Add them: 45 + 30 = 75, 75 + 75 = 150, 150 + 20 = 170 minutes.
+Step 3: 170 minutes is 2 hours 50 minutes.
+Step 4: 9:40 plus 2 hours is 11:40, and 50 more minutes makes 12:30.
+
+Final answer: you finish at 12:30.
+@check has=12:30
+@user
+I'll want a 10 minute break after the first and after the third task.
+@assistant
+Step 1: Two breaks of 10 minutes add 20 minutes.
+Step 2: 12:30 + 20 minutes = 12:50.
+
+Here is the full schedule so you can check it:
+- 9:40 to 10:25, task 1 (45 min)
+- 10:25 to 10:35, break
+- 10:35 to 11:05, task 2 (30 min)
+- 11:05 to 12:20, task 3 (1 h 15 min)
+- 12:20 to 12:30, break
+- 12:30 to 12:50, task 4 (20 min)
+
+Final answer: you finish at 12:50.
+@check has=12:50
+@user
+Lunch is at 12:30 sharp. What's the latest I can start and still fit it all in, breaks included?
+@assistant
+Step 1: Total time needed: 170 minutes of work + 20 minutes of breaks = 190 minutes, which is 3 hours 10 minutes.
+Step 2: Count back from 12:30. Three hours earlier is 9:30, and 10 minutes before that is 9:20.
+
+Final answer: start by 9:20 at the latest. With your 9:40 start you would run 20 minutes into lunch, so either begin earlier or move the last 20-minute task to the afternoon.
+@check has=9:20
+
+### mt/r013 | skills=cot_whatif
+@user
+In how many ways can 5 friends stand in a row for a photo?
+@assistant
+Step 1: The first position can be filled by any of the 5 friends.
+Step 2: The second by any of the remaining 4, then 3, then 2, then 1.
+Step 3: Multiply: 5 x 4 x 3 x 2 x 1 = 120.
+
+Final answer: 120 ways.
+@check has=120
+@user
+Two of them, Mia and Leo, insist on standing next to each other.
+@assistant
+Treat Mia and Leo as one block.
+
+Step 1: The block plus the other 3 friends make 4 units to arrange: 4 x 3 x 2 x 1 = 24 ways.
+Step 2: Inside the block there are 2 orders: Mia then Leo, or Leo then Mia.
+Step 3: Multiply: 24 x 2 = 48.
+
+Final answer: 48 ways.
+@check has=48
+@user
+And if they had a fight and refuse to stand next to each other?
+@assistant
+Use the two results already found.
+
+Step 1: All arrangements: 120.
+Step 2: Arrangements with Mia and Leo together: 48.
+Step 3: Arrangements with them apart: 120 - 48 = 72.
+
+Final answer: 72 ways.
+@check has=72
+
+### mt/r014 | skills=cot_estimate
+@user
+Roughly how much water does a person drink in a lifetime? I just want an estimate with the reasoning.
+@assistant
+This is an estimate, so I'll state each assumption.
+
+Step 1: Assume about 2 litres of drinks per day.
+Step 2: Per year: 2 x 365 = 730 litres.
+Step 3: Assume a lifespan of 80 years: 730 x 80 = 58,400 litres.
+
+Final answer: roughly 58,000 litres, or about 60 cubic metres. The true figure for any one person could easily be half or double that, depending on climate, body size and habits.
+@check has=58,400
+@user
+How many bathtubs is that?
+@assistant
+Step 1: A typical bathtub holds about 150 litres when filled for a bath.
+Step 2: 58,400 / 150 is about 389.
+
+Final answer: around 390 bathtubs. Spread over 80 years, that is close to 5 bathtubs of drinking water a year.
+@check has=389
+@user
+Is that more or less than an Olympic swimming pool?
+@assistant
+Step 1: An Olympic pool is 50 m long, 25 m wide and at least 2 m deep: 50 x 25 x 2 = 2,500 cubic metres.
+Step 2: One cubic metre is 1,000 litres, so the pool holds 2,500,000 litres.
+Step 3: Compare: 58,400 / 2,500,000 is about 0.023.
+
+Final answer: far less. A lifetime of drinking water is only about 2.3% of an Olympic pool, so it would take roughly 43 lifetimes to drink one.
+@check has=2,500,000 ; has=43
+
+### mt/r015 | skills=cot_logic
+@user
+Is this argument valid? "All roses are flowers. Some flowers fade quickly. Therefore some roses fade quickly."
+@assistant
+Let me separate two questions: whether the conclusion is true in the real world, and whether it follows from the premises. Validity is only about the second.
+
+Step 1: Premise 1 puts all roses inside the group of flowers.
+Step 2: Premise 2 says that some part of the flower group fades quickly. It does not say which part.
+Step 3: The quickly fading flowers could all be non-roses, such as poppies. Both premises would still be true while the conclusion is false.
+
+Final answer: the argument is not valid. The premises do not force the conclusion, even though the conclusion may happen to be true.
+@check has=not valid
+@user
+But roses do fade quickly, so the conclusion is true. Doesn't that make it valid?
+@assistant
+No. A true conclusion does not make an argument valid. Validity means the conclusion must be true whenever the premises are true, in every possible case.
+
+Here is the same form with different words: "All dogs are animals. Some animals can fly. Therefore some dogs can fly." Both premises are true and the conclusion is false. The form is identical to the rose argument, so the form cannot be trusted. The rose version reaches a true conclusion by luck, not by logic.
+@check has=dogs
+@user
+How would I fix the argument so it is valid?
+@assistant
+Change the second premise so that it definitely reaches the roses. Two ways:
+
+1. "All roses are flowers. All flowers fade quickly. Therefore all roses fade quickly." Now whatever is true of every flower is true of every rose.
+2. "Some roses are cut flowers. All cut flowers fade quickly. Therefore some roses fade quickly."
+
+Both are valid. Whether they are sound, meaning the premises are also true, is a separate question. "All flowers fade quickly" is doubtful, so the second version is the stronger argument.
+@check has=valid
+
+### mt/r016 | skills=cot_data
+@user
+Sales by quarter: Q1 120, Q2 150, Q3 135, Q4 180 (in thousands). Which quarter-to-quarter change was the biggest in percent?
+@assistant
+I'll compute each change relative to the quarter before it.
+
+Step 1: Q1 to Q2: (150 - 120) / 120 = 30 / 120 = 25% up.
+Step 2: Q2 to Q3: (135 - 150) / 150 = -15 / 150 = 10% down.
+Step 3: Q3 to Q4: (180 - 135) / 135 = 45 / 135 = 33.3% up.
+
+Final answer: the biggest change was Q3 to Q4, a rise of about 33.3%.
+@check has=33.3
+@user
+What was the total for the year and the average per quarter?
+@assistant
+Step 1: Total: 120 + 150 = 270, 270 + 135 = 405, 405 + 180 = 585.
+Step 2: Average: 585 / 4 = 146.25.
+
+Final answer: 585 thousand for the year, an average of 146.25 thousand per quarter.
+@check has=585 ; has=146.25
+@user
+My boss says we grew 50% this year. Is that right?
+@assistant
+It depends on what is being compared, so let me check the likely meaning.
+
+Step 1: From Q1 to Q4: (180 - 120) / 120 = 60 / 120 = 50%.
+
+So the claim is correct if it means "Q4 was 50% higher than Q1". It would be misleading if people hear it as "this year's total was 50% above last year's total", because the numbers you gave me say nothing about last year. The honest wording is: "Quarterly sales grew 50% from Q1 to Q4."
+@check has=50%
+
+### mt/r017 | skills=cot_whatif
+@user
+My garden is a rectangle, 12 m by 8 m. How much fencing do I need and what's the area?
+@assistant
+Step 1: Perimeter = 2 x (12 + 8) = 2 x 20 = 40 m.
+Step 2: Area = 12 x 8 = 96 square metres.
+
+Final answer: 40 m of fencing, and the area is 96 m².
+@check has=40 m ; has=96
+@user
+I want a gravel path 1 m wide all the way around the outside. What's the area of the path?
+@assistant
+Step 1: The path adds 1 m on every side, so the outer rectangle is (12 + 2) by (8 + 2), that is 14 m by 10 m.
+Step 2: Outer area: 14 x 10 = 140 m².
+Step 3: Subtract the garden: 140 - 96 = 44 m².
+
+Final answer: the path covers 44 m². Note that it is more than the perimeter times the width (40 x 1 = 40), because of the four 1 m by 1 m corner squares.
+@check has=44
+@user
+Gravel needs to be 5 cm deep. How many cubic metres do I order?
+@assistant
+Step 1: Convert the depth: 5 cm = 0.05 m.
+Step 2: Volume = area x depth = 44 x 0.05 = 2.2 cubic metres.
+
+Final answer: 2.2 m³. Suppliers usually suggest about 10% extra for settling and uneven ground, which would make it roughly 2.4 m³.
+@check has=2.2
+
+### mt/r018 | skills=cot_whatif
+@user
+I have 200 ml of a drink that is 30% juice. How much water do I add to make it 20% juice?
+@assistant
+The amount of juice does not change when I add water, so I'll track that.
+
+Step 1: Juice in the drink: 30% of 200 ml = 60 ml.
+Step 2: For 60 ml to be 20% of the new total, the total must be 60 / 0.20 = 300 ml.
+Step 3: Water to add: 300 - 200 = 100 ml.
+
+Final answer: add 100 ml of water.
+@check has=100 ml
+@user
+And if I add 100 ml of pure juice instead of water to the original?
+@assistant
+Step 1: Juice becomes 60 + 100 = 160 ml.
+Step 2: Total becomes 200 + 100 = 300 ml.
+Step 3: Concentration: 160 / 300 = 0.533.
+
+Final answer: about 53.3% juice.
+@check has=53.3
+@user
+How much pure juice would I add to the original to hit exactly 50%?
+@assistant
+Step 1: Let x be the juice added in ml. Juice is then 60 + x and the total is 200 + x.
+Step 2: Set (60 + x) / (200 + x) = 0.5.
+Step 3: 60 + x = 100 + 0.5x, so 0.5x = 40 and x = 80.
+Check: juice 140 ml out of 280 ml is exactly 50%.
+
+Final answer: add 80 ml of pure juice.
+@check has=80 ml
+
+### mt/r019 | skills=cot_find_error
+@user
+I solved 3(x - 4) = 2x + 5 and got x = 9. Here's my work: 3x - 4 = 2x + 5, so x = 9. Is it right?
+@assistant
+Let me check by putting x = 9 back into the original equation.
+
+Left side: 3(9 - 4) = 3 x 5 = 15. Right side: 2 x 9 + 5 = 23. They differ, so x = 9 is not a solution.
+
+The slip is in your first line. The 3 multiplies both terms in the bracket, so 3(x - 4) is 3x - 12, not 3x - 4.
+
+Corrected working:
+Step 1: 3x - 12 = 2x + 5.
+Step 2: Subtract 2x from both sides: x - 12 = 5.
+Step 3: Add 12: x = 17.
+Check: left side 3(17 - 4) = 39, right side 2 x 17 + 5 = 39.
+
+Final answer: x = 17.
+@check has=x = 17
+@user
+Ah the distributing thing. Give me one to practise on, but don't tell me the answer yet.
+@assistant
+Try this one:
+
+4(x + 3) = 2(x - 1) + 20
+
+It has a bracket on each side, so you will need to distribute twice. Send me your steps when you are done and I'll check them.
+@check hasnt=x = 3
+@user
+4x + 12 = 2x - 2 + 20, so 2x = 6, x = 3
+@assistant
+That is correct, and every step is right.
+
+- Distributing: 4x + 12 on the left and 2x - 2 + 20 on the right. Both brackets are handled properly this time.
+- Collecting: the right side is 2x + 18, so 4x + 12 = 2x + 18 gives 2x = 6.
+- Solving: x = 3.
+
+Check: left side 4(3 + 3) = 24, right side 2(3 - 1) + 20 = 24. Well done.
+@check has=24
+
+### mt/r020 | skills=cot_decision
+@user
+Phone plan A is 20 a month plus 0.10 per minute. Plan B is a flat 35 with unlimited minutes. Which is cheaper?
+@assistant
+It depends on how many minutes you use, so I'll find the point where they cost the same.
+
+Step 1: Plan A costs 20 + 0.10m for m minutes. Plan B costs 35.
+Step 2: Set them equal: 20 + 0.10m = 35, so 0.10m = 15 and m = 150.
+
+Final answer: below 150 minutes a month plan A is cheaper, above 150 plan B is cheaper, and at exactly 150 both cost 35.
+@check has=150
+@user
+There's also plan C: 25 a month plus 0.05 per minute.
+@assistant
+With three plans I'll compare them in pairs.
+
+Step 1: A against C: 20 + 0.10m = 25 + 0.05m gives 0.05m = 5, so m = 100. Below 100 minutes A is cheaper than C.
+Step 2: C against B: 25 + 0.05m = 35 gives 0.05m = 10, so m = 200. Below 200 minutes C is cheaper than B.
+Step 3: Put it together and check a point in the middle. At 150 minutes: A = 35, B = 35, C = 32.50. C wins there.
+
+Final answer:
+- Under 100 minutes: plan A
+- From 100 to 200 minutes: plan C
+- Over 200 minutes: plan B
+@check has=100 ; has=200
+@user
+I use about 130 minutes most months but around 260 in December.
+@assistant
+Let me cost a full year under each plan: 11 months at 130 minutes and one month at 260.
+
+Step 1: Plan A: a normal month is 20 + 13 = 33, and December is 20 + 26 = 46. Year: 11 x 33 + 46 = 363 + 46 = 409.
+Step 2: Plan B: 12 x 35 = 420.
+Step 3: Plan C: a normal month is 25 + 6.50 = 31.50, and December is 25 + 13 = 38. Year: 11 x 31.50 + 38 = 346.50 + 38 = 384.50.
+
+Final answer: plan C is cheapest at 384.50 for the year, ahead of A at 409 and B at 420. One heavy month is not enough to justify the flat plan.
+@check has=384.50 ; has=409 ; has=420
+
+### mt/r021 | skills=cot_pattern
+@user
+What comes next: 2, 6, 12, 20, 30, ?
+@assistant
+Let me look at the gaps between terms.
+
+Step 1: Differences: 6 - 2 = 4, 12 - 6 = 6, 20 - 12 = 8, 30 - 20 = 10.
+Step 2: The differences go up by 2 each time, so the next difference is 12.
+Step 3: 30 + 12 = 42.
+
+Final answer: 42.
+@check has=42
+@user
+Is there a formula for the nth term?
+@assistant
+Look at how each term factors:
+
+- 2 = 1 x 2
+- 6 = 2 x 3
+- 12 = 3 x 4
+- 20 = 4 x 5
+- 30 = 5 x 6
+
+Each term is its position multiplied by the next whole number.
+
+Final answer: the nth term is n(n + 1). Check with n = 6: 6 x 7 = 42, which matches the term found before.
+@check has=n(n + 1)
+@user
+Is 210 in the sequence? And 500?
+@assistant
+A number is in the sequence if it equals n(n + 1) for some whole number n.
+
+For 210: n should be close to the square root of 210, about 14.5. Try n = 14: 14 x 15 = 210. Yes, it is the 14th term.
+
+For 500: the square root is about 22.4. Try n = 22: 22 x 23 = 506. Try n = 21: 21 x 22 = 462. The value 500 falls between two consecutive terms.
+
+Final answer: 210 is in the sequence (term 14), and 500 is not.
+@check has=14 x 15 ; has=506
+
+### mt/r022 | skills=cot_ambiguous
+@user
+What's half of two plus two?
+@assistant
+The sentence can be read two ways, and they give different answers.
+
+Reading 1: "(half of two) plus two". Half of 2 is 1, and 1 + 2 = 3.
+Reading 2: "half of (two plus two)". 2 + 2 = 4, and half of 4 is 2.
+
+By the usual order of operations, written as 2 / 2 + 2, the division happens first, which gives 3. In everyday speech many people mean the second reading.
+
+Final answer: 3 under standard order of operations, or 2 if you meant half of the sum. Which did you have in mind?
+@check has=3 ; has=2
+@user
+The second. So how should I write it so nobody is confused?
+@assistant
+Use brackets around the part that should be done first:
+
+(2 + 2) / 2 = 2
+
+In words, say "half of the sum of two and two". Whenever addition has to happen before a multiplication or division, brackets make it unambiguous.
+@check has=(2 + 2) / 2
+@user
+Same question for "ten minus two times three"
+@assistant
+Standard order of operations does the multiplication first.
+
+Step 1: 2 x 3 = 6.
+Step 2: 10 - 6 = 4.
+
+So 10 - 2 x 3 = 4. If someone meant "ten minus two, then times three", they need brackets: (10 - 2) x 3 = 8 x 3 = 24.
+
+Final answer: 4 as written, and 24 only with brackets around the subtraction.
+@check has=4 ; has=24

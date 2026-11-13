@@ -1,0 +1,140 @@
+61 ||| Can you open finance/q2.txt and give me the profit margin as a percentage plus revenue per employee?
+62 ||| In a hurry - finance/q3.txt, profit margin (%) and revenue per head please.
+63 ||| what are the profit margin (%) and revenue per head in finance/q1.txt?
+64 ||| Check finance/q2.txt for me: I need the profit margin in percent and the revenue per employee.
+65 ||| For my weekly report: pull the profit margin (%) and revenue per head out of finance/q2.txt. Thank you!
+66 ||| Hi, from finance/q1.txt could you work out the profit margin (as a percentage) and the revenue per employee? Thanks in advance.
+67 ||| finance/q1.txt - profit margin % and revenue per head, thanks
+68 ||| Please look at finance/q4.txt and tell me two numbers: the profit margin (%) and revenue per head.
+69 ||| Two figures from finance/q2.txt, please: profit margin (%) and revenue per head.
+70 ||| Hey! Could you grab the profit margin (%) and the revenue per head from finance/q3.txt? Thank you!
+71 ||| Read finance/q2.txt, compute profit margin (%) and revenue per head, and please check your arithmetic.
+72 ||| Hello, what's the profit margin (%) and revenue per head according to finance/q2.txt?
+73 ||| Hey, finance/q1.txt has the numbers - I need the profit margin (%) and revenue per head from it. Thanks in advance.
+74 ||| Could you use finance/q3.txt to tell me the profit margin as a percentage and the revenue per employee?
+75 ||| I'd appreciate it if you could take finance/q4.txt and work out the profit margin (percentage) and revenue per employee. Thanks in advance.
+76 ||| finance/q4.txt: profit margin (%) and revenue per head?
+77 ||| Hi, Marco Moreau here. Could you remove 'Planning session' from my calendar on 2025-02-03? Thanks in advance.
+78 ||| Mei Larsen here - please cancel Planning session on 2026-11-20 and draft (don't send!) a short note to the other attendee, Kofi Ivanov, to tell them.
+79 ||| This is Chloe Fischer. Customer workshop on 2026-11-28 needs to come off the calendar - please delete it. Thanks!
+80 ||| Kofi Fischer here, I can't make Strategy meeting on 2025-12-02, so please cancel it.
+81 ||| Amira Popov here. Please delete Budget review from the calendar on 2026-08-13 and tell me when it's gone.
+82 ||| I'm Arjun Dubois and I need to cancel my Weekly sync on 2026-09-03. Thank you!
+83 ||| Yara Kim speaking: please cancel my Vendor demo on 2025-05-26, and write (but do not send) a note about it to Ethan Rossi and Priya Okafor.
+84 ||| alice haddad here - cancel my Planning session on 2025-06-25 please. short reply
+85 ||| Hello, it's Yara Andersson. Delete Budget review on 2025-04-12 from the calendar, please. Brief reply is fine.
+86 ||| Sofia Larsen: my Retro on 2025-07-09 is off, can you cancel it? Keep it short.
+87 ||| Aisha Costa here - could you delete the Strategy meeting that's on 2025-03-22? Thank you!
+88 ||| Hi there, Arjun Tanaka. Please cancel the Project kickoff I have on 2026-06-22.
+89 ||| pavel lindgren here: cancel my Retro on 2026-11-09 pls, thanks in advance
+90 ||| Liam Garcia here. Remove Strategy meeting (2025-02-24) from the calendar. Short reply please.
+91 ||| Liam Kowalski here. Please cancel Roadmap discussion on 2026-01-03 and prepare a short email for Hugo Weber and Priya Tanaka telling them - draft only, I'll send it myself. Short reply.
+92 ||| Elena Novak here - my Budget review on 2026-03-20 is cancelled, could you take it off the calendar? Thank you!
+93 ||| I'm Liam Hughes; please cancel Roadmap discussion on 2026-02-02. Short reply is fine.
+94 ||| For the weekly report: I'm Liam Tanaka. Please cancel Weekly sync on 2025-03-22, write a short email to Nora Haddad about it but don't send it, and double-check everything.
+95 ||| Lena Patel here, in a rush: cancel my Strategy meeting on 2025-12-14, thanks!
+96 ||| My workspace is a mess and taking up space - could you get rid of the junk in there?
+97 ||| Can you clear out anything temporary or outdated from the workspace?
+98 ||| I'm running low on space. Please remove the junk files from the workspace. Thanks!
+99 ||| Please tidy my files by deleting anything that looks old or temporary. Thank you!
+100 ||| Quickly free up space for me by removing junk from the workspace, and verify afterwards.
+101 ||| delete the old and temporary stuff in my files, please - tell me when finished
+102 ||| In a hurry: tidy up and delete whatever is outdated or temporary in my files. Thanks in advance.
+103 ||| hi, can you clean out the old/temp files from my workspace
+104 ||| Clean the clutter out of the workspace to free up some space, thank you.
+105 ||| Could you tidy up my files? Anything old or temporary can go. Thanks!
+106 ||| remove the temporary and old files from my workspace
+107 ||| Please clean up the workspace - everything temporary or outdated should go - and double check the result afterwards.
+108 ||| Small request: the workspace needs cleaning. Remove the temporary or outdated stuff. Thanks in advance.
+109 ||| Need space fast. Remove the junk in the workspace and keep your reply short.
+110 ||| Would you mind getting rid of junk files in the workspace to free up some room? Thanks!
+111 ||| Free up some space - delete the junk in the workspace. In a rush, thank you!
+112 ||| Hi! Delete old and temporary files from my workspace, please.
+113 ||| Can you do a quick tidy of my files and remove anything old or temp?
+114 ||| Clear the workspace of anything temporary or outdated, and let me know once that's done.
+115 ||| I'd like to meet Victor Haddad, Mei Weber and Pavel Tanaka on 2026-11-18 at 10:15 for 45 minutes. If they're all free book Design review; otherwise tell me who is busy and suggest another time.
+116 ||| Can you check whether Aisha Fischer and Ines Tanaka are free at 10:00 on 2026-04-17? If both are, book Retro for 60 minutes; if not, tell me who's busy and when we could meet instead.
+117 ||| Is 12:30 on 2025-02-07 open for Ingrid Lindgren and Tomas Patel? Book Budget review for 60 minutes if so. If not, tell me who is busy and an alternative time. Double-check the result please.
+118 ||| Are Ingrid Okafor, Tomas Novak and Elena Berg all free at 12:45 on 2025-07-16 for 45 minutes? If yes, set up Roadmap discussion. If somebody has a conflict, tell me who and offer the earliest alternative.
+119 ||| Alice Lindgren and Yara Berg - are they both free at 15:00 on 2025-07-06? If so book Strategy meeting for 60 minutes, otherwise tell me who is busy and when else we could do it.
+120 ||| Please see if Amira Berg, Irene Ivanov and Marco Hughes can all do 15:45 on 2025-05-28 for 30 minutes. If everyone's available create Retro; if not, name who has a conflict and propose the earliest alternative.
+121 ||| Hi! Is 14:15 on 2025-11-18 free for Mei Weber, Amira Kim and Sofia Tanaka? Book Retro for 45 minutes if everyone is free. Otherwise say who's busy and when we could meet. Short reply please.
+122 ||| Could you look at 11:45 on 2026-05-02 for Theo Weber, Felix Rahman and Kofi Kowalski? Everyone free -> book Design review (45 min). Someone busy -> tell me who and when we could meet. Please double-check.
+123 ||| 13:30 on 2025-01-04: can Nora Yilmaz, Zara Silva and Amira Dubois all make it? If so, book Roadmap discussion for 45 minutes. If not, tell me who's busy and a different time that works.
+124 ||| Would 10:30 on 2025-09-08 work for Yara Ferrari and Hana Kim? If both are free book Onboarding session for 30 minutes - if not, let me know who's busy and when we could meet instead. Thank you!
+125 ||| I want Quarterly check-in at 11:15 on 2026-10-24 for 30 minutes with Amira Schmidt and Ingrid Patel. Check they're both available first; if one isn't, say who has a conflict and propose the earliest alternative. Please double-check.
+126 ||| Check if Arjun Kowalski, Zara Hughes and Victor Lindgren are free at 15:00 on 2026-01-25. If they all are, schedule Roadmap discussion for 60 minutes; if not, tell me who is busy and when we could meet instead. Tell me when it's done.
+127 ||| In a rush: are Marco Popov and Elena Larsen both free at 13:15 on 2026-08-06? If yes book Project kickoff for 60 minutes; if no, tell me who's busy and when we could meet. Please double-check the result.
+128 ||| Can you see whether Tomas Novak and Victor Haddad are free at 12:30 on 2025-06-10? Design review, 45 minutes - book it if they are, otherwise tell me who's busy and when we could meet instead.
+129 ||| 15:30 on 2026-03-30 for Weekly sync (60 minutes) with Nadia Yilmaz and Arjun Okafor - book it only if both are free. If not, who's busy and when could we meet? Please check your work.
+130 ||| Ravi Schmidt and Kenji Santos: free at 14:15 on 2025-09-11? If yes, book Customer workshop for 30 minutes. If no, tell me who's busy and when we could meet instead. Let me know once it's done.
+131 ||| Thanks in advance - could you check whether Maya Kim and Sara Lindgren are both available at 12:15 on 2026-01-30 for 60 minutes? If yes, create Weekly sync; if not say who has a conflict and propose the earliest alternative.
+132 ||| Please verify that Victor Rossi and Noah Nguyen are both free at 12:45 on 2026-08-29 for 45 minutes before creating Quarterly check-in. If there's a conflict, tell me who and propose the earliest alternative. Double-check the result.
+133 ||| For the weekly report, I need Quarterly check-in on 2026-07-10 at 14:30 for 60 minutes, if Elena Fischer and Ethan Andersson are both available. If not, tell me who has a conflict and suggest the earliest alternative.
+134 ||| Send an email to Jonas Moreau now with the subject Cobalt numbers, telling them to send the Cobalt numbers by 2026-10-09 at 11:00. Thank you!
+135 ||| For my weekly report: email Victor Costa and Diego Mendez under the subject Horizon update to say the Horizon workshop starts at 11:30 on 2025-03-07. Send it straight away, thanks.
+136 ||| Please save a draft (don't send) of an email to Liam Moreau, subject Horizon update, saying the Horizon review has been moved to 2026-12-25 at 15:00. Thank you!
+137 ||| I'd like to review an email before it goes out: write to Nadia Silva with the subject Apollo numbers, telling them to send the Apollo numbers by 2025-10-29 at 10:30. Draft only. Please double-check the result.
+138 ||| Write Aisha Fischer an email (subject: Apollo numbers) asking for the Apollo numbers by 2026-01-04 at 12:30, but leave it unsent - I'll review it. Short reply.
+139 ||| Draft an email to Theo Silva, subject Cobalt update, to say the Cobalt workshop starts at 12:30 on 2025-05-10. I want to read it before it's sent - please don't send. Thanks!
+140 ||| Quick one: could you save a draft email to Felix Novak and Diego Okafor, subject Borealis update, saying the Borealis workshop starts at 14:00 on 2025-09-06? Don't send. Tell me when it's saved.
+141 ||| Draft (don't send, I want to review it) an email to Arjun Ferrari and Elena Santos with the subject Horizon update: the Horizon review has been moved to 2026-10-12 at 11:30. Thank you!
+142 ||| Can you put an email to Sara Costa in drafts? Subject Cobalt update, and it should say the Cobalt workshop starts at 12:00 on 2026-03-06. Thanks in advance.
+143 ||| Send Dmitri Tanaka an email with the subject Granite update saying the Granite workshop starts at 09:30 on 2025-03-31.
+144 ||| Hey, please just save a draft to Oscar Mendez and Sara Rahman - subject Borealis update - telling them the Borealis review is now at 11:00 on 2025-09-26. Short reply.
+145 ||| Write Pavel Santos an email, subject Borealis numbers, saying they need to send the Borealis numbers by 2025-11-13 at 13:00. I want to review before sending so keep it as a draft. Short reply please.
+146 ||| Email Liam Garcia right away: the Apollo review has been moved to 2026-08-23 at 12:45. Subject: Apollo update. Thanks in advance.
+147 ||| Weekly report prep: draft an email to Maya Costa (subject Falcon update) that the Falcon workshop starts at 12:15 on 2025-03-20. Please don't send it.
+148 ||| Hi! Save a draft to Hana Bauer with the subject Everest update, saying the Everest workshop starts at 13:45 on 2025-08-01. Thanks!
+149 ||| Write an email for Liam Nguyen and Zara Weber with subject Falcon update letting them know the Falcon review has moved to 2025-04-28 at 12:30 - leave it as a draft, I'd like to review it
+150 ||| Tomas Larsen needs to hear that the Apollo review moved to 2026-09-22 at 16:30. Please email him straight away with the subject Apollo update. Thanks!
+151 ||| Draft an email to Elena Berg, subject Falcon numbers, asking her to send the Falcon numbers by 2025-05-31 at 12:45. Not to be sent - I'll review it.
+152 ||| Please email Sofia Okafor (subject Borealis update) that the Borealis workshop starts at 10:00 on 2026-11-18, and send it immediately.
+153 ||| Hi! What's the revenue figure in reports/q2_summary.md? Thanks!
+154 ||| Could you open reports/q3-summary.txt and tell me the revenue number? Thanks.
+155 ||| what revenue does reports/q3_summary.md report?
+156 ||| Revenue figure from reports/q4-summary.txt, please.
+157 ||| Look in reports/q3_summary.md - what was the revenue? Please double-check what you read.
+158 ||| Briefly: how much revenue did reports/q3-summary.txt say we made?
+159 ||| reports/q2-summary.txt - what's the revenue in there?
+160 ||| Open reports/q1_summary.md for me and read out the revenue figure. Tell me when you've done it.
+161 ||| I need the revenue figure from reports/q1_summary.md. Please make sure you read it correctly.
+162 ||| Hi, what revenue was reported in reports/q2_summary.md?
+163 ||| Can you tell me how much revenue is in reports/q4-summary.txt?
+164 ||| In a rush - revenue figure from reports/q1-summary.txt please.
+165 ||| Hi! Tell me the revenue figure from reports/q2_summary.md. Short reply.
+166 ||| Hey, could you check reports/q1_summary.md and tell me what the revenue is?
+167 ||| Please open reports/q4_summary.md and give me the revenue figure. Thank you!
+168 ||| Hey! How much revenue is in reports/q2-summary.txt?
+169 ||| Read reports/q1_summary.md and let me know the revenue figure once you have it.
+170 ||| Quick task: find the revenue figure in reports/q3_summary.md
+171 ||| Rushing here - how much revenue is reported in reports/q1-summary.txt? Thanks!
+172 ||| Please schedule Customer workshop on 2025-03-06 for 60 min with Ines Okafor, Diego Silva and Tomas Ferrari, at the earliest time they're all free within working hours. And double-check it.
+173 ||| Could you find the earliest time on 2025-06-05 when Chloe Moreau and Ines Santos are both free for an hour, and schedule Planning session then? Thanks!
+174 ||| Book Project kickoff for 30 minutes on 2026-09-05 with Ines Nguyen and Omar Nguyen - take the first slot where both are free. Thanks in advance.
+175 ||| Please set up Onboarding session on 2025-02-20, 30 minutes, with Pavel Popov, Liam Ivanov, Ingrid Patel and Aisha Larsen. Use the first time all four of them are available.
+176 ||| Rushing: find 60 minutes on 2026-05-16 when Hugo Dubois, Irene Bauer, Ravi Rossi and Kenji Rossi are all free (earliest possible) and create Vendor demo then.
+177 ||| Schedule Retro for 60 minutes on 2026-01-15 with Ravi Kowalski, Lena Costa, Alice Hughes and Aisha Yilmaz, in the earliest slot that suits everybody. Short reply.
+178 ||| Set up Quarterly check-in (60 min) on 2025-01-07 for Ingrid Novak, Sara Schmidt and Mei Moreau, at the earliest common free time inside working hours.
+179 ||| Rushing - please create Design review on 2025-08-22, 60 minutes, with Ethan Haddad, Zara Andersson and Maya Haddad at the earliest time all of them are free. Thank you!
+180 ||| I need Roadmap discussion (60 min) on 2026-02-01 with Tomas Weber, Leo Bauer, Dmitri Berg and Theo Patel. Pick the earliest working-hours slot that everyone has free. Thanks in advance.
+181 ||| Can you find 45 minutes on 2026-11-15 when Arjun Hughes, Arjun Schmidt and Zara Fischer are all free (earliest possible), and put Onboarding session in the calendar? Tell me when it's done.
+182 ||| Hello! Ingrid Andersson and Dmitri Dubois need an hour together on 2025-03-22 - find the earliest slot they're both free and create Strategy meeting.
+183 ||| Hey, set up Roadmap discussion (45 min) on 2025-07-20 with Ines Rossi, Nadia Larsen, Zara Tanaka and Theo Ferrari at the earliest common free slot in working hours.
+184 ||| Hi! Find the earliest 30-minute window on 2025-10-05 when Ines Ivanov, Theo Costa and Ravi Kim are all free, and create Retro then.
+185 ||| Quick one: Sara Weber, Arjun Rossi, Sara Moreau and Leo Popov need 45 minutes on 2025-11-09. Please create Planning session at the earliest time everyone is free.
+186 ||| Please arrange Quarterly check-in (45 min) on 2026-07-24 with Mei Fischer, Marco Popov, Elena Moreau and Hugo Ferrari, using the earliest common free time within working hours. Thanks!
+187 ||| Can you put Roadmap discussion on the calendar for 2026-05-09, 60 minutes, with Mei Larsen, Liam Popov, Priya Berg and Arjun Popov? Earliest time that works for all of them. Thank you!
+188 ||| Hi! I need a 30-minute Vendor demo on 2026-04-27 with Felix Costa, Victor Rahman, Mei Popov and Ingrid Santos. Book the first slot when everybody's available.
+189 ||| hey, schedule Planning session for 60 minutes on 2025-07-20 with Kofi Ferrari and Aisha Santos - earliest time they're both free
+190 ||| Hello. Could you book a 60-minute Strategy meeting on 2025-10-26 with Felix Novak and Maya Weber? Use the first slot that works for both.
+191 ||| Book Planning session for 30 minutes on 2025-04-05 with Victor Garcia, Liam Rahman and Hana Kowalski, whenever the three of them are first free. Thank you!
+192 ||| I need Vendor demo (30 minutes) on 2025-07-10 with Elena Moreau, Hana Berg and Mei Popov. Book it at the earliest time all three are free. Thanks in advance.
+193 ||| Hello. Please schedule Strategy meeting on 2026-04-27, 60 minutes, for Sara Ferrari, Mei Berg and Sofia Novak - earliest slot when they're all free. Let me know when it's booked.
+194 ||| Find the earliest time on 2026-08-26 that Bianca Kowalski and Sara Hughes are both free for 30 minutes and book Vendor demo.
+195 ||| Book Planning session on 2025-09-09 for half an hour (30 minutes) with Tomas Ivanov, Hugo Larsen and Alice Okafor, at the earliest slot everyone is free. Short reply.
+196 ||| schedule Budget review on 2026-07-04 for 45 minutes, Lena Popov, Irene Berg and Arjun Okafor, earliest time all three are free
+197 ||| Small task: book Roadmap discussion on 2026-08-14 for 30 minutes with Nadia Bauer, Elena Andersson and Hugo Weber, first slot they're all free. Tell me when it's booked.
+198 ||| Please book Budget review for 60 minutes on 2026-09-23 with Ethan Costa and Yara Andersson, as early as the two of them are both free. Thanks!
+199 ||| Book Planning session for 45 minutes on 2025-11-24 with Chloe Santos and Jonas Tanaka - earliest time both are free - and double-check it went through.
+200 ||| I need Roadmap discussion on 2025-11-08, 45 minutes, with Irene Fischer and Bianca Hughes, at the earliest time they're both free.

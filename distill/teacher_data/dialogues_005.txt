@@ -1,0 +1,702 @@
+Code, extraction and writing sessions: code is executed by the verifier, extracted JSON must parse, and each revision keeps what the user already approved while changing only what was asked.
+
+### mt/p001 | skills=code_iterate
+@user
+Write a Python function that checks whether a string is a palindrome.
+@assistant
+Here is a simple version. It compares the string with its reverse.
+
+```python
+def is_palindrome(s):
+    return s == s[::-1]
+```
+
+`s[::-1]` builds a reversed copy, so `is_palindrome("level")` returns `True` and `is_palindrome("hello")` returns `False`.
+@pyassert is_palindrome("level") and not is_palindrome("hello")
+@user
+It should ignore capitals, spaces and punctuation. "A man, a plan, a canal: Panama" should count.
+@assistant
+Then the text needs cleaning before the comparison. I keep only letters and digits and lower-case them.
+
+```python
+def is_palindrome(s):
+    cleaned = [ch.lower() for ch in s if ch.isalnum()]
+    return cleaned == cleaned[::-1]
+```
+
+Step by step for your example: the cleaned characters spell "amanaplanacanalpanama", which reads the same in both directions, so the function returns `True`.
+@pyassert is_palindrome("A man, a plan, a canal: Panama") and not is_palindrome("Not one")
+@user
+What does it return for an empty string? Is that a bug?
+@assistant
+It returns `True`. The cleaned list is empty, and an empty list equals its own reverse.
+
+That is the usual convention, since an empty string reads the same both ways, so I would not call it a bug. If your use case should reject empty input, add one line:
+
+```python
+def is_palindrome(s):
+    cleaned = [ch.lower() for ch in s if ch.isalnum()]
+    if not cleaned:
+        return False
+    return cleaned == cleaned[::-1]
+```
+
+Note that this version also returns `False` for a string made only of punctuation, such as "?!".
+@pyassert is_palindrome("") is False and is_palindrome("?!") is False and is_palindrome("Noon")
+
+### mt/p002 | skills=code_debug
+@user
+This is supposed to return the average of a list but I get an error with an empty list.
+
+def average(nums):
+    return sum(nums) / len(nums)
+@assistant
+The error is a `ZeroDivisionError`. For an empty list `len(nums)` is 0, and Python cannot divide by zero.
+
+You need to decide what an empty list should give. A common choice is `None`, meaning "there is no average":
+
+```python
+def average(nums):
+    if not nums:
+        return None
+    return sum(nums) / len(nums)
+```
+
+Returning 0 is tempting, but it can hide problems, because 0 looks like a real result.
+@pyassert average([]) is None and average([2, 4, 9]) == 5
+@user
+Actually I'd prefer it raises a clear error message instead.
+@assistant
+That is a good choice when an empty list means something went wrong upstream.
+
+```python
+def average(nums):
+    if not nums:
+        raise ValueError("average() needs at least one number")
+    return sum(nums) / len(nums)
+```
+
+Callers now see a message that names the problem, in place of a division error that points at the wrong cause.
+@pyassert average([1, 2]) == 1.5
+@user
+How do I test that it raises?
+@assistant
+With plain Python you can use `try` and `except`:
+
+```python
+def average(nums):
+    if not nums:
+        raise ValueError("average() needs at least one number")
+    return sum(nums) / len(nums)
+
+
+def test_average_empty():
+    try:
+        average([])
+    except ValueError as err:
+        assert "at least one number" in str(err)
+    else:
+        raise AssertionError("expected ValueError")
+```
+
+If you use pytest, the same test is shorter: `with pytest.raises(ValueError): average([])`.
+@pyassert test_average_empty() is None
+
+### mt/p003 | skills=code_explain
+@user
+What does this do?
+
+result = [x * x for x in range(10) if x % 2 == 0]
+@assistant
+It builds a list of the squares of the even numbers from 0 to 9.
+
+Reading it in order:
+1. `for x in range(10)` goes through 0, 1, 2, up to 9.
+2. `if x % 2 == 0` keeps only the values with no remainder when divided by 2, which are 0, 2, 4, 6, 8.
+3. `x * x` squares each one that is kept.
+
+The result is `[0, 4, 16, 36, 64]`.
+@check has=[0, 4, 16, 36, 64]
+@user
+Rewrite it as a normal loop so I can see the steps.
+@assistant
+```python
+result = []
+for x in range(10):
+    if x % 2 == 0:
+        result.append(x * x)
+```
+
+It does the same three things in the same order: loop, filter, then add the square to the list.
+@pyassert result == [0, 4, 16, 36, 64]
+@user
+Which one should I use?
+@assistant
+For something this short, the list comprehension. It is the common Python style, and once you are used to it, it reads as one thought: "squares of the even numbers".
+
+Switch to the loop when the logic grows, for example several conditions, nested loops, or a step that needs a comment. A comprehension that needs more than one line to understand is harder to read than the loop it replaces.
+@check has=comprehension
+
+### mt/p004 | skills=code_iterate
+@user
+I need a function that counts how often each word appears in a text.
+@assistant
+```python
+def word_counts(text):
+    counts = {}
+    for word in text.lower().split():
+        counts[word] = counts.get(word, 0) + 1
+    return counts
+```
+
+It lower-cases the text so "The" and "the" count as one word, splits on whitespace, and uses `counts.get(word, 0)` to start each new word at zero.
+@pyassert word_counts("the cat and the hat") == {"the": 2, "cat": 1, "and": 1, "hat": 1}
+@user
+Punctuation is messing it up. "cat." and "cat" are counted separately.
+@assistant
+Strip punctuation from the ends of each word before counting.
+
+```python
+import string
+
+
+def word_counts(text):
+    counts = {}
+    for word in text.lower().split():
+        word = word.strip(string.punctuation)
+        if word:
+            counts[word] = counts.get(word, 0) + 1
+    return counts
+```
+
+`strip(string.punctuation)` only removes characters at the start and end, so "don't" keeps its apostrophe. The `if word` check skips tokens that were nothing but punctuation, such as a lone dash.
+@pyassert word_counts("The cat. A cat - don't!") == {"the": 1, "cat": 2, "a": 1, "don't": 1}
+@user
+Now give me the top 3 words.
+@assistant
+Sort the items by count, highest first, and take three.
+
+```python
+import string
+
+
+def word_counts(text):
+    counts = {}
+    for word in text.lower().split():
+        word = word.strip(string.punctuation)
+        if word:
+            counts[word] = counts.get(word, 0) + 1
+    return counts
+
+
+def top_words(text, n=3):
+    counts = word_counts(text)
+    ranked = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+    return ranked[:n]
+```
+
+The sort key `(-count, word)` puts the biggest counts first and breaks ties alphabetically, so the output is the same every time you run it.
+@pyassert top_words("b a b c a b d") == [("b", 3), ("a", 2), ("c", 1)]
+
+### mt/p005 | skills=code_review
+@user
+Can you review this? It works but feels clumsy.
+
+def get_evens(numbers):
+    evens = []
+    for i in range(len(numbers)):
+        if numbers[i] % 2 == 0:
+            evens.append(numbers[i])
+    return evens
+@assistant
+It is correct. Two things would make it cleaner.
+
+1. Loop over the values directly. You never use the index `i` except to look up `numbers[i]`.
+2. With that change the whole function fits in a list comprehension.
+
+```python
+def get_evens(numbers):
+    return [n for n in numbers if n % 2 == 0]
+```
+
+The behaviour is identical, including for an empty list and for negative numbers.
+@pyassert get_evens([1, 2, 3, 4, -6, 7]) == [2, 4, -6] and get_evens([]) == []
+@user
+Would it break if someone passes a string in the list?
+@assistant
+Yes. For a string, `%` means text formatting, not remainder, so `"abc" % 2` raises a `TypeError`. Your original version fails in the same way, so this is not something the rewrite introduced.
+
+Whether to handle it depends on where the data comes from. If the list should only hold numbers, letting it fail loudly is fine. If mixed input is expected, skip anything that is not an integer:
+
+```python
+def get_evens(numbers):
+    return [n for n in numbers if isinstance(n, int) and n % 2 == 0]
+```
+@pyassert get_evens([2, "abc", 3, 8, 2.0]) == [2, 8]
+@user
+Why did 2.0 get dropped there?
+@assistant
+Because `isinstance(2.0, int)` is `False`. The value 2.0 is a float, even though it is mathematically even.
+
+If floats with whole values should count, widen the check:
+
+```python
+def get_evens(numbers):
+    return [n for n in numbers if isinstance(n, (int, float)) and n % 2 == 0]
+```
+
+One more detail: `True` and `False` are a kind of `int` in Python, so `False` (which equals 0) would be reported as even. Add `and not isinstance(n, bool)` if booleans can appear in your data.
+@pyassert get_evens([2, "abc", 3, 8, 2.0, 2.5]) == [2, 8, 2.0]
+
+### mt/p006 | skills=code_algorithm
+@user
+Write a function that returns the nth Fibonacci number.
+@assistant
+I'll use the convention fib(0) = 0, fib(1) = 1, and each later number is the sum of the two before it.
+
+```python
+def fib(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+```
+
+The loop keeps the last two numbers and moves them forward n times. For n = 10 it returns 55.
+@pyassert fib(0) == 0 and fib(1) == 1 and fib(10) == 55
+@user
+My teacher showed a recursive version. Why didn't you use that?
+@assistant
+The recursive version follows the definition closely, which makes it good for teaching:
+
+```python
+def fib_recursive(n):
+    if n < 2:
+        return n
+    return fib_recursive(n - 1) + fib_recursive(n - 2)
+```
+
+Its weakness is speed. Each call makes two more calls, and the same values are recomputed again and again. `fib_recursive(30)` already makes over a million calls, and each increase of n by one multiplies the work by about 1.6. The loop does n steps and nothing more.
+@pyassert fib_recursive(15) == 610
+@user
+Can I keep the recursion but make it fast?
+@assistant
+Yes, by remembering results that were already computed. This is called memoisation, and Python has a ready-made decorator for it.
+
+```python
+from functools import lru_cache
+
+
+@lru_cache(maxsize=None)
+def fib_memo(n):
+    if n < 2:
+        return n
+    return fib_memo(n - 1) + fib_memo(n - 2)
+```
+
+Each value of n is now computed once and then read from the cache, so the work grows in step with n, as it does in the loop. One limit remains: very large n, around a thousand or more, can hit Python's recursion depth limit, which the loop version never does.
+@pyassert fib_memo(80) == 23416728348467685
+
+### mt/p007 | skills=code_sql
+@user
+I have a table orders(id, customer, amount, created_at). How do I get total spending per customer?
+@assistant
+Group the rows by customer and sum the amounts:
+
+```sql
+SELECT customer, SUM(amount) AS total_spent
+FROM orders
+GROUP BY customer;
+```
+
+`GROUP BY customer` makes one output row per customer, and `SUM(amount)` adds up that customer's orders.
+@check has=GROUP BY customer
+@user
+Only customers who spent more than 500, biggest first.
+@assistant
+```sql
+SELECT customer, SUM(amount) AS total_spent
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) > 500
+ORDER BY total_spent DESC;
+```
+
+The filter goes in `HAVING`, not `WHERE`, because it applies to the summed total. `WHERE` runs before grouping and can only see single rows.
+@check has=HAVING SUM(amount) > 500 ; has=DESC
+@user
+And only count orders from 2024.
+@assistant
+That condition is about single rows, so this one does belong in `WHERE`:
+
+```sql
+SELECT customer, SUM(amount) AS total_spent
+FROM orders
+WHERE created_at >= '2024-01-01'
+  AND created_at < '2025-01-01'
+GROUP BY customer
+HAVING SUM(amount) > 500
+ORDER BY total_spent DESC;
+```
+
+The order of work is: `WHERE` keeps the 2024 orders, `GROUP BY` collects them per customer, `HAVING` drops the customers at 500 or below, and `ORDER BY` sorts what remains. I used a date range in place of a year function so that an index on `created_at` can still be used.
+@check has=WHERE created_at >= '2024-01-01' ; has=HAVING
+
+### mt/p008 | skills=code_regex
+@user
+I need a regex that matches a date like 2024-03-15.
+@assistant
+```python
+import re
+
+DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+```
+
+Piece by piece: `\d{4}` is four digits for the year, then a hyphen, `\d{2}` for the month, another hyphen, and `\d{2}` for the day. The `^` and `$` anchors make sure the whole string is a date, with nothing before or after.
+@pyassert DATE.match("2024-03-15") and not DATE.match("2024-3-15") and not DATE.match("x2024-03-15")
+@user
+It accepts 2024-13-45. Can the regex reject impossible months and days?
+@assistant
+It can reject the obviously impossible ones:
+
+```python
+import re
+
+DATE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$")
+```
+
+The month part allows 01 to 09 or 10 to 12. The day part allows 01 to 09, 10 to 29, or 30 and 31.
+
+It still accepts dates like 2024-02-31, because a regex cannot easily know how many days each month has. For real validation, let the date library decide.
+@pyassert DATE.match("2024-12-31") and not DATE.match("2024-13-45") and not DATE.match("2024-00-10") and DATE.match("2024-02-31")
+@user
+Show me the library way then.
+@assistant
+```python
+from datetime import datetime
+
+
+def is_valid_date(text):
+    try:
+        datetime.strptime(text, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
+```
+
+`strptime` parses the text with the given format and raises `ValueError` when the date does not exist. It knows the month lengths and leap years, so 2024-02-29 passes and 2023-02-29 fails.
+
+One caveat: `strptime` is lenient about leading zeros and also accepts "2024-3-15". If the format must be strict, run the regex first and then this check.
+@pyassert is_valid_date("2024-02-29") and not is_valid_date("2023-02-29") and not is_valid_date("2024-02-31")
+
+### mt/x001 | skills=extract_json
+@system
+You convert messages into JSON. Reply with JSON only, no explanation.
+@user
+Extract name, date and number of guests: "Hi, this is Carla Mendes. I'd like a table for six on the 14th of May at 8pm."
+@assistant
+{"name": "Carla Mendes", "date": "14 May", "guests": 6}
+@check jsonvalid ; has="guests": 6
+@user
+Add the time as a separate field in 24h format.
+@assistant
+{"name": "Carla Mendes", "date": "14 May", "time": "20:00", "guests": 6}
+@check jsonvalid ; has="time": "20:00"
+@user
+Next one: "Booking for two, name's Idris, tomorrow lunchtime."
+@assistant
+{"name": "Idris", "date": "tomorrow", "time": null, "guests": 2}
+@check jsonvalid ; has="time": null
+@user
+Why is time null? He said lunchtime.
+@assistant
+{"note": "Lunchtime is not an exact clock time, so the 24h time field was left null instead of guessing. The date is kept as 'tomorrow' because the message gives no calendar date.", "suggestion": {"name": "Idris", "date": "tomorrow", "time": null, "time_hint": "lunchtime", "guests": 2}}
+@check jsonvalid ; has=lunchtime
+
+### mt/x002 | skills=extract_fields
+@user
+Pull out the key facts from this listing as a short list:
+
+"Bright 2-bed flat on the third floor of a 1930s building, 68 m², with a south-facing balcony. Rent 1,450 per month plus about 120 for utilities. Available from 1 September. No pets. Five minutes' walk to Rosenplatz station."
+@assistant
+- Type: 2-bedroom flat, third floor, 1930s building
+- Size: 68 m²
+- Extras: south-facing balcony
+- Rent: 1,450 per month
+- Utilities: about 120 per month
+- Available: from 1 September
+- Pets: not allowed
+- Transport: 5 minutes' walk to Rosenplatz station
+@check has=68 ; has=1,450 ; has=Rosenplatz
+@user
+What's the total monthly cost and the rent per square metre?
+@assistant
+Step 1: Total monthly cost: 1,450 + 120 = about 1,570.
+Step 2: Rent per square metre: 1,450 / 68 = about 21.32.
+
+So roughly 1,570 a month in total, and about 21.30 per m² for the rent alone. The utilities figure is an estimate in the listing, so the total may vary.
+@check has=1,570 ; has=21.3
+@user
+Is there a lift?
+@assistant
+The listing does not mention one. Since the flat is on the third floor of a 1930s building, it is worth asking the landlord before a viewing.
+@check has=does not mention
+@user
+Now the same facts as JSON.
+@assistant
+```json
+{
+  "type": "flat",
+  "bedrooms": 2,
+  "floor": 3,
+  "building_year": "1930s",
+  "size_m2": 68,
+  "balcony": "south-facing",
+  "rent_per_month": 1450,
+  "utilities_per_month_approx": 120,
+  "available_from": "1 September",
+  "pets_allowed": false,
+  "transport": "5 minutes' walk to Rosenplatz station",
+  "lift": null
+}
+```
+@check jsonvalid ; has="lift": null
+
+### mt/x003 | skills=extract_classify
+@user
+Label each review as positive, negative or mixed:
+
+1. "Arrived two days late and the box was crushed."
+2. "Lovely fabric, fits perfectly, will buy again."
+3. "Great sound, but the battery dies after three hours."
+@assistant
+1. Negative. Both points are complaints: late delivery and damaged packaging.
+2. Positive. Praise for the fabric and fit, plus the intent to buy again.
+3. Mixed. The sound is praised, but the battery life is criticised.
+@check has=Mixed ; has=Negative ; has=Positive
+@user
+For each one, what's the main topic: delivery, product quality or price?
+@assistant
+1. Delivery. The complaint is about lateness and the state of the box, not the product inside.
+2. Product quality. Fabric and fit are both about the item.
+3. Product quality. Sound and battery are both features of the product.
+
+None of the three mentions price.
+@check has=Delivery ; has=None of the three mentions price
+@user
+Here's a fourth: "It's fine I guess."
+@assistant
+4. Mixed, leaning neutral. "Fine" is mildly positive, but "I guess" signals low enthusiasm. If your labels allowed "neutral", that would fit better than any of the three.
+
+Topic: unclear. The review does not say what is fine, so I would not assign it to delivery, quality or price.
+@check has=neutral ; has=unclear
+
+### mt/x004 | skills=extract_table
+@user
+Turn this into a table:
+
+"Monday we sold 14 coffees and 6 teas. Tuesday 19 coffees, 4 teas. Wednesday was slow: 9 coffees and 9 teas."
+@assistant
+| Day | Coffees | Teas |
+|---|---|---|
+| Monday | 14 | 6 |
+| Tuesday | 19 | 4 |
+| Wednesday | 9 | 9 |
+@check has=| Tuesday | 19 | 4 |
+@user
+Add a total column and a total row.
+@assistant
+| Day | Coffees | Teas | Total |
+|---|---|---|---|
+| Monday | 14 | 6 | 20 |
+| Tuesday | 19 | 4 | 23 |
+| Wednesday | 9 | 9 | 18 |
+| Total | 42 | 19 | 61 |
+@check has=| Total | 42 | 19 | 61 |
+@user
+Which day had the highest share of tea?
+@assistant
+Step 1: Monday: 6 / 20 = 30%.
+Step 2: Tuesday: 4 / 23 = about 17%.
+Step 3: Wednesday: 9 / 18 = 50%.
+
+Wednesday had the highest share of tea, at 50%, even though it was the slowest day overall.
+@check has=50% ; has=Wednesday
+
+### mt/x005 | skills=extract_entities
+@user
+List the people, organisations and places in this sentence:
+
+"Dr. Amina Yusuf of the Baltic Marine Institute told reporters in Gdansk that the survey, funded by the Nordholm Foundation, would be led by her colleague Piotr Lange."
+@assistant
+People:
+- Dr. Amina Yusuf
+- Piotr Lange
+
+Organisations:
+- Baltic Marine Institute
+- Nordholm Foundation
+
+Places:
+- Gdansk
+@check has=Piotr Lange ; has=Nordholm Foundation ; has=Gdansk
+@user
+Who is funding the survey and who is leading it?
+@assistant
+The Nordholm Foundation is funding the survey, and Piotr Lange will lead it. Dr. Amina Yusuf is the one who announced this, but the sentence does not say she is leading it.
+@check has=Piotr Lange will lead
+@user
+Where does Piotr Lange work?
+@assistant
+The sentence does not state it outright. It calls him Dr. Yusuf's colleague, and she is at the Baltic Marine Institute, so he most likely works there too. That is an inference, not a stated fact.
+@check has=inference
+
+### mt/w001 | skills=write_revise
+@user
+Write a two-sentence product description for a reusable water bottle.
+@assistant
+This stainless steel bottle keeps drinks cold for 24 hours and hot for 12, with a leak-proof lid you can trust in any bag. It holds 750 ml, fits standard cup holders, and replaces hundreds of plastic bottles a year.
+@check max_sentences n=2
+@user
+Too salesy. Make it plainer.
+@assistant
+A 750 ml stainless steel bottle with a leak-proof lid. It keeps drinks cold for about 24 hours or hot for about 12.
+@check max_sentences n=2 ; hasnt=trust
+@user
+Good. Now a version for kids, same facts.
+@assistant
+This bottle keeps your water cold all day long, and the lid stays shut so nothing spills in your school bag. It is made of strong steel and holds 750 ml, enough for a whole day of playing.
+@check max_sentences n=2 ; has=750 ml
+@user
+Put the plain one and the kids one side by side so I can compare.
+@assistant
+Plain version:
+A 750 ml stainless steel bottle with a leak-proof lid. It keeps drinks cold for about 24 hours or hot for about 12.
+
+Kids version:
+This bottle keeps your water cold all day long, and the lid stays shut so nothing spills in your school bag. It is made of strong steel and holds 750 ml, enough for a whole day of playing.
+@check has=Plain version ; has=Kids version
+
+### mt/w002 | skills=write_email
+@user
+Help me write an email to my manager asking for Friday off. Her name is Ruth.
+@assistant
+Subject: Request for a day off on Friday
+
+Hi Ruth,
+
+Would it be possible for me to take this Friday off? I will make sure my current tasks are finished or handed over before then, and I am happy to share a short status note on Thursday.
+
+Please let me know if that works.
+
+Thanks,
+[Your name]
+@check has=Hi Ruth
+@user
+Mention that Sam agreed to cover my support shift.
+@assistant
+Subject: Request for a day off on Friday
+
+Hi Ruth,
+
+Would it be possible for me to take this Friday off? Sam has agreed to cover my support shift, so the queue will be looked after. I will also make sure my other tasks are finished or handed over before then, and I am happy to share a short status note on Thursday.
+
+Please let me know if that works.
+
+Thanks,
+[Your name]
+@check has=Sam has agreed to cover my support shift
+@user
+Shorter. She reads on her phone.
+@assistant
+Subject: Friday off?
+
+Hi Ruth,
+
+Could I take this Friday off? Sam has agreed to cover my support shift, and I will hand over anything else on Thursday.
+
+Thanks,
+[Your name]
+@check max_words n=40 ; has=Sam
+
+### mt/w003 | skills=write_edit
+@user
+Fix the grammar and spelling, but don't change my wording more than needed:
+
+"Me and my team has been working on this project since three months and we beleive its ready for launch, however their are a few small issue's left."
+@assistant
+"My team and I have been working on this project for three months, and we believe it's ready for launch. However, there are a few small issues left."
+@check has=My team and I have been working ; has=issues left
+@user
+What did you change?
+@assistant
+- "Me and my team has" became "My team and I have". The subject form is "I", and a plural subject takes "have".
+- "since three months" became "for three months". "For" goes with a length of time, and "since" goes with a starting point.
+- "beleive" became "believe" (spelling).
+- "its" became "it's", the short form of "it is".
+- The comma before "however" became a full stop, because "however" starts a new sentence here.
+- "their are" became "there are".
+- "issue's" became "issues". A plural needs no apostrophe.
+@check has=for three months
+@user
+Is "Me and my team" really wrong? Everyone says it.
+@assistant
+In casual speech it is very common and nobody will misunderstand you. In formal writing it is still treated as an error when it is the subject of the sentence.
+
+A quick test: remove the other people and see what is left. You would say "I have been working", not "Me have been working", so the subject form is "I". After a verb or preposition "me" is the right choice: "She thanked my team and me."
+
+For a project update that goes to managers or clients I would keep "My team and I".
+@check has=I have been working
+
+### mt/w004 | skills=write_tone
+@user
+Rewrite this so it's polite: "You sent the wrong file again. Send the right one today."
+@assistant
+"Thanks for sending this over. It looks like the attachment is not the file I needed. Could you send the correct one today? I'd appreciate it."
+@check has=Could you
+@user
+Too soft. This is the third time. I want firm but professional.
+@assistant
+"The file you sent is again not the one I asked for. This is the third time, and it is holding up the work. Please send the correct file today, and let me know if something is unclear about which one I need."
+@check has=third time ; hasnt=appreciate
+@user
+Add the file name: Q3_forecast_final.xlsx
+@assistant
+"The file you sent is again not the one I asked for. This is the third time, and it is holding up the work. Please send Q3_forecast_final.xlsx today, and let me know if something is unclear about which file I need."
+@check has=Q3_forecast_final.xlsx ; has=third time
+
+### mt/w005 | skills=write_creative
+@user
+Write a four-line poem about a lighthouse.
+@assistant
+Alone above the breaking sea,
+it turns its patient light around,
+and ships that cannot see the shore
+are told where safety can be found.
+@check lines n=4
+@user
+Make it rhyme in pairs, lines 1-2 and 3-4.
+@assistant
+Alone above the restless sea,
+it turns its light for you and me.
+When ships are lost and far from shore,
+it guides them safely home once more.
+@check lines n=4 ; has=sea
+@user
+Now turn that into a haiku.
+@assistant
+Above restless waves
+one patient light turns all night,
+calling the ships home.
+@check lines n=3
+@user
+Is that really 5-7-5?
+@assistant
+Let me count the syllables.
+
+Line 1: A-bove (2) rest-less (2) waves (1) = 5.
+Line 2: one (1) pa-tient (2) light (1) turns (1) all (1) night (1) = 7.
+Line 3: call-ing (2) the (1) ships (1) home (1) = 5.
+
+Yes, it is 5-7-5.
+@check has=5-7-5

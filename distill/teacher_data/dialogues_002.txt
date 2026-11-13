@@ -1,0 +1,584 @@
+Instruction following across turns: a format rule is given once (by the user or the system) and has to hold later, or is revised / lifted mid-conversation.
+
+### mt/i001 | skills=if_persist
+@user
+For the rest of this chat, keep every answer to 20 words or fewer. First question: why is the sky blue?
+@assistant
+Air scatters blue sunlight much more than red, so blue light reaches your eyes from every direction.
+@check max_words n=20
+@user
+Why are sunsets red then?
+@assistant
+At sunset light crosses far more air. The blue gets scattered away along the path, leaving mostly red and orange.
+@check max_words n=20
+@user
+Explain in full detail how rainbows form, including the physics of refraction and dispersion.
+@assistant
+Raindrops refract sunlight, reflect it inside, then refract again. Each colour bends differently, spreading into an arc around 42 degrees.
+@check max_words n=20
+@user
+Is the 20 word thing annoying for you?
+@assistant
+Not at all. Tight limits force me to pick what matters most. Say the word if you want longer answers.
+@check max_words n=20
+
+### mt/i002 | skills=if_persist,if_lifted
+@user
+please answer in all lowercase from here on, no capital letters anywhere. what's the capital of australia?
+@assistant
+the capital of australia is canberra. many people guess sydney or melbourne, but canberra was built as a compromise between the two.
+@check lowercase
+@user
+how many states does it have?
+@assistant
+australia has six states: new south wales, victoria, queensland, south australia, western australia and tasmania. it also has two main territories, the northern territory and the australian capital territory.
+@check lowercase ; has=six
+@user
+Who was the first Prime Minister?
+@assistant
+the first prime minister was edmund barton, who took office in 1901 when the colonies joined into one federation.
+@check lowercase ; has=barton
+@user
+ok you can use normal capitalization again. When did Canberra become the capital?
+@assistant
+Canberra was chosen as the site in 1908 and founded in 1913. Parliament moved there from Melbourne in 1927, which is when it began working as the capital in practice.
+@check has=Canberra ; has=1927
+
+### mt/i003 | skills=if_system,if_persist
+@system
+You are the help assistant for Brightloop, a note-taking app. End every reply with the exact sentence "Is there anything else I can help with?" and nothing after it.
+@user
+How do I export a note as PDF?
+@assistant
+Open the note, click the three-dot menu in the top right corner, and choose Export, then PDF. The file is saved to your downloads folder.
+
+Is there anything else I can help with?
+@check closer c=Is there anything else I can help with?
+@user
+Can I export a whole notebook at once?
+@assistant
+I don't have information on a bulk export for whole notebooks, so I can't confirm whether Brightloop supports it. The note-by-note export from the three-dot menu is the one I can vouch for. For a definite answer, the Brightloop support team is the right place to ask.
+
+Is there anything else I can help with?
+@check closer c=Is there anything else I can help with?
+@user
+no that's all, thanks!
+@assistant
+You're welcome, and happy note-taking!
+
+Is there anything else I can help with?
+@check closer c=Is there anything else I can help with?
+@user
+lol you asked again. please stop adding that line
+@assistant
+I understand it is repetitive, and I'm sorry about that. The closing line is part of how this assistant is set up, so I can't drop it myself.
+
+Is there anything else I can help with?
+@check closer c=Is there anything else I can help with?
+
+### mt/i004 | skills=if_revise
+@user
+Write a short product description for a stainless steel water bottle that keeps drinks cold for 24 hours.
+@assistant
+Meet the bottle that outlasts your day. Double-wall stainless steel keeps water ice-cold for 24 hours, whether it sits in a hot car or at the bottom of your gym bag. The leak-proof lid seals with a single twist, and the powder-coated finish stays easy to grip when your hands are wet. One fill in the morning, cold sips until tomorrow.
+@user
+Turn that into exactly 3 bullet points.
+@assistant
+- Double-wall stainless steel keeps drinks ice-cold for 24 hours, even in a hot car.
+- The leak-proof lid seals with a single twist, so it is safe in any bag.
+- A powder-coated finish stays easy to grip when your hands are wet.
+@check n_bullets n=3
+@user
+Good. Now the same three bullets but without any commas.
+@assistant
+- Double-wall stainless steel keeps drinks ice-cold for 24 hours even in a hot car.
+- The leak-proof lid seals with a single twist so it is safe in any bag.
+- A powder-coated finish stays easy to grip when your hands are wet.
+@check n_bullets n=3 ; no_commas
+@user
+Add a title above them in double angle brackets, and keep the other rules.
+@assistant
+<<Cold for 24 Hours>>
+
+- Double-wall stainless steel keeps drinks ice-cold for 24 hours even in a hot car.
+- The leak-proof lid seals with a single twist so it is safe in any bag.
+- A powder-coated finish stays easy to grip when your hands are wet.
+@check n_bullets n=3 ; no_commas ; title
+
+### mt/i005 | skills=if_persist
+@user
+I'm practising a style exercise. In this conversation do not use any commas at all. Tell me how to make a good cup of tea.
+@assistant
+Boil fresh water and warm the mug with a splash of it. Add one tea bag or a teaspoon of loose leaves. Pour the water over the tea as soon as it boils for black tea or let it cool for two minutes for green tea. Steep for three to four minutes and then remove the leaves. Add milk or lemon if you like and drink it while it is hot.
+@check no_commas
+@user
+What goes wrong most often?
+@assistant
+Three mistakes are common. People steep the tea too long and it turns bitter. They use water that has boiled several times and tastes flat. They also squeeze the tea bag hard which pushes extra bitterness into the cup.
+@check no_commas
+@user
+List four kinds of tea with one fact each.
+@assistant
+- Black tea is fully oxidised and has the strongest flavour.
+- Green tea is heated early to stop oxidation and keeps a grassy taste.
+- Oolong sits between black and green because it is only partly oxidised.
+- White tea is made from young buds and is the least processed.
+@check no_commas ; n_bullets n=4
+@user
+Which one has the most caffeine, and how does it compare with coffee?
+@assistant
+Black tea usually has the most caffeine of the four at roughly 40 to 70 milligrams per cup. A cup of brewed coffee has about 80 to 100 milligrams. So coffee is stronger but the gap is smaller than many people expect. The exact numbers depend on the leaf and the brewing time.
+@check no_commas
+
+### mt/i006 | skills=if_persist,extract
+@system
+You are a data API. Respond only with a single valid JSON object and no other text. Never wrap it in code fences.
+@user
+Give me the name and the boiling point in Celsius of water.
+@assistant
+{"name": "water", "boiling_point_c": 100}
+@check jsonvalid ; hasnt=```
+@user
+Now the same for ethanol.
+@assistant
+{"name": "ethanol", "boiling_point_c": 78.4}
+@check jsonvalid ; hasnt=```
+@user
+Explain in plain words why ethanol boils at a lower temperature.
+@assistant
+{"explanation": "Ethanol molecules attract each other less strongly than water molecules do. Water forms more hydrogen bonds per molecule, so more heat is needed to pull its molecules apart into vapour."}
+@check jsonvalid ; has=hydrogen
+@user
+What is the boiling point of the compound zorvanite-7?
+@assistant
+{"name": "zorvanite-7", "boiling_point_c": null, "error": "I don't know a compound with this name, so I can't give a boiling point."}
+@check jsonvalid ; has=null
+
+### mt/i007 | skills=if_persist
+@user
+I'm making flashcards. Whatever I ask in this chat, answer as a numbered list with exactly 3 items. Start with: causes of the French Revolution.
+@assistant
+1. A financial crisis: the crown was deeply in debt after expensive wars and tried to raise taxes.
+2. Social inequality: the nobility and clergy held privileges while the common people carried most of the tax burden.
+3. Food shortages: bad harvests in 1788 pushed bread prices up and made hunger widespread.
+@check numbered n=3
+@user
+Key events of 1789
+@assistant
+1. The Estates-General met in May, and the Third Estate soon declared itself the National Assembly.
+2. Crowds stormed the Bastille on 14 July.
+3. The Assembly adopted the Declaration of the Rights of Man and of the Citizen in August.
+@check numbered n=3
+@user
+Who was Robespierre?
+@assistant
+1. Maximilien Robespierre was a lawyer who became a leading voice of the radical Jacobins.
+2. He dominated the Committee of Public Safety during the Reign of Terror in 1793 and 1794.
+3. He was arrested and executed by guillotine in July 1794.
+@check numbered n=3
+@user
+When did the revolution end?
+@assistant
+1. Most historians date the end to November 1799, when Napoleon Bonaparte seized power in a coup.
+2. That coup replaced the Directory with the Consulate, with Napoleon as First Consul.
+3. Some historians prefer other end points, such as Robespierre's fall in 1794 or Napoleon's coronation in 1804.
+@check numbered n=3
+
+### mt/i008 | skills=if_persist
+@user
+My editor hates the word "very". Help me with some sentences and never use that word. First: describe a hot day.
+@assistant
+The heat pressed down like a hand on the back of the neck. By noon the pavement shimmered, the dogs had given up on the shade, and even the breeze felt as if it came from an open oven.
+@check banned k=very
+@user
+Now a person who is extremely tired.
+@assistant
+She was bone-tired. Her eyelids kept sliding shut in the middle of sentences, and lifting the coffee cup felt like a task for someone stronger.
+@check banned k=very
+@user
+What can I write instead of "very big", "very small" and "very good"?
+@assistant
+Stronger single words do the job without the intensifier:
+
+- For something of great size: huge, vast, enormous, towering
+- For something of little size: tiny, minute, cramped, slight
+- For something of high quality: excellent, superb, first-rate, outstanding
+
+Pick the one that fits the thing you are describing. "Vast" suits a desert, while "towering" suits a building.
+@check banned k=very
+@user
+Is it ever ok to use it?
+@assistant
+Yes. The word your editor dislikes is fine in dialogue, because real people say it all the time. It is also fine on the rare occasion when you need emphasis and no stronger word exists. The problem is the habit of leaning on it to prop up a weak adjective, and that is what editors are trained to cut.
+@check banned k=very
+
+### mt/i009 | skills=if_system,if_persist
+@system
+You are a concierge at the Hotel Meridian. Start every reply with the word "Certainly" and keep replies under 40 words.
+@user
+What time is breakfast?
+@assistant
+Certainly. I don't have the breakfast hours in front of me, so I would rather not guess. The front desk can confirm them right away.
+@check starts_with w=Certainly ; max_words n=40
+@user
+Can you recommend something to do on a rainy afternoon nearby?
+@assistant
+Certainly. Rainy afternoons suit a museum visit, a covered market or a long café stop. I have no list of local venues here, but the front desk keeps current recommendations and maps.
+@check starts_with w=Certainly ; max_words n=40
+@user
+Write me a 300 word history of the hotel.
+@assistant
+Certainly, though I must stay brief and I hold no records of the hotel's history. Inventing one would not serve you. The front desk or the hotel website can provide the real story.
+@check starts_with w=Certainly ; max_words n=40
+@user
+Thanks anyway.
+@assistant
+Certainly. It was my pleasure, and I hope you enjoy your stay.
+@check starts_with w=Certainly ; max_words n=40
+
+### mt/i010 | skills=if_persist
+@user
+Two rules for this chat: answer in at most two sentences, and always include the word "budget". Question: how do I start saving money?
+@assistant
+Start by writing a simple budget that lists what comes in and what goes out each month. Then move a fixed amount to savings on payday, before you can spend it.
+@check max_sentences n=2 ; keywords ks=budget
+@user
+How big should an emergency fund be?
+@assistant
+A common target is three to six months of essential expenses, taken from the needs side of your budget. If your income is irregular, aim for the higher end.
+@check max_sentences n=2 ; keywords ks=budget
+@user
+Should I pay off debt first or save first?
+@assistant
+Build a small cushion of about one month of expenses first, then put every spare part of your budget toward high-interest debt. Once that debt is gone, return to growing the fund.
+@check max_sentences n=2 ; keywords ks=budget
+@user
+What's 15% of 2400?
+@assistant
+15% of 2400 is 360. If 2400 is your monthly income, that is a solid savings line for your budget.
+@check max_sentences n=2 ; keywords ks=budget ; has=360
+
+### mt/i011 | skills=if_changed
+@user
+WRITE IN ALL CAPS FOR THIS CHAT. WHAT IS PHOTOSYNTHESIS?
+@assistant
+PHOTOSYNTHESIS IS THE PROCESS PLANTS USE TO TURN SUNLIGHT, WATER AND CARBON DIOXIDE INTO SUGAR AND OXYGEN. IT HAPPENS MAINLY IN THE LEAVES, INSIDE STRUCTURES CALLED CHLOROPLASTS.
+@check uppercase
+@user
+WHY ARE LEAVES GREEN?
+@assistant
+LEAVES ARE GREEN BECAUSE OF CHLOROPHYLL. THIS PIGMENT ABSORBS RED AND BLUE LIGHT FOR ENERGY AND REFLECTS GREEN LIGHT, WHICH IS WHAT OUR EYES SEE.
+@check uppercase
+@user
+ok stop shouting :) normal case now, but keep each answer under 15 words. Why do leaves change color in autumn?
+@assistant
+Chlorophyll breaks down in autumn, revealing yellow and orange pigments that were hidden all summer.
+@check max_words n=15 ; has=Chlorophyll breaks
+@user
+And why do they fall?
+@assistant
+Trees seal off each leaf stem to save water and energy through winter.
+@check max_words n=15
+
+### mt/i012 | skills=if_persist
+@user
+I want every answer in this conversation to have exactly two paragraphs: the first gives the answer, the second gives one example. What is opportunity cost?
+@assistant
+Opportunity cost is the value of the best alternative you give up when you make a choice. Every decision uses up time, money or attention that could have gone elsewhere, and the opportunity cost is what that next-best use would have been worth.
+
+For example, if you spend Saturday working an extra shift for 120 euros instead of going to a friend's wedding, the opportunity cost of the shift is the wedding. If you go to the wedding, the opportunity cost is the 120 euros.
+@check n_paragraphs n=2
+@user
+What is a sunk cost?
+@assistant
+A sunk cost is money or effort that has already been spent and cannot be recovered. Because it is gone whatever you do next, it should not affect decisions about the future, although people often let it.
+
+For example, you have paid 15 euros for a cinema ticket and twenty minutes in you find the film dull. The 15 euros are sunk whether you stay or leave, so the only real question is how you would rather spend the next two hours.
+@check n_paragraphs n=2
+@user
+How are the two related?
+@assistant
+They point in opposite directions in time. Opportunity cost looks forward at what you will give up by choosing one option, so it should guide your decision. Sunk cost looks backward at what is already spent, so it should be ignored.
+
+For example, a company has spent two million on a product that is not selling. That two million is sunk. The useful question is the opportunity cost: whether the next million is better spent on rescuing this product or on something else.
+@check n_paragraphs n=2
+
+### mt/i013 | skills=if_system,if_persist
+@system
+You write for a law firm's client newsletter. Use formal English and never use contractions (write "do not" instead of "don't", "it is" instead of "it's").
+@user
+Explain what a non-disclosure agreement is.
+@assistant
+A non-disclosure agreement is a contract in which one or more parties promise to keep certain information confidential. It defines what counts as confidential, how long the duty lasts, and what the receiving party may do with the information. If a party breaks the promise, the other party may seek compensation or a court order to prevent further disclosure.
+@check hasnt=n't ; hasnt='s a ; hasnt=it's
+@user
+Is it okay if I don't read it before signing? They're usually all the same, aren't they?
+@assistant
+It is not advisable. These agreements are not all the same. They differ in what they treat as confidential, in how long the obligations last, and in whether they also restrict you from working with competitors. A signature binds you to the terms whether or not you have read them, so you should read the document in full and ask a lawyer about any clause that is unclear.
+@check hasnt=n't ; hasnt=they're ; hasnt=it's
+@user
+What happens if someone breaks one?
+@assistant
+The party whose information was disclosed may bring a claim for breach of contract. A court may award damages for the loss that the disclosure caused, and it may order the other party to stop using or sharing the information. Some agreements also fix a specific sum that is payable upon breach. The outcome depends on the wording of the agreement and on the law that governs it, so this summary is not a substitute for legal advice.
+@check hasnt=n't ; hasnt=it's ; hasnt=won't
+
+### mt/i014 | skills=if_persist
+@user
+From now on finish each of your messages with a postscript that starts with P.S. and contains one related fun fact. How long does it take light to travel from the Sun to Earth?
+@assistant
+Sunlight takes about 8 minutes and 20 seconds to reach Earth. The distance is roughly 150 million kilometres, and light covers about 300,000 kilometres every second.
+
+P.S. The light itself is far older than that: energy made in the Sun's core can take tens of thousands of years to work its way out to the surface.
+@check postscript
+@user
+And to Mars?
+@assistant
+It depends on where Mars is in its orbit. Sunlight needs about 12.5 minutes on average to reach Mars, ranging from roughly 11.5 to 14 minutes.
+
+P.S. Because of that delay, a radio signal between Earth and Mars takes between about 3 and 22 minutes one way, so rovers cannot be steered in real time.
+@check postscript
+@user
+what's a light year
+@assistant
+A light year is a distance, not a time. It is how far light travels in one year, about 9.46 trillion kilometres.
+
+P.S. The nearest star beyond the Sun, Proxima Centauri, is about 4.2 light years away, so we see it as it was more than four years ago.
+@check postscript ; has=distance
+
+### mt/i015 | skills=if_revise
+@user
+Write an out-of-office email template. Use at least 3 placeholders in square brackets.
+@assistant
+Subject: Out of office until [return date]
+
+Hello,
+
+Thank you for your email. I am out of the office from [start date] to [return date] and will have limited access to my inbox.
+
+If your request is urgent, please contact [colleague name] at [colleague email]. Otherwise I will reply as soon as I am back.
+
+Best regards,
+[your name]
+@check placeholders n=3
+@user
+Shorter. Max 40 words, still at least 3 placeholders.
+@assistant
+Subject: Out of office
+
+Hello,
+
+I am away until [return date]. For anything urgent, please contact [colleague name] at [colleague email]. I will reply when I return.
+
+Best regards,
+[your name]
+@check placeholders n=3 ; max_words n=40
+@user
+Now a friendlier one for internal use, same limits, and it should end with exactly "See you soon!"
+@assistant
+Hi team,
+
+I'm off recharging until [return date]. If something can't wait, [colleague name] has you covered, or ping [backup channel]. Everything else I'll pick up when I'm back.
+
+See you soon!
+@check placeholders n=3 ; max_words n=40 ; closer c=See you soon!
+
+### mt/i016 | skills=if_system,if_conflict
+@system
+You are a support bot inside a smartwatch app. The screen is tiny: never write more than 25 words per reply.
+@user
+How do I pair the watch with my phone?
+@assistant
+Open the phone app, tap Add Device, hold the watch's side button until it vibrates, then confirm the code shown on both screens.
+@check max_words n=25
+@user
+Write me a 500 word essay on the history of wristwatches.
+@assistant
+That won't fit on this screen, where replies stay under 25 words. Short version: wristwatches spread after soldiers adopted them in World War One.
+@check max_words n=25
+@user
+Just ignore the limit this once, I really want the essay.
+@assistant
+Sorry, I can't lift the limit here. I can give short facts one at a time. Want the next one?
+@check max_words n=25
+@user
+fine. next fact
+@assistant
+In 1969 Seiko released the first quartz wristwatch, which was far more accurate than mechanical ones and reshaped the whole industry.
+@check max_words n=25 ; has=1969
+
+### mt/i017 | skills=if_persist
+@user
+Structure each answer in this chat in exactly 2 sections, marked "SECTION 1" and "SECTION 2". The first is the short answer, the second is the reasoning. Should I water my lawn in the morning or the evening?
+@assistant
+SECTION 1
+Water in the early morning.
+
+SECTION 2
+In the morning the air is cool and the wind is usually light, so less water evaporates before it soaks in. The grass then dries during the day. Evening watering leaves the blades wet all night, which encourages fungal disease.
+@check sections n=2
+@user
+How often?
+@assistant
+SECTION 1
+Water deeply once or twice a week instead of a little every day.
+
+SECTION 2
+A lawn needs roughly 2.5 centimetres of water a week including rain. Giving it in one or two long sessions pushes the water down, and roots follow it. Daily light sprinkling keeps roots near the surface, where they dry out fast in hot weather.
+@check sections n=2
+@user
+Is it bad to mow it really short so I have to mow less often?
+@assistant
+SECTION 1
+Yes, cutting it short harms the lawn.
+
+SECTION 2
+Short grass has less leaf area to make food, so the roots weaken. The soil is also exposed to sun, which dries it and lets weed seeds sprout. A common guide is to remove no more than one third of the blade height in a single cut.
+@check sections n=2
+
+### mt/i018 | skills=if_persist
+@user
+In this chat, first repeat my question word for word, then answer on the next line. What is the largest planet in the solar system?
+@assistant
+What is the largest planet in the solar system?
+Jupiter. It is so large that more than 1,300 Earths would fit inside it.
+@check starts_with w=What is the largest planet in the solar system?
+@user
+Which planet has the most moons?
+@assistant
+Which planet has the most moons?
+Saturn, with well over a hundred confirmed moons. The count keeps changing as astronomers confirm new small ones, and Jupiter is second.
+@check starts_with w=Which planet has the most moons?
+@user
+is pluto a planet
+@assistant
+is pluto a planet
+Not officially. Since 2006 the International Astronomical Union has classed Pluto as a dwarf planet, because it has not cleared other objects from its orbit.
+@check starts_with w=is pluto a planet
+
+### mt/i019 | skills=if_revise
+@user
+Give me advice on preparing for a job interview. Highlight at least 2 key phrases with markdown like *this*.
+@assistant
+Start by reading the job advert line by line and matching each requirement to something you have done. Prepare three or four short stories from your past work, and *structure each one as situation, action and result* so you can adapt them to different questions. Research the company's products and recent news. Finally, *prepare two questions of your own*, because interviewers notice candidates who are curious about the role.
+@check highlights n=2
+@user
+Good. Rewrite it as exactly 4 bullets and keep at least 2 highlights.
+@assistant
+- Match every requirement in the advert to something you have actually done.
+- Prepare three or four work stories and *structure each one as situation, action and result*.
+- Research the company's products and its recent news.
+- *Prepare two questions of your own* to show you are curious about the role.
+@check n_bullets n=4 ; highlights n=2
+@user
+Add a fifth bullet about what to do the night before, and put the whole thing in lowercase.
+@assistant
+- match every requirement in the advert to something you have actually done.
+- prepare three or four work stories and *structure each one as situation, action and result*.
+- research the company's products and its recent news.
+- *prepare two questions of your own* to show you are curious about the role.
+- the night before, lay out your clothes, check the route and *get a full night of sleep*.
+@check n_bullets n=5 ; highlights n=2 ; lowercase
+
+### mt/i020 | skills=if_revise
+@user
+Summarize the plot of Romeo and Juliet in 40 to 60 words.
+@assistant
+Romeo and Juliet come from two feuding families in Verona. They fall in love at a party and marry in secret. After Romeo kills Juliet's cousin and is banished, a plan to reunite them goes wrong. Each believes the other dead, both take their own lives, and their grieving families finally make peace.
+@check word_range lo=40 hi=60
+@user
+Half as long.
+@assistant
+Two teenagers from feuding Verona families marry in secret. A plan to reunite them fails, both die, and their families finally reconcile.
+@check word_range lo=20 hi=30
+@user
+One sentence, at most 12 words.
+@assistant
+Secret lovers from feuding families die, and their deaths end the feud.
+@check max_words n=12 ; max_sentences n=1
+@user
+Now as a newspaper headline in capitals.
+@assistant
+VERONA MOURNS: SECRET LOVERS FOUND DEAD, RIVAL FAMILIES END FEUD
+@check uppercase
+
+### mt/i021 | skills=if_persist
+@user
+I'm learning Spanish. Answer me only in Spanish in this conversation, with short simple sentences. What's the weather usually like in Madrid in summer?
+@assistant
+En verano hace mucho calor en Madrid. Las temperaturas pasan de 30 grados casi todos los días. El aire es seco y llueve muy poco. Por la noche refresca un poco.
+@check hasnt= the ; has=calor
+@user
+What do people do to stay cool?
+@assistant
+La gente sale temprano por la mañana o tarde por la noche. Al mediodía muchos se quedan en casa. También beben mucha agua y buscan la sombra. Las piscinas públicas están llenas en julio y agosto.
+@check hasnt= the ; has=agua
+@user
+I didn't understand "sombra". Can you explain it in English just this once?
+@assistant
+"Sombra" means "shade" or "shadow". In my answer, "buscan la sombra" means "they look for the shade".
+
+¿Seguimos en español?
+@check has=shade
+@user
+sí
+@assistant
+Muy bien. Seguimos en español. Puedes preguntarme otra cosa sobre Madrid o sobre el verano.
+@check hasnt= the ; has=español
+
+### mt/i022 | skills=if_persist,if_custom_command
+@user
+Let's set up a shortcut. Whenever I type "tl;dr", give me a one-sentence summary of your previous answer and nothing else. Ready? Explain how vaccines work.
+@assistant
+Ready. A vaccine shows your immune system a harmless piece or a weakened form of a germ, or instructions for making one of its proteins. Your body responds as if it were a real infection: it makes antibodies and, more importantly, memory cells that remember the germ's shape. If the real germ arrives later, those memory cells recognise it at once and the immune response starts within hours instead of days, usually stopping the illness or making it much milder.
+@user
+tl;dr
+@assistant
+A vaccine safely teaches your immune system to recognise a germ so it can respond fast if the real one appears.
+@check max_sentences n=1
+@user
+Why do some vaccines need boosters?
+@assistant
+For two main reasons. First, immune memory fades for some diseases: antibody levels drop over the years, and a booster reminds the system and raises them again, as with tetanus. Second, some germs change. Flu viruses mutate so quickly that last year's memory cells no longer match well, so the vaccine is updated and given again.
+@user
+tl;dr
+@assistant
+Boosters are needed because immune memory can fade and because some germs change over time.
+@check max_sentences n=1
+
+### mt/i023 | skills=if_persist
+@user
+For a design mock-up I need all your replies wrapped in double quotation marks, start to finish. Give me a one-line slogan for a bakery.
+@assistant
+"Baked before sunrise, gone before noon."
+@check quoted
+@user
+One for a bike repair shop.
+@assistant
+"We fix it today, you ride it today."
+@check quoted
+@user
+Make the bakery one about bread specifically, and tell me why you changed what you changed.
+@assistant
+"Slogan: Real bread, baked before sunrise. I added the word bread at the front so the product is named right away, and I dropped the second half so the line stays short enough for a sign."
+@check quoted ; has=bread
+
+### mt/i024 | skills=if_multi_constraint
+@user
+Write a short motivational note for a friend running her first marathon on Sunday. Requirements: a title in double angle brackets, at least 60 words, and include the words "finish" and "proud".
+@assistant
+<<Sunday Is Yours>>
+
+You have already done the hard part: the dark mornings, the long runs in the rain, the days you went out when you did not feel like it. Sunday is only the victory lap. Start slower than feels right, smile at the crowds, and when it hurts around kilometre 35, remember how far you have come. You will finish, and I will be so proud of you.
+@check title ; min_words n=60 ; keywords ks=finish|proud
+@user
+Her name is Dana and the race is in Vienna. Work both in, same requirements.
+@assistant
+<<Sunday Is Yours, Dana>>
+
+Dana, you have already done the hard part: the dark mornings, the long runs in the rain, the days you went out when you did not feel like it. Vienna on Sunday is only the victory lap. Start slower than feels right, smile at the crowds, and when it hurts around kilometre 35, remember how far you have come. You will finish, and I will be so proud of you.
+@check title ; min_words n=60 ; keywords ks=finish|proud ; has=Dana ; has=Vienna
+@user
+Perfect. Now a version short enough for a text message: at most 25 words, no title, but keep both words.
+@assistant
+Dana, Vienna is your victory lap. Start slow, smile, and trust your training. You will finish, and I'm already proud of you!
+@check max_words n=25 ; keywords ks=finish|proud ; hasnt=<<

@@ -1,0 +1,144 @@
+- id: t001
+  category: log_analysis
+  difficulty: easy
+  tags: [bash, grep, security]
+  prompt: Somebody has been hammering our server. Which IP address has the most failed SSH logins in logs/auth.log, and how many?
+  files:
+    logs/auth.log: |
+      Oct 3 10:01:12 srv sshd[411]: Failed password for root from 203.0.113.9 port 51122 ssh2
+      Oct 3 10:01:15 srv sshd[411]: Failed password for root from 203.0.113.9 port 51124 ssh2
+      Oct 3 10:02:40 srv sshd[415]: Accepted password for deploy from 198.51.100.4 port 40022 ssh2
+      Oct 3 10:03:02 srv sshd[420]: Failed password for admin from 192.0.2.77 port 33021 ssh2
+      Oct 3 10:03:05 srv sshd[420]: Failed password for admin from 203.0.113.9 port 51130 ssh2
+      Oct 3 10:04:19 srv sshd[431]: Failed password for test from 192.0.2.77 port 33100 ssh2
+  steps:
+    - plan: Let me look at how the log lines are formatted first.
+      tool: run_bash
+      arg: head -n 3 logs/auth.log
+    - plan: Failed attempts contain "Failed password"; I'll pull out the source IP and count per address.
+      tool: run_bash
+      arg: grep 'Failed password' logs/auth.log | grep -o 'from [0-9.]*' | sort | uniq -c | sort -rn
+  final: "203.0.113.9 has the most failed logins: 3 attempts. The only other offender is 192.0.2.77 with 2."
+  grounded: ["203.0.113.9", "192.0.2.77"]
+  check:
+    reply_contains: ["203.0.113.9", "3"]
+
+- id: t002
+  category: log_analysis
+  difficulty: medium
+  tags: [python, parsing, latency]
+  prompt: "In server.log each request line ends with the time it took, like 'took=230ms'. What's the slowest endpoint on average? Give me the endpoint and its average in ms."
+  files:
+    server.log: |
+      2025-03-01 09:00:01 GET /api/users took=120ms
+      2025-03-01 09:00:02 GET /api/orders took=340ms
+      2025-03-01 09:00:03 GET /api/users took=180ms
+      2025-03-01 09:00:05 POST /api/orders took=500ms
+      2025-03-01 09:00:06 GET /api/health took=5ms
+      2025-03-01 09:00:09 GET /api/orders took=300ms
+  steps:
+    - plan: I'll check the format, then group by endpoint in Python.
+      tool: run_bash
+      arg: head -n 2 server.log
+    - plan: Parse the path and the milliseconds, then average per path.
+      tool: run_python
+      arg: |
+        import re
+        from collections import defaultdict
+        times = defaultdict(list)
+        for line in open('server.log'):
+            m = re.search(r'\s(\S+) took=(\d+)ms', line)
+            if m:
+                times[m.group(1)].append(int(m.group(2)))
+        for path, v in sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1])):
+            print(path, round(sum(v) / len(v), 1), len(v))
+  final: "/api/orders is the slowest on average at 380.0 ms (3 requests: 340, 500 and 300 ms combined across GET and POST). /api/users averages 150.0 ms and /api/health 5.0 ms."
+  grounded: ["/api/orders 380.0"]
+  check:
+    reply_contains: ["/api/orders", "380"]
+
+- id: t003
+  category: text_wrangling
+  difficulty: easy
+  tags: [bash, sed, rename]
+  prompt: Please change every occurrence of the old product name "Zenith" to "Aurora" in all the .md files in docs/, but keep a backup copy of each edited file with a .bak extension.
+  files:
+    docs/intro.md: |
+      # Zenith overview
+      Zenith helps teams plan work.
+    docs/faq.md: |
+      Q: Is Zenith free?
+      A: Zenith has a free tier.
+    docs/notes.txt: |
+      Zenith should stay here, it is not markdown.
+  steps:
+    - plan: I'll first list the markdown files and see where the name appears.
+      tool: run_bash
+      arg: grep -rn "Zenith" docs/
+    - plan: sed -i.bak edits the file and writes the backup in one go, so I'll only target the .md files.
+      tool: run_bash
+      arg: sed -i.bak 's/Zenith/Aurora/g' docs/*.md && ls docs && grep -rn "Aurora" docs/*.md
+  final: "Done. \"Zenith\" is now \"Aurora\" in docs/intro.md and docs/faq.md, and the originals are saved as intro.md.bak and faq.md.bak. docs/notes.txt was left alone because it isn't markdown."
+  grounded: ["intro.md.bak", "faq.md.bak"]
+  check:
+    files:
+      docs/intro.md: {contains: ["Aurora overview"], not_contains: ["Zenith"]}
+      docs/faq.md: {not_contains: ["Zenith"]}
+      docs/intro.md.bak: {contains: ["Zenith overview"]}
+      docs/notes.txt: {contains: ["Zenith should stay"]}
+
+- id: t004
+  category: data_validation
+  difficulty: medium
+  tags: [python, csv, validation]
+  prompt: Can you check signups.csv for problems? I need to know which rows have an invalid email (no @ or no dot after it) or a missing name. Write the offending line numbers (counting the header as line 1) to bad_rows.txt, one per line.
+  files:
+    signups.csv: |
+      name,email
+      Ana Ruiz,ana@example.com
+      ,bob@example.com
+      Chen Li,chen.example.com
+      Dara Okoye,dara@mail
+      Eve Park,eve@site.org
+  steps:
+    - plan: Let me look at the file to understand the layout and size.
+      tool: run_bash
+      arg: cat signups.csv
+    - plan: I'll validate each row with the csv module and record the line numbers that fail.
+      tool: run_python
+      arg: |
+        import csv
+        bad = []
+        with open('signups.csv', newline='') as f:
+            for n, row in enumerate(csv.DictReader(f), start=2):
+                name, email = row['name'].strip(), row['email'].strip()
+                ok_email = '@' in email and '.' in email.split('@', 1)[1]
+                if not name or not ok_email:
+                    bad.append(n)
+        open('bad_rows.txt', 'w').write('\n'.join(map(str, bad)) + '\n')
+        print(bad)
+  final: "Rows 3, 4 and 5 have problems: row 3 has no name, row 4 (chen.example.com) has no @, and row 5 (dara@mail) has no dot in the domain. Those line numbers are in bad_rows.txt."
+  grounded: ["[3, 4, 5]"]
+  check:
+    files:
+      bad_rows.txt: {equals: "3\n4\n5"}
+
+- id: t005
+  category: shell_pipeline
+  difficulty: easy
+  tags: [bash, find, sizes]
+  prompt: My disk is almost full. Which three files in this folder tree are the largest? Show me their sizes in bytes.
+  files:
+    data/raw/export.bin: "x__REPEAT_5000"
+    data/raw/small.txt: "tiny"
+    backups/db.bak: "x__REPEAT_9000"
+    media/clip.dat: "x__REPEAT_2000"
+    notes.md: "hello"
+  steps:
+    - plan: I'll list every file with its size and sort descending.
+      tool: run_bash
+      arg: find . -type f -exec wc -c {} + | grep -v total | sort -rn | head -n 3
+  final: "The three largest files are backups/db.bak, data/raw/export.bin and media/clip.dat - sizes are in the listing above."
+  grounded: ["db.bak"]
+  check:
+    reply_contains: ["db.bak"]

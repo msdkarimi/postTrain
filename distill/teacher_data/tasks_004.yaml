@@ -1,0 +1,715 @@
+- id: t050
+  category: code_search
+  difficulty: easy
+  tags: [bash, grep, counting]
+  prompt: How many TODO comments does each file in src/ have?
+  files:
+    src/a.py: "# TODO fix\nx = 1\n# TODO later\n"
+    src/b.py: "y = 2\n"
+    src/c.py: "# TODO one\n"
+  steps:
+    - plan: grep -c prints a count per file, including files with zero matches.
+      tool: run_bash
+      arg: grep -c "TODO" src/*.py
+  final: "src/a.py has 2 TODOs, src/c.py has 1, and src/b.py has none."
+  grounded: ["src/a.py:2", "src/c.py:1", "src/b.py:0"]
+  check:
+    reply_contains: ["src/a.py", "2", "src/c.py", "1"]
+
+- id: t051
+  category: csv_sort
+  difficulty: medium
+  tags: [python, csv, sorting]
+  prompt: Sort people.csv by department (A to Z) and, within each department, by salary from highest to lowest. Save it as sorted.csv with the same header.
+  files:
+    people.csv: |
+      name,dept,salary
+      Ana,ops,50
+      Bo,dev,70
+      Cy,dev,60
+      Di,ops,55
+  steps:
+    - plan: Sort with a two-part key - department ascending, then negative salary so the highest comes first.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.DictReader(open('people.csv', newline='')))
+        rows.sort(key=lambda r: (r['dept'], -int(r['salary'])))
+        with open('sorted.csv', 'w', newline='') as f:
+            w = csv.DictWriter(f, fieldnames=['name', 'dept', 'salary'], lineterminator='\n')
+            w.writeheader()
+            w.writerows(rows)
+        print(open('sorted.csv').read())
+  final: "sorted.csv is written: dev first (Bo 70, Cy 60), then ops (Di 55, Ana 50)."
+  grounded: ["Bo,dev,70", "Di,ops,55"]
+  check:
+    files:
+      sorted.csv: {equals: "name,dept,salary\nBo,dev,70\nCy,dev,60\nDi,ops,55\nAna,ops,50"}
+
+- id: t052
+  category: date_math
+  difficulty: medium
+  tags: [python, dates, ages]
+  prompt: "As of 2025-03-01, how old is everyone in people.csv (full years)? Add an age column and save it as people_with_age.csv."
+  files:
+    people.csv: |
+      name,birthdate
+      Ana,1990-06-15
+      Bo,2000-12-01
+      Cy,1985-01-20
+  steps:
+    - plan: Age is the year difference minus one if the birthday hasn't happened yet by that date.
+      tool: run_python
+      arg: |
+        import csv
+        from datetime import date
+        ref = date(2025, 3, 1)
+        rows = list(csv.DictReader(open('people.csv', newline='')))
+        with open('people_with_age.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['name', 'birthdate', 'age'])
+            for r in rows:
+                b = date.fromisoformat(r['birthdate'])
+                age = ref.year - b.year - ((ref.month, ref.day) < (b.month, b.day))
+                w.writerow([r['name'], r['birthdate'], age])
+        print(open('people_with_age.csv').read())
+  final: "Ages as of 2025-03-01: Ana is 34, Bo is 24 and Cy is 40. They're in people_with_age.csv."
+  grounded: ["Ana,1990-06-15,34", "Bo,2000-12-01,24", "Cy,1985-01-20,40"]
+  check:
+    files:
+      people_with_age.csv: {equals: "name,birthdate,age\nAna,1990-06-15,34\nBo,2000-12-01,24\nCy,1985-01-20,40"}
+
+- id: t053
+  category: file_compare
+  difficulty: easy
+  tags: [python, sets]
+  prompt: Compare old_list.txt and new_list.txt. Which entries were removed and which were added? Write diff_report.txt with two lines, "removed: ..." and "added: ..." (comma separated, alphabetical).
+  files:
+    old_list.txt: |
+      apple
+      banana
+      cherry
+      date
+    new_list.txt: |
+      banana
+      date
+      elder
+  steps:
+    - plan: Treating each file as a set of lines makes the comparison simple.
+      tool: run_python
+      arg: |
+        old = {l.strip() for l in open('old_list.txt') if l.strip()}
+        new = {l.strip() for l in open('new_list.txt') if l.strip()}
+        report = 'removed: ' + ', '.join(sorted(old - new)) + '\nadded: ' + ', '.join(sorted(new - old)) + '\n'
+        open('diff_report.txt', 'w').write(report)
+        print(report)
+  final: "apple and cherry were removed, and elder was added. banana and date are in both lists. The report is in diff_report.txt."
+  grounded: ["removed: apple, cherry", "added: elder"]
+  check:
+    files:
+      diff_report.txt: {equals: "removed: apple, cherry\nadded: elder"}
+
+- id: t054
+  category: json_transform
+  difficulty: medium
+  tags: [python, json, merge]
+  prompt: Merge a.json and b.json (both lists of records with an "id") into merged.json, sorted by id. If an id is in both, the record from b.json should win.
+  files:
+    a.json: |
+      [{"id": 1, "v": "a"}, {"id": 2, "v": "b"}]
+    b.json: |
+      [{"id": 2, "v": "B"}, {"id": 3, "v": "c"}]
+  steps:
+    - plan: Index a.json by id, overwrite with b.json, then sort.
+      tool: run_python
+      arg: |
+        import json
+        recs = {r['id']: r for r in json.load(open('a.json'))}
+        recs.update({r['id']: r for r in json.load(open('b.json'))})
+        out = [recs[k] for k in sorted(recs)]
+        json.dump(out, open('merged.json', 'w'), indent=2)
+        print([(r['id'], r['v']) for r in out])
+  final: "merged.json has three records: 1 (a), 2 (B, taken from b.json) and 3 (c)."
+  grounded: ["[(1, 'a'), (2, 'B'), (3, 'c')]"]
+  check:
+    files:
+      merged.json: {contains: ['"v": "B"', '"v": "a"', '"v": "c"'], not_contains: ['"v": "b"']}
+
+- id: t056
+  category: text_wrangling
+  difficulty: easy
+  tags: [python, whitespace]
+  prompt: Remove trailing spaces and tabs from every line of notes.txt (edit it in place) and tell me how many lines were affected.
+  files:
+    notes.txt: "a  \nb\t\nc\n"
+  steps:
+    - plan: I'll strip only the right-hand whitespace of each line and count the lines that actually changed.
+      tool: run_python
+      arg: |
+        lines = open('notes.txt').read().split('\n')
+        fixed = [l.rstrip(' \t') for l in lines]
+        changed = sum(1 for a, b in zip(lines, fixed) if a != b)
+        open('notes.txt', 'w').write('\n'.join(fixed))
+        print('changed', changed)
+        print(repr(open('notes.txt').read()))
+  final: "Cleaned notes.txt in place: 2 lines had trailing whitespace (the first two). The file is now a, b, c."
+  grounded: ["changed 2"]
+  check:
+    files:
+      notes.txt: {equals: "a\nb\nc"}
+    reply_contains: ["2"]
+
+- id: t057
+  category: formatting
+  difficulty: easy
+  tags: [python, numbers]
+  prompt: Format the numbers in amounts.txt with thousands separators (like 1,234,567) and save them to amounts_fmt.txt, one per line.
+  files:
+    amounts.txt: |
+      1234567
+      89
+      1000
+      250000
+  steps:
+    - plan: Python's format spec with a comma does exactly this.
+      tool: run_python
+      arg: |
+        nums = [int(l) for l in open('amounts.txt') if l.strip()]
+        out = [f'{n:,}' for n in nums]
+        open('amounts_fmt.txt', 'w').write('\n'.join(out) + '\n')
+        print(out)
+  final: "Saved amounts_fmt.txt: 1,234,567, 89, 1,000 and 250,000."
+  grounded: ["['1,234,567', '89', '1,000', '250,000']"]
+  check:
+    files:
+      amounts_fmt.txt: {equals: "1,234,567\n89\n1,000\n250,000"}
+
+- id: t058
+  category: markdown_ops
+  difficulty: medium
+  tags: [python, markdown]
+  prompt: Copy just the body of the "Install" section from guide.md (everything under "## Install" until the next heading) into install.txt.
+  files:
+    guide.md: |
+      # Guide
+      ## Install
+      run pip install x
+      then test it
+      ## Usage
+      run x --help
+  steps:
+    - plan: I'll read the lines after the Install heading until the next ## heading.
+      tool: run_python
+      arg: |
+        body, on = [], False
+        for line in open('guide.md').read().splitlines():
+            if line.startswith('#'):
+                if on:
+                    break
+                on = line.strip() == '## Install'
+                continue
+            if on:
+                body.append(line)
+        open('install.txt', 'w').write('\n'.join(body) + '\n')
+        print(body)
+  final: "install.txt contains the two lines of the Install section: \"run pip install x\" and \"then test it\"."
+  grounded: ["['run pip install x', 'then test it']"]
+  check:
+    files:
+      install.txt: {equals: "run pip install x\nthen test it"}
+
+- id: t060
+  category: csv_ops
+  difficulty: easy
+  tags: [python, csv, transpose]
+  prompt: Transpose table.csv (swap rows and columns) and save the result as transposed.csv.
+  files:
+    table.csv: |
+      a,b,c
+      1,2,3
+      4,5,6
+  steps:
+    - plan: zip(*rows) flips rows and columns.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.reader(open('table.csv', newline='')))
+        t = list(zip(*rows))
+        with open('transposed.csv', 'w', newline='') as f:
+            csv.writer(f, lineterminator='\n').writerows(t)
+        print(open('transposed.csv').read())
+  final: "transposed.csv now has three rows: a,1,4 then b,2,5 then c,3,6."
+  grounded: ["a,1,4", "c,3,6"]
+  check:
+    files:
+      transposed.csv: {equals: "a,1,4\nb,2,5\nc,3,6"}
+
+- id: t061
+  category: config_check
+  difficulty: medium
+  tags: [python, config, duplicates]
+  prompt: settings.conf is a simple key=value file. Are any keys defined more than once? Tell me which keys and on which line numbers.
+  files:
+    settings.conf: |
+      host=a
+      port=1
+      host=b
+      mode=x
+      port=2
+  steps:
+    - plan: I'll record the line numbers for every key and report those with more than one.
+      tool: run_python
+      arg: |
+        from collections import defaultdict
+        seen = defaultdict(list)
+        for n, line in enumerate(open('settings.conf'), start=1):
+            if '=' in line:
+                seen[line.split('=', 1)[0].strip()].append(n)
+        for k, v in seen.items():
+            if len(v) > 1:
+                print(k, v)
+  final: "Yes: host is defined on lines 1 and 3, and port on lines 2 and 5. mode appears only once."
+  grounded: ["host [1, 3]", "port [2, 5]"]
+  check:
+    reply_contains: ["host", "1", "3", "port", "2", "5"]
+
+- id: t062
+  category: time_math
+  difficulty: hard
+  tags: [python, datetime, timezone]
+  prompt: The times in meetings.txt are in UTC. Convert them to UTC+2 (keep the date correct if it rolls over midnight) and save meetings_local.txt in the same "YYYY-MM-DD HH:MM Title" format.
+  files:
+    meetings.txt: |
+      2025-06-01 14:00 Kickoff
+      2025-06-01 22:30 Review
+  steps:
+    - plan: Parse each timestamp, add two hours with timedelta so the date rolls over properly, and format it back.
+      tool: run_python
+      arg: |
+        from datetime import datetime, timedelta
+        out = []
+        for line in open('meetings.txt'):
+            if not line.strip():
+                continue
+            stamp, title = line.strip()[:16], line.strip()[17:]
+            t = datetime.strptime(stamp, '%Y-%m-%d %H:%M') + timedelta(hours=2)
+            out.append(f"{t:%Y-%m-%d %H:%M} {title}")
+        open('meetings_local.txt', 'w').write('\n'.join(out) + '\n')
+        print('\n'.join(out))
+  final: "Converted to UTC+2: Kickoff is 2025-06-01 16:00, and Review moves to the next day, 2025-06-02 00:30. Saved in meetings_local.txt."
+  grounded: ["2025-06-01 16:00 Kickoff", "2025-06-02 00:30 Review"]
+  check:
+    files:
+      meetings_local.txt: {equals: "2025-06-01 16:00 Kickoff\n2025-06-02 00:30 Review"}
+
+- id: t063
+  category: text_extraction
+  difficulty: medium
+  tags: [python, parsing, json]
+  prompt: cli.txt contains command-line style options. Turn them into args.json - numbers as numbers, bare flags as true, everything else as strings.
+  files:
+    cli.txt: |
+      --name=ana --age=30 --verbose --city=Oslo
+  steps:
+    - plan: Split on whitespace, strip the leading dashes, and convert values by type.
+      tool: run_python
+      arg: |
+        import json
+        args = {}
+        for tok in open('cli.txt').read().split():
+            key, _, val = tok.lstrip('-').partition('=')
+            if not _:
+                args[key] = True
+            elif val.isdigit():
+                args[key] = int(val)
+            else:
+                args[key] = val
+        json.dump(args, open('args.json', 'w'), indent=2)
+        print(open('args.json').read())
+  final: "args.json holds name \"ana\", age 30 (a number), verbose true and city \"Oslo\"."
+  grounded: ['"age": 30', '"verbose": true']
+  check:
+    files:
+      args.json: {contains: ['"name": "ana"', '"age": 30', '"verbose": true', '"city": "Oslo"']}
+
+- id: t064
+  category: markdown_ops
+  difficulty: medium
+  tags: [python, markdown, links]
+  prompt: Check docs/index.md for links to other pages that don't exist in docs/. Only look at relative .md links.
+  files:
+    docs/index.md: |
+      See [A](a.md), [B](b.md) and [C](c.md).
+      Also https://example.com is external.
+    docs/a.md: "A"
+    docs/b.md: "B"
+  steps:
+    - plan: I'll extract the relative .md link targets and test whether each file exists next to index.md.
+      tool: run_python
+      arg: |
+        import os, re
+        text = open('docs/index.md').read()
+        for target in re.findall(r'\]\(([^)#]+\.md)\)', text):
+            print(target, 'OK' if os.path.exists(os.path.join('docs', target)) else 'MISSING')
+  final: "One broken link: c.md doesn't exist in docs/. a.md and b.md are fine."
+  grounded: ["c.md MISSING"]
+  check:
+    reply_contains: ["c.md"]
+    reply_not_contains: ["a.md doesn't", "b.md doesn't"]
+
+- id: t065
+  category: file_ops
+  difficulty: easy
+  tags: [bash, find, cleanup]
+  prompt: Delete all the .tmp files in this folder and its sub-folders, and tell me how many you removed.
+  files:
+    a.tmp: "1"
+    b.tmp: "2"
+    keep.txt: "keep"
+    sub/c.tmp: "3"
+  steps:
+    - plan: Let me first list what would be removed.
+      tool: run_bash
+      arg: find . -name '*.tmp' -type f | sort
+    - plan: That's exactly the set I expected, so I'll delete them and list what remains.
+      tool: run_bash
+      arg: find . -name '*.tmp' -type f -delete; find . -type f | sort
+  final: "Removed 3 .tmp files: a.tmp, b.tmp and sub/c.tmp. keep.txt is still there."
+  grounded: ["./sub/c.tmp", "./keep.txt"]
+  check:
+    files:
+      keep.txt: {equals: "keep"}
+    absent: [a.tmp, b.tmp, sub/c.tmp]
+
+- id: t068
+  category: csv_math
+  difficulty: medium
+  tags: [python, csv, running-total]
+  prompt: ledger.csv lists transactions (positive = money in, negative = money out), starting from a balance of 0. Add a running balance column and save it as ledger_balance.csv.
+  files:
+    ledger.csv: |
+      date,amount
+      2025-01-02,100
+      2025-01-05,-30
+      2025-01-09,-20
+      2025-01-15,50
+  steps:
+    - plan: I'll accumulate the amounts in order and write the balance after each row.
+      tool: run_python
+      arg: |
+        import csv
+        bal = 0
+        with open('ledger_balance.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['date', 'amount', 'balance'])
+            for r in csv.DictReader(open('ledger.csv', newline='')):
+                bal += int(r['amount'])
+                w.writerow([r['date'], r['amount'], bal])
+        print(open('ledger_balance.csv').read())
+  final: "ledger_balance.csv is written. The balance goes 100, 70, 50 and ends at 100 after the last transaction."
+  grounded: ["2025-01-15,50,100"]
+  check:
+    files:
+      ledger_balance.csv: {equals: "date,amount,balance\n2025-01-02,100,100\n2025-01-05,-30,70\n2025-01-09,-20,50\n2025-01-15,50,100"}
+
+- id: t069
+  category: file_compare
+  difficulty: easy
+  tags: [python, csv, sets]
+  prompt: Which ids appear only in list_a.csv, and which only in list_b.csv?
+  files:
+    list_a.csv: |
+      id
+      1
+      2
+      3
+      4
+    list_b.csv: |
+      id
+      3
+      4
+      5
+      6
+  steps:
+    - plan: Load both id columns as sets and subtract them each way.
+      tool: run_python
+      arg: |
+        import csv
+        a = {r['id'] for r in csv.DictReader(open('list_a.csv'))}
+        b = {r['id'] for r in csv.DictReader(open('list_b.csv'))}
+        print('only a:', sorted(a - b))
+        print('only b:', sorted(b - a))
+  final: "Only in list_a.csv: 1 and 2. Only in list_b.csv: 5 and 6. Ids 3 and 4 are in both."
+  grounded: ["only a: ['1', '2']", "only b: ['5', '6']"]
+  check:
+    reply_contains: ["1", "2", "5", "6"]
+
+- id: t070
+  category: format_conversion
+  difficulty: easy
+  tags: [python, tsv, csv]
+  prompt: Convert data.tsv (tab-separated) to a proper data.csv. Some values contain commas, so quote them correctly.
+  files:
+    data.tsv: "name\tcity\nAna\tOslo, NO\nBo\tRome\n"
+  steps:
+    - plan: The csv module will add quotes only where a value needs them.
+      tool: run_python
+      arg: |
+        import csv
+        rows = list(csv.reader(open('data.tsv', newline=''), delimiter='\t'))
+        with open('data.csv', 'w', newline='') as f:
+            csv.writer(f, lineterminator='\n').writerows(rows)
+        print(open('data.csv').read())
+  final: "data.csv is written. The value \"Oslo, NO\" is quoted because it contains a comma; the other fields are plain."
+  grounded: ['Ana,"Oslo, NO"']
+  check:
+    files:
+      data.csv: {equals: "name,city\nAna,\"Oslo, NO\"\nBo,Rome"}
+
+- id: t071
+  category: text_analysis
+  difficulty: easy
+  tags: [python, words]
+  prompt: What's the longest word in text.txt, and how many letters does it have?
+  files:
+    text.txt: "The quick brown fox jumped over extraordinarily lazy dogs\n"
+  steps:
+    - plan: Split into words and take the one with the maximum length.
+      tool: run_python
+      arg: |
+        words = open('text.txt').read().split()
+        w = max(words, key=len)
+        print(w, len(w))
+  final: "The longest word is \"extraordinarily\", with 15 letters."
+  grounded: ["extraordinarily 15"]
+  check:
+    reply_contains: ["extraordinarily", "15"]
+
+- id: t072
+  category: text_analysis
+  difficulty: easy
+  tags: [bash, grep, counting]
+  prompt: How many times does the word "hello" appear in total across the .txt files in docs/, ignoring capitalisation?
+  files:
+    docs/a.txt: "Hello world. hello again\n"
+    docs/b.txt: "HELLO!\n"
+    docs/c.md: "hello (not a txt file)\n"
+  steps:
+    - plan: grep -o prints each match on its own line, so counting lines counts occurrences; I'll restrict it to .txt files.
+      tool: run_bash
+      arg: grep -io 'hello' docs/*.txt | wc -l
+  final: "\"hello\" appears 3 times across docs/*.txt (twice in a.txt and once in b.txt). c.md isn't a .txt file, so it wasn't counted."
+  grounded: ["3"]
+  check:
+    reply_contains: ["3"]
+
+- id: t073
+  category: file_ops
+  difficulty: medium
+  tags: [python, rename]
+  prompt: Rename the files in reports/ so the number in the name is zero-padded to three digits (report_1.txt becomes report_001.txt).
+  files:
+    reports/report_1.txt: "one"
+    reports/report_2.txt: "two"
+    reports/report_10.txt: "ten"
+  steps:
+    - plan: I'll match the number with a regex and rename with a padded version.
+      tool: run_python
+      arg: |
+        import os, re
+        for name in sorted(os.listdir('reports')):
+            m = re.fullmatch(r'report_(\d+)\.txt', name)
+            if m:
+                os.rename(os.path.join('reports', name), os.path.join('reports', f'report_{int(m[1]):03d}.txt'))
+        print(sorted(os.listdir('reports')))
+  final: "Renamed to report_001.txt, report_002.txt and report_010.txt."
+  grounded: ["['report_001.txt', 'report_002.txt', 'report_010.txt']"]
+  check:
+    files:
+      reports/report_001.txt: {equals: "one"}
+      reports/report_010.txt: {equals: "ten"}
+    absent: [reports/report_1.txt, reports/report_10.txt]
+
+- id: t074
+  category: statistics
+  difficulty: easy
+  tags: [python, mean]
+  prompt: values.txt has one number per line, but also some comment lines starting with #. What's the average of the numbers?
+  files:
+    values.txt: |
+      # header
+      10
+      20
+      # note
+      30
+  steps:
+    - plan: Skip comment and blank lines, then average what's left.
+      tool: run_python
+      arg: |
+        nums = [float(l) for l in open('values.txt') if l.strip() and not l.lstrip().startswith('#')]
+        print(len(nums), sum(nums) / len(nums))
+  final: "The average is 20.0, computed from the 3 numeric lines (10, 20 and 30); the comment lines were ignored."
+  grounded: ["3 20.0"]
+  check:
+    reply_contains: ["20"]
+
+- id: t075
+  category: text_extraction
+  difficulty: easy
+  tags: [bash, sort, uniq]
+  prompt: Count how many email addresses in emails.txt belong to each domain, most common first.
+  files:
+    emails.txt: |
+      a@x.com
+      b@y.org
+      c@x.com
+      d@x.com
+      e@y.org
+      f@z.net
+  steps:
+    - plan: Cut off everything before the @, then count the distinct domains.
+      tool: run_bash
+      arg: cut -d@ -f2 emails.txt | sort | uniq -c | sort -rn
+  final: "x.com has 3 addresses, y.org has 2 and z.net has 1."
+  grounded: ["3 x.com", "2 y.org", "1 z.net"]
+  check:
+    reply_contains: ["x.com", "3", "y.org", "2", "z.net", "1"]
+
+- id: t076
+  category: csv_group
+  difficulty: medium
+  tags: [python, csv, months]
+  prompt: Total the payments in payments.csv per month and save monthly.csv with columns month,total (two decimals, months in order).
+  files:
+    payments.csv: |
+      date,amount
+      2025-01-05,10
+      2025-01-20,15.5
+      2025-02-02,7
+      2025-03-09,20
+      2025-03-30,5
+  steps:
+    - plan: The month is the first seven characters of the date; I'll sum per month.
+      tool: run_python
+      arg: |
+        import csv
+        from collections import defaultdict
+        t = defaultdict(float)
+        for r in csv.DictReader(open('payments.csv', newline='')):
+            t[r['date'][:7]] += float(r['amount'])
+        with open('monthly.csv', 'w', newline='') as f:
+            w = csv.writer(f, lineterminator='\n')
+            w.writerow(['month', 'total'])
+            for m in sorted(t):
+                w.writerow([m, f'{t[m]:.2f}'])
+        print(open('monthly.csv').read())
+  final: "monthly.csv is saved: January 25.50, February 7.00 and March 25.00."
+  grounded: ["2025-01,25.50", "2025-02,7.00", "2025-03,25.00"]
+  check:
+    files:
+      monthly.csv: {equals: "month,total\n2025-01,25.50\n2025-02,7.00\n2025-03,25.00"}
+
+- id: t077
+  category: format_conversion
+  difficulty: easy
+  tags: [python, json, csv]
+  prompt: Convert people.json (a list of objects) to people.csv with a header row.
+  files:
+    people.json: |
+      [{"name": "Ana", "age": 30}, {"name": "Bo", "age": 25}]
+  steps:
+    - plan: The keys of the first object give the header; then I write one row per record.
+      tool: run_python
+      arg: |
+        import csv, json
+        rows = json.load(open('people.json'))
+        with open('people.csv', 'w', newline='') as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator='\n')
+            w.writeheader()
+            w.writerows(rows)
+        print(open('people.csv').read())
+  final: "people.csv is written with columns name and age and two rows (Ana 30, Bo 25)."
+  grounded: ["Ana,30", "Bo,25"]
+  check:
+    files:
+      people.csv: {equals: "name,age\nAna,30\nBo,25"}
+
+- id: t078
+  category: file_ops
+  difficulty: medium
+  tags: [python, sizes]
+  prompt: How many bytes does each sub-folder of data/ take up in total, and which one is the biggest?
+  files:
+    data/a/x.bin: "x__REPEAT_100"
+    data/a/y.bin: "x__REPEAT_50"
+    data/b/z.bin: "x__REPEAT_400"
+  steps:
+    - plan: I'll add up the file sizes under each sub-folder with os.walk.
+      tool: run_python
+      arg: |
+        import os
+        for d in sorted(os.listdir('data')):
+            total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(os.path.join('data', d)) for f in fs)
+            print(d, total)
+  final: "data/a takes 150 bytes and data/b takes 400 bytes, so b is the biggest."
+  grounded: ["a 150", "b 400"]
+  check:
+    reply_contains: ["150", "400"]
+
+- id: t079
+  category: text_analysis
+  difficulty: easy
+  tags: [python, palindromes]
+  prompt: How many lines in lines.txt are palindromes, ignoring capitalisation? List them.
+  files:
+    lines.txt: |
+      level
+      hello
+      Racecar
+      noon
+      abc
+  steps:
+    - plan: A line is a palindrome if the lowercase text equals its reverse.
+      tool: run_python
+      arg: |
+        ls = [l.strip() for l in open('lines.txt') if l.strip()]
+        pal = [l for l in ls if l.lower() == l.lower()[::-1]]
+        print(len(pal), pal)
+  final: "3 lines are palindromes: level, Racecar and noon."
+  grounded: ["3 ['level', 'Racecar', 'noon']"]
+  check:
+    reply_contains: ["3", "level", "Racecar", "noon"]
+
+- id: t080
+  category: formatting
+  difficulty: medium
+  tags: [python, roman-numerals]
+  prompt: Convert each number in nums.txt to a Roman numeral and write romans.txt with lines like "4 IV".
+  files:
+    nums.txt: |
+      4
+      9
+      14
+      40
+      90
+      2024
+  steps:
+    - plan: I'll use the standard value/symbol table with subtractive forms.
+      tool: run_python
+      arg: |
+        table = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+        def roman(n):
+            out = ''
+            for v, s in table:
+                while n >= v:
+                    out += s
+                    n -= v
+            return out
+        lines = [f'{n} {roman(n)}' for n in (int(l) for l in open('nums.txt') if l.strip())]
+        open('romans.txt', 'w').write('\n'.join(lines) + '\n')
+        print('\n'.join(lines))
+  final: "romans.txt is written: 4 IV, 9 IX, 14 XIV, 40 XL, 90 XC and 2024 MMXXIV."
+  grounded: ["14 XIV", "2024 MMXXIV"]
+  check:
+    files:
+      romans.txt: {equals: "4 IV\n9 IX\n14 XIV\n40 XL\n90 XC\n2024 MMXXIV"}

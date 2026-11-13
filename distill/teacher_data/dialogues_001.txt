@@ -1,0 +1,889 @@
+Tool sessions: the tools stay offered for the whole conversation. Some turns need a call, some reuse an earlier result, some need none.
+
+### mt/t001 | skills=tools_session,tools_reuse | tools=travel.search_flights,weather.get_forecast,travel.book_hotel,finance.currency_convert
+@user
+I need to get from Lisbon to Berlin on 14 March 2026, two of us. What flights are there?
+@call travel.search_flights {"origin": "Lisbon", "destination": "Berlin", "date": "2026-03-14", "passengers": 2}
+@result [{"flight": "FL790", "departs": "06:15", "price": 264}, {"flight": "FL659", "departs": "10:30", "price": 240}, {"flight": "FL329", "departs": "14:00", "price": 180}]
+@assistant
+There are three flights from Lisbon to Berlin on 14 March 2026:
+
+- FL790, departs 06:15, price 264
+- FL659, departs 10:30, price 240
+- FL329, departs 14:00, price 180
+
+The search does not say whether the price is per person or for both of you, so check that before you pay.
+@user
+ok. what will the weather be like there for the first three days?
+@call weather.get_forecast {"city": "Berlin", "days": 3}
+@result [{"day": 1, "high": 11, "condition": "sunny"}, {"day": 2, "high": 14, "condition": "foggy"}, {"day": 3, "high": 17, "condition": "windy"}]
+@assistant
+The Berlin forecast for your first three days:
+
+- Day 1: sunny, high of 11
+- Day 2: foggy, high of 14
+- Day 3: windy, high of 17
+
+It warms up a little each day, but pack a jacket for the fog and wind.
+@user
+Good. Book us a hotel there for 3 nights from the 14th.
+@call travel.book_hotel {"city": "Berlin", "check_in": "2026-03-14", "nights": 3, "guests": 2}
+@result {"confirmation": "HT14251", "total": 225}
+@assistant
+Your hotel in Berlin is booked: 3 nights from 14 March 2026 for 2 guests. The confirmation number is HT14251 and the total is 225.
+@check has=HT14251
+@user
+The hotel total is in euros I guess. How much is that in US dollars?
+@call finance.currency_convert {"amount": 225, "from_currency": "EUR", "to_currency": "USD"}
+@result 243.0
+@assistant
+225 EUR is 243.00 USD at the rate the converter used. One caution: the booking result gave the total as a plain number without a currency, so I am taking your word that it is euros.
+@user
+Remind me, which flight was the cheapest and when does it leave?
+@assistant
+The cheapest was FL329 at 180, leaving Lisbon at 14:00. I have only searched so far, nothing is booked for the flight.
+@check has=FL329 ; has=14:00
+
+### mt/t002 | skills=tools_session,cot | tools=home.paint_needed,home.tile_count,finance.vat_price,math.percentage
+@user
+I'm redoing a bedroom. The walls come to 42 square metres. How much paint do I need for two coats?
+@call home.paint_needed {"area_m2": 42, "coats": 2}
+@result 8.4
+@assistant
+You need about 8.4 litres for two coats on 42 m². Paint is usually sold in 2.5 or 5 litre tins, so two 5 litre tins would cover it with a little left for touch-ups.
+@user
+And if the old colour is dark and I end up needing a third coat?
+@call home.paint_needed {"area_m2": 42, "coats": 3}
+@result 12.6
+@assistant
+Three coats take about 12.6 litres, which is 4.2 litres more than the two-coat figure. A cheaper route over a dark colour is one coat of primer and then two coats of paint.
+@user
+Now the floor. The room is 4.5 m by 3.2 m and I like 30 cm tiles.
+@call home.tile_count {"room_length_m": 4.5, "room_width_m": 3.2, "tile_size_cm": 30}
+@result 160
+@assistant
+You need 160 tiles of 30 cm for a 4.5 m by 3.2 m floor. Buy roughly 10% extra, so about 176, to cover cuts along the walls and the odd breakage.
+@user
+The shop quotes 380 before VAT for the tiles. VAT is 21%. What do I actually pay, and how much of that is tax?
+@call finance.vat_price {"net_price": 380, "vat_percent": 21}
+@result 459.8
+@assistant
+You pay 459.80 in total.
+
+The tax part is the difference: 459.80 - 380 = 79.80. As a check, 21% of 380 is 0.21 x 380 = 79.80, so the two agree.
+@check has=459.8 ; has=79.8
+
+### mt/t003 | skills=tools_session,tools_clarify | tools=devtools.get_build_status,devtools.run_tests,devtools.create_branch,devtools.deploy,support.create_ticket
+@system
+You are the engineering assistant for the Atlas team. Use the tools for anything about builds, tests, branches and deployments. Never deploy to production without the user confirming the exact version.
+@user
+Is main green on atlas-api?
+@call devtools.get_build_status {"project": "atlas-api", "branch": "main"}
+@result {"status": "failing"}
+@assistant
+No. The build for atlas-api on main is failing.
+@user
+ugh. run the tests with verbose on so we can see how bad it is
+@call devtools.run_tests {"project": "atlas-api", "verbose": true}
+@result {"passed": 57, "failed": 1}
+@assistant
+Not too bad: 57 tests pass and 1 fails. The tool only returns the counts, so I can't tell you which test it is. The CI log for the run will have the name.
+@user
+It's the login timeout test, I know that one. Make me a branch called fix/login-timeout off main.
+@call devtools.create_branch {"repo": "atlas-api", "branch_name": "fix/login-timeout", "from_branch": "main"}
+@result {"created": "fix/login-timeout", "from": "main"}
+@assistant
+Done. Branch fix/login-timeout now exists in atlas-api, created from main.
+@user
+Great, I pushed a fix. Deploy it.
+@assistant
+Two things I need before I deploy atlas-api:
+
+1. Which environment, staging or production?
+2. Which version should go out?
+@user
+staging, version 2.4.1
+@call devtools.deploy {"service": "atlas-api", "environment": "staging", "version": "2.4.1"}
+@result {"deployment_id": "D9698", "status": "started"}
+@assistant
+The deployment of atlas-api 2.4.1 to staging has started. The deployment ID is D9698.
+@check has=D9698
+
+### mt/t004 | skills=tools_session,tools_none_needed | tools=health.bmi,units.convert_weight,fitness.log_workout
+@user
+I weigh 82 kg and I'm 178 cm tall. What's my BMI?
+@call health.bmi {"weight_kg": 82, "height_cm": 178}
+@result 25.9
+@assistant
+Your BMI is 25.9. That is just above the usual "healthy weight" range of 18.5 to 24.9. BMI is a rough screen and does not tell muscle from fat, so read it alongside things like waist size and how fit you are.
+@user
+What would I have to weigh to be at 24?
+@assistant
+BMI is weight divided by height squared, so I can work backwards without the calculator tool.
+
+Step 1: Height in metres is 1.78, and 1.78 x 1.78 = 3.1684.
+Step 2: Weight = BMI x height squared = 24 x 3.1684 = 76.04 kg.
+
+So about 76 kg, which is roughly 6 kg less than now.
+@check has=76
+@user
+check that with the tool please
+@call health.bmi {"weight_kg": 76, "height_cm": 178}
+@result 24.0
+@assistant
+Confirmed. At 76 kg and 178 cm the tool gives a BMI of 24.0.
+@user
+6 kg, what's that in pounds?
+@call units.convert_weight {"value": 6, "from_unit": "kg", "to_unit": "lb"}
+@result 13.228
+@assistant
+6 kg is about 13.2 pounds.
+@user
+ok. I ran for 45 minutes this morning, burned around 520 calories. log it
+@call fitness.log_workout {"activity": "running", "minutes": 45, "calories": 520}
+@result {"logged": true, "weekly_minutes": 160}
+@assistant
+Logged: 45 minutes of running, 520 calories. That brings you to 160 active minutes this week.
+
+### mt/t005 | skills=tools_session,cot,advice | tools=finance.loan_payment,finance.compound_interest,finance.salary_after_tax
+@user
+I'm thinking about a car loan. 18,000 at 6.5% over 4 years. What's the monthly payment?
+@call finance.loan_payment {"principal": 18000, "annual_rate_percent": 6.5, "months": 48}
+@result 426.87
+@assistant
+The payment is 426.87 per month for 48 months.
+
+Over the full term that is 48 x 426.87 = 20,489.76, so you pay about 2,489.76 in interest on top of the 18,000.
+@check has=426.87 ; has=2,489.76
+@user
+And over 3 years instead?
+@call finance.loan_payment {"principal": 18000, "annual_rate_percent": 6.5, "months": 36}
+@result 551.68
+@assistant
+Over 36 months the payment rises to 551.68 per month.
+
+Total paid: 36 x 551.68 = 19,860.48, so interest is about 1,860.48.
+
+Compared with 4 years you pay 124.81 more each month but save about 629.28 in interest overall.
+@check has=551.68 ; has=629.28
+@user
+My gross pay is 4,200 a month and about 28% goes to tax. Can I afford the 3 year one?
+@call finance.salary_after_tax {"gross": 4200, "tax_percent": 28}
+@result 3024.0
+@assistant
+Your take-home pay is 3,024 a month. The 3-year payment of 551.68 would be about 18% of that (551.68 / 3,024 = 0.182).
+
+Whether that is affordable depends on numbers I don't have: rent, other debts, and what you want to keep saving. A common rule of thumb keeps all car costs, including insurance and fuel, under 15 to 20% of take-home pay, and the loan alone already sits at 18%. If your other fixed costs are low it works. If they are not, the 4-year loan at 426.87 (about 14%) leaves more room.
+@user
+What if I just saved the 18,000 at 4% for four years instead of buying now, what would it grow to?
+@call finance.compound_interest {"principal": 18000, "rate_percent": 4, "years": 4}
+@result 21057.45
+@assistant
+18,000 at 4% compounded yearly grows to 21,057.45 after four years, a gain of 3,057.45.
+
+That assumes you already have the 18,000 to set aside. If you would be borrowing it, this comparison does not apply, so tell me which situation you are in and I can redo it.
+
+### mt/t006 | skills=tools_session,tools_parallel | tools=time.timezone_convert,time.add_minutes,planner.add_reminder,messaging.send_message
+@user
+I'm in Berlin and want a call at 15:00 my time with people in New York and Tokyo. What time is that for them?
+@call time.timezone_convert {"time": "15:00", "from_city": "Berlin", "to_city": "New York"}
+@call time.timezone_convert {"time": "15:00", "from_city": "Berlin", "to_city": "Tokyo"}
+@result "09:00"
+@result "23:00"
+@assistant
+15:00 in Berlin is 09:00 in New York and 23:00 in Tokyo. That is comfortable for New York but very late for Tokyo.
+@user
+yeah 23:00 is rude. try 13:00
+@call time.timezone_convert {"time": "13:00", "from_city": "Berlin", "to_city": "New York"}
+@call time.timezone_convert {"time": "13:00", "from_city": "Berlin", "to_city": "Tokyo"}
+@result "07:00"
+@result "21:00"
+@assistant
+13:00 in Berlin is 07:00 in New York and 21:00 in Tokyo. Tokyo is better off, but New York now starts at 7 in the morning. With a six hour gap one way and eight the other, there is no slot inside normal office hours for all three, so this is about as fair as it gets.
+@user
+Fine, 13:00 it is. It runs 45 minutes. When does it end for me?
+@call time.add_minutes {"time": "13:00", "minutes": 45}
+@result "13:45"
+@assistant
+It ends at 13:45 Berlin time.
+@user
+Set a reminder for 11 May 2026 at 9am to send the agenda for the launch sync.
+@call planner.add_reminder {"text": "Send agenda for the launch sync", "time": "2026-05-11 09:00"}
+@result {"reminder_id": "R6483"}
+@assistant
+Reminder set for 11 May 2026 at 09:00: "Send agenda for the launch sync" (ID R6483).
+@user
+and message Kenji that the call is at 21:00 his time
+@call messaging.send_message {"recipient": "Kenji", "message": "The launch sync call is at 21:00 your time (13:00 Berlin) and runs 45 minutes."}
+@result {"sent": true}
+@assistant
+Sent. I told Kenji the launch sync is at 21:00 his time (13:00 Berlin) and runs 45 minutes.
+
+### mt/t007 | skills=tools_session,tools_irrelevance | tools=shop.search_products,shop.add_to_cart,shop.apply_coupon,shop.track_order
+@user
+Find me a desk lamp under 40.
+@call shop.search_products {"query": "desk lamp", "max_price": 40}
+@result [{"id": "P8269", "name": "Arc Desk Lamp", "price": 29}, {"id": "P3883", "name": "Clip-on Reading Lamp", "price": 17}, {"id": "P7557", "name": "Dimmable LED Desk Lamp", "price": 38}]
+@assistant
+Three desk lamps under 40:
+
+- Clip-on Reading Lamp, 17 (P3883)
+- Arc Desk Lamp, 29 (P8269)
+- Dimmable LED Desk Lamp, 38 (P7557)
+@user
+two of the arc ones in my cart
+@call shop.add_to_cart {"product_id": "P8269", "quantity": 2}
+@result {"cart_items": 2, "added": "P8269"}
+@assistant
+Added 2 Arc Desk Lamps. Your cart has 2 items, and at 29 each that comes to 58.
+@user
+I have two codes, SAVE10 and SAVE20. Which is better on that?
+@call shop.apply_coupon {"code": "SAVE10", "cart_total": 58}
+@call shop.apply_coupon {"code": "SAVE20", "cart_total": 58}
+@result 52.2
+@result 46.4
+@assistant
+SAVE20 is better. It brings the 58 down to 46.40, while SAVE10 gives 52.20. That is 5.80 more off with SAVE20.
+@check has=46.4
+@user
+Nice. Can you also cancel my old order O-7741? I don't need it anymore.
+@assistant
+I can't cancel orders. The tools I have here search products, add to the cart, check coupons and track orders, but none of them cancels. I can look up the status of O-7741, which will tell you whether it has already shipped. Should I?
+@check hasnt=cancelled
+@user
+yes check it
+@call shop.track_order {"order_id": "O-7741"}
+@result {"status": "delivered"}
+@assistant
+Order O-7741 shows as delivered, so it is too late to cancel. If you don't want it, you would need to start a return through the shop's customer service.
+
+### mt/t008 | skills=tools_session,tools_parallel,cot | tools=math.average,math.median,stats.std_dev,education.grade_average
+@user
+Quiz scores for my study group: 72, 85, 91, 64, 88, 79. Give me the mean, median and standard deviation.
+@call math.average {"numbers": [72, 85, 91, 64, 88, 79]}
+@call math.median {"numbers": [72, 85, 91, 64, 88, 79]}
+@call stats.std_dev {"numbers": [72, 85, 91, 64, 88, 79]}
+@result 79.83
+@result 82.0
+@result 9.406
+@assistant
+For the six scores:
+
+- Mean: 79.83
+- Median: 82
+- Standard deviation: 9.41
+@user
+Why is the median higher than the mean?
+@assistant
+Because one low score pulls the mean down but barely moves the median.
+
+Sorted, the scores are 64, 72, 79, 85, 88, 91. The median only looks at the two middle values: (79 + 85) / 2 = 82. The mean uses every value, so the 64, which sits almost 16 points below the average, drags it down to 79.83. When the low end has the stragglers, the mean ends up below the median.
+@user
+What's the mean if we drop the 64?
+@call math.average {"numbers": [72, 85, 91, 88, 79]}
+@result 83.0
+@assistant
+Without the 64 the mean is 83.0, up from 79.83.
+@user
+Different thing. My own course grade is 30% homework, 30% midterm, 40% final. I have 78 on homework and 84 on the midterm. If I get 91 on the final what do I end with?
+@call education.grade_average {"scores": [78, 84, 91], "weights": [0.3, 0.3, 0.4]}
+@result 85.0
+@assistant
+You would finish with 85.0.
+
+The working: 0.3 x 78 = 23.4, 0.3 x 84 = 25.2, 0.4 x 91 = 36.4, and 23.4 + 25.2 + 36.4 = 85.0.
+@user
+what do I need on the final for a 90 overall?
+@assistant
+I can solve that directly.
+
+Step 1: Homework and midterm are already fixed: 23.4 + 25.2 = 48.6 points.
+Step 2: You need 90 - 48.6 = 41.4 more points from the final.
+Step 3: The final counts 40%, so the score needed is 41.4 / 0.4 = 103.5.
+
+That is above 100, so a 90 overall is out of reach unless there is extra credit. With a perfect 100 on the final you would end at 48.6 + 40 = 88.6.
+@check has=103.5 ; has=88.6
+
+### mt/t009 | skills=tools_session,tools_chain | tools=dates.days_between,dates.day_of_week,dates.add_days,dates.age_on,dates.is_leap_year
+@user
+My thesis is due 19 June 2026. Today is 10 February 2026. How many days do I have?
+@call dates.days_between {"start_date": "2026-02-10", "end_date": "2026-06-19"}
+@result 129
+@assistant
+You have 129 days from 10 February to 19 June 2026, a little over 18 weeks.
+@user
+What day of the week is the deadline?
+@call dates.day_of_week {"date": "2026-06-19"}
+@result "Friday"
+@assistant
+19 June 2026 is a Friday.
+@user
+My supervisor wants the full draft 30 days before. What date is that, and what weekday?
+@call dates.add_days {"date": "2026-06-19", "days": -30}
+@result "2026-05-20"
+@call dates.day_of_week {"date": "2026-05-20"}
+@result "Wednesday"
+@assistant
+The draft is due on Wednesday 20 May 2026, which is 30 days before the 19 June deadline.
+@check has=20 May ; has=Wednesday
+@user
+So how many days from today until the draft?
+@assistant
+No lookup needed for this one. You have 129 days until the deadline, and the draft is due 30 days earlier, so 129 - 30 = 99 days from today.
+@check has=99
+@user
+lol I'll be how old on deadline day? born 2 August 1990
+@call dates.age_on {"birth_date": "1990-08-02", "on_date": "2026-06-19"}
+@result 35
+@assistant
+You will be 35 on 19 June 2026. Your 36th birthday comes about six weeks later, on 2 August.
+
+### mt/t010 | skills=tools_session,tools_none_needed | tools=units.convert_temperature,units.convert_weight,plants.watering_interval
+@user
+An American recipe says bake at 350 F. What's that in Celsius?
+@call units.convert_temperature {"value": 350, "from_unit": "F", "to_unit": "C"}
+@result 176.67
+@assistant
+350 °F is 176.67 °C. On most ovens you would set 175 or 180 °C. If yours is fan-assisted, drop it by about 20 degrees, so around 160 °C.
+@user
+It also wants 8 oz of butter and a pound and a half of flour. Grams please.
+@call units.convert_weight {"value": 8, "from_unit": "oz", "to_unit": "g"}
+@call units.convert_weight {"value": 1.5, "from_unit": "lb", "to_unit": "g"}
+@result 226.796
+@result 680.389
+@assistant
+- Butter: 8 oz is about 227 g
+- Flour: 1.5 lb is about 680 g
+@user
+I don't have buttermilk. What can I use?
+@assistant
+None of my tools cover this, but it is a standard kitchen swap. For each cup (240 ml) of buttermilk:
+
+- Put 1 tablespoon of lemon juice or white vinegar in a measuring jug, top up with milk to 240 ml, and let it stand for 5 to 10 minutes until it looks slightly curdled.
+- Or thin plain yogurt with a little milk until it pours.
+
+Both give the acidity the recipe relies on to react with baking soda.
+@user
+thanks. unrelated: how often should I water my basil in summer? and in winter?
+@call plants.watering_interval {"plant": "basil", "season": "summer"}
+@call plants.watering_interval {"plant": "basil", "season": "winter"}
+@result 2
+@result 4
+@assistant
+Water basil every 2 days in summer and every 4 days in winter.
+
+### mt/t011 | skills=tools_session,tools_none_needed | tools=text.word_count,text.count_letter,text.is_palindrome,text.reverse,education.reading_time
+@user
+How many words is this headline: "Join us on Saturday for the opening of the new community garden behind the library"
+@call text.word_count {"text": "Join us on Saturday for the opening of the new community garden behind the library"}
+@result 15
+@assistant
+The headline has 15 words.
+@user
+Too long, the newsletter template allows 10. Shorten it.
+@assistant
+Here is a first cut:
+
+"Join us Saturday: the new community garden opens!"
+
+Counted out: Join (1) us (2) Saturday (3) the (4) new (5) community (6) garden (7) opens (8). That is 8 words, so there is room to add the place:
+
+"Join us Saturday: new community garden opens behind the library"
+
+That one is exactly 10 words.
+@user
+Check the second one with the counter, I don't trust manual counts.
+@call text.word_count {"text": "Join us Saturday: new community garden opens behind the library"}
+@result 10
+@assistant
+The counter agrees: 10 words.
+@user
+Fun one for the kids' corner. Is "Never odd or even" a palindrome?
+@call text.is_palindrome {"text": "Never odd or even"}
+@result true
+@assistant
+Yes. Ignoring the spaces and capital letters, "Never odd or even" reads the same in both directions.
+@user
+And give me a word that turns into another word when reversed, with proof
+@call text.reverse {"text": "stressed"}
+@result "desserts"
+@assistant
+"stressed" reversed is "desserts". The tool output above is the proof.
+
+### mt/t012 | skills=tools_session,cot | tools=physics.free_fall_time,physics.kinetic_energy,units.convert_length
+@user
+Physics homework. A stone is dropped from a 20 m cliff. How long until it hits the ground? Ignore air resistance.
+@call physics.free_fall_time {"height_m": 20}
+@result 2.02
+@assistant
+It takes about 2.02 seconds.
+
+Where that comes from: for a drop from rest, h = (1/2) g t², so t = sqrt(2h / g) = sqrt(40 / 9.81) = sqrt(4.077), which is about 2.02 s.
+@user
+So from 80 m, four times higher, it takes four times as long, about 8 seconds?
+@call physics.free_fall_time {"height_m": 80}
+@result 4.04
+@assistant
+No, it takes 4.04 seconds, which is twice as long, not four times.
+
+The time depends on the square root of the height. Four times the height gives sqrt(4) = 2 times the time: 2 x 2.02 = 4.04 s. To get four times the fall time you would need 16 times the height.
+@check has=4.04 ; hasnt=you are right
+@user
+ok makes sense. How fast is the stone going when it lands in the 20 m case, and what's its kinetic energy if it weighs half a kilo?
+@assistant
+First the speed, which I can work out from the fall time: v = g x t = 9.81 x 2.02, about 19.8 m/s. Now the energy with that speed.
+@call physics.kinetic_energy {"mass_kg": 0.5, "velocity_ms": 19.8}
+@result 98.01
+@assistant
+The stone lands at about 19.8 m/s and has about 98 joules of kinetic energy.
+
+A quick cross-check with energy conservation: m g h = 0.5 x 9.81 x 20 = 98.1 J. The two agree, and the small gap comes from rounding the speed.
+@check has=98
+
+### mt/t013 | skills=tools_error,tools_session | tools=travel.search_flights,finance.stock_quote,weather.get_current
+@user
+Flights from Madrid to Rome on 3 March 2025, one person.
+@call travel.search_flights {"origin": "Madrid", "destination": "Rome", "date": "2025-03-03", "passengers": 1}
+@result {"error": "date must be in the future"}
+@assistant
+The search rejected that date because 3 March 2025 is in the past. Did you mean 3 March of a later year, or a different date?
+@user
+oops, 2027
+@call travel.search_flights {"origin": "Madrid", "destination": "Rome", "date": "2027-03-03", "passengers": 1}
+@result [{"flight": "FL412", "departs": "07:40", "price": 96}, {"flight": "FL218", "departs": "18:05", "price": 121}]
+@assistant
+Two flights from Madrid to Rome on 3 March 2027:
+
+- FL412, departs 07:40, price 96
+- FL218, departs 18:05, price 121
+@user
+While I'm here, what's Tesla stock at?
+@assistant
+I can't look that one up. The stock quote tool here only covers four symbols: ACME, GLBX, INIT and HOOL. I also won't guess a price from memory, because a remembered share price would be out of date. If one of those four is useful, I can fetch it.
+@check hasnt=$
+@user
+HOOL then
+@call finance.stock_quote {"symbol": "HOOL"}
+@result {"symbol": "HOOL", "price": 176.5}
+@assistant
+HOOL is at 176.50.
+@user
+and is it raining in Rome right now?
+@call weather.get_current {"city": "Rome"}
+@result {"error": "service temporarily unavailable"}
+@assistant
+The weather service is temporarily unavailable, so I can't tell you right now. I can try again in a moment if you like.
+@user
+try again
+@call weather.get_current {"city": "Rome"}
+@result {"city": "Rome", "temperature": 14, "units": "celsius", "condition": "light rain"}
+@assistant
+It worked this time. Yes, there is light rain in Rome right now, and it is 14 °C.
+
+### mt/t014 | skills=tools_confirm,tools_session | tools=mailer.search_inbox,mailer.send_email,planner.add_reminder
+@system
+You help Sam manage email. Always show the draft and wait for a clear yes before sending any email.
+@user
+Do I have anything from Petra about an invoice?
+@call mailer.search_inbox {"query": "Petra invoice", "folder": "inbox"}
+@result {"count": 1}
+@assistant
+Yes, there is 1 message in your inbox matching "Petra invoice". The search only returns a count, so I can't show you its contents.
+@user
+Right, that's invoice 2291. Reply to petra@northwind.example that we'll pay it on Friday 22 May.
+@assistant
+Here is the draft. I have not sent it.
+
+To: petra@northwind.example
+Subject: Invoice 2291 - payment date
+
+Hi Petra,
+
+Thanks for sending invoice 2291. We will pay it on Friday 22 May.
+
+Best regards,
+Sam
+
+Send it as is?
+@user
+Make it a bit warmer and then send.
+@assistant
+A warmer version:
+
+To: petra@northwind.example
+Subject: Invoice 2291 - payment date
+
+Hi Petra,
+
+Thank you for invoice 2291, and for getting it over so promptly. We will pay it on Friday 22 May. Let me know if you need anything else from us in the meantime.
+
+Warm regards,
+Sam
+
+You asked me to send after the change, so I am sending this version now.
+@call mailer.send_email {"to": "petra@northwind.example", "subject": "Invoice 2291 - payment date", "body": "Hi Petra,\n\nThank you for invoice 2291, and for getting it over so promptly. We will pay it on Friday 22 May. Let me know if you need anything else from us in the meantime.\n\nWarm regards,\nSam"}
+@result {"queued": true, "to": "petra@northwind.example"}
+@assistant
+The email to petra@northwind.example is queued for sending.
+@user
+remind me thursday 21 May at 4pm to actually make the payment
+@call planner.add_reminder {"text": "Pay invoice 2291 (Northwind, promised for Friday 22 May)", "time": "2026-05-21 16:00"}
+@result {"reminder_id": "R3310"}
+@assistant
+Reminder set for Thursday 21 May at 16:00: pay invoice 2291. I assumed 2026, since 21 May falls on a Thursday that year. Tell me if you meant another year.
+
+### mt/t015 | skills=tools_session,cot | tools=iot.get_sensor_reading,iot.set_thermostat,home.energy_cost
+@user
+What's the living room temperature? The sensor is called living-room-temp.
+@call iot.get_sensor_reading {"sensor_id": "living-room-temp"}
+@result {"value": 23.3, "unit": "C"}
+@assistant
+The living room is at 23.3 °C.
+@user
+Too warm. Set the thermostat there to 21, heating mode.
+@call iot.set_thermostat {"room": "living room", "temperature_c": 21, "mode": "heat"}
+@result {"ok": true}
+@assistant
+Done. The living room thermostat is set to 21 °C in heat mode. The room will take a while to drift down from 23.3.
+@user
+We used 310 kWh last month at 0.32 per kWh. What did that cost?
+@call home.energy_cost {"kwh": 310, "price_per_kwh": 0.32}
+@result 99.2
+@assistant
+310 kWh at 0.32 per kWh cost 99.20.
+@user
+I read that each degree lower saves around 5% on heating... so 2 degrees is 10%. What would the bill be then?
+@assistant
+Taking your 5% per degree figure as given:
+
+Step 1: 2 degrees lower is about 10% less energy: 310 x 0.90 = 279 kWh.
+Step 2: Cost at the same price:
+@call home.energy_cost {"kwh": 279, "price_per_kwh": 0.32}
+@result 89.28
+@assistant
+The bill would be about 89.28, a saving of 9.92 a month.
+
+Two caveats. The 5% rule is a rough average, and it applies to heating energy only. If part of the 310 kWh went to lights, cooking and appliances, the real saving is smaller.
+@check has=89.28 ; has=9.92
+
+### mt/t016 | skills=tools_session,tools_honest_result | tools=food.find_restaurants,events.find_concerts,maps.get_distance,movies.get_showtimes
+@user
+Planning Saturday 6 June in Porto. Any mid-priced Thai places?
+@call food.find_restaurants {"city": "Porto", "cuisine": "thai", "price_level": 2}
+@result [{"name": "Baan Rim Douro", "rating": 4.4}, {"name": "Lemongrass Porto", "rating": 4.1}, {"name": "Thai Garden Cedofeita", "rating": 3.7}]
+@assistant
+Three mid-priced Thai restaurants in Porto:
+
+- Baan Rim Douro, rated 4.4
+- Lemongrass Porto, rated 4.1
+- Thai Garden Cedofeita, rated 3.7
+@user
+Is there jazz on that night?
+@call events.find_concerts {"city": "Porto", "genre": "jazz", "month": "June"}
+@result [{"artist": "Douro Jazz Quartet", "date": "2026-06-12"}, {"artist": "Marta Reis Trio", "date": "2026-06-20"}]
+@assistant
+Not on the 6th. The jazz concerts in Porto in June are the Douro Jazz Quartet on 12 June and the Marta Reis Trio on 20 June. Both are after your Saturday.
+@check hasnt=yes
+@user
+Shame. A film then. When is The Long Tide showing that day?
+@call movies.get_showtimes {"movie": "The Long Tide", "city": "Porto", "date": "2026-06-06"}
+@result ["13:00", "16:45", "21:15"]
+@assistant
+The Long Tide is showing in Porto on 6 June at 13:00, 16:45 and 21:15. The 16:45 showing would leave time for dinner afterwards, and the 21:15 works if you eat first.
+@user
+Which of those restaurants is closest to the cinema?
+@assistant
+I can't work that out from what I have. The showtimes result did not name a cinema, and the restaurant search did not return addresses. If you tell me the cinema and the address or neighbourhood of a restaurant, I can check the distance between the two.
+@user
+ok forget it. On Sunday we drive to Braga. How far?
+@call maps.get_distance {"origin": "Porto", "destination": "Braga", "mode": "driving"}
+@result {"km": 55, "mode": "driving"}
+@assistant
+Porto to Braga is 55 km by car.
+
+### mt/t017 | skills=tools_session,cot | tools=finance.break_even,finance.roi,math.percentage
+@user
+I want to sell handmade candles. Fixed costs for the year are 12,000. Each candle costs me 9 to make and I'd sell at 25. How many do I need to sell to break even?
+@call finance.break_even {"fixed_costs": 12000, "price_per_unit": 25, "cost_per_unit": 9}
+@result 750
+@assistant
+You break even at 750 candles.
+
+Each candle leaves 25 - 9 = 16 after its own cost, and 12,000 / 16 = 750. Over a year that is about 63 candles a month, or roughly 14 to 15 a week.
+@check has=750
+@user
+and at 29 each?
+@call finance.break_even {"fixed_costs": 12000, "price_per_unit": 29, "cost_per_unit": 9}
+@result 600
+@assistant
+At 29 you break even at 600 candles, because each one now leaves 20 instead of 16. That is 150 fewer than at 25, as long as the higher price does not cost you sales.
+@user
+What's 600 as a percent of 750? I want to say "we need X% of the volume".
+@call math.percentage {"part": 600, "whole": 750}
+@result 80.0
+@assistant
+600 is 80% of 750. So you could say: "At 29 we need only 80% of the volume to break even."
+@user
+Say I sell 1,200 candles at 25 in year one. What's my return on the 12,000?
+@assistant
+I need the profit first.
+
+Step 1: Margin per candle is 25 - 9 = 16.
+Step 2: Total margin: 1,200 x 16 = 19,200.
+Step 3: Profit after fixed costs: 19,200 - 12,000 = 7,200.
+
+The ROI tool compares a gain with a cost. Here the amount you get back is 19,200 against the 12,000 you put in.
+@call finance.roi {"gain": 19200, "cost": 12000}
+@result 60.0
+@assistant
+Your return is 60%: a profit of 7,200 on the 12,000 of fixed costs.
+
+Note that this treats the 12,000 as your only investment. The money tied up in materials and your own unpaid hours are not counted.
+@check has=60% ; has=7,200
+
+### mt/t018 | skills=tools_session,cot | tools=transport.fuel_cost,transport.parking_fee,transport.train_search
+@user
+Comparing driving vs train for a day in Utrecht from Leiden on 1 September 2026. It's 64 km each way. My car does 6.5 l/100km and petrol is 1.80. What's the fuel for one way?
+@call transport.fuel_cost {"distance_km": 64, "consumption_l_per_100km": 6.5, "price_per_litre": 1.8}
+@result 7.49
+@assistant
+Fuel for one way is 7.49, so a round trip is 14.98.
+@user
+Parking is 2.50 an hour, capped at 15 a day. I'll be there 9 hours.
+@call transport.parking_fee {"hours": 9, "rate_per_hour": 2.5, "daily_cap": 15}
+@result 15
+@assistant
+Parking comes to 15. Nine hours at 2.50 would be 22.50, so the daily cap applies.
+
+Driving total for the day: 14.98 fuel + 15 parking = 29.98.
+@check has=29.98
+@user
+Now trains that morning.
+@call transport.train_search {"origin": "Leiden", "destination": "Utrecht", "date": "2026-09-01"}
+@result [{"train": "T693", "departs": "07:15", "duration_min": 43}, {"train": "T374", "departs": "07:45", "duration_min": 43}, {"train": "T638", "departs": "08:15", "duration_min": 51}]
+@assistant
+Morning trains from Leiden to Utrecht on 1 September 2026:
+
+- T693, departs 07:15, 43 minutes
+- T374, departs 07:45, 43 minutes
+- T638, departs 08:15, 51 minutes
+
+The search gives times but no fares.
+@user
+So which is cheaper, train or car?
+@assistant
+I can't say yet, because the train search returned no ticket prices. What I can give you is the number to beat: driving costs 29.98 for the day, fuel and parking together.
+
+If a return ticket costs less than that, the train wins on price. Driving also adds wear on the car, which the 29.98 does not include, so a ticket slightly above 30 could still be the better deal.
+@check has=29.98
+
+### mt/t019 | skills=tools_session,code | tools=devtools.search_code,database.run_query,devtools.regex_test,devtools.format_json
+@user
+How many TODOs are left in the python files of billing-service?
+@call devtools.search_code {"repo": "billing-service", "pattern": "TODO", "file_type": "py"}
+@result {"matches": 2}
+@assistant
+There are 2 matches for "TODO" in the Python files of billing-service.
+@user
+I need a regex that pulls ISO dates out of release notes. Test it on: Released 2026-01-15, patched 2026-02-03.
+@call devtools.regex_test {"pattern": "\\d{4}-\\d{2}-\\d{2}", "text": "Released 2026-01-15, patched 2026-02-03."}
+@result ["2026-01-15", "2026-02-03"]
+@assistant
+This pattern works:
+
+```
+\d{4}-\d{2}-\d{2}
+```
+
+On your sample it finds both dates: 2026-01-15 and 2026-02-03. It checks the shape only, so it would also accept an impossible date like 2026-13-45.
+@user
+Good enough. Run this on the analytics db: signups per country since the start of 2026.
+@call database.run_query {"database": "analytics", "sql": "SELECT country, COUNT(*) AS signups FROM signups WHERE created_at >= '2026-01-01' GROUP BY country ORDER BY signups DESC"}
+@result {"rows": 11, "elapsed_ms": 46}
+@assistant
+The query ran in 46 ms and returned 11 rows, so there are signups from 11 countries since 1 January 2026. The tool reports only the row count, not the rows.
+
+I assumed a table called signups with country and created_at columns. This is the SQL I ran:
+
+```sql
+SELECT country, COUNT(*) AS signups
+FROM signups
+WHERE created_at >= '2026-01-01'
+GROUP BY country
+ORDER BY signups DESC
+```
+@user
+last thing, pretty print this with 4 spaces: {"id":7,"tags":["a","b"]}
+@call devtools.format_json {"json_text": "{\"id\":7,\"tags\":[\"a\",\"b\"]}", "indent": 4}
+@result "{\n    \"id\": 7,\n    \"tags\": [\n        \"a\",\n        \"b\"\n    ]\n}"
+@assistant
+```json
+{
+    "id": 7,
+    "tags": [
+        "a",
+        "b"
+    ]
+}
+```
+
+### mt/t020 | skills=tools_session,if_system | tools=weather.get_current,weather.get_forecast,units.convert_temperature
+@system
+You are a weather line for a radio station. Every reply must be at most two sentences, and must never contain a list.
+@user
+What's it like in Oslo right now?
+@call weather.get_current {"city": "Oslo", "units": "celsius"}
+@result {"city": "Oslo", "temperature": 9, "units": "celsius", "condition": "windy"}
+@assistant
+Oslo is windy right now at 9 degrees Celsius.
+@check max_sentences n=2 ; n_bullets n=0
+@user
+And the next two days?
+@call weather.get_forecast {"city": "Oslo", "days": 2}
+@result [{"day": 1, "high": 13, "condition": "light rain"}, {"day": 2, "high": 18, "condition": "overcast"}]
+@assistant
+Tomorrow brings light rain with a high of 13. The day after is overcast but warmer, reaching 18.
+@check max_sentences n=2 ; n_bullets n=0
+@user
+Give me the full breakdown of everything you know about Oslo weather, as detailed as possible.
+@assistant
+Oslo is windy and 9 degrees now, with light rain and a high of 13 tomorrow. The day after turns overcast and warmer at 18.
+@check max_sentences n=2 ; n_bullets n=0
+@user
+What's 18 Celsius in Fahrenheit, for our American listeners?
+@call units.convert_temperature {"value": 18, "from_unit": "C", "to_unit": "F"}
+@result 64.4
+@assistant
+18 degrees Celsius is 64.4 degrees Fahrenheit.
+@check max_sentences n=2
+@user
+Should listeners take an umbrella tomorrow?
+@assistant
+Yes, light rain is forecast for Oslo tomorrow. An umbrella or a rain jacket is a good idea.
+@check max_sentences n=2
+
+### mt/t021 | skills=tools_session,cot | tools=math.is_prime,math.gcd,math.lcm,math.fibonacci,math.to_binary
+@user
+Is 91 prime?
+@call math.is_prime {"number": 91}
+@result false
+@assistant
+No, 91 is not prime.
+@user
+Really? It looks prime. What divides it?
+@assistant
+It does look prime, which is why it catches people out. 91 = 7 x 13.
+
+A quick way to find that: you only need to test primes up to the square root of 91, which is about 9.5, so 2, 3, 5 and 7. It is odd, its digits sum to 10 so 3 fails, and it does not end in 0 or 5. Then 7 x 13 = 91, so 7 divides it.
+@check has=7 x 13
+@user
+What about 97?
+@call math.is_prime {"number": 97}
+@result true
+@assistant
+Yes, 97 is prime.
+@user
+I have two gears with 84 and 126 teeth. After how many teeth passing do they line up at the start again? And what's the biggest tooth count that divides both?
+@call math.lcm {"a": 84, "b": 126}
+@call math.gcd {"a": 84, "b": 126}
+@result 252
+@result 42
+@assistant
+- They line up again after 252 teeth have passed. That is 3 full turns of the 84-tooth gear and 2 turns of the 126-tooth gear.
+- The largest tooth count that divides both is 42.
+@check has=252 ; has=42
+@user
+97 in binary?
+@call math.to_binary {"number": 97}
+@result "1100001"
+@assistant
+97 in binary is 1100001. Check: 64 + 32 + 1 = 97.
+
+### mt/t022 | skills=tools_session,cot | tools=science.molar_mass,science.half_life_remaining
+@user
+Molar mass of glucose?
+@call science.molar_mass {"formula": "C6H12O6"}
+@result 180.16
+@assistant
+The molar mass of glucose (C6H12O6) is 180.16 g/mol.
+@user
+So how many moles are in 45 g of it?
+@assistant
+Moles = mass / molar mass = 45 / 180.16, which is about 0.25 mol.
+
+A quick check: a quarter of 180.16 is 45.04, so 45 g is almost exactly a quarter of a mole.
+@check has=0.25
+@user
+Different topic. Iodine-131 has a half-life of 8 days. From an 80 mg sample, what's left after 24 days?
+@call science.half_life_remaining {"initial": 80, "half_life": 8, "elapsed": 24}
+@result 10.0
+@assistant
+10 mg remains after 24 days.
+
+24 days is exactly three half-lives, so the amount halves three times: 80, 40, 20, 10.
+@user
+And after 12 days? I'd guess 30, halfway between 40 and 20.
+@call science.half_life_remaining {"initial": 80, "half_life": 8, "elapsed": 12}
+@result 28.284
+@assistant
+It is about 28.3 mg, a bit less than your guess of 30.
+
+Decay is not a straight line between the half-life points. After 12 days, 1.5 half-lives have passed, so the fraction left is (1/2)^1.5, about 0.354, and 80 x 0.354 = 28.3 mg. The amount falls faster early in each interval, so the midpoint in time sits below the midpoint in mass.
+@check has=28.3
+
+### mt/t023 | skills=tools_session,tools_clarify | tools=hr.get_employee,support.create_ticket,messaging.send_message
+@system
+You are the internal IT helpdesk assistant. Create tickets only when you have a subject, a priority and a description of the problem.
+@user
+Open a ticket, Lea's laptop is broken.
+@assistant
+I can do that. I need a bit more first:
+
+1. What exactly is wrong with the laptop?
+2. How urgent is it: low, medium or high?
+@user
+It won't charge since this morning, she tried two chargers. High, she has a client demo on Thursday. Her employee id is E-2207 if you need it.
+@call hr.get_employee {"employee_id": "E-2207"}
+@result {"name": "Lea Novak", "department": "Sales"}
+@call support.create_ticket {"subject": "Laptop will not charge", "priority": "high", "description": "Lea Novak (Sales, E-2207): laptop stopped charging this morning. Two different chargers tried, no change. She has a client demo on Thursday."}
+@result {"ticket_id": "T-6182", "status": "open"}
+@assistant
+Ticket T-6182 is open with high priority: "Laptop will not charge" for Lea Novak in Sales. The description notes the two chargers she tried and the client demo on Thursday.
+@check has=T-6182
+@user
+Tell Lea the ticket number.
+@call messaging.send_message {"recipient": "Lea Novak", "message": "Hi Lea, IT ticket T-6182 (high priority) is open for your laptop that will not charge. The team knows about your client demo on Thursday."}
+@result {"sent": true}
+@assistant
+Sent. Lea has the ticket number T-6182 and knows the team is aware of her Thursday demo.
+@user
+When will it be fixed?
+@assistant
+I don't know. The ticket is open, but it shows no assignee or estimated time yet, and I have no tool that reads the repair schedule. Since the demo is Thursday, it is worth asking the IT team directly for a loan laptop in case the repair runs late.
+
+### mt/t024 | skills=tools_session,write | tools=social.schedule_post,text.word_count,util.qr_code
+@user
+Write a LinkedIn post: we're hiring a data engineer in Lyon, applications close 30 June. Keep it under 40 words.
+@assistant
+We're hiring a Data Engineer in Lyon. You'll build the pipelines our whole product runs on, with a small team that ships every week. Applications close 30 June. Know someone who fits? Send them our way.
+@check max_words n=40
+@user
+count it to be sure
+@call text.word_count {"text": "We're hiring a Data Engineer in Lyon. You'll build the pipelines our whole product runs on, with a small team that ships every week. Applications close 30 June. Know someone who fits? Send them our way."}
+@result 36
+@assistant
+36 words, so it is under your limit of 40.
+@user
+Schedule it for 2 June 2026, 9 in the morning.
+@call social.schedule_post {"platform": "linkedin", "text": "We're hiring a Data Engineer in Lyon. You'll build the pipelines our whole product runs on, with a small team that ships every week. Applications close 30 June. Know someone who fits? Send them our way.", "publish_at": "2026-06-02 09:00"}
+@result {"post_id": "SP9091", "status": "scheduled"}
+@assistant
+Scheduled on LinkedIn for 2 June 2026 at 09:00. The post ID is SP9091.
+@user
+I also want a QR code for the job page for the office poster: https://jobs.example.com/data-engineer
+@call util.qr_code {"text": "https://jobs.example.com/data-engineer"}
+@result {"image_url": "https://img.example/qr/97165.png"}
+@assistant
+Here is the QR code for the job page: https://img.example/qr/97165.png
+
+It was made at the default size. For a poster you may want a larger one, so tell me a size in pixels and I'll regenerate it.

@@ -1,0 +1,601 @@
+Context following and honesty: answers come from the given text only, missing facts are named as missing, and limits (no live data, no memory of other chats, uncertain facts) are stated plainly with a useful next step.
+
+### mt/c001 | skills=context_doc
+@user
+Here is our office notice. Answer my questions from it.
+
+"The Harbour Street office will close for floor repairs from Monday 3 March to Friday 7 March. Staff should work from home that week. Laptops can be collected from IT on Friday 28 February between 10:00 and 16:00. The car park stays open. Deliveries will be redirected to the Mill Lane warehouse."
+
+When can I pick up a laptop?
+@assistant
+On Friday 28 February, between 10:00 and 16:00, from IT.
+@check has=28 February ; has=10:00
+@user
+Can I still park there during the closure?
+@assistant
+Yes. The notice says the car park stays open.
+@check has=car park stays open
+@user
+Who do I contact if my laptop isn't ready?
+@assistant
+The notice does not say. It names IT as the place to collect laptops but gives no contact person, phone number or email. I would ask the IT team directly or whoever sent the notice.
+@check has=does not say
+@user
+And where will my parcel go if it arrives on the 5th?
+@assistant
+The 5th of March falls inside the closure week, so according to the notice it will be redirected to the Mill Lane warehouse.
+@check has=Mill Lane
+
+### mt/c002 | skills=context_doc
+@system
+Answer only from the product sheet the user provides. If the sheet does not contain the answer, say so in one sentence and do not guess.
+@user
+Product sheet: "AeroKettle K2. Capacity 1.7 litres. Power 2200 W. Boils 1 litre in about 2 minutes 30 seconds. Auto shut-off and boil-dry protection. Stainless steel body, removable limescale filter. Cord length 75 cm. Warranty 2 years."
+
+How long is the warranty?
+@assistant
+The warranty is 2 years.
+@check has=2 years
+@user
+Is it dishwasher safe?
+@assistant
+The product sheet does not say whether the kettle is dishwasher safe.
+@check has=does not say ; max_words n=20
+@user
+What colour options are there?
+@assistant
+The sheet does not list any colour options. It only mentions a stainless steel body.
+@check has=stainless steel
+@user
+How long to boil a full kettle then?
+@assistant
+The sheet only gives a time for 1 litre: about 2 minutes 30 seconds. It does not state a time for the full 1.7 litres, so I cannot give you a figure from it.
+@check has=1 litre ; has=does not
+
+### mt/c003 | skills=context_table
+@user
+Train times from Leeds to York today:
+
+Dep 08:12, arr 08:35, platform 9
+Dep 08:40, arr 09:10, platform 11
+Dep 09:05, arr 09:28, platform 9
+Dep 09:33, arr 10:04, platform 12
+
+Which one is fastest?
+@assistant
+Let me work out each journey time.
+
+- 08:12 to 08:35 is 23 minutes.
+- 08:40 to 09:10 is 30 minutes.
+- 09:05 to 09:28 is 23 minutes.
+- 09:33 to 10:04 is 31 minutes.
+
+Two trains tie for fastest at 23 minutes: the 08:12 and the 09:05, both from platform 9.
+@check has=23 minutes ; has=09:05
+@user
+I need to be in York by 9:15. Latest train I can take?
+@assistant
+The trains that arrive by 09:15 are the 08:12 (arrives 08:35) and the 08:40 (arrives 09:10). The 09:05 arrives at 09:28, which is too late.
+
+So the latest you can take is the 08:40 from platform 11, arriving 09:10.
+@check has=08:40 ; has=platform 11
+@user
+How much is a ticket?
+@assistant
+The timetable you sent has only departure times, arrival times and platforms. There are no prices in it, so I cannot tell you the fare. The operator's website or a ticket machine will show it.
+@check has=no prices
+
+### mt/c004 | skills=context_conflict
+@user
+I'm pasting two notes from my team about the same launch.
+
+Note A (Monday): "Launch is set for 14 June. Marketing emails go out on the 12th."
+Note B (Thursday): "Launch moved to 21 June because of the payment bug. Email date to be confirmed."
+
+When is the launch?
+@assistant
+The two notes disagree, and the later one replaces the earlier. Note B, written on Thursday, moves the launch to 21 June because of the payment bug. So based on the most recent note, the launch is 21 June.
+@check has=21 June
+@user
+And when do the marketing emails go out?
+@assistant
+That is not settled. Note A said the 12th, but that was tied to the old 14 June launch. Note B says the email date is "to be confirmed". So there is no current date in what you sent me, and the 12th should not be relied on.
+@check has=to be confirmed
+@user
+If they keep the same gap as before, what date would that be?
+@assistant
+Step 1: In Note A the emails went out on 12 June for a 14 June launch, a gap of 2 days.
+Step 2: Two days before 21 June is 19 June.
+
+So with the same gap the emails would go out on 19 June. That is my inference from the old plan, not something either note states.
+@check has=19 June
+
+### mt/c005 | skills=context_quote
+@user
+Text: "Honeybees communicate the location of food through a movement known as the waggle dance. The angle of the dance relative to vertical indicates the direction of the food relative to the sun. The duration of the waggle phase indicates distance: a longer waggle means the food is farther away. The dance was decoded by Karl von Frisch, who received a Nobel Prize in 1973."
+
+What does the length of the waggle tell the other bees?
+@assistant
+It tells them the distance to the food. According to the text, a longer waggle means the food is farther away.
+@check has=distance
+@user
+Quote the sentence that supports that.
+@assistant
+"The duration of the waggle phase indicates distance: a longer waggle means the food is farther away."
+@check has=The duration of the waggle phase indicates distance
+@user
+Does the text say how far bees can fly to reach food?
+@assistant
+No. The text explains how distance is signalled, but it gives no figure for how far bees fly.
+@check has=No
+@user
+Who decoded it and when?
+@assistant
+Karl von Frisch decoded the dance. The text does not say when he did the work. The only date it gives is 1973, the year he received a Nobel Prize.
+@check has=Karl von Frisch ; has=1973
+
+### mt/c006 | skills=context_policy
+@system
+You are the help assistant for Brightleaf Books. Use only the policy below.
+
+Returns policy: Unused items can be returned within 30 days of delivery with the receipt. Refunds go to the original payment method within 5 working days of us receiving the item. Sale items can be exchanged but not refunded. E-books and gift cards cannot be returned. Return postage is free for faulty items; otherwise the customer pays.
+@user
+I bought a cookbook 3 weeks ago and never opened it. Can I get my money back?
+@assistant
+Yes, as long as it was not a sale item. Three weeks is inside the 30-day window and the book is unused, so you can return it with your receipt. The refund goes to your original payment method within 5 working days of us receiving it.
+
+Was the cookbook bought at full price or in a sale?
+@check has=30 ; has=sale
+@user
+It was in the summer sale.
+@assistant
+Then I am afraid a refund is not available. Under our policy sale items can be exchanged but not refunded. You are welcome to exchange the cookbook for another item, and you are still within the 30 days to do that.
+@check has=exchanged
+@user
+Who pays the postage if I exchange it?
+@assistant
+You would pay the return postage. It is only free when the item is faulty.
+@check has=faulty
+@user
+Can I get store credit instead?
+@assistant
+The policy I have does not mention store credit, so I cannot promise it. What it does allow for a sale item is an exchange. If you would like to ask about store credit, the customer service team can tell you whether an exception is possible.
+@check has=does not mention
+
+### mt/c007 | skills=context_minutes
+@user
+Meeting notes, 9 Oct: "Present: Dana, Luis, Priya. Budget for Q4 approved at 48k. Luis to send the vendor shortlist by Friday. Priya raised the hiring freeze; no decision, revisit next meeting. Dana will book the offsite for the week of 17 Nov. Next meeting 23 Oct."
+
+List the action items with owners.
+@assistant
+There are two action items with a named owner:
+
+- Luis: send the vendor shortlist by Friday.
+- Dana: book the offsite for the week of 17 November.
+
+One open point has no owner: the hiring freeze, to be revisited at the next meeting on 23 October.
+@check has=Luis ; has=Dana
+@user
+What was decided about hiring?
+@assistant
+Nothing was decided. Priya raised the hiring freeze, the notes record "no decision", and it will be revisited at the next meeting.
+@check has=no decision
+@user
+Was Marco at the meeting?
+@assistant
+Marco is not listed. The notes show three people present: Dana, Luis and Priya.
+@check has=not listed
+@user
+Write a one-line summary I can paste in chat.
+@assistant
+Q4 budget approved at 48k, Luis sends the vendor shortlist by Friday, Dana books the offsite for the week of 17 Nov, and the hiring freeze stays undecided until the 23 Oct meeting.
+@check lines n=1 ; has=48k
+
+### mt/c008 | skills=context_recipe
+@user
+Recipe card: "Lemon rice. Serves 2. 150 g basmati rice, 300 ml water, 1 lemon (juice and zest), 1 tbsp oil, 1 tsp mustard seeds, a handful of peanuts, salt. Rinse the rice, boil with the water for 12 minutes, rest 5 minutes covered. Fry mustard seeds and peanuts in the oil for 1 minute, stir into the rice with the lemon."
+
+How much water for 6 people?
+@assistant
+Step 1: The card serves 2, so for 6 the factor is 6 / 2 = 3.
+Step 2: Water: 300 x 3 = 900 ml.
+
+You need 900 ml of water, along with 450 g of rice.
+@check has=900
+@user
+Is it gluten free?
+@assistant
+The card does not say. Looking at the listed ingredients (rice, water, lemon, oil, mustard seeds, peanuts, salt), none of them contains gluten in its plain form. For someone who must avoid gluten strictly, check the packaging of the peanuts and mustard seeds, since processed foods can carry traces.
+@check has=does not say
+@user
+How long from start to plate?
+@assistant
+Adding the times on the card: 12 minutes boiling + 5 minutes resting + 1 minute frying = 18 minutes. The frying can be done while the rice rests, which brings it down to about 17 minutes. The card gives no time for rinsing, so allow a couple of minutes more.
+@check has=18 minutes
+
+### mt/c009 | skills=context_email
+@user
+Email from my landlord: "Dear tenant, the boiler service is booked for Tuesday 14th between 8am and 12pm. Please make sure someone over 18 is home to let the engineer in. If this does not suit you, call the office on 555-0142 before Friday to rearrange. The visit takes about 45 minutes."
+
+I work Tuesdays. What are my options according to this?
+@assistant
+The email gives you two options:
+
+1. Have another adult (over 18) at home on Tuesday 14th between 8am and 12pm to let the engineer in. It does not have to be you.
+2. Call the office on 555-0142 before Friday to rearrange.
+@check has=555-0142 ; has=before Friday
+@user
+Could the engineer come in the afternoon?
+@assistant
+The email does not offer an afternoon slot. The booked window is 8am to 12pm. Whether an afternoon is possible is something to ask when you call to rearrange.
+@check has=does not
+@user
+Draft a short reply asking to move it to Thursday morning.
+@assistant
+Dear [Landlord's name],
+
+Thank you for letting me know about the boiler service. I am at work on Tuesday 14th and will not be able to let the engineer in. Would it be possible to move the visit to Thursday morning instead?
+
+I will also call the office before Friday, as you asked, to confirm.
+
+Kind regards,
+[Your name]
+@check has=Thursday morning
+
+### mt/c010 | skills=context_numbers
+@user
+From our annual report: "Revenue rose from 4.2 million in 2022 to 5.1 million in 2023. Operating costs were 3.9 million in 2023, up from 3.4 million. Headcount grew from 38 to 45. The company opened one new office, in Lyon."
+
+What was the profit in 2023?
+@assistant
+The report does not state profit directly, but it gives the two numbers needed for operating profit.
+
+Step 1: Revenue in 2023: 5.1 million.
+Step 2: Operating costs in 2023: 3.9 million.
+Step 3: 5.1 - 3.9 = 1.2 million.
+
+Operating profit in 2023 was 1.2 million. Net profit after tax and interest cannot be worked out from this passage.
+@check has=1.2 million
+@user
+Did profit go up?
+@assistant
+Step 1: 2022 operating profit: 4.2 - 3.4 = 0.8 million.
+Step 2: 2023 operating profit: 1.2 million.
+Step 3: Change: 1.2 - 0.8 = 0.4 million, which is a 50% rise.
+
+Yes. Operating profit rose from 0.8 million to 1.2 million.
+@check has=0.8 million ; has=50%
+@user
+What's revenue per employee in each year?
+@assistant
+Step 1: 2022: 4.2 million / 38 = about 110,500 per employee.
+Step 2: 2023: 5.1 million / 45 = about 113,300 per employee.
+
+Revenue per employee rose slightly, by roughly 2.5%.
+@check has=110,5 ; has=113,3
+@user
+How many offices do they have now?
+@assistant
+The passage does not give a total. It only says one new office was opened, in Lyon, so the company has at least two, but the exact number is not stated.
+@check has=does not
+
+### mt/c011 | skills=context_story
+@user
+Short story extract: "Mara locked the bakery at six, as she had every evening for eleven years. Tonight she left the lights on. The letter from the bank sat unopened on the counter, next to her father's rolling pin. Outside, the first snow of the year had started, and she stood in it for a long time before walking home the long way."
+
+What time does she usually close?
+@assistant
+At six in the evening. The extract says she has locked the bakery at six every evening for eleven years.
+@check has=six
+@user
+Why did she leave the lights on?
+@assistant
+The extract does not tell us. It only notes that tonight was different from her routine. A reasonable reading, given the unopened letter from the bank and the way she lingers outside, is that she is worried about the bakery's future and is reluctant to let it go dark. That is an interpretation, not something the text states.
+@check has=does not tell ; has=interpretation
+@user
+What does the letter say?
+@assistant
+We cannot know. The letter is unopened, so even Mara has not read it within the extract.
+@check has=unopened
+@user
+Who owned the bakery before her?
+@assistant
+The extract does not say. Her father's rolling pin on the counter hints that he may have been a baker, possibly there before her, but ownership is never mentioned.
+@check has=rolling pin
+
+### mt/c012 | skills=context_instructions
+@user
+Assembly leaflet: "Step 1: Attach the four legs (A) to the frame (B) using the long bolts. Step 2: Slide the shelf (C) into the lower slots. Step 3: Fix the back panel (D) with the 12 small nails. Step 4: Do not fully tighten bolts until the shelf is in place. Tools needed: hex key (included), hammer (not included)."
+
+Do I need to buy any tools?
+@assistant
+Only if you do not already own a hammer. The leaflet lists a hex key, which is included, and a hammer, which is not.
+@check has=hammer
+@user
+I tightened all the bolts hard in step 1. Problem?
+@assistant
+Possibly. Step 4 says not to fully tighten the bolts until the shelf is in place, which suggests the frame needs a little give for the shelf to slide into the lower slots. I would loosen the bolts slightly, fit the shelf (C), and then tighten everything.
+@check has=loosen
+@user
+How many long bolts should be in the bag?
+@assistant
+The leaflet does not give a count for the long bolts. The only quantity it states is 12 small nails for the back panel. With four legs there must be at least four bolts, but the exact number is not in the text you sent.
+@check has=does not give
+
+### mt/h001 | skills=honest_limits
+@user
+What's the weather in Vienna right now?
+@assistant
+I cannot check that. I have no access to live weather data in this conversation, so anything I said would be a guess. A weather app or a search for "Vienna weather" will give you the current conditions in a few seconds.
+
+If it helps with planning, I can tell you what Vienna's climate is usually like at a given time of year.
+@check has=cannot ; hasnt=degrees
+@user
+Sure, what's it normally like in late October?
+@assistant
+Late October in Vienna is typically cool and autumnal. Daytime temperatures are often somewhere around 10 to 14 C, with colder nights. Expect a mix of grey days, some rain and the occasional clear, crisp one, and it gets dark early in the evening.
+
+These are long-term typical values, not a forecast. A layer you can add or remove and a rain jacket cover most of what the season brings.
+@check has=typical
+@user
+So should I bring an umbrella on Saturday?
+@assistant
+I cannot tell you about this Saturday in particular, since that needs a forecast. Based on the season alone, rain is common enough that a small umbrella or a rain jacket is a sensible thing to pack. Check a forecast on Friday evening for a real answer.
+@check has=forecast
+
+### mt/h002 | skills=honest_memory
+@user
+Can you continue the cover letter we worked on yesterday?
+@assistant
+I do not have yesterday's conversation. Each chat starts fresh for me, so I cannot see the letter we worked on.
+
+If you paste the draft here, I will pick it up from where it stands. It also helps to tell me the role you are applying for and what you wanted to change.
+@check has=paste
+@user
+Ugh. Ok here's what I have: "Dear Ms Okafor, I am writing to apply for the Junior Data Analyst role at Fenwick Labs. I recently completed a degree in statistics and"
+@assistant
+Thank you. Here is a continuation that picks up mid-sentence:
+
+"...and spent the past year turning that training into practical work. For my final project I analysed three years of bike-share data to find where stations ran empty, which meant cleaning messy records, building the model and explaining the results to people who had never studied statistics. I would like to bring the same care to the Junior Data Analyst role at Fenwick Labs.
+
+I would welcome the chance to talk about how I could contribute to your team. Thank you for your time and consideration.
+
+Yours sincerely,
+[Your name]"
+
+The project in the middle is a placeholder I invented to show the shape. Please swap in something you really did, because I do not know your background.
+@check has=placeholder
+@user
+Good call. My real project was predicting hospital wait times with regression.
+@assistant
+Here is the middle paragraph rewritten around your real project:
+
+"...and spent the past year turning that training into practical work. For my final project I built a regression model to predict hospital waiting times, which meant cleaning incomplete records, choosing which factors mattered and explaining the results to people who had never studied statistics. I would like to bring the same care to the Junior Data Analyst role at Fenwick Labs."
+
+If you tell me one concrete result, such as how accurate the predictions were, I can add it. A number makes a paragraph like this much stronger.
+@check has=hospital waiting times
+
+### mt/h003 | skills=honest_unknown
+@user
+Who won the Nobel Prize in Literature in 1987?
+@assistant
+Joseph Brodsky, the Russian-born poet and essayist who later became a United States citizen.
+@check has=Brodsky
+@user
+And what did he say in the third paragraph of his acceptance speech?
+@assistant
+I cannot quote that reliably. I know the lecture exists and that it deals with literature, language and the individual, but I cannot reproduce a specific paragraph word for word, and if I tried I would risk inventing sentences he never said.
+
+The full text is published on the Nobel Prize website, which is the right place to get the exact wording.
+@check has=cannot
+@user
+Fine, just tell me what his main idea was.
+@assistant
+In broad terms, Brodsky argued that literature and aesthetic experience are a private matter that strengthens a person's independence of mind. A reader develops individual taste and judgement, and someone with real taste is less easily swayed by slogans. He also treated language as something greater and older than any institution, with the poet as its servant.
+
+That is a summary from memory of his well-known themes, so use the published lecture if you need to cite it.
+@check has=summary
+
+### mt/h004 | skills=honest_false_premise
+@user
+Why did Einstein win the Nobel Prize for relativity?
+@assistant
+He did not, although many people assume so. Einstein received the 1921 Nobel Prize in Physics "for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect".
+
+Relativity was still considered too unconfirmed and too controversial by the committee at the time, so the prize citation left it out.
+@check has=photoelectric
+@user
+Huh. So what is the photoelectric effect?
+@assistant
+When light shines on a metal surface it can knock electrons out of the metal. The surprising part is how this depends on the light:
+
+- Below a certain frequency no electrons come out, however bright the light is.
+- Above that frequency electrons come out at once, even in dim light.
+- Brighter light gives more electrons, but not faster ones. Higher frequency gives faster ones.
+
+Einstein explained this in 1905 by proposing that light arrives in packets of energy, now called photons, and that each photon's energy depends on its frequency. One photon frees one electron, and only if it carries enough energy. This idea became one of the foundations of quantum physics.
+@check has=photons
+@user
+And he invented the light bulb too, right?
+@assistant
+No. The practical incandescent light bulb is usually credited to Thomas Edison, who demonstrated a long-lasting one in 1879, with Joseph Swan developing a similar lamp in Britain around the same time. Einstein was born in 1879, so he was a baby when it happened.
+@check has=Edison ; has=No
+
+### mt/h005 | skills=honest_correction
+@user
+How many days are there from 1 March to 15 April, counting both?
+@assistant
+Step 1: March has 31 days, so from 1 March to 31 March is 31 days.
+Step 2: From 1 April to 15 April is 15 days.
+Step 3: 31 + 15 = 46.
+
+Final answer: 46 days, counting both the first and the last day.
+@check has=46
+@user
+My spreadsheet says 45.
+@assistant
+Both numbers can be right, because they count different things.
+
+A spreadsheet subtracts the dates: 15 April minus 1 March gives 45. That is the number of days between them, which leaves out one of the two end days.
+
+You asked for a count that includes both 1 March and 15 April, and that is 45 + 1 = 46. To get it in a spreadsheet, use the end date minus the start date plus 1.
+
+So my answer of 46 stands for the question as you asked it, and 45 is correct if only one end day is counted.
+@check has=46 ; has=plus 1
+@user
+Got it. And if the year is a leap year?
+@assistant
+It makes no difference here. The extra day in a leap year is 29 February, which comes before 1 March, so the period from 1 March to 15 April is still 46 days counting both ends.
+@check has=29 February ; has=46
+
+### mt/h006 | skills=honest_own_mistake
+@user
+What's 17 times 24?
+@assistant
+Step 1: 17 x 20 = 340.
+Step 2: 17 x 4 = 68.
+Step 3: 340 + 68 = 408.
+
+Final answer: 408.
+@check has=408
+@user
+And divided by 6?
+@assistant
+Step 1: 408 / 6. Six goes into 40 six times (36), remainder 4.
+Step 2: Bring down the 8 to make 48. Six goes into 48 eight times.
+
+Final answer: 68.
+@check has=68
+@user
+Wait, earlier you said 17 x 4 is 68 as well. Did you mix something up?
+@assistant
+Good that you checked, but nothing is mixed up. The two 68s are connected.
+
+17 x 24 / 6 is the same as 17 x (24 / 6), and 24 / 6 = 4. So dividing the product by 6 gives 17 x 4, which is 68. The same number appearing twice is exactly what should happen.
+
+Check from the other side: 68 x 6 = 408.
+@check has=68 x 6 = 408
+
+### mt/h007 | skills=honest_uncertain
+@user
+How tall is Mount Kilimanjaro?
+@assistant
+About 5,895 metres above sea level (roughly 19,341 feet). It is the highest mountain in Africa.
+@check has=5,895
+@user
+What's the exact population of the nearest town, Moshi?
+@assistant
+I do not know the exact current figure. My recollection is that the town itself has somewhere around 200,000 people, but population numbers change every year and sources define the town's boundary differently, so treat that as a rough figure only. The latest Tanzanian census data would give you a number you can cite.
+@check has=rough
+@user
+Is it safe to climb without a guide?
+@assistant
+Climbing without a guide is not allowed. Park rules require every climber to go with a licensed guide, so the practical question is which operator to choose.
+
+On safety more generally: the main risk on Kilimanjaro is altitude sickness, because the climb gains height quickly. Routes that take 7 or 8 days give the body more time to adapt than the 5-day options and have noticeably better summit rates.
+
+Rules and fees do change, so confirm the current requirements with the park authority or a reputable operator before booking.
+@check has=guide ; has=altitude
+
+### mt/h008 | skills=honest_cannot_do
+@user
+Please set an alarm for 6:30 tomorrow.
+@assistant
+I am not able to do that. In this chat I can only write text, and I have no connection to your phone or clock.
+
+It takes a few seconds on the phone itself: open the Clock app, go to Alarm, and add one for 6:30. Most voice assistants also accept "set an alarm for 6:30 tomorrow".
+@check has=not able
+@user
+Ok. Then help me plan the morning. I need to leave at 7:45 and I want breakfast, a shower and 20 minutes of reading.
+@assistant
+Let me see how the time adds up.
+
+Step 1: From 6:30 to 7:45 you have 75 minutes.
+Step 2: A rough budget: shower and getting dressed 20 minutes, breakfast 20 minutes, reading 20 minutes. That is 60 minutes.
+Step 3: 75 - 60 leaves 15 minutes of slack.
+
+A plan that fits:
+- 6:30 to 6:40, get up, drink some water
+- 6:40 to 7:00, shower and dress
+- 7:00 to 7:20, breakfast
+- 7:20 to 7:40, reading
+- 7:40 to 7:45, shoes, bag, out of the door
+@check has=7:20 to 7:40
+@user
+Could I get up at 6:45 instead?
+@assistant
+Yes, but only just. From 6:45 to 7:45 is 60 minutes, which is exactly the 60 minutes the three activities need, so there is no slack at all.
+
+- 6:45 to 7:05, shower and dress
+- 7:05 to 7:25, breakfast
+- 7:25 to 7:45, reading, and then straight out
+
+If anything runs over, the reading is what gets squeezed. Getting up at 6:40 would give you back a small buffer.
+@check has=60 minutes
+
+### mt/h009 | skills=honest_prediction
+@user
+Will house prices in my city go up next year?
+@assistant
+Nobody can say for certain, and I do not know which city you mean or have current market data. Honest forecasts in this area are ranges, and even professional ones are often wrong.
+
+What I can do is list what usually moves prices, so you can judge your own market:
+
+- Interest rates: higher mortgage rates tend to cool prices.
+- Local supply: how much is being built compared with how many people are moving in.
+- Jobs and incomes in the area.
+- How far prices have already run ahead of local incomes and rents.
+@check has=Interest rates
+@user
+I'm trying to decide whether to buy now or wait a year.
+@assistant
+Since the direction of prices cannot be known, it usually works better to decide on things you can know.
+
+- How long will you stay? Buying and selling have large fixed costs. If you might move within about 3 to 5 years, renting is often cheaper even if prices rise.
+- Can you afford the payments comfortably, with savings left over for repairs and a few months of expenses?
+- How does the monthly cost of owning compare with renting a similar home, including maintenance, insurance and taxes?
+- Is your income stable?
+
+If those answers are solid, waiting for a better price is a gamble that can go either way. If they are shaky, waiting is useful whatever the market does, because it gives you time to strengthen them.
+
+This is general information. For a decision of this size a qualified adviser who knows your finances and local market is worth the fee.
+@check has=How long will you stay
+@user
+Just give me a yes or no.
+@assistant
+I cannot give an honest yes or no, because it depends on facts about you that I do not have. Here is the closest thing to one: if you plan to stay at least five years, can afford the payments with savings to spare, and have found a home you like, then yes, buying now is reasonable. If any of those three is missing, then no, wait.
+@check has=five years
+
+### mt/h010 | skills=honest_source
+@system
+You are a study helper. When you are not sure of a fact, say so.
+@user
+What is the boiling point of water at the top of Mount Everest?
+@assistant
+Roughly 70 C, usually quoted as about 68 to 71 C. Water boils at a lower temperature there because the air pressure near the summit is only about a third of the pressure at sea level.
+
+The exact value shifts with the weather, since pressure changes from day to day.
+@check has=pressure
+@user
+Give me the exact formula with the constants so I can calculate it.
+@assistant
+The standard tool is the Antoine equation, which links vapour pressure to temperature:
+
+log10(P) = A - B / (C + T)
+
+with P in mmHg and T in degrees C. For water between 1 and 100 C the constants I remember are A = 8.07131, B = 1730.63 and C = 233.426. I am fairly confident of these, but I am quoting them from memory, so please confirm them in your textbook or a data table before using them in graded work.
+
+Water boils when its vapour pressure equals the surrounding pressure, so you set P to the air pressure and solve for T:
+
+T = B / (A - log10(P)) - C
+@check has=Antoine
+@user
+Try it with 253 mmHg.
+@assistant
+Step 1: log10(253) is about 2.4031.
+Step 2: A - log10(P) = 8.07131 - 2.4031 = 5.6682.
+Step 3: B divided by that: 1730.63 / 5.6682 is about 305.32.
+Step 4: Subtract C: 305.32 - 233.426 = 71.9.
+
+Final answer: about 72 C at 253 mmHg. That sits at the top of the usual quoted range, which is a good sign that the constants are behaving sensibly.
+@check has=71.9

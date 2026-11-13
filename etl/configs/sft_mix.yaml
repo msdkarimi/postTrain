@@ -1,0 +1,195 @@
+# DEFAULT SFT mix (scale 1). About a third REAL data (SmolTalk subsets written by strong models: general chat, IFEval-style constraints, rewriting, summarising, math CoT,
+# code) so the model does not learn only template phrasings; the rest is verified teacher / procedural data with per-family AND per-template caps.
+# Build the raw data first (see README): distill.build_trajectories, reasoning_gen, context_gen, ifgen -> teacher_if, if_struct_gen, fc_gen, mcq_gen, refusal_gen, extract_gen, code_gen, ...
+name: sft_v2
+tokenizer: Qwen/Qwen3.5-2B-Base
+max_seq_len: 4096          # examples longer than this are dropped (never truncated: truncation would cut <|im_end|>)
+val_fraction: 0.02
+seed: 42
+
+sources:
+  # 1) Verified agent trajectories (sandbox + typed workspace tools). Stratified by family, template shapes capped so a family cannot fill the quota with near-identical prompts.
+  - name: agent_distilled
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/agent_trajectories.jsonl]
+      source_name: agent
+      max_per_prompt: 4
+      max_per_family: 150
+      max_per_shape: 12
+    expand_turns: true
+    max_expansions: 3
+  - name: agent_teacher
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/agent_teacher_rewrites.jsonl, data/raw/agent_teacher_tasks.jsonl, data/raw/agent_teacher_api.jsonl]
+      source_name: agent_teacher
+    expand_turns: true
+    max_expansions: 3
+  - name: agent_code_tasks
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/agent_code_tasks.jsonl]
+      source_name: agentcode
+      max_per_family: 40
+  # 2) Teacher-written / verified skills (distill/*.py). Every source is capped per family AND per template shape; repeated sentences are limited.
+  - name: reasoning_stepwise
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/reasoning_stepwise.jsonl]
+      source_name: reasoning
+      max_per_prompt: 2
+      max_per_family: 100
+      max_per_shape: 15
+  - name: reasoning_multiturn
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/reasoning_multiturn.jsonl]
+      source_name: rmulti
+      max_per_prompt: 2
+      max_per_family: 100
+      max_per_shape: 15
+    expand_turns: true
+    max_expansions: 3
+  - name: context_following
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/context_qa.jsonl]
+      source_name: context
+      max_per_prompt: 2
+      max_per_family: 150
+      max_per_shape: 20
+  - name: instruction_following
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/if_verified.jsonl]
+      source_name: ifverified
+      optional: true
+  - name: agent_model_rewrites
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/agent_teacher_model_rewrites.jsonl]
+      source_name: agent_model_rewrites
+      optional: true
+    expand_turns: true
+    max_expansions: 3
+  - name: fc_bfcl_style
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/fc_bfcl_style.jsonl]
+      source_name: fcbfcl
+      max_per_prompt: 2
+      max_per_family: 1000
+      max_per_shape: 8
+    expand_turns: true
+    max_expansions: 2
+  - name: fc_multiturn_errors
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/fc_multiturn_errors.jsonl]
+      source_name: fcmt
+      max_per_prompt: 2
+      max_per_family: 700
+      max_per_shape: 8
+    expand_turns: true
+    max_expansions: 2
+  - name: fc_dependent_chains
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/fc_dependent_chains.jsonl]
+      source_name: fcchain
+      max_per_prompt: 2
+      max_per_family: 800
+      max_per_shape: 8
+    expand_turns: true
+    max_expansions: 2
+  - name: if_structured
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/if_structured.jsonl]
+      source_name: ifstruct
+      max_per_prompt: 2
+      max_per_family: 250
+      max_per_shape: 10
+      max_sentence_reuse: 400
+    expand_turns: true
+    max_expansions: 2
+  - name: if_system_rules
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/if_system_rules.jsonl]
+      source_name: ifsys
+      max_per_prompt: 2
+      max_per_family: 70
+      max_per_shape: 8
+      max_sentence_reuse: 300
+    expand_turns: true
+    max_expansions: 2
+  - name: mcq_knowledge
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/mcq_knowledge.jsonl]
+      source_name: mcq
+      max_per_prompt: 2
+      max_per_family: 120
+      max_per_shape: 20
+    expand_turns: true
+    max_expansions: 2
+  - name: extraction
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/extraction.jsonl]
+      source_name: extract
+      max_per_prompt: 2
+      max_per_family: 300
+      max_per_shape: 12
+    expand_turns: true
+    max_expansions: 2
+  - name: refusal_honesty
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/refusal_data.jsonl]
+      source_name: refusal
+      max_per_prompt: 2
+      max_per_family: 90
+      max_per_shape: 12
+      max_sentence_reuse: 150
+    expand_turns: true
+    max_expansions: 2
+
+  # Hand-written, machine-verified multi-turn conversations (distill/teacher_dialogues.py). Every user turn becomes one example.
+  - name: teacher_dialogues
+    adapter: local_jsonl
+    params:
+      paths: [data/raw/teacher_dialogues.jsonl]
+      source_name: teacher_mt
+    expand_turns: true
+    max_expansions: 8
+
+  # 3) Function-calling formats in other styles.
+  - name: hermes_fc
+    adapter: hermes
+    params:
+      configs: [func_calling, glaive_func_calling]
+      max_examples: 500
+    expand_turns: true
+    max_expansions: 2
+
+  # 4) REAL general data: chat, constraints, rewriting, summarising, math with reasoning, code.
+  - name: smoltalk_general
+    adapter: smoltalk
+    params:
+      subsets:
+        smol-magpie-ultra: 4000
+        smol-constraints: 3000
+        smol-rewrite: 1000
+        smol-summarize: 1000
+        everyday-conversations: 500
+        systemchats-30k: 600
+        openhermes-100k: 1500
+        self-oss-instruct: 1000
+        metamathqa-50k: 1200
+        numina-cot-100k: 800
+        explore-instruct-rewriting: 300
+    expand_turns: true
+    max_expansions: 1

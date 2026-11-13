@@ -1,0 +1,5 @@
+agent/api_find_and_schedule/10779 ||| Can you find the earliest time on 2025-06-05 when Chloe Moreau and Ines Santos are both free for 60 minutes, and schedule Planning session then? Thanks!
+agent/api_find_and_schedule/10017 ||| Hello! Ingrid Andersson and Dmitri Dubois need 60 minutes together on 2025-03-22 - find the earliest slot they're both free and create Strategy meeting.
+agent/common_free_slot/10611 ||| Rushing: when could Zara, Diego, Ravi and Dmitri meet for 60 minutes on 2026-12-14? Use calendar.json, take the earliest common free slot within working hours (09:00-17:00), and reply with start and end time.
+agent/csv_group_followup/10260 ||| Hi! Make summary.csv with the total amount for each category in spend.csv: category,total, 2 decimals, largest first. Short reply.
+agent/csv_stats/10280 ||| Hey, from the reading column in sensor_data.csv I need mean, median, min and max, rounded to 2 decimals. Blank and N/A cells should be ignored. Thank you!

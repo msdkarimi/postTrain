@@ -1,0 +1,699 @@
+- id: c001
+  category: code_writing
+  difficulty: easy
+  tags: [python, function, regex, code]
+  prompt: Create slugify.py with a function slugify(text) that lowercases the text, replaces every run of characters other than letters and digits with a single hyphen, and removes hyphens from the start and end. For example "Hello, World!" becomes "hello-world".
+  files:
+    README.md: "Small utilities project.\n"
+  steps:
+    - plan: Let me check what's already in the workspace.
+      tool: run_bash
+      arg: ls
+    - plan: One regex substitution does the work - any run of characters outside a-z and 0-9 (after lowercasing) becomes a single hyphen - and strip() removes hyphens at the ends.
+      tool: run_bash
+      arg: |
+        cat > slugify.py <<'EOF'
+        import re
+
+
+        def slugify(text):
+            return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+        EOF
+    - plan: Now a quick test with your example and a messier input.
+      tool: run_bash
+      arg: python3 -c "from slugify import slugify; print(slugify('Hello, World!')); print(slugify('  A  B--C '))"
+  final: "slugify.py is written. My test gave hello-world for \"Hello, World!\" and a-b-c for \"  A  B--C \", so runs of spaces and punctuation collapse into single hyphens and the ends are trimmed."
+  grounded: ["hello-world", "a-b-c"]
+  check:
+    run:
+      - cmd: "python3 -c \"from slugify import slugify as s; assert s('Hello, World!') == 'hello-world'; assert s('  A  B--C ') == 'a-b-c'; assert s('') == ''; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c002
+  category: debugging
+  difficulty: medium
+  tags: [python, tests, bugfix, code]
+  prompt: test_stats.py fails. Find the bug in stats.py, fix it without changing the test, and show me the test passing.
+  files:
+    stats.py: |
+      def median(values):
+          n = len(values)
+          mid = n // 2
+          if n % 2:
+              return values[mid]
+          return (values[mid - 1] + values[mid]) / 2
+    test_stats.py: |
+      from stats import median
+      assert median([3, 1, 2]) == 2, median([3, 1, 2])
+      assert median([4, 1, 3, 2]) == 2.5
+      print("all tests passed")
+  steps:
+    - plan: First I'll run the test to see the real failure.
+      tool: run_bash
+      arg: python3 test_stats.py
+      fails: true
+    - plan: median([3, 1, 2]) returned 1 instead of 2. Let me read the function.
+      tool: run_bash
+      arg: cat stats.py
+    - plan: The function indexes into the list as given, but a median needs the values in sorted order. I'll sort a copy first, so the caller's list isn't modified.
+      tool: run_python
+      arg: |
+        src = open('stats.py').read().replace("    n = len(values)", "    values = sorted(values)\n    n = len(values)")
+        open('stats.py', 'w').write(src)
+    - plan: Now rerun the test.
+      tool: run_bash
+      arg: python3 test_stats.py
+  final: "Fixed. median() never sorted its input, so median([3, 1, 2]) picked the middle of the unsorted list and returned 1. I added values = sorted(values) at the top, which leaves the caller's list untouched, and test_stats.py now prints \"all tests passed\"."
+  grounded: ["all tests passed"]
+  check:
+    run:
+      - cmd: python3 test_stats.py
+        stdout_contains: [all tests passed]
+      - cmd: "python3 -c \"from stats import median; v = [3, 1, 2]; median(v); assert v == [3, 1, 2]; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c003
+  category: code_writing
+  difficulty: medium
+  tags: [python, function, logs, code]
+  prompt: Write parse_log.py with a function count_levels(path) that reads a log file and returns a dict of how many lines each level (INFO, WARN, ERROR) has. Try it on app.log.
+  files:
+    app.log: |
+      2025-03-01 10:00:00 INFO start
+      2025-03-01 10:00:05 ERROR db down
+      2025-03-01 10:00:09 INFO retry
+      2025-03-01 10:00:12 WARN slow
+  steps:
+    - plan: Let me look at the line format before writing the parser.
+      tool: run_bash
+      arg: head -n 2 app.log
+    - plan: The level is the third whitespace-separated field, so I'll count those with a Counter and return a plain dict.
+      tool: run_bash
+      arg: |
+        cat > parse_log.py <<'EOF'
+        from collections import Counter
+
+
+        def count_levels(path):
+            counts = Counter()
+            with open(path) as f:
+                for line in f:
+                    parts = line.split()
+                    if len(parts) >= 3:
+                        counts[parts[2]] += 1
+            return dict(counts)
+        EOF
+    - plan: Try it on the real file.
+      tool: run_bash
+      arg: python3 -c "from parse_log import count_levels; print(count_levels('app.log'))"
+  final: "parse_log.py is ready. count_levels('app.log') returns {'INFO': 2, 'ERROR': 1, 'WARN': 1}."
+  grounded: ["{'INFO': 2, 'ERROR': 1, 'WARN': 1}"]
+  check:
+    run:
+      - cmd: "python3 -c \"from parse_log import count_levels as c; assert c('app.log') == {'INFO': 2, 'ERROR': 1, 'WARN': 1}; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c004
+  category: refactoring
+  difficulty: medium
+  tags: [python, rename, refactor, code]
+  prompt: Rename the function calc_total to compute_total everywhere in this project, and make sure main.py still prints the same result.
+  files:
+    totals.py: "def calc_total(items):\n    return sum(items)\n"
+    main.py: "from totals import calc_total\n\nprint(calc_total([1, 2, 3]))\n"
+    report.py: "from totals import calc_total\n\n\ndef summary(x):\n    return 'total=' + str(calc_total(x))\n"
+  steps:
+    - plan: First find every place the old name is used, so I don't miss one.
+      tool: run_bash
+      arg: grep -rn "calc_total" .
+    - plan: It appears in all three files. I'll replace the name in each .py file and keep everything else as it is.
+      tool: run_python
+      arg: |
+        import glob
+        for p in glob.glob('*.py'):
+            s = open(p).read()
+            open(p, 'w').write(s.replace('calc_total', 'compute_total'))
+    - plan: Now verify two things - no old name is left, and main.py still runs.
+      tool: run_bash
+      arg: grep -rn "calc_total" . || echo "no old name left"; python3 main.py
+  final: "Renamed calc_total to compute_total in totals.py, main.py and report.py. A search finds no leftover old name, and python3 main.py still prints 6."
+  grounded: ["no old name left"]
+  check:
+    files:
+      totals.py: {contains: [compute_total], not_contains: [calc_total]}
+      report.py: {contains: [compute_total], not_contains: [calc_total]}
+    run:
+      - cmd: python3 main.py
+        stdout_equals: "6"
+
+- id: c005
+  category: scripting
+  difficulty: medium
+  tags: [bash, script, wc, code]
+  prompt: Write a bash script report.sh that prints one line per .txt file in docs/ in the form "docs/a.txt: 2 lines, 3 words" (alphabetical order), then run it.
+  files:
+    docs/a.txt: "one two\nthree\n"
+    docs/b.txt: "x\n"
+  steps:
+    - plan: Let me see the files I need to report on.
+      tool: run_bash
+      arg: ls docs
+    - plan: A glob already sorts alphabetically. wc prints padded numbers on some systems, so I'll strip the spaces with tr.
+      tool: run_bash
+      arg: |
+        cat > report.sh <<'EOF'
+        #!/bin/bash
+        for f in docs/*.txt; do
+          echo "$f: $(wc -l < "$f" | tr -d ' ') lines, $(wc -w < "$f" | tr -d ' ') words"
+        done
+        EOF
+        chmod +x report.sh
+    - plan: Run it.
+      tool: run_bash
+      arg: bash report.sh
+  final: "report.sh is written and prints \"docs/a.txt: 2 lines, 3 words\" and \"docs/b.txt: 1 lines, 1 words\"."
+  grounded: ["docs/a.txt: 2 lines, 3 words", "docs/b.txt: 1 lines, 1 words"]
+  check:
+    run:
+      - cmd: bash report.sh
+        stdout_equals: "docs/a.txt: 2 lines, 3 words\ndocs/b.txt: 1 lines, 1 words"
+
+- id: c006
+  category: code_writing
+  difficulty: easy
+  tags: [python, argparse, cli, code]
+  prompt: Make a small command line tool greet.py. It takes a required --name and an optional --shout flag. It prints "Hello, NAME!" and, with --shout, the same text in capitals. Show it working.
+  steps:
+    - plan: argparse handles the required option and the boolean flag. I'll build the message first and upper-case it only when --shout is given.
+      tool: run_bash
+      arg: |
+        cat > greet.py <<'EOF'
+        import argparse
+
+        parser = argparse.ArgumentParser(description="Greet someone")
+        parser.add_argument("--name", required=True)
+        parser.add_argument("--shout", action="store_true")
+        args = parser.parse_args()
+        msg = f"Hello, {args.name}!"
+        print(msg.upper() if args.shout else msg)
+        EOF
+    - plan: Test both modes.
+      tool: run_bash
+      arg: python3 greet.py --name Bo; python3 greet.py --name Ana --shout
+  final: "greet.py works: `python3 greet.py --name Bo` prints \"Hello, Bo!\" and `python3 greet.py --name Ana --shout` prints \"HELLO, ANA!\". --name is required, so omitting it shows an argparse error."
+  grounded: ["Hello, Bo!", "HELLO, ANA!"]
+  check:
+    run:
+      - cmd: python3 greet.py --name Ana --shout
+        stdout_equals: "HELLO, ANA!"
+      - cmd: python3 greet.py --name Bo
+        stdout_equals: "Hello, Bo!"
+      - cmd: python3 greet.py
+        exit: 2
+
+- id: c007
+  category: code_writing
+  difficulty: medium
+  tags: [python, validation, edge_cases, code]
+  prompt: Write emailcheck.py with is_valid_email(s). A valid address has exactly one @, no spaces, a non-empty part before the @, and a domain that contains a dot that is not at the very start or end. Test it on a few good and bad examples.
+  steps:
+    - plan: I'll encode each rule as an early return, so every bad case is rejected explicitly.
+      tool: run_bash
+      arg: |
+        cat > emailcheck.py <<'EOF'
+        def is_valid_email(s):
+            if s.count('@') != 1 or ' ' in s:
+                return False
+            local, domain = s.split('@')
+            if not local or '.' not in domain:
+                return False
+            return not domain.startswith('.') and not domain.endswith('.')
+        EOF
+    - plan: Let me try both valid addresses and the tricky invalid ones - missing parts, spaces, a double @ and dots at the wrong end of the domain.
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from emailcheck import is_valid_email as v
+        good = ['ana@example.com', 'x.y@mail.co.uk']
+        bad = ['ana@', '@x.com', 'a b@x.com', 'a@x', 'a@@x.com', 'a@.com', 'a@x.']
+        print('good:', [v(g) for g in good])
+        print('bad:', [v(b) for b in bad])
+        PY
+  final: "emailcheck.py is written. The two good addresses return True and all seven bad ones (missing local part or domain, space, no dot, double @, leading or trailing dot in the domain) return False."
+  grounded: ["good: [True, True]", "bad: [False, False, False, False, False, False, False]"]
+  check:
+    run:
+      - cmd: "python3 -c \"from emailcheck import is_valid_email as v; assert v('ana@example.com') and v('x.y@mail.co.uk'); assert not any(v(b) for b in ['ana@', '@x.com', 'a b@x.com', 'a@x', 'a@@x.com', 'a@.com', 'a@x.']); print('ok')\""
+        stdout_contains: [ok]
+
+- id: c008
+  category: code_writing
+  difficulty: medium
+  tags: [python, csv, aggregation, code]
+  prompt: In top_n.py write a function top_n(path, n) that reads sales.csv, totals the amount per region and returns the n biggest regions as a list of (region, total) tuples, largest first. Run it for n=2.
+  files:
+    sales.csv: |
+      region,amount
+      West,100
+      East,50
+      West,70
+      North,10
+      East,30
+  steps:
+    - plan: Let me check the columns first.
+      tool: run_bash
+      arg: head -n 3 sales.csv
+    - plan: A Counter keyed by region will total the amounts, and most_common(n) gives the largest first.
+      tool: run_bash
+      arg: |
+        cat > top_n.py <<'EOF'
+        import csv
+        from collections import Counter
+
+
+        def top_n(path, n):
+            totals = Counter()
+            with open(path, newline='') as f:
+                for row in csv.DictReader(f):
+                    totals[row['region']] += float(row['amount'])
+            return totals.most_common(n)
+        EOF
+    - plan: Run it for n=2.
+      tool: run_bash
+      arg: python3 -c "from top_n import top_n; print(top_n('sales.csv', 2))"
+  final: "top_n.py is written. top_n('sales.csv', 2) returns [('West', 170.0), ('East', 80.0)] - North, with 10.0, is left out."
+  grounded: ["[('West', 170.0), ('East', 80.0)]"]
+  check:
+    run:
+      - cmd: "python3 -c \"from top_n import top_n; assert top_n('sales.csv', 2) == [('West', 170.0), ('East', 80.0)]; assert len(top_n('sales.csv', 5)) == 3; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c009
+  category: test_writing
+  difficulty: medium
+  tags: [python, tests, edge_cases, code]
+  prompt: math_utils.py has a function clamp(x, lo, hi). Write test_math_utils.py with plain assert statements covering normal, below-range, above-range and boundary cases, and run it.
+  files:
+    math_utils.py: "def clamp(x, lo, hi):\n    return max(lo, min(x, hi))\n"
+  steps:
+    - plan: Let me read the function so the tests match what it should do.
+      tool: run_bash
+      arg: cat math_utils.py
+    - plan: clamp should return x when it lies in [lo, hi], lo when x is below and hi when x is above, including the exact boundaries. I'll write one assert for each of those cases.
+      tool: run_bash
+      arg: |
+        cat > test_math_utils.py <<'EOF'
+        from math_utils import clamp
+
+        assert clamp(5, 0, 10) == 5          # inside the range
+        assert clamp(-3, 0, 10) == 0         # below the range
+        assert clamp(42, 0, 10) == 10        # above the range
+        assert clamp(0, 0, 10) == 0          # lower boundary
+        assert clamp(10, 0, 10) == 10        # upper boundary
+        assert clamp(2.5, 0, 10) == 2.5      # floats
+        print("clamp tests passed")
+        EOF
+    - plan: Run the tests.
+      tool: run_bash
+      arg: python3 test_math_utils.py
+  final: "test_math_utils.py has six assertions - inside the range, below, above, both boundaries and a float - and they all pass (\"clamp tests passed\")."
+  grounded: ["clamp tests passed"]
+  check:
+    files:
+      test_math_utils.py: {contains: [clamp, assert]}
+    run:
+      - cmd: python3 test_math_utils.py
+        stdout_contains: [clamp tests passed]
+
+- id: c010
+  category: data_validation
+  difficulty: medium
+  tags: [python, json, validation, code]
+  prompt: Write validate.py that reads data.json and prints the ids of invalid records as a comma-separated list. A record is invalid if its name is missing or empty, or its age is negative.
+  files:
+    data.json: |
+      [{"id": 1, "name": "Ana", "age": 30},
+       {"id": 2, "name": "", "age": 25},
+       {"id": 3, "name": "Cy", "age": -4},
+       {"id": 4, "age": 40},
+       {"id": 5, "name": "Eve", "age": 22}]
+  steps:
+    - plan: Let me look at the data to see how records can be broken.
+      tool: run_bash
+      arg: cat data.json
+    - plan: Use .get so a missing name doesn't raise, and treat an empty string the same as missing.
+      tool: run_bash
+      arg: |
+        cat > validate.py <<'EOF'
+        import json
+
+        bad = []
+        for rec in json.load(open('data.json')):
+            if not rec.get('name') or rec.get('age', 0) < 0:
+                bad.append(str(rec['id']))
+        print(','.join(bad))
+        EOF
+    - plan: Run it.
+      tool: run_bash
+      arg: python3 validate.py
+  final: "validate.py prints 2,3,4: record 2 has an empty name, record 3 has a negative age and record 4 has no name. Records 1 and 5 are fine."
+  grounded: ["2,3,4"]
+  check:
+    run:
+      - cmd: python3 validate.py
+        stdout_equals: "2,3,4"
+
+- id: c011
+  category: debugging
+  difficulty: medium
+  tags: [python, tests, off_by_one, code]
+  prompt: Pages are numbered from 1, but page() in paginate.py seems to skip the first page. Fix it so test_paginate.py passes.
+  files:
+    paginate.py: |
+      def page(items, page_number, per_page):
+          start = page_number * per_page
+          return items[start:start + per_page]
+    test_paginate.py: |
+      from paginate import page
+      data = list(range(10))
+      assert page(data, 1, 3) == [0, 1, 2], page(data, 1, 3)
+      assert page(data, 4, 3) == [9]
+      assert page(data, 5, 3) == []
+      print("pagination ok")
+  steps:
+    - plan: Run the test to see what it reports.
+      tool: run_bash
+      arg: python3 test_paginate.py
+      fails: true
+    - plan: Page 1 returned [3, 4, 5] instead of [0, 1, 2], so the start index is off by one page. With 1-based pages the start must be (page_number - 1) * per_page.
+      tool: run_python
+      arg: |
+        src = open('paginate.py').read().replace("start = page_number * per_page", "start = (page_number - 1) * per_page")
+        open('paginate.py', 'w').write(src)
+    - plan: Rerun the test.
+      tool: run_bash
+      arg: python3 test_paginate.py
+  final: "Fixed: the start index used page_number * per_page, which treats pages as 0-based. It is now (page_number - 1) * per_page, and test_paginate.py prints \"pagination ok\"."
+  grounded: ["pagination ok"]
+  check:
+    run:
+      - cmd: python3 test_paginate.py
+        stdout_contains: [pagination ok]
+
+- id: c012
+  category: code_writing
+  difficulty: hard
+  tags: [python, algorithm, intervals, code]
+  prompt: Write intervals.py with a function merge(intervals) that merges overlapping or touching intervals given as [start, end] lists and returns them sorted. For example [[1,3],[2,6],[8,10],[15,18]] becomes [[1,6],[8,10],[15,18]]. Test it, including an empty list and touching intervals.
+  steps:
+    - plan: Sort by start, then walk through once. If the next interval starts at or before the end of the last merged one, extend that one; otherwise start a new one. Using <= makes touching intervals merge.
+      tool: run_bash
+      arg: |
+        cat > intervals.py <<'EOF'
+        def merge(intervals):
+            merged = []
+            for start, end in sorted(intervals):
+                if merged and start <= merged[-1][1]:
+                    merged[-1][1] = max(merged[-1][1], end)
+                else:
+                    merged.append([start, end])
+            return merged
+        EOF
+    - plan: Test your example, touching intervals and the empty list.
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from intervals import merge
+        print(merge([[1, 3], [2, 6], [8, 10], [15, 18]]))
+        print(merge([[1, 4], [4, 5]]))
+        print(merge([]))
+        PY
+  final: "intervals.py is written and tested: your example gives [[1, 6], [8, 10], [15, 18]], the touching pair [[1, 4], [4, 5]] merges into [[1, 5]], and an empty list returns []."
+  grounded: ["[[1, 6], [8, 10], [15, 18]]", "[[1, 5]]"]
+  check:
+    run:
+      - cmd: "python3 -c \"from intervals import merge as m; assert m([[1,3],[2,6],[8,10],[15,18]]) == [[1,6],[8,10],[15,18]]; assert m([[1,4],[4,5]]) == [[1,5]]; assert m([]) == []; assert m([[5,6],[1,2]]) == [[1,2],[5,6]]; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c013
+  category: database
+  difficulty: medium
+  tags: [python, sqlite, csv, code]
+  prompt: Write load.py that creates a SQLite database shop.db with a table orders(customer, amount) from orders.csv, then show me the total per customer using SQL.
+  files:
+    orders.csv: |
+      customer,amount
+      ana,10
+      bo,5
+      ana,20
+  steps:
+    - plan: Let me check the CSV header.
+      tool: run_bash
+      arg: cat orders.csv
+    - plan: I'll create the table and insert the rows with parameters, so values are never pasted into the SQL text.
+      tool: run_bash
+      arg: |
+        cat > load.py <<'EOF'
+        import csv
+        import sqlite3
+
+        con = sqlite3.connect('shop.db')
+        con.execute('DROP TABLE IF EXISTS orders')
+        con.execute('CREATE TABLE orders (customer TEXT, amount REAL)')
+        with open('orders.csv', newline='') as f:
+            rows = [(r['customer'], float(r['amount'])) for r in csv.DictReader(f)]
+        con.executemany('INSERT INTO orders VALUES (?, ?)', rows)
+        con.commit()
+        con.close()
+        EOF
+        python3 load.py
+    - plan: Now query the totals per customer from the database.
+      tool: run_python
+      arg: |
+        import sqlite3
+        con = sqlite3.connect('shop.db')
+        print(con.execute('SELECT customer, SUM(amount) FROM orders GROUP BY customer ORDER BY customer').fetchall())
+  final: "load.py creates shop.db with the orders table. The SQL totals are ana 30.0 and bo 5.0."
+  grounded: ["[('ana', 30.0), ('bo', 5.0)]"]
+  check:
+    run:
+      - cmd: "python3 -c \"import sqlite3; r = dict(sqlite3.connect('shop.db').execute('select customer, sum(amount) from orders group by customer')); assert r == {'ana': 30.0, 'bo': 5.0}; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c014
+  category: code_writing
+  difficulty: medium
+  tags: [python, cli, text, code]
+  prompt: Write wc_top.py: given a text file path as an argument, print the 3 most frequent words (lowercase) as "word count" lines, most frequent first, ties alphabetical. Run it on text.txt.
+  files:
+    text.txt: "the cat and the dog and the bird\n"
+  steps:
+    - plan: Count lowercase words, then sort by count descending and word ascending so ties are alphabetical.
+      tool: run_bash
+      arg: |
+        cat > wc_top.py <<'EOF'
+        import sys
+        from collections import Counter
+
+        words = open(sys.argv[1]).read().lower().split()
+        counts = Counter(words)
+        for word, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:3]:
+            print(word, n)
+        EOF
+    - plan: Run it on the sample file.
+      tool: run_bash
+      arg: python3 wc_top.py text.txt
+  final: "wc_top.py works. On text.txt it prints the 3, and 2, bird 1 - bird beats cat and dog on the tie because it comes first alphabetically."
+  grounded: ["the 3", "and 2", "bird 1"]
+  check:
+    run:
+      - cmd: python3 wc_top.py text.txt
+        stdout_equals: "the 3\nand 2\nbird 1"
+
+- id: c015
+  category: code_writing
+  difficulty: easy
+  tags: [python, dates, code]
+  prompt: Write dates_lite.py with days_between(a, b) and is_weekend(d) for ISO dates like 2025-03-01. Test them.
+  steps:
+    - plan: datetime.date.fromisoformat parses the strings, subtraction gives the day difference, and weekday() is 5 or 6 on Saturday and Sunday.
+      tool: run_bash
+      arg: |
+        cat > dates_lite.py <<'EOF'
+        from datetime import date
+
+
+        def days_between(a, b):
+            return (date.fromisoformat(b) - date.fromisoformat(a)).days
+
+
+        def is_weekend(d):
+            return date.fromisoformat(d).weekday() >= 5
+        EOF
+    - plan: Test with a known Saturday (2025-03-01) and Monday (2025-03-03).
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from dates_lite import days_between, is_weekend
+        print(days_between('2025-03-01', '2025-03-15'))
+        print(is_weekend('2025-03-01'), is_weekend('2025-03-03'))
+        PY
+  final: "dates_lite.py is ready. days_between('2025-03-01', '2025-03-15') is 14, 2025-03-01 (a Saturday) is a weekend day and 2025-03-03 (a Monday) is not."
+  grounded: ["14", "True False"]
+  check:
+    run:
+      - cmd: "python3 -c \"from dates_lite import days_between as d, is_weekend as w; assert d('2025-03-01', '2025-03-15') == 14; assert d('2025-03-15', '2025-03-01') == -14; assert w('2025-03-01') and w('2025-03-02') and not w('2025-03-03'); print('ok')\""
+        stdout_contains: [ok]
+
+- id: c016
+  category: text_wrangling
+  difficulty: easy
+  tags: [bash, awk, dedupe]
+  prompt: Remove duplicate lines from in.txt but keep the first occurrence of each and the original order. Save the result as out.txt.
+  files:
+    in.txt: "b\na\nb\nc\na\nd\n"
+  steps:
+    - plan: sort -u would reorder the lines, so I'll use awk with a "seen" counter that only prints a line the first time it appears.
+      tool: run_bash
+      arg: awk '!seen[$0]++' in.txt > out.txt && cat out.txt
+  final: "out.txt now contains b, a, c, d - each line once, in the order of first appearance."
+  grounded: ["b"]
+  check:
+    files:
+      out.txt: {equals: "b\na\nc\nd"}
+
+- id: c017
+  category: code_writing
+  difficulty: medium
+  tags: [python, error_handling, code]
+  prompt: Write safe_div.py with safe_div(a, b, default=None) that returns a / b, or the default when b is zero. It should also return the default if either argument is not a number. Test the cases.
+  steps:
+    - plan: Catching ZeroDivisionError and TypeError covers both cases without checking types by hand.
+      tool: run_bash
+      arg: |
+        cat > safe_div.py <<'EOF'
+        def safe_div(a, b, default=None):
+            try:
+                return a / b
+            except (ZeroDivisionError, TypeError):
+                return default
+        EOF
+    - plan: Test normal division, zero, a custom default and a non-number.
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from safe_div import safe_div
+        print(safe_div(10, 4), safe_div(1, 0), safe_div(1, 0, default=-1), safe_div('x', 2, default=0))
+        PY
+  final: "safe_div.py works: 10 / 4 gives 2.5, dividing by zero gives None, with default=-1 it gives -1, and a non-number such as 'x' returns the default 0."
+  grounded: ["2.5 None -1 0"]
+  check:
+    run:
+      - cmd: "python3 -c \"from safe_div import safe_div as s; assert s(10, 4) == 2.5; assert s(1, 0) is None; assert s(1, 0, default=-1) == -1; assert s('x', 2, default=0) == 0; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c018
+  category: format_conversion
+  difficulty: medium
+  tags: [python, cli, csv, json, code]
+  prompt: Write csv2json.py that takes an input CSV path and an output JSON path as arguments and writes a list of objects (values as strings). Try it on people.csv.
+  files:
+    people.csv: |
+      name,age
+      Ana,30
+      Bo,25
+  steps:
+    - plan: csv.DictReader already yields one dict per row, so the script reads the two paths from sys.argv and dumps the list.
+      tool: run_bash
+      arg: |
+        cat > csv2json.py <<'EOF'
+        import csv
+        import json
+        import sys
+
+        src, dst = sys.argv[1], sys.argv[2]
+        with open(src, newline='') as f:
+            rows = list(csv.DictReader(f))
+        with open(dst, 'w') as f:
+            json.dump(rows, f, indent=2)
+        EOF
+    - plan: Run it on people.csv and show the output.
+      tool: run_bash
+      arg: python3 csv2json.py people.csv people.json && cat people.json
+  final: "csv2json.py writes people.json with two objects, {\"name\": \"Ana\", \"age\": \"30\"} and {\"name\": \"Bo\", \"age\": \"25\"}. Ages stay strings, as requested."
+  grounded: ['"name": "Ana"', '"age": "25"']
+  check:
+    run:
+      - cmd: "python3 csv2json.py people.csv chk.json && python3 -c \"import json; assert json.load(open('chk.json')) == [{'name': 'Ana', 'age': '30'}, {'name': 'Bo', 'age': '25'}]; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c019
+  category: code_writing
+  difficulty: medium
+  tags: [python, recursion, code]
+  prompt: Write flatten.py with flatten(nested) that turns an arbitrarily nested list like [1, [2, [3, 4]], 5] into [1, 2, 3, 4, 5]. Strings should be kept whole, not split into letters.
+  steps:
+    - plan: Recursion fits: for each element, if it is a list flatten it, otherwise keep it. Strings are not lists, so they stay whole.
+      tool: run_bash
+      arg: |
+        cat > flatten.py <<'EOF'
+        def flatten(nested):
+            out = []
+            for item in nested:
+                if isinstance(item, list):
+                    out.extend(flatten(item))
+                else:
+                    out.append(item)
+            return out
+        EOF
+    - plan: Test with deep nesting, an empty inner list and a string.
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from flatten import flatten
+        print(flatten([1, [2, [3, 4]], 5]))
+        print(flatten([[], ['ab', [['cd']]]]))
+        PY
+  final: "flatten.py is ready. [1, [2, [3, 4]], 5] becomes [1, 2, 3, 4, 5], and [[], ['ab', [['cd']]]] becomes ['ab', 'cd'] - the strings stay whole and empty lists disappear."
+  grounded: ["[1, 2, 3, 4, 5]", "['ab', 'cd']"]
+  check:
+    run:
+      - cmd: "python3 -c \"from flatten import flatten as f; assert f([1,[2,[3,4]],5]) == [1,2,3,4,5]; assert f([[],['ab',[['cd']]]]) == ['ab','cd']; assert f([]) == []; print('ok')\""
+        stdout_contains: [ok]
+
+- id: c020
+  category: code_writing
+  difficulty: medium
+  tags: [python, strings, roundtrip, code]
+  prompt: Write rle.py with encode(s) and decode(s) for simple run-length encoding, so "aaabcc" encodes to "a3b1c2" and back. It must work with runs longer than 9.
+  steps:
+    - plan: Encoding groups consecutive equal characters with itertools.groupby. For decoding I need a regex that reads a letter followed by all of its digits, so runs like 12 work.
+      tool: run_bash
+      arg: |
+        cat > rle.py <<'EOF'
+        import re
+        from itertools import groupby
+
+
+        def encode(s):
+            return ''.join(f'{ch}{len(list(g))}' for ch, g in groupby(s))
+
+
+        def decode(s):
+            return ''.join(ch * int(n) for ch, n in re.findall(r'(\D)(\d+)', s))
+        EOF
+    - plan: Test your example, a long run and a round trip.
+      tool: run_bash
+      arg: |
+        python3 - <<'PY'
+        from rle import encode, decode
+        print(encode('aaabcc'), decode('a3b1c2'))
+        long = 'x' * 12 + 'y'
+        print(encode(long), decode(encode(long)) == long)
+        PY
+  final: "rle.py works: encode('aaabcc') gives a3b1c2 and decode('a3b1c2') gives aaabcc. A run of 12 x's followed by a y encodes to x12y1 and decodes back to the original."
+  grounded: ["a3b1c2 aaabcc", "x12y1 True"]
+  check:
+    run:
+      - cmd: "python3 -c \"from rle import encode as e, decode as d; assert e('aaabcc') == 'a3b1c2'; assert d('a3b1c2') == 'aaabcc'; t = 'x' * 12 + 'y' * 3; assert d(e(t)) == t; assert e('') == ''; print('ok')\""
+        stdout_contains: [ok]

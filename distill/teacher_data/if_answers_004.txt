@@ -1,0 +1,136 @@
+### if/3040
+Picture this: your friend shows you a drawing and asks, "What do you think?" Giving good feedback is like helping them make it even better. First, say something nice and true, like "I love the colours you picked." Then share one idea, for example "Maybe the sun could be bigger", and say it kindly so it feels like a gift and not a complaint. If you want, you can tell [your teacher] or ask [a grown-up] for more tips. Is there anything else I can help with?
+### if/5386
+1. Ana: My little brother uses the same password for everything, which sounds *risky*.
+2. Ben: It is, because if one site leaks it, thieves can try it everywhere, so each account needs its own *unique password*.
+3. Ana: But I can't remember twenty passwords!
+4. Ben: You don't have to: a password manager remembers them for you, and you only need one *strong master phrase*.
+### if/3019
+{"title": "Rent or buy a home?", "content": "Imagine you could either borrow a bike every day or buy one of your own. Borrowing (renting) means you pay a little each month and never have to fix anything, and you can switch bikes easily. Buying costs a lot at the start, but in the end the bike is yours. Grown-ups think about how long they will stay in one place, how much money they have saved and whether they want the freedom to move before deciding."}
+### if/1720
+"One perspective treats coffee as a precise recipe: weigh the beans, control the water temperature and time every brew so each cup tastes the same. The other treats it as a daily ritual: use whatever method you enjoy, taste as you go and let preference decide. The first gives consistency and helps you fix mistakes, the second keeps the pleasure in it, and the best cup usually comes from learning the numbers first and then bending them to your own taste."
+### if/3943
+"The Forge 14 is a laptop made for people who write code all day. It pairs a fast eight-core processor with 32 GB of memory, so compiling, containers and a browser full of documentation all run together without a stutter. The 14-inch matte display is sharp enough for long sessions, the keyboard has deep, quiet keys, and the battery lasts a full working day away from the desk."
+### if/1095
+The bicycle started in 1817 when Karl von Drais built a wooden running machine with two wheels and no pedals. Riders pushed along with their feet and it was fast for its time but tiring. In the 1860s inventors added pedals to the front wheel and the ride became smoother yet still shaky. High wheelers followed and they were quick but dangerous because a fall from such height hurt. The safety bicycle of the 1880s changed everything with two wheels of equal size and a chain that turned the back wheel. Air-filled rubber tyres soon made rides comfortable and ordinary people gained a new freedom to travel to work and to town. This growth in cycling pushed cities to build better roads and later special bike lanes. Gears and lighter frames arrived in the twentieth century and electric motors now help commuters climb hills. Anyone who wants to start cycling today should be careful to choose a bike that fits and to wear a helmet.
+### if/2292
+A BROKEN HEATER IN A RENTED FLAT IS FIRST A COMMUNICATION PROBLEM. TELL THE LANDLORD IN WRITING AND KEEP A COPY. NOTE THE DATE THE FAULT STARTED AND ADD PHOTOS. ASK FOR A REPAIR DATE AND FOLLOW UP IF NOTHING HAPPENS. A SAFE ELECTRIC HEATER CAN HELP IN THE MEANTIME BUT NEVER LEAVE IT RUNNING WHILE YOU SLEEP.
+### if/3336
+"Keep passwords strong by following a few rules: make each one long, use a different password for every account, store them in a reputable password manager, turn on two-factor authentication wherever it is offered, and never share a password by email or chat. If a site reports a breach, change that password immediately."
+### if/3661
+<<A Bill Becomes Law>>
+Friends, every law you live under began as a simple idea that someone wrote down and called a bill. A member of the legislature introduces it and a committee studies it, hears from experts and sometimes rewrites it. Then the full chamber debates and votes, the second chamber repeats the process, and any differences between the two versions are settled in a joint committee. At the very end the head of government signs the bill or vetoes it. Each of those steps is a chance for citizens to be heard, so use it.
+
+P.S. Find out who your representative is and send one short message about a bill you care about.
+### if/5118
+IMAGINE THE DOG NEXT DOOR IS A BIT LIKE A BABY: WHEN IT FEELS LONELY OR SCARED IT CRIES OUT, AND FOR A DOG THAT MEANS BARKING. IT MAY BE BORED, HUNGRY, OR WORRIED BECAUSE ITS OWNER LEFT. THE KIND THING TO DO IS TALK TO THE NEIGHBOUR POLITELY SO THEY CAN HELP THE DOG FEEL CALM. DO NOT SHOUT AT THE DOG BECAUSE THAT WOULD ONLY SCARE IT MORE.
+### if/1501
+Every great bug report is a clear signal and writing one well should become a habit. Say what you did, what you expected and what happened instead.
+### if/5055
+Imagine your fridge is a treasure chest, and every bit of food inside is treasure you do not want to lose. *Look before you shop*, so you do not buy a second bunch of bananas when you already have one. *Put the oldest food at the front*, so it gets eaten first, like letting the person who waited longest go first in line. And *turn leftovers into a new meal*: yesterday's rice can become tomorrow's fried rice, so nothing goes in the bin.
+### if/3519
+Three days in Lisbon is enough to see the highlights if you plan around the hills. Stay near the centre, ideally in Baixa, Chiado or Alfama, so you can walk to many sights and come back to rest in the afternoon. Spend the first day in Alfama: wander up to the castle in the morning, listen for fado music in the evening and let yourself get lost in the narrow streets. On the second day take the train or tram to Belem for the tower, the monastery and the famous custard tarts, and keep the evening free for a long dinner. Use the third day for a trip to Sintra, where the colourful palaces sit in the hills, and book tickets in advance because queues get long. Wear comfortable shoes with a good grip, since the cobbles are slippery, and carry a refillable bottle of water. The metro is cheap and the old trams are charming but crowded, so travel early if you want a seat. Finally, leave some space in the plan: the best moments in Lisbon often come from sitting on a terrace with a coffee and watching the city go by.
+### if/1595
+<<Choosing a Programming Laptop>>
+Pick a fast processor with at least sixteen gigabytes of memory, a solid state drive and a keyboard you enjoy typing on, because you will use all of them every day. Choose a sharp screen and decent battery life if you work away from a desk. Read reviews about cooling under load, since a laptop that overheats slows your builds.
+### if/2315
+Turn a sunny corner of your balcony into a kitchen garden with the Balcony Harvest kit. It includes three deep planters with drainage, organic potting mix and seeds for *lettuce, radishes and basil*, which grow fast and forgive beginners. A printed guide explains *how much light and water each plant needs*, so you can start with confidence. Everything fits in one box and takes about ten minutes to set up.
+### if/3773
+{"title": "How the internet finds your way", "content": "When you open a web page, your message is cut into tiny packets, each stamped with the address of its destination. Routers along the way read that address and pass every packet to the next hop, often by different paths, and the receiving computer puts them back in order. If a link fails, the network simply picks another route, which is why the internet keeps working even when parts of it break."}
+### if/4695
+Imagine your body is a phone that charges while you sleep. *Eight hours of sleep* is the full charge: your brain sorts what you learned today and your muscles repair themselves. With a full charge you can think faster, feel happier and *stay healthy*, but if you only sleep a little, you wake up with a battery at ten percent and everything feels harder.
+### if/1984
+Here is some practical advice about the water cycle if you want to teach it or understand it better. *Draw it as a loop* with arrows from the sea to the sky, to the clouds, to rain and back, so the pattern is easy to remember. Then *try a jar experiment*: pour a little hot water in a jar, put a plate of ice on top and watch droplets form, just like clouds. Finally, connect it to daily life, for example to why puddles disappear and why rivers keep flowing.
+### if/581
+One perspective on password safety is technical: use long random passwords, a different one for every account, and a manager to remember them, with two-factor authentication as a second lock. It treats the problem as math and tools, and it works very well when people actually follow it.
+
+The other perspective is human: most breaches start with a tricked person and not a cracked password, so the best protection is learning to spot phishing, to pause before clicking and to ask when something looks odd. The strongest approach combines both, with good tools and good habits. Let me know if you have any questions.
+### if/1016
+<<Vault Key: The Password Manager That Remembers Everything>>
+Stop reusing the same password. Vault Key creates a *long, unique password* for every site and fills it in for you. Your data is encrypted on your device and protected by a single *master phrase* that only you know. It works on your phone, tablet and laptop, and it warns you when a site you use has been breached.
+### if/3407
+"A MAP MUST FLATTEN A ROUND PLANET AND THAT ALWAYS STRETCHES SOMETHING. THE MERCATOR MAP KEEPS ANGLES TRUE FOR SAILORS BUT MAKES AREAS NEAR THE POLES LOOK HUGE, SO GREENLAND LOOKS AS BIG AS AFRICA. EQUAL-AREA MAPS KEEP SIZES RIGHT BUT BEND SHAPES. NO FLAT MAP CAN KEEP DISTANCE, DIRECTION AND AREA ALL CORRECT, SO MAPMAKERS CHOOSE THE PROJECTION THAT FITS THE PURPOSE."
+### if/5479
+"Q: What should I do about a package that never arrived? A: Check the *tracking page*, ask the seller for a *refund or replacement* in writing and keep *screenshots of your order*."
+
+### if/1817
+1. Your immune system learns to recognise germs by meeting them, and a vaccine lets it meet a harmless piece of one.
+2. The body responds by making antibodies and memory cells that stay around for years.
+3. If the real germ shows up later, the response is fast enough to stop the illness or make it mild.
+4. This post explains the steps in plain language and answers common worries about side effects.
+### if/4247
+Setting up a home network safely comes down to a few steps. First, *change the default router password* and choose a long passphrase for the wifi. Second, keep the router's firmware updated and *use WPA3 or WPA2 encryption*. Create a guest network for visitors and write down the router login in a safe place such as [your password manager]. If something looks wrong, contact [your provider's support] and ask them to check the connection.
+### if/1479
+TEAMS WORK BEST WITH CLEAR UPDATES, SHORT CHECK-INS AND SHARED DEADLINES. OUR TOOL KEEPS EVERYONE IN SYNC FROM ANYWHERE.
+### if/4891
+<<Why Bees Matter to Farmers>>
+Walk through any orchard in spring and listen: that hum is a workforce at work. Bees carry pollen from flower to flower, and many fruits, vegetables and nuts will not form without that service. Good pollination raises yields and improves the shape and size of the harvest, and wild bees add to what managed hives can do. Farmers who plant flowering strips and reduce harmful spraying often see the difference at harvest time.
+### if/4633
+"a common mistake is to treat one cold day as proof about climate. weather is what the sky does today in one place and climate is the average of that weather over thirty years or more. to avoid the mistake, look at long-term records before drawing a conclusion, and remember that a single winter cannot undo a trend that spans decades."
+### if/4387
+A common mistake in remote work is assuming that silence means everything is fine, so problems stay hidden until they are big. Avoid it by agreeing on short written updates, naming owners and deadlines clearly, and asking for confirmation when a message matters. Hold a brief check-in once or twice a week to catch misunderstandings early. Let me know if you have any questions.
+### if/4391
+Thank you all for giving me a few minutes. I want to start with an apology: I missed the deadline we agreed on and that put extra pressure on the team.
+
+The reason was simple. I underestimated how long testing would take and I did not say so early enough. That is on me and not on anyone else.
+
+From now on I will share a realistic date at the start and tell you right away if it slips. The finished work will reach you on Thursday and I will check in with each of you before then.
+### if/362
+- Imagine you are looking at a friend's drawing and want to help.
+- First say something you really like about it, such as the colours.
+- Then ask a question, like "What was the hardest part?"
+- Next, suggest one small idea in a friendly voice.
+- Never say that the drawing is bad, because that hurts feelings.
+- Finish by saying thank you for showing it to you.
+### if/624
+Today I processed your refund request and I am sorry the product did not meet your expectations. The money, 49.90 euros, will return to your original payment method within five to seven working days. If you would like a replacement or a different product instead, just reply to this message and I will arrange it. Thank you for your patience.
+### if/536
+One perspective on feedback is the coach's view: the goal is growth, so be direct, specific and quick, because delay makes advice stale. The other is the mentor's view: *build trust first*, because people only accept hard messages from someone they believe is on their side. Both views have merit, and the best feedback is *honest but warm*, offered with trust and aimed at growth.
+### if/2006
+Imagine your trip: book a central hotel, plan one area per day, reserve Sintra tickets, wear sturdy shoes, keep an evening free.
+### if/4932
+<<A Greener Start for Our Town>>
+Neighbours, from [Monday the 3rd] every home in our town will receive three bins: one for paper, one for plastic and glass, and a small green one for food scraps. Trucks will collect them every week and a leaflet will explain what goes where. If you have questions, speak to [your local volunteer] at the market or visit [the council website]. Together we will send less to landfill and save money.
+### if/2552
+Think of reviewing a friend's code like checking a friend's drawing. First say what you like about it. Then ask a question about the part that puzzled you instead of telling them it is wrong. Offer one small idea for how to make it better and explain why it would help. Always be nice about the code and never about the person. When they fix something say thank you.
+### if/2360
+<<Securing Your Home Network>>
+Start by changing the default password on your router and use a long passphrase for the wifi. Keep the router's firmware up to date, turn on WPA3 or WPA2 and give guests their own network so your own devices stay private. Check the list of connected devices now and then, and remove anything you do not recognise.
+### if/3973
+Today we start with budgeting. Ana: I never know where my money goes. Ben: Write down your income, then your rent and transport, and give every remaining euro a job.
+### if/2021
+Maps distort because a round Earth must be flattened. Mercator preserves angles but inflates areas near the poles. Equal-area maps keep sizes but bend shapes. No flat map preserves everything.
+### if/5154
+Vaccines work like a training exercise for your immune system. A harmless piece of a germ shows your body what to look for so it learns to make antibodies and memory cells that last for years. If the real germ ever arrives your body reacts fast and the illness is mild or never starts. In this post we walk through the steps and answer the most common questions.
+
+P.S. Talk to your doctor about which vaccines are recommended for you.
+
+### if/3180
+Missing a deadline is never pleasant and I owe you a clear apology and a plan. I underestimated the work and I did not tell you soon enough. Here is what I will change: realistic dates from the start and an early warning when something slips. Thank you for your patience while I fix this.
+### if/4896
+Mia read Leo's code and thought of kind words. She praised the clear names then asked one gentle question.
+### if/3205
+Today we answer a few questions about why the sky is blue. Q: What colour is sunlight? A: It looks white but it contains every colour of the rainbow. Q: Why does blue win? A: Air molecules scatter short blue wavelengths far more than long red ones, so blue light reaches your eyes from every direction. Q: Why are sunsets red? A: The light travels through more air, so the blue is scattered away and the reds are left.
+### if/1248
+A common mistake about bees is thinking they only make honey, so protecting them seems optional for farmers. In fact *many crops depend on bee pollination*, and fewer bees can mean smaller harvests. The fix is to *plant flowering strips beside fields* and to *avoid spraying pesticides while crops are in bloom*, which gives bees food and keeps them safe.
+### if/1349
+1. meet the strum kit: a beginner acoustic guitar with soft nylon strings that are kind to young fingers
+2. it comes with a tuner and a chord chart so you can play your first song on day one
+3. a padded bag and a spare set of strings make it ready to travel and practise anywhere
+### if/1222
+sleep is the cheapest upgrade you can give your body and your mind. while you rest your brain files away what you learned and your muscles repair themselves. people who sleep eight hours concentrate better and feel calmer, and they make fewer mistakes at work. so tonight put the phone down thirty minutes earlier and let the rest do its work.
+### if/5736
+"The key idea is balance: when a customer asks for a refund, listen first, check the policy and the order details, and then decide with both fairness and the company's interests in mind. Apologise sincerely and explain clearly what you can do and when. A smooth refund often turns into long-term loyalty and growth."
+### if/4704
+Friends, picture a farm in spring. The hum you hear is bees, and without them many of our fruits, vegetables and nuts would never form. Good pollination raises yields and gives better quality, and wild bees add to what managed hives can do. When farmers plant flowering strips and spray with care, everyone benefits, from the grower to the person who buys the apple.
+
+P.S. Plant something flowering on your windowsill this week and watch who visits.
+### if/1028
+{"title": "Training for your first 10k", "content": "Q: How long should I train? A: Eight to twelve weeks is a comfortable plan for most beginners. Q: How often should I run? A: Three times a week with rest days between. Q: What if I need to walk? A: That is fine, many first-time runners mix walking and running. Q: How do I avoid injury? A: Wear shoes that fit, increase distance by about ten percent a week and listen to your body."}
+### if/3748
+Picture this journey through the history of the bicycle in five steps:
+1. In 1817 Karl von Drais built a wooden running machine, the great-grandparent of every bike.
+2. Pedals arrived in the 1860s and with them the first real cycling craze.
+3. High wheelers were thrilling but dangerous, which pushed inventors to look for something safer.
+4. The safety bicycle with its chain and equal wheels made cycling something everyone could do.
+5. Today bikes are cheap clean transport, and you can join that story with a ride this week.
